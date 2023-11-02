@@ -1,8 +1,7 @@
 #pragma once
 // MainPanel.h
-//#ifndef MAINPANEL_H
-//#define MAINPANEL_H
 
+#include <wx/textfile.h>
 #include <wx/wx.h>
 #include "Game.h"
 
@@ -17,7 +16,9 @@ private:
 
     // Deklaracja metody obs³ugi zdarzenia wxShowEvent
     void OnPanelShow(wxShowEvent& event);
-    void LoadGamesFromFiles();
+    void LoadGames();
+    int CountGames();
+    Game CreateGameBasedOnFile(int i);
 };
 
-//#endif // MAINPANEL_H
+

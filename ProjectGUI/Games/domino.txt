@@ -1,0 +1,2 @@
+name: domino
+quantity: 4

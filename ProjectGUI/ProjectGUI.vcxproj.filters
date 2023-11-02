@@ -98,16 +98,16 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="mvc.txt" />
-    <Text Include="szachy.txt">
-      <Filter>Pliki zasobów\Games</Filter>
-    </Text>
-    <Text Include="domino.txt">
-      <Filter>Pliki zasobów\Games</Filter>
-    </Text>
-    <Text Include="uno.txt">
-      <Filter>Pliki zasobów\Games</Filter>
-    </Text>
     <Text Include="Games\statki.txt">
+      <Filter>Pliki zasobów\Games</Filter>
+    </Text>
+    <Text Include="Games\domino.txt">
+      <Filter>Pliki zasobów\Games</Filter>
+    </Text>
+    <Text Include="Games\szachy.txt">
+      <Filter>Pliki zasobów\Games</Filter>
+    </Text>
+    <Text Include="Games\uno.txt">
       <Filter>Pliki zasobów\Games</Filter>
     </Text>
   </ItemGroup>

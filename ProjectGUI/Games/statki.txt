@@ -1,2 +1,2 @@
-name: statki;
-quantity: 8;
+name: statki
+quantity: 8
