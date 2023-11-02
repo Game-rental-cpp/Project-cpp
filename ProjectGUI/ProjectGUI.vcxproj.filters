@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Pliki źródłowe">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Pliki zasobów">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Pliki źródłowe\MainFrame">
+      <UniqueIdentifier>{15eeecc5-8223-4e76-b978-c1d5eb228490}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\MainFrame">
+      <UniqueIdentifier>{785b8bcb-a9ba-4d4a-b58f-929a05a8457d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\MainPanel">
+      <UniqueIdentifier>{2c1dfeb6-dac7-4fa6-a6ae-5bc7fd29b50a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\MainPanel">
+      <UniqueIdentifier>{e00e4950-6cd5-4e42-aa96-bed0f70675cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\LoginPanel">
+      <UniqueIdentifier>{bb2f6fe6-212a-4b8a-8138-81cc01fc451a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\LoginPanel">
+      <UniqueIdentifier>{5940eaf5-37e6-4f4e-83a3-094499a4c9a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\MyAccPanel">
+      <UniqueIdentifier>{d4cadbc6-f297-4b3f-aff0-c2b2705d1b64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\MyAccPanel">
+      <UniqueIdentifier>{c4e3a2db-2e00-447b-b9f1-3f7239388021}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki zasobów\Users">
+      <UniqueIdentifier>{eec680e0-c25e-4594-89e2-eff54de8f6c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki zasobów\Games">
+      <UniqueIdentifier>{2fc26235-75f8-4450-81bd-4557ad9a173b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="App.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="MainFrame.cpp">
+      <Filter>Pliki źródłowe\MainFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="MainPanel.cpp">
+      <Filter>Pliki źródłowe\MainPanel</Filter>
+    </ClCompile>
+    <ClCompile Include="LoginPanel.cpp">
+      <Filter>Pliki źródłowe\LoginPanel</Filter>
+    </ClCompile>
+    <ClCompile Include="MyAccPanel.cpp">
+      <Filter>Pliki źródłowe\MyAccPanel</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MainFrame.h">
+      <Filter>Pliki nagłówkowe\MainFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="MainPanel.h">
+      <Filter>Pliki nagłówkowe\MainPanel</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginPanel.h">
+      <Filter>Pliki nagłówkowe\LoginPanel</Filter>
+    </ClInclude>
+    <ClInclude Include="MyAccPanel.h">
+      <Filter>Pliki nagłówkowe\MyAccPanel</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

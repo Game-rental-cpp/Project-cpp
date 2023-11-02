@@ -1,0 +1,4 @@
+.vs/
+# wxWidgets build and installation directories
+/build/
+/install/
