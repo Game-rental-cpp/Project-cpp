@@ -4,6 +4,7 @@
 //#define MAINPANEL_H
 
 #include <wx/wx.h>
+#include "Game.h"
 
 class MainPanel : public wxPanel
 {
@@ -13,6 +14,10 @@ public:
 private:
     wxButton* button;
     wxStaticText* label;
+
+    // Deklaracja metody obs³ugi zdarzenia wxShowEvent
+    void OnPanelShow(wxShowEvent& event);
+    void LoadGamesFromFiles();
 };
 
 //#endif // MAINPANEL_H

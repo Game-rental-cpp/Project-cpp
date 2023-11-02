@@ -43,6 +43,12 @@
     <Filter Include="Pliki zasobów\Games">
       <UniqueIdentifier>{2fc26235-75f8-4450-81bd-4557ad9a173b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki źródłowe\DTOs">
+      <UniqueIdentifier>{11dcc3a3-50c2-41fd-80a5-4f3874c2a56e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\DTOs">
+      <UniqueIdentifier>{0262a5c8-dcc5-454d-b84e-eb32371a9a6f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp">
@@ -63,6 +69,9 @@
     <ClCompile Include="Logic.cpp">
       <Filter>Pliki źródłowe\MainFrame</Filter>
     </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Pliki źródłowe\DTOs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainFrame.h">
@@ -80,11 +89,26 @@
     <ClInclude Include="Logic.h">
       <Filter>Pliki nagłówkowe\MainFrame</Filter>
     </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Pliki nagłówkowe\DTOs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="mvc.txt" />
+    <Text Include="szachy.txt">
+      <Filter>Pliki zasobów\Games</Filter>
+    </Text>
+    <Text Include="domino.txt">
+      <Filter>Pliki zasobów\Games</Filter>
+    </Text>
+    <Text Include="uno.txt">
+      <Filter>Pliki zasobów\Games</Filter>
+    </Text>
+    <Text Include="Games\statki.txt">
+      <Filter>Pliki zasobów\Games</Filter>
+    </Text>
   </ItemGroup>
 </Project>
