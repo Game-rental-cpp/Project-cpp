@@ -1,0 +1,1 @@
+Funkcja mvcShowcase() zosta³a wywo³ana.

@@ -1,6 +1,7 @@
 // MainFrame.cpp
 #include "MainFrame.h"
 
+
 MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
     : wxFrame(NULL, wxID_ANY, title, pos, size)
 {
@@ -68,6 +69,9 @@ void MainFrame::OnGoBack(wxCommandEvent & event)
 
     // Przerysuj okno, aby zastosowaæ zmiany widoku
     this->Layout();
+
+    //Poni¿sza funkcja jest zdefiniowana w osobnym pliku, aby zapewniæ przejrzystoœæ kodu.
+    mvcShowcase();
 }
 
 // Funkcja obs³ugi zdarzenia po naciœniêciu przycisku "Zaloguj / zarejestruj"
@@ -96,4 +100,5 @@ void MainFrame::OnMyAcc(wxCommandEvent& event)
     mainPanel->Hide();
 
     this->Layout();
+
 }

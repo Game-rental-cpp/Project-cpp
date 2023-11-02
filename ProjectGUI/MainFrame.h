@@ -1,12 +1,10 @@
 #pragma once
-// MainFrame.h
-//#ifndef MAINFRAME_H
-//#define MAINFRAME_H
 
 #include <wx/wx.h>
 #include "MainPanel.h"
 #include "LoginPanel.h"
 #include "MyAccPanel.h"
+#include "Logic.h"
 
 class MainFrame : public wxFrame
 {
@@ -23,7 +21,6 @@ private:
     MainPanel* mainPanel;
     LoginPanel* loginPanel;
     MyAccPanel* myAccPanel;
-    // Inne deklaracje
+
 };
 
-//#endif // MAINFRAME_H
