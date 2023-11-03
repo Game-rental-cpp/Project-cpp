@@ -13,12 +13,15 @@ public:
 private:
     wxButton* button;
     wxStaticText* label;
+    wxPanel* gamesPanel;
 
     // Deklaracja metody obs³ugi zdarzenia wxShowEvent
     void OnPanelShow(wxShowEvent& event);
     void LoadGames();
     int CountGames();
     Game CreateGameBasedOnFile(int i);
+    /*void CreateOrShowGamesPanel();
+    void HideGamesPanel();*/
 };
 
 

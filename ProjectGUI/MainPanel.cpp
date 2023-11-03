@@ -3,6 +3,7 @@
 #include <wx/dir.h>
 #include <string>
 
+
 MainPanel::MainPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size)
     : wxPanel(parent, id, pos, size)
 {
@@ -12,25 +13,53 @@ MainPanel::MainPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const 
     // Tworzenie etykiety
     label = new wxStaticText(this, wxID_ANY, "To jest etykieta w MainPanel", wxPoint(10, 50));
 
+    // Tworzenie panelu booksPanel
+    gamesPanel = new wxPanel(this, wxID_ANY, wxPoint(10, 100), wxSize(400, 300));
+    gamesPanel->SetBackgroundColour(wxColour(255, 0, 0)); // Ustawiony na czerwony kolor (255, 0, 0)
+    // Dodanie gamesPanel do ramki i ustawienie, ¿e ma zajmowaæ ca³¹ dostêpn¹ szerokoœæ
+    //gamesSizer->Add(gamesPanel, 1, wxEXPAND | wxALL | wxALIGN_CENTER, 10);
+
     // Przypisanie funkcji obs³ugi zdarzenia wxShowEvent
     Bind(wxEVT_SHOW, &MainPanel::OnPanelShow, this);
 
     LoadGames();
 
 }
-
 void MainPanel::OnPanelShow(wxShowEvent& event)
 {
     if (event.IsShown()) {
         // Panel zosta³ pokazany na ekranie
         LoadGames();
-
+       // gamesPanel->Refresh();
     }
     else {
         // Panel zosta³ ukryty
     }
     event.Skip();
 }
+
+/////////////
+//void MainPanel::CreateOrShowGamesPanel()
+//{
+//    if (!gamesPanel) {
+//        // Jeœli gamesPanel nie istnieje, to go tworzymy
+//        gamesPanel = new wxPanel(this, wxID_ANY);
+//        // Dodaj kod do konfiguracji i umieszczania elementów w gamesPanel
+//    }
+//
+//    gamesPanel->Show(); // Pokazanie gamesPanel
+//    Refresh(); // Odœwie¿enie, aby zobaczyæ zmiany
+//}
+//
+//void MainPanel::HideGamesPanel()
+//{
+//    if (gamesPanel) {
+//        gamesPanel->Hide(); // Ukrycie gamesPanel
+//        Refresh(); // Odœwie¿enie, aby zobaczyæ zmiany
+//    }
+//}
+/// ////////////
+
 
 void MainPanel::LoadGames()
 {
@@ -55,7 +84,9 @@ void MainPanel::LoadGames()
 
         // Tworzenie etykiety z nazw¹ i iloœci¹ gier
         wxString labelText = wxString::Format("Nazwa gry: %s, iloœæ sztuk: %d", gameName, gameQuantity);
-        wxStaticText* gameLabel = new wxStaticText(this, wxID_ANY, labelText, wxPoint(x, y));
+        wxStaticText* gameLabel = new wxStaticText(gamesPanel, wxID_ANY, labelText, wxPoint(x, y));
+        wxButton* button = new wxButton(gamesPanel, wxID_ANY, "Wypo¿ycz", wxPoint(x+200, y));
+
         //wxStaticText* gameLabel = new wxStaticText(this, wxID_ANY, labelText, wxPoint(10, 70 + i * 20));
         // Mo¿esz dostosowaæ pozycjê i inne w³aœciwoœci etykiety, jeœli to konieczne
     }
