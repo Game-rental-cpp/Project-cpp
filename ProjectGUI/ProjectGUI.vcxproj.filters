@@ -110,5 +110,11 @@
     <Text Include="Games\uno.txt">
       <Filter>Pliki zasobów\Games</Filter>
     </Text>
+    <Text Include="Users\_logged.txt">
+      <Filter>Pliki zasobów\Users</Filter>
+    </Text>
+    <Text Include="Games\bierki.txt">
+      <Filter>Pliki zasobów\Games</Filter>
+    </Text>
   </ItemGroup>
 </Project>

@@ -1,6 +1,7 @@
 // MainFrame.cpp
 #include "MainFrame.h"
-
+#include<fstream>
+#include <filesystem>
 
 MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
     : wxFrame(NULL, wxID_ANY, title, pos, size)
@@ -10,9 +11,11 @@ MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& si
     loginBtn = new wxButton(this, wxID_ANY, "Zaloguj / Zarejestruj");
     myAccBtn = new wxButton(this, wxID_ANY, "Moje konto");
 
-    //Domyœlnie ukryte
+    //Pokazuj odpowiednie przyciski w zale¿noœci czy user jest zalogowany czy nie
     goBackBtn->Hide();
-    myAccBtn->Hide();
+    if (IsLogged())
+        loginBtn->Hide();
+    else myAccBtn->Hide();
 
     // Tworzenie i dodawanie MainPanel
     mainPanel = new MainPanel(this, wxID_ANY, wxPoint(10, 100), wxSize(410, 300));
@@ -59,8 +62,13 @@ void MainFrame::OnGoBack(wxCommandEvent & event)
 {
     goBackBtn->Hide();
     //
-    loginBtn->Show();
-    myAccBtn->Hide();
+    if (IsLogged()) {
+        loginBtn->Hide();
+        myAccBtn->Show();
+    } else {
+        loginBtn->Show();
+        myAccBtn->Hide();
+    }
 
     //pokazywanie / ukrywanie panelów
     mainPanel->Show();
@@ -101,4 +109,33 @@ void MainFrame::OnMyAcc(wxCommandEvent& event)
 
     this->Layout();
 
+}
+
+
+bool MainFrame::IsLogged() const {
+    // Pobieramy œcie¿kê do pliku MainFrame.cpp
+        wxString parentDir = wxGetCwd();
+
+    // £¹czymy œcie¿kê do katalogu "Users"
+    wxString loggedFile = parentDir + "/Users/_logged.txt";
+
+    // SprawdŸ, czy plik istnieje
+    if (wxFileExists(loggedFile)) {
+        // Otwórz plik do odczytu
+        wxFile file(loggedFile, wxFile::read);
+
+        //int l = file.Length();
+        //std::string ll = std::to_string(l);
+        //wxLogMessage("%s", ll.c_str());
+        int len = file.Length();
+        file.Close();
+
+        // SprawdŸ, czy plik jest pusty
+        if (len == 0)
+            return false; // Plik jest pusty, wiêc u¿ytkownik nie jest zalogowany
+        else return true; //Plik nie jest pusty, u¿ytkownik jest zalogowany
+        
+    }
+
+    return false; // Plik nie istnieje
 }

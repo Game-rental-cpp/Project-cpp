@@ -13,6 +13,7 @@ public:
     void OnGoBack(wxCommandEvent& event);
     void OnLogin(wxCommandEvent& event);
     void OnMyAcc(wxCommandEvent& event);
+    bool IsLogged() const;
 
 private:
     wxButton* goBackBtn;

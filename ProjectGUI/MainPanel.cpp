@@ -111,7 +111,7 @@ void MainPanel::LoadGames()
         // Tworzenie nowej gry na podstawie pliku i dodawanie jej do wektora
         Game game = CreateGameBasedOnFile(i);
 
-        gamesVector.push_back(game); // Dodawanie nowej gry do wektora
+        gamesVector.push_back(game); // Dodawanie gry do wektora
 
 
         // Pobierz nazwê i liczbê sztuk
@@ -139,7 +139,7 @@ void MainPanel::LoadGames()
     label->SetLabel("Liczba ró¿nych gier: " + fileCountStr);
 }
 
-
+//Ta funkcja tworzy obiekt typu Game na podstawie plików txt
 Game MainPanel::CreateGameBasedOnFile(int i)
 {
     std::string name;

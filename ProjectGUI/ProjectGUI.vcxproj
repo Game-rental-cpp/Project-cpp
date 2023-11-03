@@ -151,11 +151,13 @@
     <None Include="..\.gitignore" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Games\bierki.txt" />
     <Text Include="Games\domino.txt" />
     <Text Include="Games\statki.txt" />
     <Text Include="Games\szachy.txt" />
     <Text Include="Games\uno.txt" />
     <Text Include="mvc.txt" />
+    <Text Include="Users\_logged.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
