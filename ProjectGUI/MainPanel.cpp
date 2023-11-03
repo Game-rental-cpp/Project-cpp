@@ -2,6 +2,11 @@
 #include "MainPanel.h"
 #include <wx/dir.h>
 #include <string>
+#include <map>
+#include <vector>
+
+std::map<wxButton*, wxStaticText*> buttonLabelMap;
+std::vector<Game> gamesVector; 
 
 
 MainPanel::MainPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size)
@@ -25,6 +30,61 @@ MainPanel::MainPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const 
     LoadGames();
 
 }
+
+void MainPanel::ChangeQuantity(wxCommandEvent& event)
+{
+   
+    // Pobierz obiekt przycisku, który zosta³ naciœniêty
+    wxButton* button = dynamic_cast<wxButton*>(event.GetEventObject());
+
+    // SprawdŸ, czy uda³o siê pobraæ obiekt przycisku
+    if (button) {
+        // SprawdŸ, czy istnieje etykieta odpowiadaj¹ca temu przyciskowi w mapie
+        if (buttonLabelMap.find(button) != buttonLabelMap.end()) {
+            // Pobierz etykietê odpowiadaj¹c¹ przyciskowi
+            wxStaticText* label = buttonLabelMap[button];
+
+            // Pobierz aktualn¹ wartoœæ etykiety
+            wxString labelText = label->GetLabel();
+
+            // Pobierz liczbê z tekstu etykiety
+            int quantity;
+            labelText.AfterLast(' ').ToInt(&quantity);
+
+            // Pobierz nazwê gry z tekstu etykiety
+            wxString gameName = labelText.BeforeFirst(',').substr(11);
+
+            ///Chcê wyszukaæ obiekt game z vectora, którego w³asnoœci name jest taka sama jak gameName
+            Game foundGame(gameName.ToStdString(), 0);
+
+ 
+            for (int i = 0; i < gamesVector.size(); i++) {
+                if ( gamesVector[i].GetName() == gameName) {
+
+                    wxLogMessage(wxString(gamesVector[i].GetName().c_str()));
+                    //jeszcze setQuantity powinno aktualiziowaæ pliki txt
+                    gamesVector[i].SetQuantity(gamesVector[i].GetQuantity()-1);
+
+                    wxString newLabelText = labelText.BeforeLast(' ') + wxString::Format(" %ld", gamesVector[i].GetQuantity());
+                    label->SetLabel(newLabelText);
+                    break; // Znaleziono grê, przerywamy pêtlê
+                }
+               
+            }
+
+
+            label->Refresh();
+        }
+    }
+
+
+
+    // Dodaj tutaj inny kod, który chcesz wykonaæ po naciœniêciu przycisku
+}
+
+
+
+
 void MainPanel::OnPanelShow(wxShowEvent& event)
 {
     if (event.IsShown()) {
@@ -73,6 +133,8 @@ void MainPanel::LoadGames()
         // Tworzenie nowej gry na podstawie pliku i dodawanie jej do wektora
         Game game = CreateGameBasedOnFile(i);
 
+        gamesVector.push_back(game); // Dodawanie nowej gry do wektora
+
 
         // Pobierz nazwê i liczbê sztuk
         wxString gameNameWx = game.GetName();
@@ -82,10 +144,13 @@ void MainPanel::LoadGames()
         int x = rand() % (100); // Losowa pozycja x na panelu
         int y = rand() % (200); // Losowa pozycja y na panelu
 
-        // Tworzenie etykiety z nazw¹ i iloœci¹ gier
         wxString labelText = wxString::Format("Nazwa gry: %s, iloœæ sztuk: %d", gameName, gameQuantity);
         wxStaticText* gameLabel = new wxStaticText(gamesPanel, wxID_ANY, labelText, wxPoint(x, y));
-        wxButton* button = new wxButton(gamesPanel, wxID_ANY, "Wypo¿ycz", wxPoint(x+200, y));
+        wxButton* hireBtn = new wxButton(gamesPanel, wxID_ANY, "Wypo¿ycz", wxPoint(x + 200, y));
+        hireBtn->Bind(wxEVT_BUTTON, &MainPanel::ChangeQuantity, this, wxID_ANY, wxID_ANY);
+
+        // Dodaj przycisk i etykietê do kontenera
+        buttonLabelMap[hireBtn] = gameLabel;
 
         //wxStaticText* gameLabel = new wxStaticText(this, wxID_ANY, labelText, wxPoint(10, 70 + i * 20));
         // Mo¿esz dostosowaæ pozycjê i inne w³aœciwoœci etykiety, jeœli to konieczne

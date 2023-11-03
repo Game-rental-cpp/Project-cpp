@@ -20,6 +20,7 @@ private:
     void LoadGames();
     int CountGames();
     Game CreateGameBasedOnFile(int i);
+    void ChangeQuantity(wxCommandEvent& event);
     /*void CreateOrShowGamesPanel();
     void HideGamesPanel();*/
 };
