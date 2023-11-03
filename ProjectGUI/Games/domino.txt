@@ -1,2 +1,2 @@
 name: domino
-quantity: 3
+quantity: 0

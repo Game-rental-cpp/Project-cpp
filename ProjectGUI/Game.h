@@ -14,7 +14,6 @@ public:
     // Metody ustawiaj¹ce wartoœci pól name i quantity
     void SetName(const std::string& name);
     void SetQuantity(int quantity);
-    void UpdateTextFile(int quantity);
 
 private:
     std::string name;

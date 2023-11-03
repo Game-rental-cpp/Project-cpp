@@ -14,8 +14,6 @@ public:
     void SetName(const std::string& name);
     void SetQuantity(int quantity);
 
-    //metoda aktualizuj¹ca pliki txt
-    void UpdateTextFile(int quantity);
 
 private:
     std::string name;
@@ -42,6 +40,7 @@ void Game::SetName(const std::string& name) {
 void Game::SetQuantity(int quantity) {
     this->quantity = quantity;
 
+    //Update txt file
     std::string folderPath = "./Games/"; // Œcie¿ka do folderu "Games"
     std::string fileName = folderPath + name + ".txt"; // Tworzymy pe³n¹ œcie¿kê do pliku
     std::ofstream file(fileName);
@@ -53,6 +52,3 @@ void Game::SetQuantity(int quantity) {
 }
 
 
-void UpdateTextFile(int quantity) {
-
-}

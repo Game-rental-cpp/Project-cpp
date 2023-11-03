@@ -31,9 +31,33 @@ MainPanel::MainPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const 
 
 }
 
+void MainPanel::OnPanelShow(wxShowEvent& event)
+{
+     //Wykonaj jeœli MainPanel zosta³ pokazany na ekranie
+    if (event.IsShown()) {
+
+        // Usuñ istniej¹cy gamesPanel, jeœli istnieje
+        if (gamesPanel) {
+            gamesPanel->Destroy();
+            gamesPanel = nullptr;
+            gamesVector.clear();
+            buttonLabelMap.clear();
+        }
+
+        // Twórz nowy gamesPanel
+        gamesPanel = new wxPanel(this, wxID_ANY, wxPoint(10, 100), wxSize(400, 300));
+        gamesPanel->SetBackgroundColour(wxColour(255, 0, 0)); // Ustaw kolor t³a (opcjonalnie)
+
+        LoadGames();
+        Layout(); // Zaktualizuj uk³ad
+
+    }
+
+    event.Skip();
+}
+
 void MainPanel::ChangeQuantity(wxCommandEvent& event)
 {
-   
     // Pobierz obiekt przycisku, który zosta³ naciœniêty
     wxButton* button = dynamic_cast<wxButton*>(event.GetEventObject());
 
@@ -77,51 +101,10 @@ void MainPanel::ChangeQuantity(wxCommandEvent& event)
 
 }
 
-
-
-
-void MainPanel::OnPanelShow(wxShowEvent& event)
-{
-    if (event.IsShown()) {
-        // Panel zosta³ pokazany na ekranie
-        LoadGames();
-       // gamesPanel->Refresh();
-    }
-    else {
-        // Panel zosta³ ukryty
-    }
-    event.Skip();
-}
-
-/////////////
-//void MainPanel::CreateOrShowGamesPanel()
-//{
-//    if (!gamesPanel) {
-//        // Jeœli gamesPanel nie istnieje, to go tworzymy
-//        gamesPanel = new wxPanel(this, wxID_ANY);
-//        // Dodaj kod do konfiguracji i umieszczania elementów w gamesPanel
-//    }
-//
-//    gamesPanel->Show(); // Pokazanie gamesPanel
-//    Refresh(); // Odœwie¿enie, aby zobaczyæ zmiany
-//}
-//
-//void MainPanel::HideGamesPanel()
-//{
-//    if (gamesPanel) {
-//        gamesPanel->Hide(); // Ukrycie gamesPanel
-//        Refresh(); // Odœwie¿enie, aby zobaczyæ zmiany
-//    }
-//}
-/// ////////////
-
-
+//Funkcja dodaje do gamesPanel labele z grami i przyciski do wypo¿yczenia
 void MainPanel::LoadGames()
 {
-
-    // Tworzymy wektor na obiekty gier
-    //std::vector<Game> games;
-
+    //liczba gier
     int n = CountGames();
 
     for (int i = 0; i < n; i++) {
@@ -136,18 +119,18 @@ void MainPanel::LoadGames()
         std::string gameName = std::string(gameNameWx.ToStdString());
         int gameQuantity = game.GetQuantity();
 
-        int x = rand() % (100); // Losowa pozycja x na panelu
-        int y = rand() % (200); // Losowa pozycja y na panelu
+        //int x = rand() % (100); // Losowa pozycja x na panelu
+        //int y = rand() % (200); // Losowa pozycja y na panelu
 
         wxString labelText = wxString::Format("Nazwa gry: %s, iloœæ sztuk: %d", gameName, gameQuantity);
-        wxStaticText* gameLabel = new wxStaticText(gamesPanel, wxID_ANY, labelText, wxPoint(x, y));
-        wxButton* hireBtn = new wxButton(gamesPanel, wxID_ANY, "Wypo¿ycz", wxPoint(x + 200, y));
+        wxStaticText* gameLabel = new wxStaticText(gamesPanel, wxID_ANY, labelText, wxPoint(10, 70 + i * 20));
+        //wxStaticText* gameLabel = new wxStaticText(gamesPanel, wxID_ANY, labelText, wxPoint(x, y));
+        wxButton* hireBtn = new wxButton(gamesPanel, wxID_ANY, "Wypo¿ycz", wxPoint(250, 70+ i* 20));
         hireBtn->Bind(wxEVT_BUTTON, &MainPanel::ChangeQuantity, this, wxID_ANY, wxID_ANY);
 
         // Dodaj przycisk i etykietê do kontenera
         buttonLabelMap[hireBtn] = gameLabel;
 
-        //wxStaticText* gameLabel = new wxStaticText(this, wxID_ANY, labelText, wxPoint(10, 70 + i * 20));
         // Mo¿esz dostosowaæ pozycjê i inne w³aœciwoœci etykiety, jeœli to konieczne
     }
 
@@ -207,7 +190,7 @@ Game MainPanel::CreateGameBasedOnFile(int i)
 }
 
 
-
+//Ta funkcja liczy ile jest plików txt z grami
 int MainPanel::CountGames() {
     // Pobieramy œcie¿kê do pliku MainPanel.cpp
     wxString parentDir = wxGetCwd();
