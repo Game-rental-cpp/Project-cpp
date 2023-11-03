@@ -4,7 +4,7 @@
 #include "MainPanel.h"
 #include "LoginPanel.h"
 #include "MyAccPanel.h"
-#include "Logic.h"
+#include "MainFrame_Logic.h"
 
 class MainFrame : public wxFrame
 {
@@ -13,7 +13,6 @@ public:
     void OnGoBack(wxCommandEvent& event);
     void OnLogin(wxCommandEvent& event);
     void OnMyAcc(wxCommandEvent& event);
-    bool IsLogged() const;
 
 private:
     wxButton* goBackBtn;

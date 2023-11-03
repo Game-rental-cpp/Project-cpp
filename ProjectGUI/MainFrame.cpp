@@ -1,6 +1,6 @@
 // MainFrame.cpp
 #include "MainFrame.h"
-#include<fstream>
+#include <fstream>
 #include <filesystem>
 
 MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
@@ -13,7 +13,7 @@ MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& si
 
     //Pokazuj odpowiednie przyciski w zale¿noœci czy user jest zalogowany czy nie
     goBackBtn->Hide();
-    if (IsLogged())
+    if (isLogged())
         loginBtn->Hide();
     else myAccBtn->Hide();
 
@@ -62,7 +62,7 @@ void MainFrame::OnGoBack(wxCommandEvent & event)
 {
     goBackBtn->Hide();
     //
-    if (IsLogged()) {
+    if (isLogged()) {
         loginBtn->Hide();
         myAccBtn->Show();
     } else {
@@ -109,33 +109,4 @@ void MainFrame::OnMyAcc(wxCommandEvent& event)
 
     this->Layout();
 
-}
-
-
-bool MainFrame::IsLogged() const {
-    // Pobieramy œcie¿kê do pliku MainFrame.cpp
-        wxString parentDir = wxGetCwd();
-
-    // £¹czymy œcie¿kê do katalogu "Users"
-    wxString loggedFile = parentDir + "/Users/_logged.txt";
-
-    // SprawdŸ, czy plik istnieje
-    if (wxFileExists(loggedFile)) {
-        // Otwórz plik do odczytu
-        wxFile file(loggedFile, wxFile::read);
-
-        //int l = file.Length();
-        //std::string ll = std::to_string(l);
-        //wxLogMessage("%s", ll.c_str());
-        int len = file.Length();
-        file.Close();
-
-        // SprawdŸ, czy plik jest pusty
-        if (len == 0)
-            return false; // Plik jest pusty, wiêc u¿ytkownik nie jest zalogowany
-        else return true; //Plik nie jest pusty, u¿ytkownik jest zalogowany
-        
-    }
-
-    return false; // Plik nie istnieje
 }

@@ -133,7 +133,7 @@
   <ItemGroup>
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Logic.cpp" />
+    <ClCompile Include="MainFrame_Logic.cpp" />
     <ClCompile Include="LoginPanel.cpp" />
     <ClCompile Include="MainFrame.cpp" />
     <ClCompile Include="MainPanel.cpp" />
@@ -141,7 +141,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
-    <ClInclude Include="Logic.h" />
+    <ClInclude Include="MainFrame_Logic.h" />
     <ClInclude Include="LoginPanel.h" />
     <ClInclude Include="MainFrame.h" />
     <ClInclude Include="MainPanel.h" />
