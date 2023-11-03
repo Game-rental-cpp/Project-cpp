@@ -53,15 +53,13 @@ void MainPanel::ChangeQuantity(wxCommandEvent& event)
 
             // Pobierz nazwê gry z tekstu etykiety
             wxString gameName = labelText.BeforeFirst(',').substr(11);
-
-            ///Chcê wyszukaæ obiekt game z vectora, którego w³asnoœci name jest taka sama jak gameName
-            Game foundGame(gameName.ToStdString(), 0);
-
  
+            //W pêtli jest aktualizowany odpowiedni obiekt Game z wektora, a nastêpnie na tej podstawie aktuazlizowany jest laebl
             for (int i = 0; i < gamesVector.size(); i++) {
+
                 if ( gamesVector[i].GetName() == gameName) {
 
-                    wxLogMessage(wxString(gamesVector[i].GetName().c_str()));
+                    //wxLogMessage(wxString(gamesVector[i].GetName().c_str()));
                     //jeszcze setQuantity powinno aktualiziowaæ pliki txt
                     gamesVector[i].SetQuantity(gamesVector[i].GetQuantity()-1);
 
@@ -77,9 +75,6 @@ void MainPanel::ChangeQuantity(wxCommandEvent& event)
         }
     }
 
-
-
-    // Dodaj tutaj inny kod, który chcesz wykonaæ po naciœniêciu przycisku
 }
 
 

@@ -1,2 +1,2 @@
 name: szachy
-quantity: 10
+quantity: 9
