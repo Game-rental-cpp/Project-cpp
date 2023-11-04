@@ -49,5 +49,5 @@ Może się zdarzyć, że po przełaczaniu się na inny branch VisualStudio wyśw
 Jeśli chcesz wyświetlić listę branchy, wpisz komendę __git branch__. Branch z gwiazdką to ten, na którym się teraz znajdujesz.
 
 ##### Miejsce na podpisy:
-##### -
+##### - Mikołaj Karaman
 ##### -
