@@ -10,4 +10,8 @@ public:
 private:
     wxButton* button;
     wxStaticText* label;
+
+    void OnPanelShow(wxShowEvent& event);
+    void LoadUser();
+    void LogOut();
 };
