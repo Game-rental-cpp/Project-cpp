@@ -1,2 +1,2 @@
 name: statki
-quantity: 7
+quantity: 5

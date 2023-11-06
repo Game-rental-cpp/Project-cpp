@@ -1,6 +1,8 @@
 #pragma once
 
 #include <wx/wx.h>
+#include "UserCRUD.h"
+
 
 class MyAccPanel : public wxPanel
 {

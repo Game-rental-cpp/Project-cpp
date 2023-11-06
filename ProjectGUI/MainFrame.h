@@ -5,6 +5,8 @@
 #include "LoginPanel.h"
 #include "MyAccPanel.h"
 #include "MainFrame_Logic.h"
+#include "MainFrame_Controller.h"
+#include "UserCRUD.h"
 
 class MainFrame : public wxFrame
 {

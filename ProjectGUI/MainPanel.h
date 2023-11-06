@@ -4,6 +4,7 @@
 #include <wx/textfile.h>
 #include <wx/wx.h>
 #include "Game.h"
+#include "GameCRUD.h"
 
 class MainPanel : public wxPanel
 {
@@ -18,9 +19,9 @@ private:
     // Deklaracja metody obs³ugi zdarzenia wxShowEvent
     void OnPanelShow(wxShowEvent& event);
     void LoadGames();
-    int CountGames();
+    //int CountGames();
     Game CreateGameBasedOnFile(int i);
-    void ChangeQuantity(wxCommandEvent& event);
+    void UpdateGame(wxCommandEvent& event);
     /*void CreateOrShowGamesPanel();
     void HideGamesPanel();*/
 };

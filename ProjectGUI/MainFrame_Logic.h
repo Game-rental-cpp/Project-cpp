@@ -2,4 +2,3 @@
 #pragma once
 
 void mvcShowcase();
-bool isLogged();

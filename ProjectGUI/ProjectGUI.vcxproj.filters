@@ -43,11 +43,17 @@
     <Filter Include="Pliki zasobów\Games">
       <UniqueIdentifier>{2fc26235-75f8-4450-81bd-4557ad9a173b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pliki źródłowe\DTOs">
+    <Filter Include="Pliki źródłowe\Models">
       <UniqueIdentifier>{11dcc3a3-50c2-41fd-80a5-4f3874c2a56e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pliki nagłówkowe\DTOs">
+    <Filter Include="Pliki nagłówkowe\Models">
       <UniqueIdentifier>{0262a5c8-dcc5-454d-b84e-eb32371a9a6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\CRUD">
+      <UniqueIdentifier>{6ffd1562-eabc-4fb7-9eb9-f46cb5f793c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\CRUD">
+      <UniqueIdentifier>{e1720c9b-216d-4e6d-ab2d-1d3e38b7e47d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -67,9 +73,18 @@
       <Filter>Pliki źródłowe\MyAccPanel</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
-      <Filter>Pliki źródłowe\DTOs</Filter>
+      <Filter>Pliki źródłowe\Models</Filter>
     </ClCompile>
     <ClCompile Include="MainFrame_Logic.cpp">
+      <Filter>Pliki źródłowe\MainFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="UserCRUD.cpp">
+      <Filter>Pliki źródłowe\CRUD</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCRUD.cpp">
+      <Filter>Pliki źródłowe\CRUD</Filter>
+    </ClCompile>
+    <ClCompile Include="MainFrame_Controller.cpp">
       <Filter>Pliki źródłowe\MainFrame</Filter>
     </ClCompile>
   </ItemGroup>
@@ -87,9 +102,18 @@
       <Filter>Pliki nagłówkowe\MyAccPanel</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
-      <Filter>Pliki nagłówkowe\DTOs</Filter>
+      <Filter>Pliki nagłówkowe\Models</Filter>
     </ClInclude>
     <ClInclude Include="MainFrame_Logic.h">
+      <Filter>Pliki nagłówkowe\MainFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="UserCRUD.h">
+      <Filter>Pliki nagłówkowe\CRUD</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCRUD.h">
+      <Filter>Pliki nagłówkowe\CRUD</Filter>
+    </ClInclude>
+    <ClInclude Include="MainFrame_Controller.h">
       <Filter>Pliki nagłówkowe\MainFrame</Filter>
     </ClInclude>
   </ItemGroup>
@@ -97,7 +121,6 @@
     <None Include="..\.gitignore" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="mvc.txt" />
     <Text Include="Games\statki.txt">
       <Filter>Pliki zasobów\Games</Filter>
     </Text>

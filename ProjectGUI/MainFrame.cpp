@@ -13,7 +13,7 @@ MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& si
 
     //Pokazuj odpowiednie przyciski w zale¿noœci czy user jest zalogowany czy nie
     goBackBtn->Hide();
-    if (isLogged())
+    if (UserCRUD::isLogged())
         loginBtn->Hide();
     else myAccBtn->Hide();
 
@@ -57,29 +57,17 @@ MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& si
 }
 
 
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 // Funkcja obs³ugi zdarzenia po naciœniêciu przycisku "Wróæ"
 void MainFrame::OnGoBack(wxCommandEvent & event)
 {
-    goBackBtn->Hide();
-    //
-    if (isLogged()) {
-        loginBtn->Hide();
-        myAccBtn->Show();
-    } else {
-        loginBtn->Show();
-        myAccBtn->Hide();
-    }
-
-    //pokazywanie / ukrywanie panelów
-    mainPanel->Show();
-    loginPanel->Hide();
-    myAccPanel->Hide();
+    goBackHandle(goBackBtn, loginBtn, myAccBtn, mainPanel, loginPanel, myAccPanel);
+    //MainFrame_Controller::goBackHandle(goBackBtn, loginBtn, myAccBtn, mainPanel, loginPanel, myAccPanel);
 
     // Przerysuj okno, aby zastosowaæ zmiany widoku
     this->Layout();
-
-    //Poni¿sza funkcja jest zdefiniowana w osobnym pliku, aby zapewniæ przejrzystoœæ kodu.
-    mvcShowcase();
 }
 
 // Funkcja obs³ugi zdarzenia po naciœniêciu przycisku "Zaloguj / zarejestruj"
@@ -108,5 +96,4 @@ void MainFrame::OnMyAcc(wxCommandEvent& event)
     mainPanel->Hide();
 
     this->Layout();
-
 }

@@ -5,6 +5,7 @@
 #include <map>
 #include <vector>
 
+
 std::map<wxButton*, wxStaticText*> buttonLabelMap;
 std::vector<Game> gamesVector; 
 
@@ -56,7 +57,7 @@ void MainPanel::OnPanelShow(wxShowEvent& event)
     event.Skip();
 }
 
-void MainPanel::ChangeQuantity(wxCommandEvent& event)
+void MainPanel::UpdateGame(wxCommandEvent& event)
 {
     // Pobierz obiekt przycisku, który zosta³ naciœniêty
     wxButton* button = dynamic_cast<wxButton*>(event.GetEventObject());
@@ -105,7 +106,7 @@ void MainPanel::ChangeQuantity(wxCommandEvent& event)
 void MainPanel::LoadGames()
 {
     //liczba gier
-    int n = CountGames();
+    int n = GameCRUD::countGames();
 
     for (int i = 0; i < n; i++) {
         // Tworzenie nowej gry na podstawie pliku i dodawanie jej do wektora
@@ -126,7 +127,7 @@ void MainPanel::LoadGames()
         wxStaticText* gameLabel = new wxStaticText(gamesPanel, wxID_ANY, labelText, wxPoint(10, 70 + i * 20));
         //wxStaticText* gameLabel = new wxStaticText(gamesPanel, wxID_ANY, labelText, wxPoint(x, y));
         wxButton* hireBtn = new wxButton(gamesPanel, wxID_ANY, "Wypo¿ycz", wxPoint(250, 70+ i* 20));
-        hireBtn->Bind(wxEVT_BUTTON, &MainPanel::ChangeQuantity, this, wxID_ANY, wxID_ANY);
+        hireBtn->Bind(wxEVT_BUTTON, &MainPanel::UpdateGame, this, wxID_ANY, wxID_ANY);
 
         // Dodaj przycisk i etykietê do kontenera
         buttonLabelMap[hireBtn] = gameLabel;
@@ -189,27 +190,3 @@ Game MainPanel::CreateGameBasedOnFile(int i)
     return game;
 }
 
-
-//Ta funkcja liczy ile jest plików txt z grami
-int MainPanel::CountGames() {
-    // Pobieramy œcie¿kê do pliku MainPanel.cpp
-    wxString parentDir = wxGetCwd();
-
-    // £¹czymy œcie¿kê do katalogu "Games"
-    wxString gamesDir = parentDir + "/Games";
-
-    // Liczymy iloœæ plików w katalogu "Games"
-    int fileCount = 0;
-    wxDir dir(gamesDir);
-    if (dir.IsOpened()) {
-        wxString filename;
-        bool cont = dir.GetFirst(&filename, wxEmptyString, wxDIR_FILES);
-        while (cont) {
-            fileCount++;
-            cont = dir.GetNext(&filename);
-        }
-    }
-    return fileCount;
-
-
-}

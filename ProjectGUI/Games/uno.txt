@@ -1,2 +1,2 @@
 name: uno
-quantity: 6
+quantity: 5

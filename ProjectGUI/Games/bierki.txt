@@ -1,2 +1,2 @@
 name: bierki
-quantity: 10
+quantity: 5
