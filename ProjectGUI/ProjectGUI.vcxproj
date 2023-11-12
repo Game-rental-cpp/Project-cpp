@@ -139,6 +139,7 @@
     <ClCompile Include="LoginPanel.cpp" />
     <ClCompile Include="MainFrame.cpp" />
     <ClCompile Include="MainPanel.cpp" />
+    <ClCompile Include="MainPanel_Controller.cpp" />
     <ClCompile Include="MainPanel_Logic.cpp" />
     <ClCompile Include="MyAccPanel.cpp" />
     <ClCompile Include="UserCRUD.cpp" />
@@ -152,6 +153,7 @@
     <ClInclude Include="LoginPanel.h" />
     <ClInclude Include="MainFrame.h" />
     <ClInclude Include="MainPanel.h" />
+    <ClInclude Include="MainPanel_Controller.h" />
     <ClInclude Include="MainPanel_Logic.h" />
     <ClInclude Include="MyAccPanel.h" />
     <ClInclude Include="UserCRUD.h" />

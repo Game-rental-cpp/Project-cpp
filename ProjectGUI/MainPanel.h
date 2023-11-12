@@ -2,6 +2,7 @@
 // MainPanel.h
 #include "MainPanel.h"
 #include "MainPanel_Logic.h"
+#include "MainPanel_Controller.h"
 #include <wx/textfile.h>
 #include <wx/wx.h>
 #include "Game.h"
