@@ -1,3 +1,5 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 #include "UserCRUD.h"
 #include <iostream>
 #include <fstream>

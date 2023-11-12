@@ -157,62 +157,23 @@ Game MainPanel::CreateGameBasedOnFile(int i)
         wxString filePath = files[i];
         wxTextFile file(filePath);
 
-
         if (file.Exists() && file.Open()) {
-            wxString fileContents= GameCRUD::readGame("uno");
-       /*     std::string fileContents= R"(
-                {
-                    "name": "John",
-                    "quantity": 30
-                }
-            )";*/
+            wxString fileName = wxFileNameFromPath(filePath);
+            //cut the .json extension from the name
+            std::string truncatedFileName = fileName.ToStdString().substr(0, fileName.length() - 5);
 
-            /*json jsonData = json::parse(fileContents);
+            wxString fileContents = GameCRUD::readGame(truncatedFileName);
+
+            json jsonData = json::parse(fileContents);
 
             name = jsonData["name"];
-            quantity = jsonData["quantity"];*/
-            wxLogMessage(wxString(fileContents.c_str()));
-            
-             
-             
-             // Tworzenie stringa JSON
-    /*        std::string jsonString = R"(
-                {
-                    "name": "John",
-                    "quantity": 30,
-                }
-            )";
-
-
-            //pobierz zawartoœæ pliku
-         /*   for (size_t lineIdx = 0; lineIdx < file.GetLineCount(); ++lineIdx) {
-                fileContents += file.GetLine(lineIdx);
-                fileContents += "\n";
-            }*/
-
-            // Rozbij zawartoœæ pliku na linie
-            //wxArrayString lines = wxSplit(fileContents, '\n');
-
-            //for (const wxString& line : lines) {
-            //    wxArrayString parts = wxSplit(line, ':');
-            //    if (parts.GetCount() == 2) {
-            //        wxString key = parts[0].Strip(wxString::both);
-            //        wxString value = parts[1].Strip(wxString::both);
-
-            //        if (key == "name") {
-            //            name = value.ToStdString();
-            //        }
-            //        else if (key == "quantity") {
-            //            value.ToInt(&quantity);
-            //        }
-            //    }
-            //}
-
+            quantity = jsonData["quantity"];
+  
             file.Close();
         }
     }
 
-    Game game("name", 4);
+    Game game(name, quantity);
 
     return game;
 }

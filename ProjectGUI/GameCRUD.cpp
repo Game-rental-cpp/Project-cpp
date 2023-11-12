@@ -3,6 +3,9 @@
 #include "GameCRUD.h"
 #include <wx/dir.h>
 #include <string>
+#include <iostream>
+#include <fstream>
+#include <sstream>
 
 //This function count files in the Games directory
 int GameCRUD::countGames() {
@@ -29,5 +32,24 @@ int GameCRUD::countGames() {
 }
 
 std::string GameCRUD::readGame(std::string fileName) {
+    // Open the file for reading
+    std::ifstream inputFile("./Games/"+fileName+".json");
+
+
+    if (inputFile.is_open()) {
+        // Read the content of the file
+        std::stringstream buffer;
+        buffer << inputFile.rdbuf();
+        std::string fileContent = buffer.str();
+
+        return fileContent;
+
+       
+    }
+    else {
+        // Handle the case where the file couldn't be opened
+        std::cerr << "Unable to open the file for reading." << std::endl;
+        return "false"; // You might want to return an error code here or throw an exception.
+    }
     return fileName;
 }
