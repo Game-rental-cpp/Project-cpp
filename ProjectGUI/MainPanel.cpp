@@ -11,6 +11,7 @@ std::vector<Game> helpGamesVector;
 
 //How many different games
 int gameCount = GameCRUD::countGames();
+void fulfillGamesVector();
 
 MainPanel::MainPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size)
     : wxPanel(parent, id, pos, size)
@@ -33,7 +34,7 @@ MainPanel::MainPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const 
     // Dodaj zdarzenie EVT_CHOICE do kontrolki wxChoice
     sortChoice->Bind(wxEVT_CHOICE, &MainPanel::OnChoice, this);
 
-    //FulfillGamesVector();
+    //fulfillGamesVector();
 
 
     // Creating the gamesPanel
@@ -43,8 +44,16 @@ MainPanel::MainPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const 
     Bind(wxEVT_SHOW, &MainPanel::OnPanelShow, this);
 }
 
-void fullfillGamesVector() {
 
+void fulfillGamesVector() {
+    for (int i = 0; i < gameCount; i++)
+    {
+    Game game = MainPanel_Logic::CreateGameFromJSON(i);
+
+    //wxLogMessage("ededewd");
+    gamesVector.push_back(game); // Dodawanie gry do wektora
+
+    }
 }
 
 void MainPanel::OnChoice(wxCommandEvent& event) {
@@ -81,13 +90,13 @@ void MainPanel::OnChoice(wxCommandEvent& event) {
         break;
     }
 
-
-
+    UpdateGamesPanel(gamesVector);
+    //Layout(); // Zaktualizuj uk³ad
 
     for (int i = 0; i < gameCount; i++)
     {
 
-            wxLogMessage(gamesVector[i].GetName().c_str());
+            //wxLogMessage(gamesVector[i].GetName().c_str());
     }
 
 }
@@ -96,7 +105,7 @@ void MainPanel::OnPanelShow(wxShowEvent& event)
 {
      //Do if MainPanel has occured on the screen
     if (event.IsShown()) {
-
+        //wxLogMessage(gamesVector[0].GetName().c_str());
         // Delete existing gamesPanel if it already exists
         if (gamesPanel) {
             gamesPanel->Destroy();
@@ -109,7 +118,10 @@ void MainPanel::OnPanelShow(wxShowEvent& event)
         gamesPanel = new wxPanel(this, wxID_ANY, wxPoint(10, 100), wxSize(400, 300));
         gamesPanel->SetBackgroundColour(wxColour(255, 0, 0)); // Set background color (optional)
 
-        UpdateGamesPanel();
+
+        fulfillGamesVector();
+
+        UpdateGamesPanel(gamesVector);
         Layout(); // Zaktualizuj uk³ad
 
     }
@@ -167,18 +179,27 @@ void MainPanel::UpdateGame(wxCommandEvent& event)
 
 
 //Funkcja dodaje do gamesPanel labele z grami i przyciski do wypo¿yczenia
-void MainPanel::UpdateGamesPanel()
+void MainPanel::UpdateGamesPanel(std::vector<Game> gamesVector)
 {
 
+        //Game game1= gamesVector[0];
     for (int i = 0; i < gameCount; i++) {
+
         // Tworzenie nowej gry na podstawie pliku i dodawanie jej do wektora
-        Game game = MainPanel_Logic::CreateGameFromJSON(i);
+        //Game game = MainPanel_Logic::CreateGameFromJSON(i);
 
-        gamesVector.push_back(game); // Dodawanie gry do wektora
+        //gamesVector.push_back(game); // Dodawanie gry do wektora
 
+
+
+        //Game game = gamesVector[i];
+        //wxLogMessage(gamesVector[i].GetName().c_str());
+        Game game = gamesVector[i];
+        // 
+        // 
         // Pobierz nazwê i liczbê sztuk
-        wxString gameNameWx = game.GetName();
-        std::string gameName = std::string(gameNameWx.ToStdString());
+        //wxString gameNameWx = game.GetName();
+        std::string gameName = std::string(game.GetName());
         int gameQuantity = game.GetQuantity();
 
         //int x = rand() % (100); // Losowa pozycja x na panelu

@@ -7,6 +7,7 @@
 #include "Game.h"
 #include "GameCRUD.h"
 #include "json.hpp"
+#include <vector>
 
 class MainPanel : public wxPanel
 {
@@ -22,7 +23,7 @@ private:
     // Deklaracja metody obs³ugi zdarzenia wxShowEvent
     void OnPanelShow(wxShowEvent& event);
     void OnChoice(wxCommandEvent& event);
-    void UpdateGamesPanel();
+    void UpdateGamesPanel(std::vector<Game>);
     //int CountGames();
     Game CreateGameBasedOnFile(int i);
     void UpdateGame(wxCommandEvent& event);
