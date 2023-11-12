@@ -1,5 +1,8 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 #include "GameCRUD.h"
 #include <wx/dir.h>
+#include <string>
 
 //This function count files in the Games directory
 int GameCRUD::countGames() {
@@ -23,4 +26,8 @@ int GameCRUD::countGames() {
     return fileCount;
 
 
+}
+
+std::string GameCRUD::readGame(std::string fileName) {
+    return fileName;
 }

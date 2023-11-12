@@ -159,19 +159,19 @@ Game MainPanel::CreateGameBasedOnFile(int i)
 
 
         if (file.Exists() && file.Open()) {
-            //wxString fileContents= GameCRUD::GetFile();
-            std::string fileContents= R"(
+            wxString fileContents= GameCRUD::readGame("uno");
+       /*     std::string fileContents= R"(
                 {
                     "name": "John",
                     "quantity": 30
                 }
-            )";
+            )";*/
 
-            json jsonData = json::parse(fileContents);
+            /*json jsonData = json::parse(fileContents);
 
             name = jsonData["name"];
-            quantity = jsonData["quantity"];
-             wxLogMessage(wxString(fileContents.c_str()));
+            quantity = jsonData["quantity"];*/
+            wxLogMessage(wxString(fileContents.c_str()));
             
              
              

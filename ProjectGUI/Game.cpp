@@ -40,13 +40,16 @@ void Game::SetName(const std::string& name) {
 void Game::SetQuantity(int quantity) {
     this->quantity = quantity;
 
-    //Update txt file
-    std::string folderPath = "./Games/"; // Œcie¿ka do folderu "Games"
-    std::string fileName = folderPath + name + ".json"; // Tworzymy pe³n¹ œcie¿kê do pliku
+    //Update json file
+    std::string folderPath = "./Games/"; // Path to folder "Games"
+    std::string fileName = folderPath + name + ".json";
     std::ofstream file(fileName);
     if (file.is_open()) {
-        file << "name: " << name << "\n";
-        file << "quantity: " << quantity << "\n";
+        file << "{" << "\n";
+        file << "\"name\": \"" << name << "\"," << "\n";
+        file << "\"quantity\": " << quantity << "\n";
+        file << "}";
+
         file.close();
     }
 }
