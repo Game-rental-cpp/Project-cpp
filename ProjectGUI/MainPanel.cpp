@@ -7,6 +7,7 @@
 using json = nlohmann::json;
 
 std::vector<Game> gamesVector; 
+std::vector<Game> helpGamesVector;
 
 //How many different games
 int gameCount = GameCRUD::countGames();
@@ -22,11 +23,73 @@ MainPanel::MainPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const 
     // Creating a label
     label = new wxStaticText(this, wxID_ANY, "Liczba ró¿nych gier: " + gameCountStr, wxPoint(10, 50));
 
+    wxArrayString sortOptions;
+    sortOptions.Add("Alfabetycznie (A-Z)");
+    sortOptions.Add("Alfabetycznie (Z-A)");
+    
+    sortChoice= new wxChoice(this, wxID_ANY, wxPoint(10, 75), wxSize(130, -1), sortOptions);
+    sortChoice->SetSelection(0);
+
+    // Dodaj zdarzenie EVT_CHOICE do kontrolki wxChoice
+    sortChoice->Bind(wxEVT_CHOICE, &MainPanel::OnChoice, this);
+
+    //FulfillGamesVector();
+
+
     // Creating the gamesPanel
     gamesPanel = new wxPanel(this, wxID_ANY, wxPoint(10, 100), wxSize(400, 300));
 
     // Przypisanie funkcji obs³ugi zdarzenia wxShowEvent
     Bind(wxEVT_SHOW, &MainPanel::OnPanelShow, this);
+}
+
+void fullfillGamesVector() {
+
+}
+
+void MainPanel::OnChoice(wxCommandEvent& event) {
+    int selection = sortChoice->GetSelection();
+    wxString selectedOption = sortChoice->GetString(selection);
+
+    //wxMessageBox("Wybrano opcjê: " + selectedOption, "Wybór", wxOK | wxICON_INFORMATION);
+    // Sortowanie obiektów w gamesVector wed³ug pola name
+    gamesVector[0].GetName();
+
+    switch (selection) {
+    case 0: 
+
+        for (int i = 0; i < gameCount - 1; i++) {
+            for (int j = 0; j < gameCount - i - 1; j++) {
+                if (gamesVector[j].GetName() > gamesVector[j + 1].GetName()) {
+                    // Zamieñ miejscami, jeœli warunek nie jest spe³niony
+                    std::swap(gamesVector[j], gamesVector[j + 1]);
+                }
+            }
+        }
+
+        break;
+    case 1: 
+
+        for (int i = 0; i < gameCount - 1; i++) {
+            for (int j = 0; j < gameCount - i - 1; j++) {
+                if (gamesVector[j].GetName() < gamesVector[j + 1].GetName()) {
+                    // Zamieñ miejscami, jeœli warunek nie jest spe³niony
+                    std::swap(gamesVector[j], gamesVector[j + 1]);
+                }
+            }
+        }
+        break;
+    }
+
+
+
+
+    for (int i = 0; i < gameCount; i++)
+    {
+
+            wxLogMessage(gamesVector[i].GetName().c_str());
+    }
+
 }
 
 void MainPanel::OnPanelShow(wxShowEvent& event)
@@ -53,6 +116,7 @@ void MainPanel::OnPanelShow(wxShowEvent& event)
 
     event.Skip();
 }
+
 
 //This metohods executes after clicking on "wypozycz" button
 void MainPanel::UpdateGame(wxCommandEvent& event)

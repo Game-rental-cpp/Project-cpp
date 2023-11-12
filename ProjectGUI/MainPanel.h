@@ -17,9 +17,11 @@ private:
     wxButton* button;
     wxStaticText* label;
     wxPanel* gamesPanel;
+    wxChoice* sortChoice;
 
     // Deklaracja metody obs³ugi zdarzenia wxShowEvent
     void OnPanelShow(wxShowEvent& event);
+    void OnChoice(wxCommandEvent& event);
     void UpdateGamesPanel();
     //int CountGames();
     Game CreateGameBasedOnFile(int i);
