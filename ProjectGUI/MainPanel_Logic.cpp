@@ -43,6 +43,7 @@ Game MainPanel_Logic::CreateGameFromJSON(int i)
 }
 
 std::vector<Game> MainPanel_Logic::vec;
+
 std::vector<Game> MainPanel_Logic::fulfillGamesVector(int gameCount) {
     for (int i = 0; i < gameCount; i++)
     {
@@ -53,4 +54,34 @@ std::vector<Game> MainPanel_Logic::fulfillGamesVector(int gameCount) {
 
     }
     return vec;
+}
+
+std::vector<Game> MainPanel_Logic::sortVector(std::vector<Game> gamesVector, int choice, int gameCount) {
+    // Sortowanie obiektów w gamesVector wed³ug pola name
+    switch (choice) {
+        case 0:
+            //sprto A-Z
+            for (int i = 0; i < gameCount - 1; i++) {
+                for (int j = 0; j < gameCount - i - 1; j++) {
+                    if (gamesVector[j].GetName() > gamesVector[j + 1].GetName()) {
+                        // Zamieñ miejscami, jeœli warunek nie jest spe³niony
+                        std::swap(gamesVector[j], gamesVector[j + 1]);
+                    }
+                }
+            }
+
+           break;
+        case 1:
+            //sort Z-A
+            for (int i = 0; i < gameCount - 1; i++) {
+                for (int j = 0; j < gameCount - i - 1; j++) {
+                    if (gamesVector[j].GetName() < gamesVector[j + 1].GetName()) {
+                        // Zamieñ miejscami, jeœli warunek nie jest spe³niony
+                        std::swap(gamesVector[j], gamesVector[j + 1]);
+                    }
+                }
+            }
+           break;
+    }
+    return gamesVector;
 }

@@ -45,38 +45,13 @@ MainPanel::MainPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const 
 
 //
 void MainPanel::OnChoice(wxCommandEvent& event) {
-    int selection = sortChoice->GetSelection();
-    wxString selectedOption = sortChoice->GetString(selection);
+    int choice = sortChoice->GetSelection();
+    //wxString selectedOption = sortChoice->GetString(choice);
 
-    // Sortowanie obiektów w gamesVector wed³ug pola name
-    gamesVector[0].GetName();
+    //gamesVector.clear();
+    std::vector<Game> helpGamesVector = MainPanel_Logic::sortVector(gamesVector, choice, gameCount);
 
-    switch (selection) {
-    case 0: 
-        //sprto A-Z
-        for (int i = 0; i < gameCount - 1; i++) {
-            for (int j = 0; j < gameCount - i - 1; j++) {
-                if (gamesVector[j].GetName() > gamesVector[j + 1].GetName()) {
-                    // Zamieñ miejscami, jeœli warunek nie jest spe³niony
-                    std::swap(gamesVector[j], gamesVector[j + 1]);
-                }
-            }
-        }
-
-        break;
-    case 1: 
-        //sort Z-A
-        for (int i = 0; i < gameCount - 1; i++) {
-            for (int j = 0; j < gameCount - i - 1; j++) {
-                if (gamesVector[j].GetName() < gamesVector[j + 1].GetName()) {
-                    // Zamieñ miejscami, jeœli warunek nie jest spe³niony
-                    std::swap(gamesVector[j], gamesVector[j + 1]);
-                }
-            }
-        }
-        break;
-    }
-
+    gamesVector = helpGamesVector;
     if (gamesPanel) {
         UpdateGamesPanel(gamesVector);
     }
@@ -87,8 +62,7 @@ void MainPanel::OnPanelShow(wxShowEvent& event)
 {
      //Do if MainPanel has occured on the screen
     if (event.IsShown()) {
-        //wxLogMessage(gamesVector[0].GetName().c_str());
-                // Delete existing gamesPanel if it already exists
+        
         if (gamesPanel) {
             UpdateGamesPanel(gamesVector);
         }
@@ -158,20 +132,9 @@ void MainPanel::UpdateGamesPanel(std::vector<Game> gamesVector)
         //Game game1= gamesVector[0];
     for (int i = 0; i < gameCount; i++) {
 
-        // Tworzenie nowej gry na podstawie pliku i dodawanie jej do wektora
-        //Game game = MainPanel_Logic::CreateGameFromJSON(i);
 
-        //gamesVector.push_back(game); // Dodawanie gry do wektora
-
-
-
-        //Game game = gamesVector[i];
-        //wxLogMessage(gamesVector[i].GetName().c_str());
         Game game = gamesVector[i];
-        // 
-        // 
-        // Pobierz nazwê i liczbê sztuk
-        //wxString gameNameWx = game.GetName();
+
         std::string gameName = std::string(game.GetName());
         int gameQuantity = game.GetQuantity();
 

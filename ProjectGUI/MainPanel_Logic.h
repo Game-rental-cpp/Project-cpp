@@ -20,6 +20,7 @@ public:
     //int CountGames();
     static Game CreateGameFromJSON(int i);
     static std::vector<Game> fulfillGamesVector(int n);
+    static std::vector<Game> sortVector(std::vector<Game> gamesVector, int choice, int gameCount);
     //void UpdateGame(wxCommandEvent& event);
     /*void CreateOrShowGamesPanel();
     void HideGamesPanel();*/
