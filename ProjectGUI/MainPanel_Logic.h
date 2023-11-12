@@ -5,6 +5,7 @@
 #include "Game.h"
 #include "GameCRUD.h"
 #include "json.hpp"
+#include <vector>
 
 class MainPanel_Logic : public wxPanel
 {
@@ -18,7 +19,11 @@ public:
     //void LoadGames();
     //int CountGames();
     static Game CreateGameFromJSON(int i);
+    static std::vector<Game> fulfillGamesVector(int n);
     //void UpdateGame(wxCommandEvent& event);
     /*void CreateOrShowGamesPanel();
     void HideGamesPanel();*/
+
+private:
+    static std::vector<Game> vec;
 };
