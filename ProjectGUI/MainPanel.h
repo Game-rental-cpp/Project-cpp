@@ -5,6 +5,7 @@
 #include <wx/wx.h>
 #include "Game.h"
 #include "GameCRUD.h"
+#include "json.hpp"
 
 class MainPanel : public wxPanel
 {

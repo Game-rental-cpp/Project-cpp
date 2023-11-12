@@ -2,6 +2,10 @@
 #include "MainFrame.h"
 #include <fstream>
 #include <filesystem>
+#include "json.hpp"
+
+
+using json = nlohmann::json;
 
 MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
     : wxFrame(NULL, wxID_ANY, title, pos, size)
@@ -54,6 +58,21 @@ MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& si
 
     // Przypisanie sizeru do ramki
     this->SetSizer(sizer);
+
+
+    //We have some json object
+    json data = {
+       {"name", "John"},
+       {"age", 30},
+       {"city", "New York"}
+    };
+
+    // convert to string
+        std::string jsonStr = data.dump();
+
+    // print the string
+    //wxLogMessage(wxString(jsonStr.c_str()));
+    
 }
 
 

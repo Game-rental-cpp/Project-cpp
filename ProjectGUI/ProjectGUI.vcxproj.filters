@@ -116,27 +116,30 @@
     <ClInclude Include="MainFrame_Controller.h">
       <Filter>Pliki nagłówkowe\MainFrame</Filter>
     </ClInclude>
+    <ClInclude Include="json.hpp">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Games\statki.txt">
+    <Text Include="Games\statki.json">
       <Filter>Pliki zasobów\Games</Filter>
     </Text>
-    <Text Include="Games\domino.txt">
+    <Text Include="Games\domino.json">
       <Filter>Pliki zasobów\Games</Filter>
     </Text>
-    <Text Include="Games\szachy.txt">
+    <Text Include="Games\szachy.json">
       <Filter>Pliki zasobów\Games</Filter>
     </Text>
-    <Text Include="Games\uno.txt">
+    <Text Include="Games\uno.json">
       <Filter>Pliki zasobów\Games</Filter>
     </Text>
     <Text Include="Users\_logged.txt">
       <Filter>Pliki zasobów\Users</Filter>
     </Text>
-    <Text Include="Games\bierki.txt">
+    <Text Include="Games\bierki.json">
       <Filter>Pliki zasobów\Games</Filter>
     </Text>
   </ItemGroup>

@@ -5,6 +5,7 @@
 #include <map>
 #include <vector>
 
+using json = nlohmann::json;
 
 std::map<wxButton*, wxStaticText*> buttonLabelMap;
 std::vector<Game> gamesVector; 
@@ -140,7 +141,7 @@ void MainPanel::LoadGames()
     label->SetLabel("Liczba ró¿nych gier: " + fileCountStr);
 }
 
-//Ta funkcja tworzy obiekt typu Game na podstawie plików txt
+//Ta funkcja tworzy obiekt typu Game na podstawie plików json
 Game MainPanel::CreateGameBasedOnFile(int i)
 {
     std::string name;
@@ -155,37 +156,63 @@ Game MainPanel::CreateGameBasedOnFile(int i)
     if (i >= 0 && i < files.GetCount()) {
         wxString filePath = files[i];
         wxTextFile file(filePath);
+
+
         if (file.Exists() && file.Open()) {
-            wxString fileContents;
+            //wxString fileContents= GameCRUD::GetFile();
+            std::string fileContents= R"(
+                {
+                    "name": "John",
+                    "quantity": 30
+                }
+            )";
+
+            json jsonData = json::parse(fileContents);
+
+            name = jsonData["name"];
+            quantity = jsonData["quantity"];
+             wxLogMessage(wxString(fileContents.c_str()));
+            
+             
+             
+             // Tworzenie stringa JSON
+    /*        std::string jsonString = R"(
+                {
+                    "name": "John",
+                    "quantity": 30,
+                }
+            )";
+
+
             //pobierz zawartoœæ pliku
-            for (size_t lineIdx = 0; lineIdx < file.GetLineCount(); ++lineIdx) {
+         /*   for (size_t lineIdx = 0; lineIdx < file.GetLineCount(); ++lineIdx) {
                 fileContents += file.GetLine(lineIdx);
                 fileContents += "\n";
-            }
+            }*/
 
             // Rozbij zawartoœæ pliku na linie
-            wxArrayString lines = wxSplit(fileContents, '\n');
+            //wxArrayString lines = wxSplit(fileContents, '\n');
 
-            for (const wxString& line : lines) {
-                wxArrayString parts = wxSplit(line, ':');
-                if (parts.GetCount() == 2) {
-                    wxString key = parts[0].Strip(wxString::both);
-                    wxString value = parts[1].Strip(wxString::both);
+            //for (const wxString& line : lines) {
+            //    wxArrayString parts = wxSplit(line, ':');
+            //    if (parts.GetCount() == 2) {
+            //        wxString key = parts[0].Strip(wxString::both);
+            //        wxString value = parts[1].Strip(wxString::both);
 
-                    if (key == "name") {
-                        name = value.ToStdString();
-                    }
-                    else if (key == "quantity") {
-                        value.ToInt(&quantity);
-                    }
-                }
-            }
+            //        if (key == "name") {
+            //            name = value.ToStdString();
+            //        }
+            //        else if (key == "quantity") {
+            //            value.ToInt(&quantity);
+            //        }
+            //    }
+            //}
 
             file.Close();
         }
     }
 
-    Game game(name, quantity);
+    Game game("name", 4);
 
     return game;
 }

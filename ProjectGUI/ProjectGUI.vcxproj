@@ -145,6 +145,7 @@
   <ItemGroup>
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameCRUD.h" />
+    <ClInclude Include="json.hpp" />
     <ClInclude Include="MainFrame_Controller.h" />
     <ClInclude Include="MainFrame_Logic.h" />
     <ClInclude Include="LoginPanel.h" />
@@ -157,11 +158,11 @@
     <None Include="..\.gitignore" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Games\bierki.txt" />
-    <Text Include="Games\domino.txt" />
-    <Text Include="Games\statki.txt" />
-    <Text Include="Games\szachy.txt" />
-    <Text Include="Games\uno.txt" />
+    <Text Include="Games\bierki.json" />
+    <Text Include="Games\domino.json" />
+    <Text Include="Games\statki.json" />
+    <Text Include="Games\szachy.json" />
+    <Text Include="Games\uno.json" />
     <Text Include="Users\_logged.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
