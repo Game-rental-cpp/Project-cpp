@@ -17,7 +17,7 @@ public:
 
     //void LoadGames();
     //int CountGames();
-    static Game CreateGameBasedOnFile(int i);
+    static Game CreateGameFromJSON(int i);
     //void UpdateGame(wxCommandEvent& event);
     /*void CreateOrShowGamesPanel();
     void HideGamesPanel();*/

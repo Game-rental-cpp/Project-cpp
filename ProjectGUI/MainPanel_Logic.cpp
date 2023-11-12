@@ -6,7 +6,7 @@
 using json = nlohmann::json;
 
 //Ta funkcja tworzy obiekt typu Game na podstawie plików json
-Game MainPanel_Logic::CreateGameBasedOnFile(int i)
+Game MainPanel_Logic::CreateGameFromJSON(int i)
 {
     std::string name;
     int quantity;

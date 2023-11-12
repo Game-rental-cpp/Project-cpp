@@ -27,8 +27,11 @@ MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& si
     myAccPanel = new MyAccPanel(this, wxID_ANY, wxPoint(10, 100), wxSize(410, 300));
 
     //Dpmyœlnie ukryte
+    mainPanel->Hide();
     loginPanel->Hide();
     myAccPanel->Hide();
+
+    mainPanel->Show();
 
     // Przypisanie funkcji obs³ugi zdarzeñ do przycisków
     goBackBtn->Bind(wxEVT_BUTTON, &MainFrame::OnGoBack, this);

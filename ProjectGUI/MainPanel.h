@@ -20,7 +20,7 @@ private:
 
     // Deklaracja metody obs³ugi zdarzenia wxShowEvent
     void OnPanelShow(wxShowEvent& event);
-    void LoadGames();
+    void UpdateGamesPanel();
     //int CountGames();
     Game CreateGameBasedOnFile(int i);
     void UpdateGame(wxCommandEvent& event);
