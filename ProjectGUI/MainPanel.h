@@ -1,6 +1,7 @@
 #pragma once
 // MainPanel.h
-
+#include "MainPanel.h"
+#include "MainPanel_Logic.h"
 #include <wx/textfile.h>
 #include <wx/wx.h>
 #include "Game.h"
