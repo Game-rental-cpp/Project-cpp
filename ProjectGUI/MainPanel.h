@@ -24,6 +24,7 @@ private:
     void OnPanelShow(wxShowEvent& event);
     void OnChoice(wxCommandEvent& event);
     void UpdateGamesPanel(std::vector<Game>);
+    //void UpdateGamesPanel(std::vector<Game>);
     //int CountGames();
     Game CreateGameBasedOnFile(int i);
     void UpdateGame(wxCommandEvent& event);

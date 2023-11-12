@@ -35,6 +35,7 @@ MainPanel::MainPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const 
     sortChoice->Bind(wxEVT_CHOICE, &MainPanel::OnChoice, this);
 
     //fulfillGamesVector();
+    fulfillGamesVector();
 
 
     // Creating the gamesPanel
@@ -66,7 +67,7 @@ void MainPanel::OnChoice(wxCommandEvent& event) {
 
     switch (selection) {
     case 0: 
-
+        //sprto A-Z
         for (int i = 0; i < gameCount - 1; i++) {
             for (int j = 0; j < gameCount - i - 1; j++) {
                 if (gamesVector[j].GetName() > gamesVector[j + 1].GetName()) {
@@ -78,7 +79,7 @@ void MainPanel::OnChoice(wxCommandEvent& event) {
 
         break;
     case 1: 
-
+        //sort Z-A
         for (int i = 0; i < gameCount - 1; i++) {
             for (int j = 0; j < gameCount - i - 1; j++) {
                 if (gamesVector[j].GetName() < gamesVector[j + 1].GetName()) {
@@ -90,13 +91,20 @@ void MainPanel::OnChoice(wxCommandEvent& event) {
         break;
     }
 
-    UpdateGamesPanel(gamesVector);
+    if (gamesPanel) {
+        gamesPanel->Destroy();
+        gamesPanel = nullptr;
+
+        //gamesVector.clear();
+        UpdateGamesPanel(gamesVector);
+    }
+    //UpdateGamesPanel(gamesVector);
     //Layout(); // Zaktualizuj uk³ad
 
     for (int i = 0; i < gameCount; i++)
     {
 
-            //wxLogMessage(gamesVector[i].GetName().c_str());
+            wxLogMessage(gamesVector[i].GetName().c_str());
     }
 
 }
@@ -106,22 +114,18 @@ void MainPanel::OnPanelShow(wxShowEvent& event)
      //Do if MainPanel has occured on the screen
     if (event.IsShown()) {
         //wxLogMessage(gamesVector[0].GetName().c_str());
-        // Delete existing gamesPanel if it already exists
+                // Delete existing gamesPanel if it already exists
         if (gamesPanel) {
             gamesPanel->Destroy();
             gamesPanel = nullptr;
-            gamesVector.clear();
-            //buttonLabelMap.clear();
+
+                //gamesVector.clear();
+            UpdateGamesPanel(gamesVector);
         }
 
-        // Create new gamesPanel
-        gamesPanel = new wxPanel(this, wxID_ANY, wxPoint(10, 100), wxSize(400, 300));
-        gamesPanel->SetBackgroundColour(wxColour(255, 0, 0)); // Set background color (optional)
 
 
-        fulfillGamesVector();
 
-        UpdateGamesPanel(gamesVector);
         Layout(); // Zaktualizuj uk³ad
 
     }
@@ -182,6 +186,9 @@ void MainPanel::UpdateGame(wxCommandEvent& event)
 void MainPanel::UpdateGamesPanel(std::vector<Game> gamesVector)
 {
 
+    // Create new gamesPanel
+    gamesPanel = new wxPanel(this, wxID_ANY, wxPoint(10, 100), wxSize(400, 300));
+    gamesPanel->SetBackgroundColour(wxColour(255, 0, 0)); // Set background color (optional)
         //Game game1= gamesVector[0];
     for (int i = 0; i < gameCount; i++) {
 
