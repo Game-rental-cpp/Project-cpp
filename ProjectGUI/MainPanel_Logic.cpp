@@ -1,11 +1,19 @@
 #include "MainPanel_Logic.h"
+
 #include <wx/dir.h>
 #include <string>
+#include <wx/textfile.h>
 
+#include "GameCRUD.h"
+#include "json.hpp"
 
 using json = nlohmann::json;
 
-//Ta funkcja tworzy obiekt typu Game na podstawie plików json
+/*
+Ta funkcja tworzy obiekt typu Game na podstawie plików json
+@param int i - the index number of a game.json file inside Games directory
+@returns Game game - game model
+*/
 Game MainPanel_Logic::CreateGameFromJSON(int i)
 {
     std::string name;
@@ -44,27 +52,38 @@ Game MainPanel_Logic::CreateGameFromJSON(int i)
 
 std::vector<Game> MainPanel_Logic::vec;
 
+/*
+Creates vector of games
+@param int gameCount - number of files inside Games directory
+@returns std::vector<Game>
+*/
 std::vector<Game> MainPanel_Logic::fulfillGamesVector(int gameCount) {
     for (int i = 0; i < gameCount; i++)
     {
         Game game = MainPanel_Logic::CreateGameFromJSON(i);
 
         //wxLogMessage("ededewd");
-        vec.push_back(game); // Dodawanie gry do wektora
+        vec.push_back(game); // Add game to vector
 
     }
     return vec;
 }
 
+/*
+Function sorts elements of the given vector
+@param std::vector<Game> gamesVector - vector we want to sort
+@param int choice - 0 if A-Z; 1 if Z-A
+@param int gamesCount - number of files inside Games directory
+*/
 std::vector<Game> MainPanel_Logic::sortVector(std::vector<Game> gamesVector, int choice, int gameCount) {
     // Sortowanie obiektów w gamesVector wed³ug pola name
     switch (choice) {
         case 0:
-            //sprto A-Z
+            //sort A-Z
             for (int i = 0; i < gameCount - 1; i++) {
                 for (int j = 0; j < gameCount - i - 1; j++) {
                     if (gamesVector[j].GetName() > gamesVector[j + 1].GetName()) {
-                        // Zamieñ miejscami, jeœli warunek nie jest spe³niony
+                        
                         std::swap(gamesVector[j], gamesVector[j + 1]);
                     }
                 }
@@ -76,7 +95,7 @@ std::vector<Game> MainPanel_Logic::sortVector(std::vector<Game> gamesVector, int
             for (int i = 0; i < gameCount - 1; i++) {
                 for (int j = 0; j < gameCount - i - 1; j++) {
                     if (gamesVector[j].GetName() < gamesVector[j + 1].GetName()) {
-                        // Zamieñ miejscami, jeœli warunek nie jest spe³niony
+                        
                         std::swap(gamesVector[j], gamesVector[j + 1]);
                     }
                 }

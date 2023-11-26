@@ -5,9 +5,16 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-#include <sstream>
+#include "json.hpp"
 
-//This function count files in the Games directory
+
+//in included json.hpp so now we can write the line below
+using json = nlohmann::json;
+
+/*
+This function counts files in the Games directory
+@returns int fileCount
+*/
 int GameCRUD::countGames() {
     //Take the path to GameCRUD.cpp
     wxString parentDir = wxGetCwd();
@@ -31,19 +38,26 @@ int GameCRUD::countGames() {
 
 }
 
+/*
+This funnction return the content of the given file
+@param string fileName (without extension) - name of the file we want to read
+@returns string contents
+*/
 std::string GameCRUD::readGame(std::string fileName) {
-    // Open the file for reading
-    std::ifstream inputFile("./Games/"+fileName+".json");
 
+    std::ifstream reader("./Games/" + fileName + ".json");
 
-    if (inputFile.is_open()) {
-        // Read the content of the file
-        std::stringstream buffer;
-        buffer << inputFile.rdbuf();
-        std::string fileContent = buffer.str();
+    if (reader.is_open()) {
 
-        return fileContent;
+        // Use nlohmann::json to read contents of the file
+        json jsonData;
+        reader >> jsonData;
 
+        // Zamknij plik
+        reader.close();
+
+        // Return the contents in form of string
+        return jsonData.dump();
        
     }
     else {
@@ -51,5 +65,5 @@ std::string GameCRUD::readGame(std::string fileName) {
         std::cerr << "Unable to open the file for reading." << std::endl;
         return "false"; // You might want to return an error code here or throw an exception.
     }
-    return fileName;
+
 }

@@ -24,5 +24,6 @@ private:
     LoginPanel* loginPanel;
     MyAccPanel* myAccPanel;
 
+    void OnMouseHover(wxMouseEvent& event);
 };
 

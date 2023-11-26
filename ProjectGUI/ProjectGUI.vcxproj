@@ -142,6 +142,7 @@
     <ClCompile Include="MainPanel_Controller.cpp" />
     <ClCompile Include="MainPanel_Logic.cpp" />
     <ClCompile Include="MyAccPanel.cpp" />
+    <ClCompile Include="Style.cpp" />
     <ClCompile Include="UserCRUD.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +157,7 @@
     <ClInclude Include="MainPanel_Controller.h" />
     <ClInclude Include="MainPanel_Logic.h" />
     <ClInclude Include="MyAccPanel.h" />
+    <ClInclude Include="Style.h" />
     <ClInclude Include="UserCRUD.h" />
   </ItemGroup>
   <ItemGroup>
