@@ -1,213 +1,231 @@
 // MainPanel.cpp
 #include "MainPanel.h"
-#include <wx/dir.h>
-#include <string>
-#include <map>
+#include "MainPanel_Logic.h"
+#include "MainPanel_Controller.h"
+#include "Style.h"
+#include "UserCRUD.h"
+//for some reason code works without including <vector> and "GameCRUD.h"
 #include <vector>
+#include "GameCRUD.h"
 
-std::map<wxButton*, wxStaticText*> buttonLabelMap;
 std::vector<Game> gamesVector; 
+//std::vector<Game> helpGamesVector;
 
+//How many different games
+int gameCount = GameCRUD::countGames();
 
 MainPanel::MainPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size)
     : wxPanel(parent, id, pos, size)
 {
-    // Tworzenie przycisku
-    button = new wxButton(this, wxID_ANY, "Przycisk w MainPanel", wxPoint(10, 10));
+    //Convert gameCount into string
+    wxString gameCountStr = wxString::Format("%d", gameCount);
+    // Creating a label
+    label = new wxStaticText(this, wxID_ANY, "Liczba ró¿nych gier: " + gameCountStr, wxPoint(10, 50));
+    label->SetForegroundColour(COLOR_LBL);
+    label->SetFont(SetTheFont());
 
-    // Tworzenie etykiety
-    label = new wxStaticText(this, wxID_ANY, "To jest etykieta w MainPanel", wxPoint(10, 50));
+    /////////
+    wxArrayString sortOptions;
+    sortOptions.Add("Alfabetycznie (A-Z)");
+    sortOptions.Add("Alfabetycznie (Z-A)");
 
-    // Tworzenie panelu booksPanel
-    gamesPanel = new wxPanel(this, wxID_ANY, wxPoint(10, 100), wxSize(400, 300));
-    gamesPanel->SetBackgroundColour(wxColour(255, 0, 0)); // Ustawiony na czerwony kolor (255, 0, 0)
-    // Dodanie gamesPanel do ramki i ustawienie, ¿e ma zajmowaæ ca³¹ dostêpn¹ szerokoœæ
-    //gamesSizer->Add(gamesPanel, 1, wxEXPAND | wxALL | wxALIGN_CENTER, 10);
+    sortChoice = new wxChoice(this, wxID_ANY, wxPoint(10, 75+3), wxSize(146, 175), sortOptions);
+    sortChoice->SetSelection(0);
+    sortChoice->Bind(wxEVT_CHOICE, &MainPanel::OnChoice, this);
+    sortChoice->SetFont(SetTheFont(11));  
+    ////////////
 
-    // Przypisanie funkcji obs³ugi zdarzenia wxShowEvent
+    searchInput = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxPoint(GetClientSize().GetWidth() - 10 - 30 - 190, 75), wxSize(190, 30), wxBORDER_RAISED);
+    searchInput->SetHint("Wyszukaj grê...");
+    searchInput->Connect(wxEVT_TEXT, wxCommandEventHandler(MainPanel::OnSearchChange), nullptr, this);
+    searchInput->SetFocus();
+    searchInput->SetFont(SetTheFont());
+
+    resetBtn = new wxButton(this, wxID_ANY, "X", wxPoint(GetClientSize().GetWidth() - 10 - 30, 74), wxSize(30, 31), wxBORDER_NONE);
+    resetBtn->SetBackgroundColour(RED);
+    resetBtn->SetForegroundColour(COLOR_TEXT_BTN);
+    resetBtn->Bind(wxEVT_BUTTON, &MainPanel::OnResetButtonClick, this, wxID_ANY, wxID_ANY);
+    resetBtn->SetFont(SetTheFont());
+    resetBtn->Bind(wxEVT_ENTER_WINDOW, &MainPanel::OnMouseHover, this);
+
+    /////////////
+
+    gamesVector= MainPanel_Logic::fulfillGamesVector(gameCount);
+
     Bind(wxEVT_SHOW, &MainPanel::OnPanelShow, this);
+}
 
-    LoadGames();
+void MainPanel::OnMouseHover(wxMouseEvent& event) {
+    ChangeCursor(event);
+}
+
+//This functions executes when choosing sorting method (A-Z or Z-A)
+void MainPanel::OnChoice(wxCommandEvent& event) {
+    int currentSortChoice = sortChoice->GetSelection();
+
+    // Check if user chose the same sort option two times in a row
+    if (currentSortChoice == previousSortChoice) {
+        return;
+    }
+
+    previousSortChoice = currentSortChoice;
+    std::vector<Game> helpGamesVector = MainPanel_Logic::sortVector(gamesVector, currentSortChoice, gameCount);
+
+    gamesVector = helpGamesVector;
+    if (gamesPanel) {
+        UpdateGamesPanel(MainPanel_Logic::sortVector(gamesVector, currentSortChoice, gameCount));
+    }
 
 }
 
 void MainPanel::OnPanelShow(wxShowEvent& event)
 {
-     //Wykonaj jeœli MainPanel zosta³ pokazany na ekranie
+     //Do if MainPanel has occured on the screen
     if (event.IsShown()) {
+        this->SetBackgroundColour(COLOR_BACKGROUND_PANEL); // Set background color (optional)
 
-        // Usuñ istniej¹cy gamesPanel, jeœli istnieje
-        if (gamesPanel) {
-            gamesPanel->Destroy();
-            gamesPanel = nullptr;
-            gamesVector.clear();
-            buttonLabelMap.clear();
-        }
-
-        // Twórz nowy gamesPanel
-        gamesPanel = new wxPanel(this, wxID_ANY, wxPoint(10, 100), wxSize(400, 300));
-        gamesPanel->SetBackgroundColour(wxColour(255, 0, 0)); // Ustaw kolor t³a (opcjonalnie)
-
-        LoadGames();
-        Layout(); // Zaktualizuj uk³ad
+        //if (gamesPanel) {
+            UpdateGamesPanel(gamesVector);
+        //}
 
     }
 
     event.Skip();
 }
 
-void MainPanel::ChangeQuantity(wxCommandEvent& event)
+
+//This metohod executes after clicking on "wypozycz" button
+void MainPanel::UpdateGame(wxCommandEvent& event)
 {
-    // Pobierz obiekt przycisku, który zosta³ naciœniêty
-    wxButton* button = dynamic_cast<wxButton*>(event.GetEventObject());
+    bool logged = UserCRUD::isLogged();
 
-    // SprawdŸ, czy uda³o siê pobraæ obiekt przycisku
-    if (button) {
-        // SprawdŸ, czy istnieje etykieta odpowiadaj¹ca temu przyciskowi w mapie
-        if (buttonLabelMap.find(button) != buttonLabelMap.end()) {
-            // Pobierz etykietê odpowiadaj¹c¹ przyciskowi
-            wxStaticText* label = buttonLabelMap[button];
-
-            // Pobierz aktualn¹ wartoœæ etykiety
-            wxString labelText = label->GetLabel();
-
-            // Pobierz liczbê z tekstu etykiety
-            int quantity;
-            labelText.AfterLast(' ').ToInt(&quantity);
-
-            // Pobierz nazwê gry z tekstu etykiety
-            wxString gameName = labelText.BeforeFirst(',').substr(11);
- 
-            //W pêtli jest aktualizowany odpowiedni obiekt Game z wektora, a nastêpnie na tej podstawie aktuazlizowany jest laebl
-            for (int i = 0; i < gamesVector.size(); i++) {
-
-                if ( gamesVector[i].GetName() == gameName) {
-
-                    //wxLogMessage(wxString(gamesVector[i].GetName().c_str()));
-                    //jeszcze setQuantity powinno aktualiziowaæ pliki txt
-                    gamesVector[i].SetQuantity(gamesVector[i].GetQuantity()-1);
-
-                    wxString newLabelText = labelText.BeforeLast(' ') + wxString::Format(" %ld", gamesVector[i].GetQuantity());
-                    label->SetLabel(newLabelText);
-                    break; // Znaleziono grê, przerywamy pêtlê
-                }
-               
-            }
-
-
-            label->Refresh();
-        }
+    if (!logged) {
+        wxDialog* dialog = new wxDialog(this, wxID_ANY, "Musisz siê najpierw zalogowaæ, aby móc wypo¿yczyæ grê");
+        dialog->ShowModal();
+        dialog->Destroy();
+        return;
     }
 
+    gamesVector=  MainPanel_Controller::updateGame(event, gamesPanel, gamesVector);
 }
 
-//Funkcja dodaje do gamesPanel labele z grami i przyciski do wypo¿yczenia
-void MainPanel::LoadGames()
+void MainPanel::OnSearchChange(wxCommandEvent& event) {
+    UpdateGamesPanel(gamesVector);
+    event.Skip(); 
+}
+
+void MainPanel::OnResetButtonClick(wxCommandEvent& event) {
+    //if input is already empty, dont't rerender gamesPanel
+    if (searchInput->GetValue() == "")
+        return;
+
+    searchInput->SetValue("");  // set empty string to the input
+    OnSearchChange(event);
+    event.Skip();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+Function adds labels of games and hire buttons to gamesPanel
+@param std::vector<Game> gamesVector
+*/
+void MainPanel::UpdateGamesPanel(std::vector<Game> gamesVector)
 {
-    //liczba gier
-    int n = CountGames();
+    if (gamesPanel) {
+        gamesPanel->Hide();
+        gamesPanel->Destroy();
+    }
+    
+   
+    //this vector will contain all games that should appear on screen (except those that shouldn't)
+    std::vector<Game> filteredVector;
+    wxString enteredText = searchInput->GetValue();
 
-    for (int i = 0; i < n; i++) {
-        // Tworzenie nowej gry na podstawie pliku i dodawanie jej do wektora
-        Game game = CreateGameBasedOnFile(i);
+    //This loop pushes appropriate vectors to filteredVector
+    for (int i = 0; i < gameCount; i++) {
+        Game game = gamesVector[i];
+        if (game.GetName().find(enteredText.Lower()) == std::string::npos && enteredText != "")
+            continue;
+        filteredVector.push_back(game);
+    }
 
-        gamesVector.push_back(game); // Dodawanie gry do wektora
+
+    gamesPanel = nullptr;
+    int height = filteredVector.size() <= 3 ? 350 : filteredVector.size() * 50;
+    gamesPanel = new wxScrolledWindow(this, wxID_ANY, wxPoint(0, 150), wxSize(GetClientSize().GetWidth(), height));
+    gamesPanel->SetScrollRate(0, 10);  // Ustawienia przewijania - drugi argument to liczba pikseli na jedno przewiniêcie
+    //gamesPanel->Hide();
+    gamesPanel->SetBackgroundColour(RED); // Set background color (optional)
+    gamesPanel->SetVirtualSize(wxSize(410, 300));
 
 
-        // Pobierz nazwê i liczbê sztuk
-        wxString gameNameWx = game.GetName();
-        std::string gameName = std::string(gameNameWx.ToStdString());
+
+
+    if (filteredVector.size() == 0) {
+        wxStaticText* noGameLabel = new wxStaticText(gamesPanel, wxID_ANY, "¯adna z gier nie spe³nia warunków wyszukiwania", wxPoint(33, 150), wxDefaultSize);
+        noGameLabel->SetForegroundColour(COLOR_LBL);
+        //noGameLabel->SetBackgroundColour(COLOR_BACKGROUND_LOGINBTN);
+        noGameLabel->SetFont(SetTheFont());
+    }
+
+
+
+
+    for (int i = 0; i < filteredVector.size(); i++) {
+
+        Game game = filteredVector[i];
+
+        std::string gameName = std::string(game.GetName());
         int gameQuantity = game.GetQuantity();
 
         //int x = rand() % (100); // Losowa pozycja x na panelu
         //int y = rand() % (200); // Losowa pozycja y na panelu
 
+        //Creating elements inside gamesPanel
         wxString labelText = wxString::Format("Nazwa gry: %s, iloœæ sztuk: %d", gameName, gameQuantity);
-        wxStaticText* gameLabel = new wxStaticText(gamesPanel, wxID_ANY, labelText, wxPoint(10, 70 + i * 20));
+        // (label name is the same as game name + Lbl)
+        wxStaticText* gameLabel = new wxStaticText(gamesPanel, wxID_ANY, labelText, wxPoint(10, 10 + i * 35), wxDefaultSize, 0, gameName + "Lbl");
+        gameLabel->SetForegroundColour(COLOR_LBL);
+        gameLabel->SetFont(SetTheFont());
+
+
         //wxStaticText* gameLabel = new wxStaticText(gamesPanel, wxID_ANY, labelText, wxPoint(x, y));
-        wxButton* hireBtn = new wxButton(gamesPanel, wxID_ANY, "Wypo¿ycz", wxPoint(250, 70+ i* 20));
-        hireBtn->Bind(wxEVT_BUTTON, &MainPanel::ChangeQuantity, this, wxID_ANY, wxID_ANY);
+        
+        std::string buttonText= "Wypo¿ycz";
 
-        // Dodaj przycisk i etykietê do kontenera
-        buttonLabelMap[hireBtn] = gameLabel;
+        // (button name is the same as game name)
+        wxButton* hireBtn = new wxButton(gamesPanel, wxID_ANY, buttonText, wxPoint(GetClientSize().GetWidth() - 10 - 85, 10+ i* 35), wxSize(85, 35), 0, wxDefaultValidator, gameName);
+        
+        hireBtn->SetBackgroundColour(COLOR_BACKGROUND_BTN);
+        hireBtn->SetForegroundColour(COLOR_TEXT_BTN);
 
-        // Mo¿esz dostosowaæ pozycjê i inne w³aœciwoœci etykiety, jeœli to konieczne
+        hireBtn->Bind(wxEVT_BUTTON, &MainPanel::UpdateGame, this, wxID_ANY, wxID_ANY);
+        hireBtn->Bind(wxEVT_ENTER_WINDOW, &MainPanel::OnMouseHover, this);
+        hireBtn->SetFont(SetTheFont());
+      
+        if (gameQuantity == 0) 
+            MainPanel_Controller::disableButton(hireBtn);
+        
+       /* else
+            hireBtn->Enable(true);*/
+
+
     }
+    gamesPanel->Show();
 
-    // Konwertujemy fileCount na string i aktualizujemy etykietê
-    wxString fileCountStr = wxString::Format("%d", n);
-    label->SetLabel("Liczba ró¿nych gier: " + fileCountStr);
-}
 
-//Ta funkcja tworzy obiekt typu Game na podstawie plików txt
-Game MainPanel::CreateGameBasedOnFile(int i)
-{
-    std::string name;
-    int quantity;
-
-    wxString parentDir = wxGetCwd();
-    wxString gamesDir = parentDir + "/Games";
-
-    wxArrayString files;
-    wxDir::GetAllFiles(gamesDir, &files, wxEmptyString, wxDIR_FILES);
-
-    if (i >= 0 && i < files.GetCount()) {
-        wxString filePath = files[i];
-        wxTextFile file(filePath);
-        if (file.Exists() && file.Open()) {
-            wxString fileContents;
-            //pobierz zawartoœæ pliku
-            for (size_t lineIdx = 0; lineIdx < file.GetLineCount(); ++lineIdx) {
-                fileContents += file.GetLine(lineIdx);
-                fileContents += "\n";
-            }
-
-            // Rozbij zawartoœæ pliku na linie
-            wxArrayString lines = wxSplit(fileContents, '\n');
-
-            for (const wxString& line : lines) {
-                wxArrayString parts = wxSplit(line, ':');
-                if (parts.GetCount() == 2) {
-                    wxString key = parts[0].Strip(wxString::both);
-                    wxString value = parts[1].Strip(wxString::both);
-
-                    if (key == "name") {
-                        name = value.ToStdString();
-                    }
-                    else if (key == "quantity") {
-                        value.ToInt(&quantity);
-                    }
-                }
-            }
-
-            file.Close();
-        }
-    }
-
-    Game game(name, quantity);
-
-    return game;
 }
 
 
-//Ta funkcja liczy ile jest plików txt z grami
-int MainPanel::CountGames() {
-    // Pobieramy œcie¿kê do pliku MainPanel.cpp
-    wxString parentDir = wxGetCwd();
 
-    // £¹czymy œcie¿kê do katalogu "Games"
-    wxString gamesDir = parentDir + "/Games";
-
-    // Liczymy iloœæ plików w katalogu "Games"
-    int fileCount = 0;
-    wxDir dir(gamesDir);
-    if (dir.IsOpened()) {
-        wxString filename;
-        bool cont = dir.GetFirst(&filename, wxEmptyString, wxDIR_FILES);
-        while (cont) {
-            fileCount++;
-            cont = dir.GetNext(&filename);
-        }
-    }
-    return fileCount;
-}

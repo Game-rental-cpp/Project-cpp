@@ -1,6 +1,8 @@
 #pragma once
 
 #include <wx/wx.h>
+#include "UserCRUD.h"
+
 
 class MyAccPanel : public wxPanel
 {
@@ -10,4 +12,8 @@ public:
 private:
     wxButton* button;
     wxStaticText* label;
+
+    void OnPanelShow(wxShowEvent& event);
+    void LoadUser();
+    void LogOut();
 };

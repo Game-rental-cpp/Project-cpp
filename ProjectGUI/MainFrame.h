@@ -5,6 +5,8 @@
 #include "LoginPanel.h"
 #include "MyAccPanel.h"
 #include "MainFrame_Logic.h"
+#include "MainFrame_Controller.h"
+#include "UserCRUD.h"
 
 class MainFrame : public wxFrame
 {
@@ -22,5 +24,6 @@ private:
     LoginPanel* loginPanel;
     MyAccPanel* myAccPanel;
 
+    void OnMouseHover(wxMouseEvent& event);
 };
 

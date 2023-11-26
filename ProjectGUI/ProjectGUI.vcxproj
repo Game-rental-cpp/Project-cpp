@@ -133,30 +133,42 @@
   <ItemGroup>
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameCRUD.cpp" />
+    <ClCompile Include="MainFrame_Controller.cpp" />
     <ClCompile Include="MainFrame_Logic.cpp" />
     <ClCompile Include="LoginPanel.cpp" />
     <ClCompile Include="MainFrame.cpp" />
     <ClCompile Include="MainPanel.cpp" />
+    <ClCompile Include="MainPanel_Controller.cpp" />
+    <ClCompile Include="MainPanel_Logic.cpp" />
     <ClCompile Include="MyAccPanel.cpp" />
+    <ClCompile Include="Style.cpp" />
+    <ClCompile Include="UserCRUD.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameCRUD.h" />
+    <ClInclude Include="json.hpp" />
+    <ClInclude Include="MainFrame_Controller.h" />
     <ClInclude Include="MainFrame_Logic.h" />
     <ClInclude Include="LoginPanel.h" />
     <ClInclude Include="MainFrame.h" />
     <ClInclude Include="MainPanel.h" />
+    <ClInclude Include="MainPanel_Controller.h" />
+    <ClInclude Include="MainPanel_Logic.h" />
     <ClInclude Include="MyAccPanel.h" />
+    <ClInclude Include="Style.h" />
+    <ClInclude Include="UserCRUD.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Games\bierki.txt" />
-    <Text Include="Games\domino.txt" />
-    <Text Include="Games\statki.txt" />
-    <Text Include="Games\szachy.txt" />
-    <Text Include="Games\uno.txt" />
-    <Text Include="mvc.txt" />
+    <Text Include="Games\bierki.json" />
+    <Text Include="Games\domino.json" />
+    <Text Include="Games\statki.json" />
+    <Text Include="Games\szachy.json" />
+    <Text Include="Games\uno.json" />
     <Text Include="Users\_logged.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

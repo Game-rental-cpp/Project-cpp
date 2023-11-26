@@ -1,2 +1,0 @@
-name: bierki
-quantity: 10
