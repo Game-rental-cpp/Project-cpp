@@ -1,23 +1,23 @@
 #pragma once
 
-
 #include <string>
 
 class Game {
 public:
-    Game(const std::string& name, int quantity);
+    Game(const std::string& name, int quantity, int nrOfLoans);
 
-    // Metody dostêpowe do pól name i quantity
+    // getters
     const std::string& GetName() const;
     int GetQuantity() const;
+    int GetNrOfLoans() const;
 
-    // Metody ustawiaj¹ce wartoœci pól name i quantity
-    void SetName(const std::string& name);
+    // setters
+    //void SetName(const std::string& name);
     void SetQuantity(int quantity);
+    void SetNrOfLoans(int nrOfLoans);
 
 private:
     std::string name;
     int quantity;
+    int nrOfLoans;
 };
-
-

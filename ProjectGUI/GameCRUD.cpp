@@ -39,7 +39,7 @@ int GameCRUD::countGames() {
 }
 
 /*
-This funnction return the content of the given file
+This function return the content of the given file
 @param string fileName (without extension) - name of the file we want to read
 @returns string contents
 */
@@ -66,4 +66,24 @@ std::string GameCRUD::readGame(std::string fileName) {
         return "false"; // You might want to return an error code here or throw an exception.
     }
 
+}
+
+
+/*
+This funnction updates a game file
+@param string gameName
+@param int quantity
+@param int nrOfLoans
+*/
+void GameCRUD::updateGame(std::string name, int quantity, int nrOfLoans) {
+ std::ofstream file("./Games/" + name + ".json");
+    if (file.is_open()) {
+        json jsonData = {
+            {"name", name},
+            {"quantity", quantity},
+            {"nrOfLoans", nrOfLoans}
+        };
+        file << jsonData.dump(4) << std::endl;
+        file.close();
+    }
 }

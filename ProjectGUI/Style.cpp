@@ -12,7 +12,7 @@ wxFont SetTheFont(int fontSize) {
 }
 
 // set cursor
-void ChangeCursor(wxMouseEvent& event) {
+void OnCursorHover(wxMouseEvent& event) {
     wxWindow* element = dynamic_cast<wxWindow*>(event.GetEventObject());
 
     wxCursor cursor(wxCURSOR_HAND);

@@ -1,4 +1,5 @@
 {
-"name": "szachy",
-"quantity": 7
+    "name": "szachy",
+    "nrOfLoans": 21,
+    "quantity": 6
 }

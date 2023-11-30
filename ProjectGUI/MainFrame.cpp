@@ -144,5 +144,5 @@ void MainFrame::OnMyAcc(wxCommandEvent& event)
 
 
 void MainFrame::OnMouseHover(wxMouseEvent& event) {
-    ChangeCursor(event);
+    OnCursorHover(event);
 }

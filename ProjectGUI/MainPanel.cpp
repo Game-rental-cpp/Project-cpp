@@ -9,7 +9,7 @@
 #include "GameCRUD.h"
 
 std::vector<Game> gamesVector; 
-//std::vector<Game> helpGamesVector;
+//
 
 //How many different games
 int gameCount = GameCRUD::countGames();
@@ -20,6 +20,7 @@ MainPanel::MainPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const 
     //Convert gameCount into string
     wxString gameCountStr = wxString::Format("%d", gameCount);
     // Creating a label
+    //Witaj w wypo¿yczalni gier planszowych! Mamy do zaoferowania n ró¿nych gier. Wybierz któr¹œ z listy i kliknij "Wypo¿ycz"
     label = new wxStaticText(this, wxID_ANY, "Liczba ró¿nych gier: " + gameCountStr, wxPoint(10, 50));
     label->SetForegroundColour(COLOR_LBL);
     label->SetFont(SetTheFont());
@@ -28,6 +29,7 @@ MainPanel::MainPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const 
     wxArrayString sortOptions;
     sortOptions.Add("Alfabetycznie (A-Z)");
     sortOptions.Add("Alfabetycznie (Z-A)");
+    sortOptions.Add("Liczba wypo¿yczeñ");
 
     sortChoice = new wxChoice(this, wxID_ANY, wxPoint(10, 75+3), wxSize(146, 175), sortOptions);
     sortChoice->SetSelection(0);
@@ -38,7 +40,6 @@ MainPanel::MainPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const 
     searchInput = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxPoint(GetClientSize().GetWidth() - 10 - 30 - 190, 75), wxSize(190, 30), wxBORDER_RAISED);
     searchInput->SetHint("Wyszukaj grê...");
     searchInput->Connect(wxEVT_TEXT, wxCommandEventHandler(MainPanel::OnSearchChange), nullptr, this);
-    searchInput->SetFocus();
     searchInput->SetFont(SetTheFont());
 
     resetBtn = new wxButton(this, wxID_ANY, "X", wxPoint(GetClientSize().GetWidth() - 10 - 30, 74), wxSize(30, 31), wxBORDER_NONE);
@@ -56,7 +57,7 @@ MainPanel::MainPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const 
 }
 
 void MainPanel::OnMouseHover(wxMouseEvent& event) {
-    ChangeCursor(event);
+    OnCursorHover(event);
 }
 
 //This functions executes when choosing sorting method (A-Z or Z-A)
@@ -83,6 +84,7 @@ void MainPanel::OnPanelShow(wxShowEvent& event)
      //Do if MainPanel has occured on the screen
     if (event.IsShown()) {
         this->SetBackgroundColour(COLOR_BACKGROUND_PANEL); // Set background color (optional)
+        searchInput->SetFocus();
 
         //if (gamesPanel) {
             UpdateGamesPanel(gamesVector);
@@ -105,6 +107,13 @@ void MainPanel::UpdateGame(wxCommandEvent& event)
         dialog->Destroy();
         return;
     }
+
+    //if (!user.isPremium()) {
+    //    wxDialog* dialog = new wxDialog(this, wxID_ANY, "Przekroczono maksymaln¹ iloœæ grier wypo¿yczonych na raz. Aby wypo¿yczyæ now¹ grê zostañ cz³onkiem premium lub oddaj któr¹œ z ju¿ wypo¿yczonych gier.");
+    //    dialog->ShowModal();
+    //    dialog->Destroy();
+    //    return;
+    //}
 
     gamesVector=  MainPanel_Controller::updateGame(event, gamesPanel, gamesVector);
 }
@@ -162,12 +171,12 @@ void MainPanel::UpdateGamesPanel(std::vector<Game> gamesVector)
 
 
     gamesPanel = nullptr;
-    int height = filteredVector.size() <= 3 ? 350 : filteredVector.size() * 50;
-    gamesPanel = new wxScrolledWindow(this, wxID_ANY, wxPoint(0, 150), wxSize(GetClientSize().GetWidth(), height));
+    int height = filteredVector.size() <= 3 ? 330 : filteredVector.size() * 80;
+    gamesPanel = new wxScrolledWindow(this, wxID_ANY, wxPoint(0, 150), wxSize(GetClientSize().GetWidth(), 330));
     gamesPanel->SetScrollRate(0, 10);  // Ustawienia przewijania - drugi argument to liczba pikseli na jedno przewiniêcie
     //gamesPanel->Hide();
     gamesPanel->SetBackgroundColour(RED); // Set background color (optional)
-    gamesPanel->SetVirtualSize(wxSize(410, 300));
+    gamesPanel->SetVirtualSize(wxSize(410, height));
 
 
 
@@ -188,16 +197,25 @@ void MainPanel::UpdateGamesPanel(std::vector<Game> gamesVector)
 
         std::string gameName = std::string(game.GetName());
         int gameQuantity = game.GetQuantity();
-
+        int nrOfLoans = game.GetNrOfLoans();
         //int x = rand() % (100); // Losowa pozycja x na panelu
         //int y = rand() % (200); // Losowa pozycja y na panelu
 
         //Creating elements inside gamesPanel
-        wxString labelText = wxString::Format("Nazwa gry: %s, iloœæ sztuk: %d", gameName, gameQuantity);
+        wxString labelText0 = wxString::Format("Nazwa gry: %s", gameName);
+        wxString labelText1 = wxString::Format("Iloœæ dostêpnych sztuk: %d", gameQuantity);
+        wxString labelText2 = wxString::Format("Ca³kowita iloœæ wypo¿yczeñ: %d", nrOfLoans);
         // (label name is the same as game name + Lbl)
-        wxStaticText* gameLabel = new wxStaticText(gamesPanel, wxID_ANY, labelText, wxPoint(10, 10 + i * 35), wxDefaultSize, 0, gameName + "Lbl");
-        gameLabel->SetForegroundColour(COLOR_LBL);
-        gameLabel->SetFont(SetTheFont());
+        wxStaticText* gameLabel0 = new wxStaticText(gamesPanel, wxID_ANY, labelText0, wxPoint(10, 10 + i * 80), wxDefaultSize, 0, gameName + "Lbl0");
+        wxStaticText* gameLabel1 = new wxStaticText(gamesPanel, wxID_ANY, labelText1, wxPoint(10, 30 + i * 80), wxDefaultSize, 0, gameName + "Lbl1");
+        wxStaticText* gameLabel2 = new wxStaticText(gamesPanel, wxID_ANY, labelText2, wxPoint(10, 50 + i * 80), wxDefaultSize, 0, gameName + "Lbl2");
+        
+        gameLabel0->SetForegroundColour(COLOR_LBL);
+        gameLabel0->SetFont(SetTheFont());        
+        gameLabel1->SetForegroundColour(COLOR_LBL);
+        gameLabel1->SetFont(SetTheFont());        
+        gameLabel2->SetForegroundColour(COLOR_LBL);
+        gameLabel2->SetFont(SetTheFont());
 
 
         //wxStaticText* gameLabel = new wxStaticText(gamesPanel, wxID_ANY, labelText, wxPoint(x, y));
@@ -205,7 +223,7 @@ void MainPanel::UpdateGamesPanel(std::vector<Game> gamesVector)
         std::string buttonText= "Wypo¿ycz";
 
         // (button name is the same as game name)
-        wxButton* hireBtn = new wxButton(gamesPanel, wxID_ANY, buttonText, wxPoint(GetClientSize().GetWidth() - 10 - 85, 10+ i* 35), wxSize(85, 35), 0, wxDefaultValidator, gameName);
+        wxButton* hireBtn = new wxButton(gamesPanel, wxID_ANY, buttonText, wxPoint(GetClientSize().GetWidth() - 10 - 85, 10+ i* 85), wxSize(85, 35), 0, wxDefaultValidator, gameName);
         
         hireBtn->SetBackgroundColour(COLOR_BACKGROUND_BTN);
         hireBtn->SetForegroundColour(COLOR_TEXT_BTN);
