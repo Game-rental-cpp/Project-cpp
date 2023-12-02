@@ -18,6 +18,7 @@ Game MainPanel_Logic::CreateGameFromJSON(int i)
 {
     std::string name;
     int quantity;
+    int nrOfLoans;
 
     wxString parentDir = wxGetCwd();
     wxString gamesDir = parentDir + "/Games";
@@ -40,12 +41,13 @@ Game MainPanel_Logic::CreateGameFromJSON(int i)
 
             name = jsonData["name"];
             quantity = jsonData["quantity"];
+            nrOfLoans = jsonData["nrOfLoans"];
 
             file.Close();
         }
     }
 
-    Game game(name, quantity);
+    Game game(name, quantity, nrOfLoans);
 
     return game;
 }
@@ -95,6 +97,17 @@ std::vector<Game> MainPanel_Logic::sortVector(std::vector<Game> gamesVector, int
             for (int i = 0; i < gameCount - 1; i++) {
                 for (int j = 0; j < gameCount - i - 1; j++) {
                     if (gamesVector[j].GetName() < gamesVector[j + 1].GetName()) {
+                        
+                        std::swap(gamesVector[j], gamesVector[j + 1]);
+                    }
+                }
+            }
+            break;
+        case 2:
+            //Nr of loans
+            for (int i = 0; i < gameCount - 1; i++) {
+                for (int j = 0; j < gameCount - i - 1; j++) {
+                    if (gamesVector[j].GetNrOfLoans() < gamesVector[j + 1].GetNrOfLoans()) {
                         
                         std::swap(gamesVector[j], gamesVector[j + 1]);
                     }

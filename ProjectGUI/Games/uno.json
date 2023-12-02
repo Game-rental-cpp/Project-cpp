@@ -1,4 +1,5 @@
 {
-"name": "uno",
-"quantity": 0
+    "name": "uno",
+    "nrOfLoans": 12,
+    "quantity": 2
 }

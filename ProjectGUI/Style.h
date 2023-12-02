@@ -9,7 +9,8 @@
 
 //panels
 #define COLOR_BACKGROUND_PANEL wxColour(23, 27, 33)
-#define COLOR_BACKGROUND_FRAME wxColour(14, 17, 22)
+#define COLOR_BACKGROUND_FRAME wxColour(230, 220, 230)
+//#define COLOR_BACKGROUND_FRAME wxColour(14, 17, 22)
 
 // buttons
 #define COLOR_BACKGROUND_BTN wxColour(100, 100, 100)
@@ -28,7 +29,7 @@
 
 // Deklaracja funkcji GetLabelFont
 wxFont SetTheFont(int fontSize = FONT_SIZE_LBL);
-void ChangeCursor(wxMouseEvent& event);
+void OnCursorHover(wxMouseEvent& event);
 
 
 #endif // STYLDEF_H
