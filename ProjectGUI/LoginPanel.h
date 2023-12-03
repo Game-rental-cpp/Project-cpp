@@ -1,14 +1,15 @@
 #pragma once
 
 #include <wx/wx.h>
+#include "FormsPanel.h"
 
 class LoginPanel : public wxPanel
 {
 public:
     LoginPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size);
-    void OnButtonClick(wxCommandEvent& event);
+    //void OnShowPanel(wxShowEvent& event);
 
 private:
-    wxButton* button;
     wxStaticText* label;
+    //FormsPanel* formsPanel;
 };
