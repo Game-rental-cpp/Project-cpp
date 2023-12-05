@@ -8,8 +8,8 @@ LoginPanel::LoginPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, cons
 {
 
     // Tworzenie etykiety
-    label = new wxStaticText(this, wxID_ANY, "Zalogowano", wxPoint(10, 50)); 
-    // Tworzenia panela z formularzami
-    //formsPanel = new FormsPanel(this, wxID_ANY, wxPoint(10, 100), wxSize(410, 500));
-    //formsPanel->setCo
+    label = new wxStaticText(this, wxID_ANY, "Zalogowano", wxPoint(10, 50));
+    label->Hide();
+    // Tworzenie panela z formularzami
+    formsPanel = new FormsPanel(this, wxID_ANY, wxPoint(10, 100), wxSize(410, 500));
 }

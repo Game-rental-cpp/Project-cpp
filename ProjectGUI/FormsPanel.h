@@ -1,8 +1,6 @@
 #pragma once
 // FormsPanel.h
-
 #include <wx/wx.h>
-
 class FormsPanel : public wxPanel
 {
 public:

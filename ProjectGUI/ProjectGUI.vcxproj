@@ -137,6 +137,7 @@
     <ClCompile Include="MainFrame_Controller.cpp" />
     <ClCompile Include="MainFrame_Logic.cpp" />
     <ClCompile Include="LoginPanel.cpp" />
+    <ClCompile Include="FormsPanel.cpp" />
     <ClCompile Include="MainFrame.cpp" />
     <ClCompile Include="MainPanel.cpp" />
     <ClCompile Include="MainPanel_Controller.cpp" />
