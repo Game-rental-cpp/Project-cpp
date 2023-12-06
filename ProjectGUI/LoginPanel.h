@@ -7,9 +7,9 @@ class LoginPanel : public wxPanel
 {
 public:
     LoginPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size);
-    void OnShowPanel(wxShowEvent& event);
+    void OnButtonClick(wxCommandEvent& event);
 
 private:
-    FormsPanel* formsPanel;
     wxStaticText* label;
+    FormsPanel* formsPanel;
 };

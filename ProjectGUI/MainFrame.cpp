@@ -2,35 +2,60 @@
 #include "MainFrame.h"
 #include <fstream>
 #include <filesystem>
+#include "json.hpp"
+#include "Style.h"
+
+using json = nlohmann::json;
 
 MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
     : wxFrame(NULL, wxID_ANY, title, pos, size)
 {
-    // Tworzenie przycisków
-    goBackBtn = new wxButton(this, wxID_ANY, "Wróæ");
-    loginBtn = new wxButton(this, wxID_ANY, "Zaloguj / Zarejestruj");
-    myAccBtn = new wxButton(this, wxID_ANY, "Moje konto");
+    // Creating buttons
+    goBackBtn = new wxButton(this, wxID_ANY, "Wróæ", wxDefaultPosition, wxSize(80, 40));
+    loginBtn = new wxButton(this, wxID_ANY, "Zaloguj / Zarejestruj", wxDefaultPosition, wxSize(170, 40), wxBORDER_RAISED);
+    myAccBtn = new wxButton(this, wxID_ANY, "Moje konto", wxDefaultPosition, wxSize(100, 40));
 
-    //Pokazuj odpowiednie przyciski w zale¿noœci czy user jest zalogowany czy nie
+    //Show appropriate buttons depending on whether the user is logged in or not
     goBackBtn->Hide();
     if (UserCRUD::isLogged())
         loginBtn->Hide();
     else myAccBtn->Hide();
 
-    // Tworzenie i dodawanie MainPanel
-    mainPanel = new MainPanel(this, wxID_ANY, wxPoint(10, 100), wxSize(410, 300));
-    loginPanel = new LoginPanel(this, wxID_ANY, wxPoint(10, 100), wxSize(410, 300));
-    myAccPanel = new MyAccPanel(this, wxID_ANY, wxPoint(10, 100), wxSize(410, 300));
+    // Creating and adding panels
+    mainPanel = new MainPanel(this, wxID_ANY, wxPoint(10, 100), wxSize(410, 500));
+    loginPanel = new LoginPanel(this, wxID_ANY, wxPoint(20, 200), wxSize(410, 500));
+    myAccPanel = new MyAccPanel(this, wxID_ANY, wxPoint(10, 100), wxSize(410, 500));
 
-    //Dpmyœlnie ukryte
+    //default hidden
+    mainPanel->Hide();
     loginPanel->Hide();
     myAccPanel->Hide();
 
-    // Przypisanie funkcji obs³ugi zdarzeñ do przycisków
+    mainPanel->Show();
+
+    // Assigning event handling functions to buttons
     goBackBtn->Bind(wxEVT_BUTTON, &MainFrame::OnGoBack, this);
     loginBtn->Bind(wxEVT_BUTTON, &MainFrame::OnLogin, this);
     myAccBtn->Bind(wxEVT_BUTTON, &MainFrame::OnMyAcc, this);
 
+    //change cursor on hover
+    loginBtn->Bind(wxEVT_ENTER_WINDOW, &MainFrame::OnMouseHover, this);
+    goBackBtn->Bind(wxEVT_ENTER_WINDOW, &MainFrame::OnMouseHover, this);
+    myAccBtn->Bind(wxEVT_ENTER_WINDOW, &MainFrame::OnMouseHover, this);
+    //loginBtn->Bind(wxEVT_LEAVE_WINDOW, &MainFrame::OnMouseHover, this);
+
+    //nav button style
+    loginBtn->SetFont(SetTheFont(10).MakeBold());
+    loginBtn->SetBackgroundColour(COLOR_BACKGROUND_LOGINBTN);
+    loginBtn->SetForegroundColour(COLOR_TEXT_LOGINBTN);
+
+    myAccBtn->SetFont(SetTheFont(10).MakeBold());
+    myAccBtn->SetBackgroundColour(COLOR_BACKGROUND_PANEL);
+    myAccBtn->SetForegroundColour(COLOR_TEXT_BTN);
+
+    goBackBtn->SetFont(SetTheFont(10).MakeBold());
+    goBackBtn->SetBackgroundColour(COLOR_BACKGROUND_PANEL);
+    goBackBtn->SetForegroundColour(COLOR_TEXT_BTN);
 
 
     //mainPanel->SetWindowStyleFlag(wxALIGN_CENTER_HORIZONTAL);
@@ -42,11 +67,13 @@ MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& si
     sizer->AddSpacer(10);
 
     // wyœrodkowanie w poziomie
+    //sizer->Add(goBackBtn, 0, wxALIGN_LEFT | wxLEFT, 40);
     sizer->Add(goBackBtn, 0, wxALIGN_CENTER_HORIZONTAL);
     sizer->Add(loginBtn, 0, wxALIGN_CENTER_HORIZONTAL);
     sizer->Add(myAccBtn, 0, wxALIGN_CENTER_HORIZONTAL);
 
-    sizer->AddSpacer(20);
+    sizer->AddSpacer(10);
+
 
     sizer->Add(mainPanel, 0, wxALIGN_CENTER_HORIZONTAL);
     sizer->Add(loginPanel, 0, wxALIGN_CENTER_HORIZONTAL);
@@ -54,6 +81,23 @@ MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& si
 
     // Przypisanie sizeru do ramki
     this->SetSizer(sizer);
+
+
+    //We have some json object
+    json data = {
+       {"name", "John"},
+       {"age", 30},
+       {"city", "New York"}
+    };
+
+    // convert to string
+        std::string jsonStr = data.dump();
+
+        this->SetBackgroundColour(COLOR_BACKGROUND_FRAME); // Set background color (optional)
+
+    // print the string
+    //wxLogMessage(wxString(jsonStr.c_str()));
+    
 }
 
 
@@ -96,4 +140,9 @@ void MainFrame::OnMyAcc(wxCommandEvent& event)
     mainPanel->Hide();
 
     this->Layout();
+}
+
+
+void MainFrame::OnMouseHover(wxMouseEvent& event) {
+    OnCursorHover(event);
 }

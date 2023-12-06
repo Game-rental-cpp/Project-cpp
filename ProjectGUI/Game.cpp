@@ -1,29 +1,10 @@
-#include <string>
-#include <fstream>
-#include <filesystem>
-
-class Game {
-public:
-    Game(const std::string& name, int quantity);
-
-    // Metody dostêpowe do pól name i quantity
-    const std::string& GetName() const;
-    int GetQuantity() const;
-
-    // Metody ustawiaj¹ce wartoœci pól name i quantity
-    void SetName(const std::string& name);
-    void SetQuantity(int quantity);
-
-
-private:
-    std::string name;
-    int quantity;
-};
+#include "Game.h"
+#include "GameCRUD.h"
 
 // Implementacja konstruktora
-Game::Game(const std::string& name, int quantity) : name(name), quantity(quantity) {}
+Game::Game(const std::string& name, int quantity, int nrOfLoans) : name(name), quantity(quantity), nrOfLoans(nrOfLoans) {}
 
-// Implementacja getterów
+// getters
 const std::string& Game::GetName() const {
     return name;
 }
@@ -32,23 +13,25 @@ int Game::GetQuantity() const {
     return quantity;
 }
 
-// Implementacja setterów
-void Game::SetName(const std::string& name) {
-    this->name = name;
+int Game::GetNrOfLoans() const {
+    return nrOfLoans;
 }
 
-void Game::SetQuantity(int quantity) {
-    this->quantity = quantity;
 
-    //Update txt file
-    std::string folderPath = "./Games/"; // Œcie¿ka do folderu "Games"
-    std::string fileName = folderPath + name + ".txt"; // Tworzymy pe³n¹ œcie¿kê do pliku
-    std::ofstream file(fileName);
-    if (file.is_open()) {
-        file << "name: " << name << "\n";
-        file << "quantity: " << quantity << "\n";
-        file.close();
+// setters
+//void Game::SetName(const std::string& name) {
+//    this->name = name;
+//}
+
+void Game::SetQuantity(int quantity) {
+    // Quantity cannot be negative
+    if (quantity >= 0) {
+        this->quantity = quantity;
+        GameCRUD::updateGame(name, quantity, nrOfLoans);
     }
 }
 
-
+void Game::SetNrOfLoans(int nrOfLoans) {
+    this->nrOfLoans++;
+    GameCRUD::updateGame(name, quantity, nrOfLoans);
+}

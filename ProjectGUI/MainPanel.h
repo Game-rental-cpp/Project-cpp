@@ -1,10 +1,8 @@
 #pragma once
 // MainPanel.h
-
-#include <wx/textfile.h>
 #include <wx/wx.h>
 #include "Game.h"
-#include "GameCRUD.h"
+
 
 class MainPanel : public wxPanel
 {
@@ -12,18 +10,21 @@ public:
     MainPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size);
 
 private:
-    wxButton* button;
     wxStaticText* label;
-    wxPanel* gamesPanel;
+    wxScrolledWindow* gamesPanel;
+    wxChoice* sortChoice;
+    wxTextCtrl* searchInput;
+    wxButton* resetBtn;
 
+    int previousSortChoice;
     // Deklaracja metody obs³ugi zdarzenia wxShowEvent
     void OnPanelShow(wxShowEvent& event);
-    void LoadGames();
-    //int CountGames();
-    Game CreateGameBasedOnFile(int i);
+    void OnChoice(wxCommandEvent& event);
+    void UpdateGamesPanel(std::vector<Game>);
     void UpdateGame(wxCommandEvent& event);
-    /*void CreateOrShowGamesPanel();
-    void HideGamesPanel();*/
+    void OnSearchChange(wxCommandEvent& event);
+    void OnResetButtonClick(wxCommandEvent& event);
+    void OnMouseHover(wxMouseEvent& event);
 };
 
 
