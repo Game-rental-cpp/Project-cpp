@@ -31,6 +31,74 @@ bool UserCRUD::isLogged() {
     else {
         // Handle the case where the file couldn't be opened
         std::cerr << "Unable to open the file for reading." << std::endl;
-        return false; // You might want to return an error code here or throw an exception.
+        return false; // You might want to return an error code here or throw an exception
     }
+}
+
+//creat
+static void CreateUser(std::string login, std::string password) {
+    // Open the file for writing
+    std::ofstream outputFile(".Users/" +login + ".json");
+    
+    if (outputFile.is_open()) {
+        // Write username and password to a file
+        outputFile << "login: " << login << std::endl;
+        outputFile << "password: " << password << std::endl;
+        outputFile << "isPremium: " << false << std::endl;
+
+        outputFile.close();
+    }
+    else {
+        // Handle the case where the file couldn't be opened
+        std::cerr << "Unable to open the file for reading." << std::endl;
+        return; // You might want to return an error code here or throw an exception
+    }
+}
+
+//read
+static std::string ReadLogged() {
+    // Open the file for reading
+    std::ifstream inputFile("./Users/_logged.txt");
+    std::string loggedContent;
+
+    if (inputFile.is_open()) {
+        // Read the content of the file
+        std::stringstream buffer;
+        buffer << inputFile.rdbuf();
+        loggedContent = buffer.str();
+
+        inputFile.close();
+        return loggedContent;
+    }
+    else {
+        // Handle the case where the file couldn't be opened
+        std::cerr << "Unable to open the file for reading." << std::endl;
+        return ""; // You might want to return an error code here or throw an exception
+    }
+}
+
+//update
+static void Update_logged(std::string newContent){
+    //Open the file for 
+    std::ofstream inputFile("./Users/_logged.txt", std::ios::trunc);
+
+    if (inputFile.is_open()) {
+        // Write the new content to the file
+        inputFile << newContent;
+
+        inputFile.close();
+    }
+    else {
+        // Handle the case where the file couldn't be opened
+        std::cerr << "Unable to open the file for reading." << std::endl;
+        return; // You might want to return an error code here or throw an exception
+    }
+}
+
+//delete
+
+//other
+static bool DoesExist(std::string) 
+{
+
 }
