@@ -44,12 +44,12 @@ void UserCRUD::CreateUser(std::string login, std::string password) {
 
     if (outputFile.is_open()) {
         // Write username and password to a file
-        json userJson;
-        userJson["login:"] = login;
-        userJson["password:"] = password;
-        userJson["isPremium:"] = false;
-
-        outputFile << userJson << std::endl;
+        json userJson = {
+            {"login:", login},
+            {"password:", password},
+            {"isPremium:", false}
+        };
+        outputFile << userJson.dump(4) << std::endl;
 
         outputFile.close();
     }
