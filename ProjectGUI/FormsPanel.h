@@ -9,6 +9,8 @@ public:
     FormsPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size);
     void OnLogin(wxCommandEvent& event);
     void OnSignup(wxCommandEvent& event);
+    bool loginNameIsValid(std::string loginName);
+    bool loginPasswordIsValid(std::string loginPassword);
 
 private:
     wxTextCtrl* loginName;

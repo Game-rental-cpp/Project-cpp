@@ -2,6 +2,8 @@
 #include "FormsPanel.h"
 #include <wx/wx.h>
 #include <wx/textctrl.h>
+#include <string>
+
 
 FormsPanel::FormsPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size)
     : wxPanel(parent, id, pos, size)
@@ -13,8 +15,8 @@ FormsPanel::FormsPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, cons
 
     // Tworzenie formularza Zarejestruj
     signupName = new wxTextCtrl(this, wxID_ANY, "signup", wxPoint(10, 110), wxSize(200, 20));
-    signupPassword1 = new wxTextCtrl(this, wxID_ANY, "signup pass1", wxPoint(10, 140), wxSize(200, 20));
-    signupPassword2 = new wxTextCtrl(this, wxID_ANY, "signup pass2", wxPoint(10, 170), wxSize(200, 20));
+    signupPassword1 = new wxTextCtrl(this, wxID_ANY, "signup password", wxPoint(10, 140), wxSize(200, 20));
+    signupPassword2 = new wxTextCtrl(this, wxID_ANY, "confirm password", wxPoint(10, 170), wxSize(200, 20));
     signupBtn = new wxButton(this, wxID_ANY, "Zarejestruj się", wxPoint(10, 200));
 
     loginBtn->Bind(wxEVT_BUTTON, &FormsPanel::OnLogin, this);
@@ -53,14 +55,61 @@ void FormsPanel::OnLogin(wxCommandEvent& event)
 void FormsPanel::OnSignup(wxCommandEvent& event)
 {
     std::string userSignupName = signupName->GetValue().ToStdString();
+    // Sprawdzanie czy taki użytkownik już istnieje
     //if (UserCRUD::DoesExist(userSignupName))
     if (false)
     {
-        wxMessageDialog* noKnownUserDlg = new wxMessageDialog(this, "Użytkownik o takim loginie już istnieje", "Błąd");
-        noKnownUserDlg->ShowModal();
+        wxMessageDialog* userAlreadyExistsDlg = new wxMessageDialog(this, "Użytkownik o takim loginie już istnieje", "Błąd");
+        userAlreadyExistsDlg->ShowModal();
         return;
     }
 
-    std::string userSignupPassword = signupPassword1->GetValue().ToStdString();
+    if (!loginNameIsValid(userSignupName))
+        return;
 
+    std::string userSignupPassword = signupPassword1->GetValue().ToStdString();
+    if (userSignupPassword != signupPassword2->GetValue().ToStdString())
+    {
+        wxMessageDialog* differentPasswordsDlg = new wxMessageDialog(this, "Hasła muszą być takie same", "Błąd");
+        differentPasswordsDlg->ShowModal();
+        return;
+    }
+
+}
+
+// Funckja sprawdzająca login podany przez użytkownika przy rejestracji 
+bool FormsPanel::loginNameIsValid(std::string loginName)
+{
+    constexpr int MIN_CHAR_NAME{3};
+    constexpr int MAX_CHAR_NAME{15};
+    
+    std::string loginNameErrorMessage = "";
+    int length = loginName.size();
+
+    if (length < MIN_CHAR_NAME || length > MAX_CHAR_NAME)
+        loginNameErrorMessage += "Login musi zawierać od " + std::to_string(MIN_CHAR_NAME) + " do " + std::to_string(MAX_CHAR_NAME) + " znaków.\n";
+
+    // może składać się tylko z cyfr, podkreśleń, myślników oraz małych i dużych liter alfabetu angielskiego
+    for (int i = 0; i < length; i++)
+    {
+        char c = loginName[i];
+        if (!isalpha(c) && !isdigit(c) && c != '-' && c != '_')
+        {
+            loginNameErrorMessage += "Login może składać się tylko z cyfr, podkreśleń, myślników oraz małych i dużych liter alfabetu angielskiego.\n";
+            break;
+        }
+    }
+
+    if (loginNameErrorMessage == "")
+        return true;
+
+    wxMessageDialog* loginNameErrorDlg = new wxMessageDialog(this, loginNameErrorMessage, "Błąd");
+    loginNameErrorDlg->ShowModal();
+    return false;
+}
+
+
+bool FormsPanel::loginPasswordIsValid(std::string loginPassword)
+{
+    return true;
 }
