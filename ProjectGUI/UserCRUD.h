@@ -1,7 +1,6 @@
 #pragma once
 #include <string>
 
-
 class UserCRUD {
 	public:
 		static bool isLogged();

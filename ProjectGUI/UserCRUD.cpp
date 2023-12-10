@@ -4,7 +4,9 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include "json.hpp"
 
+using json = nlohmann::json;
 
 //This function checks if someone is logged in (if _logged.txt is empty or full)
 bool UserCRUD::isLogged() {
@@ -31,20 +33,23 @@ bool UserCRUD::isLogged() {
     else {
         // Handle the case where the file couldn't be opened
         std::cerr << "Unable to open the file for reading." << std::endl;
-        return false; // You might want to return an error code here or throw an exception
+        return false; // You might want to return an error code here or throw an exception.
     }
-}
+}    
 
 //creat
-static void CreateUser(std::string login, std::string password) {
+void UserCRUD::CreateUser(std::string login, std::string password) {
     // Open the file for writing
-    std::ofstream outputFile(".Users/" +login + ".json");
-    
+    std::ofstream outputFile("./Users/" + login + ".json");
+
     if (outputFile.is_open()) {
         // Write username and password to a file
-        outputFile << "login: " << login << std::endl;
-        outputFile << "password: " << password << std::endl;
-        outputFile << "isPremium: " << false << std::endl;
+        json userJson;
+        userJson["login:"] = login;
+        userJson["password:"] = password;
+        userJson["isPremium:"] = false;
+
+        outputFile << userJson << std::endl;
 
         outputFile.close();
     }
@@ -56,7 +61,7 @@ static void CreateUser(std::string login, std::string password) {
 }
 
 //read
-static std::string ReadLogged() {
+std::string UserCRUD::ReadLogged() {
     // Open the file for reading
     std::ifstream inputFile("./Users/_logged.txt");
     std::string loggedContent;
@@ -78,7 +83,7 @@ static std::string ReadLogged() {
 }
 
 //update
-static void Update_logged(std::string newContent){
+void UserCRUD::Update_logged(std::string newContent) {
     //Open the file for 
     std::ofstream inputFile("./Users/_logged.txt", std::ios::trunc);
 
@@ -98,7 +103,9 @@ static void Update_logged(std::string newContent){
 //delete
 
 //other
-static bool DoesExist(std::string) 
-{
-
+bool UserCRUD::DoesExist(std::string) {
+    return true;
 }
+
+
+
