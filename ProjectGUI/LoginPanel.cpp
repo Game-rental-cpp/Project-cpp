@@ -29,6 +29,7 @@ LoginPanel::LoginPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, cons
 }
 
 // Funkcja obsługi zdarzenia po naciśnięciu przycisku "Zaloguj się"
+// NA RAZIE NIC NIE ROBI BO NIE MA FUNKCJI Z "UserCRUD.h" !!!
 void LoginPanel::OnLogin(wxCommandEvent& event)
 {
     std::string userLoginName = loginName->GetValue().ToStdString();
@@ -44,7 +45,7 @@ void LoginPanel::OnLogin(wxCommandEvent& event)
 
     // Sprawdzanie hasła
     //if (UserCRUD::ReadPassword(userLoginName) != loginPass->GetValue().ToStdString())
-    if (true)
+    if (false)
     {
         wxMessageDialog* incorrectPasswordDlg = new wxMessageDialog(this, "Nieprawidłowe hasło.", "Błąd");
         incorrectPasswordDlg->ShowModal();
@@ -53,4 +54,6 @@ void LoginPanel::OnLogin(wxCommandEvent& event)
 
     // Logowanie użytkownika
     // UserCRUD::Update_logged(userLoginName);
+    // formsPanel->Hide();
+    // successLabel->Show();
 }
