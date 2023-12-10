@@ -64,10 +64,13 @@ void FormsPanel::OnSignup(wxCommandEvent& event)
         return;
     }
 
-    if (!loginNameIsValid(userSignupName))
+    // Walidacja loginu
+    if (!signupNameIsValid(userSignupName))
         return;
 
     std::string userSignupPassword = signupPassword1->GetValue().ToStdString();
+
+    // Sprawdzanie czy hasła podane przez użytkownika są jednakowe 
     if (userSignupPassword != signupPassword2->GetValue().ToStdString())
     {
         wxMessageDialog* differentPasswordsDlg = new wxMessageDialog(this, "Hasła muszą być takie same", "Błąd");
@@ -75,41 +78,98 @@ void FormsPanel::OnSignup(wxCommandEvent& event)
         return;
     }
 
+    // Walidacja hasła
+    if (!signupPasswordIsValid(userSignupPassword))
+        return;
+
+    // Jeśli rejestracja przebiegła pomyślnie
+    // Tworzenie nowego konta
+    // UserCRUD::CreateUser(userSignupName, userSignupPassword)
+    
+    // Logowanie użytkownika
+    // UserCRUD::Update_logged(userSignupName);
+
 }
 
 // Funckja sprawdzająca login podany przez użytkownika przy rejestracji 
-bool FormsPanel::loginNameIsValid(std::string loginName)
+bool FormsPanel::signupNameIsValid(std::string signupName)
 {
     constexpr int MIN_CHAR_NAME{3};
     constexpr int MAX_CHAR_NAME{15};
     
-    std::string loginNameErrorMessage = "";
-    int length = loginName.size();
+    std::string signupNameErrorMessage = "";
+    int length = signupName.size();
 
+    // Sprawdzanie długości logina
     if (length < MIN_CHAR_NAME || length > MAX_CHAR_NAME)
-        loginNameErrorMessage += "Login musi zawierać od " + std::to_string(MIN_CHAR_NAME) + " do " + std::to_string(MAX_CHAR_NAME) + " znaków.\n";
+        signupNameErrorMessage += "Login musi zawierać od " + std::to_string(MIN_CHAR_NAME) + " do " + std::to_string(MAX_CHAR_NAME) + " znaków.\n";
 
-    // może składać się tylko z cyfr, podkreśleń, myślników oraz małych i dużych liter alfabetu angielskiego
+    // Sprawdzanie zawartości logina
     for (int i = 0; i < length; i++)
     {
-        char c = loginName[i];
+        char c = signupName[i];
         if (!isalpha(c) && !isdigit(c) && c != '-' && c != '_')
         {
-            loginNameErrorMessage += "Login może składać się tylko z cyfr, podkreśleń, myślników oraz małych i dużych liter alfabetu angielskiego.\n";
+            signupNameErrorMessage += "Login może składać się tylko z cyfr, podkreśleń, myślników oraz małych i dużych liter alfabetu angielskiego.\n";
             break;
         }
     }
 
-    if (loginNameErrorMessage == "")
+    if (signupNameErrorMessage == "")
         return true;
 
-    wxMessageDialog* loginNameErrorDlg = new wxMessageDialog(this, loginNameErrorMessage, "Błąd");
-    loginNameErrorDlg->ShowModal();
+    // Wyświetlanie odpowiedniego komunikatu jeśli login jest niewłaściry
+    wxMessageDialog* signupNameErrorDlg = new wxMessageDialog(this, signupNameErrorMessage, "Błąd");
+    signupNameErrorDlg->ShowModal();
     return false;
 }
 
 
-bool FormsPanel::loginPasswordIsValid(std::string loginPassword)
+// Funckja sprawdzająca hasło podane przez użytkownika przy rejestracji
+bool FormsPanel::signupPasswordIsValid(std::string signupPassword)
 {
-    return true;
+    constexpr int MIN_CHAR_PSSWRD{ 8 };
+    constexpr int MAX_CHAR_PSSWRD{ 30 };
+
+    std::string signupPasswordErrorMessage = "";
+    int length = signupPassword.size();
+
+    // Sprawdzanie długości hasła
+    if (length < MIN_CHAR_PSSWRD || length > MAX_CHAR_PSSWRD)
+        signupPasswordErrorMessage += "Hasło musi zawierać od " + std::to_string(MIN_CHAR_PSSWRD) + " do " + std::to_string(MAX_CHAR_PSSWRD) + " znaków.\n";
+    
+    // Sprawdzanie zawartości hasła
+    bool hasLower{ false }; bool hasUpper{ false }; bool hasDigit{ false }; bool hasSpecial{ false };
+    for (int i = 0; i < length; i++)
+    {
+        if (hasLower && hasUpper && hasDigit && hasSpecial)
+            break;
+        char c = signupPassword[i];
+        if (islower(c))
+            hasLower = true;
+        else if (isupper(c))
+            hasUpper = true;
+        else if (isdigit(c))
+            hasDigit = true;
+        else
+            hasSpecial = true;
+    }
+
+    // Dodawanie odpowiednich komunikatów
+    if (!hasLower)
+        signupPasswordErrorMessage += "Hasło musi zawierać małe litery.\n";
+    if (!hasUpper)
+        signupPasswordErrorMessage += "Hasło musi zawierać duże litery.\n";
+    if (!hasDigit)
+        signupPasswordErrorMessage += "Hasło musi zawierać cyfry.\n";
+    if (!hasSpecial)
+        signupPasswordErrorMessage += "Hasło musi zawierać znaki specjalne.\n";
+    
+    if (signupPasswordErrorMessage == "")
+        return true;
+
+    // Wyświetlanie odpowiedniego komunikatu jeśli hasło jest niewłaściwe
+    wxMessageDialog* signupPasswordErrorDlg = new wxMessageDialog(this, signupPasswordErrorMessage, "Błąd");
+    signupPasswordErrorDlg->ShowModal();
+    return false;
 }
