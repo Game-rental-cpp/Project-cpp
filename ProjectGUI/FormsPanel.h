@@ -16,6 +16,7 @@ private:
     wxButton* loginBtn;
 
     wxTextCtrl* signupName;
-    wxTextCtrl* signupPassword;
+    wxTextCtrl* signupPassword1;
+    wxTextCtrl* signupPassword2;
     wxButton* signupBtn;
 };
