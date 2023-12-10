@@ -7,8 +7,15 @@ class LoginPanel : public wxPanel
 {
 public:
     LoginPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size);
+    /*
+    void OnLogin(wxCommandEvent& event);
+    void OnSignup(wxCommandEvent& event);
+    bool signupNameIsValid(std::string signupName);
+    bool signupPasswordIsValid(std::string signupPassword);
+    */
+    
 
 private:
-    wxStaticText* label;
-    FormsPanel* formsPanel;
+    wxStaticText* successLabel;
+    wxPanel* formsPanel;
 };

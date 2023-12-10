@@ -1,7 +1,6 @@
 ﻿// FormsPanel.cpp
 #include "FormsPanel.h"
 #include <wx/wx.h>
-#include <wx/textctrl.h>
 #include <string>
 
 
