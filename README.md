@@ -50,4 +50,4 @@ Jeśli chcesz wyświetlić listę branchy, wpisz komendę **git branch**. Branch
 
 ##### - Mikołaj Karaman
 
-##### -
+##### - Renata Hader
