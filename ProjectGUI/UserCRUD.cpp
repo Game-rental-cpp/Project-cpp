@@ -122,7 +122,19 @@ std::string UserCRUD::ReadUser(std::string login) {
 }
 
 void UserCRUD::UpdateUser(std::string login, std::string body) {
-    
+    //Open the file for writing
+    std::ofstream inputFile("./Users/" + login + ".json", std::ios::trunc);
+    if (inputFile.is_open()) {
+        // Write the new content to the file
+        inputFile << body;
+
+        inputFile.close();
+    }
+    else {
+        // Handle the case where the file couldn't be opened
+        std::cerr << "Unable to open the file for reading." << std::endl;
+        return; // You might want to return an error code here or throw an exception
+    }
 }
 
 //delete
