@@ -1,5 +1,6 @@
 ﻿// LoginPanel.cpp
 #include "LoginPanel.h"
+#include "UserCRUD.h"
 #include <wx/wx.h>
 
 
@@ -27,17 +28,30 @@ LoginPanel::LoginPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, cons
 
     loginBtn->Bind(wxEVT_BUTTON, &LoginPanel::OnLogin, this);
     signupBtn->Bind(wxEVT_BUTTON, &LoginPanel::OnSignup, this);
+
+    Bind(wxEVT_SHOW, &LoginPanel::OnPanelShow, this);
+}
+
+
+// Funkcja obsługi zdarzenia wyświetlenia LoginPanel
+void LoginPanel::OnPanelShow(wxShowEvent& event)
+{
+    if (event.IsShown()) {
+        successLabel->Hide();
+        formsPanel->Show();
+
+    }
+
+    event.Skip();
 }
 
 // Funkcja obsługi zdarzenia po naciśnięciu przycisku "Zaloguj się"
-// NA RAZIE NIC NIE ROBI BO NIE MA FUNKCJI Z "UserCRUD.h" !!!
 void LoginPanel::OnLogin(wxCommandEvent& event)
 {
     std::string userLoginName = loginName->GetValue().ToStdString();
 
     // Sprawdzanie czy istnieje użytkownik o podanym loginie
-    //if (!UserCRUD::DoesExist(userLoginName))
-    if (false)
+    if (!UserCRUD::DoesExist(userLoginName))
     {
         wxMessageDialog* noKnownUserDlg = new wxMessageDialog(this, "Brak użytkownika o takim loginie.", "Błąd");
         noKnownUserDlg->ShowModal();
@@ -45,7 +59,7 @@ void LoginPanel::OnLogin(wxCommandEvent& event)
     }
 
     // Sprawdzanie hasła
-    //if (UserCRUD::ReadPassword(userLoginName) != loginPass->GetValue().ToStdString())
+    //if (UserCRUD::ReadPassword(userLoginName) != loginPassword->GetValue().ToStdString())
     if (false)
     {
         wxMessageDialog* incorrectPasswordDlg = new wxMessageDialog(this, "Nieprawidłowe hasło.", "Błąd");
@@ -54,9 +68,9 @@ void LoginPanel::OnLogin(wxCommandEvent& event)
     }
 
     // Logowanie użytkownika
-    // UserCRUD::Update_logged(userLoginName);
-    // formsPanel->Hide();
-    // successLabel->Show();
+    UserCRUD::Update_logged(userLoginName);
+    formsPanel->Hide();
+    successLabel->Show();
 }
 
 // Funkcja obsługi zdarzenia po naciśnięciu przycisku "Zarejestruj się"
@@ -64,8 +78,7 @@ void LoginPanel::OnSignup(wxCommandEvent& event)
 {
     std::string userSignupName = signupName->GetValue().ToStdString();
     // Sprawdzanie czy taki użytkownik już istnieje
-    //if (UserCRUD::DoesExist(userSignupName))
-    if (false)
+    if (UserCRUD::DoesExist(userSignupName))
     {
         wxMessageDialog* userAlreadyExistsDlg = new wxMessageDialog(this, "Użytkownik o takim loginie już istnieje", "Błąd");
         userAlreadyExistsDlg->ShowModal();
@@ -92,10 +105,10 @@ void LoginPanel::OnSignup(wxCommandEvent& event)
 
     // Jeśli rejestracja przebiegła pomyślnie
     // Tworzenie nowego konta
-    // UserCRUD::CreateUser(userSignupName, userSignupPassword)
+    UserCRUD::CreateUser(userSignupName, userSignupPassword);
 
     // Logowanie użytkownika
-    // UserCRUD::Update_logged(userSignupName);
+    UserCRUD::Update_logged(userSignupName);
     formsPanel->Hide();
     successLabel->Show();
 }

@@ -6,6 +6,7 @@ class LoginPanel : public wxPanel
 {
 public:
     LoginPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size);
+    void OnPanelShow(wxShowEvent& event);
     
     void OnLogin(wxCommandEvent& event);
     void OnSignup(wxCommandEvent& event);
