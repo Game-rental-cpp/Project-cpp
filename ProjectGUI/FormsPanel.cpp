@@ -1,37 +1,29 @@
-﻿// LoginPanel.cpp
-#include "LoginPanel.h"
+﻿// FormsPanel.cpp
+#include "FormsPanel.h"
 #include <wx/wx.h>
+#include <string>
 
 
-LoginPanel::LoginPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size)
+FormsPanel::FormsPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size)
     : wxPanel(parent, id, pos, size)
 {
-
-    // Tworzenie i ukrywanie etykiety sukces
-    successLabel = new wxStaticText(this, wxID_ANY, "Zalogowano", wxPoint(10, 50));
-    successLabel->Hide();
-
-    // Tworzenie panela z formularzami
-    formsPanel = new wxPanel(this, wxID_ANY, wxPoint(10, 100), wxSize(410, 500));
-
     // Tworzenie formularza Zaloguj
-    loginName = new wxTextCtrl(formsPanel, wxID_ANY, "login", wxPoint(10, 0), wxSize(200, 20));
-    loginPassword = new wxTextCtrl(formsPanel, wxID_ANY, "login pass", wxPoint(10, 30), wxSize(200, 20));
-    loginBtn = new wxButton(formsPanel, wxID_ANY, "Zaloguj się", wxPoint(10, 60));
+    loginName = new wxTextCtrl(this, wxID_ANY, "login", wxPoint(10, 0), wxSize(200, 20));
+    loginPassword = new wxTextCtrl(this, wxID_ANY, "login pass", wxPoint(10, 30), wxSize(200, 20));
+    loginBtn = new wxButton(this, wxID_ANY, "Zaloguj się", wxPoint(10, 60));
 
     // Tworzenie formularza Zarejestruj
-    signupName = new wxTextCtrl(formsPanel, wxID_ANY, "signup", wxPoint(10, 110), wxSize(200, 20));
-    signupPassword1 = new wxTextCtrl(formsPanel, wxID_ANY, "signup password", wxPoint(10, 140), wxSize(200, 20));
-    signupPassword2 = new wxTextCtrl(formsPanel, wxID_ANY, "confirm password", wxPoint(10, 170), wxSize(200, 20));
-    signupBtn = new wxButton(formsPanel, wxID_ANY, "Zarejestruj się", wxPoint(10, 200));
+    signupName = new wxTextCtrl(this, wxID_ANY, "signup", wxPoint(10, 110), wxSize(200, 20));
+    signupPassword1 = new wxTextCtrl(this, wxID_ANY, "signup password", wxPoint(10, 140), wxSize(200, 20));
+    signupPassword2 = new wxTextCtrl(this, wxID_ANY, "confirm password", wxPoint(10, 170), wxSize(200, 20));
+    signupBtn = new wxButton(this, wxID_ANY, "Zarejestruj się", wxPoint(10, 200));
 
-    loginBtn->Bind(wxEVT_BUTTON, &LoginPanel::OnLogin, this);
-    signupBtn->Bind(wxEVT_BUTTON, &LoginPanel::OnSignup, this);
+    loginBtn->Bind(wxEVT_BUTTON, &FormsPanel::OnLogin, this);
+    signupBtn->Bind(wxEVT_BUTTON, &FormsPanel::OnSignup, this);
 }
 
 // Funkcja obsługi zdarzenia po naciśnięciu przycisku "Zaloguj się"
-// NA RAZIE NIC NIE ROBI BO NIE MA FUNKCJI Z "UserCRUD.h" !!!
-void LoginPanel::OnLogin(wxCommandEvent& event)
+void FormsPanel::OnLogin(wxCommandEvent& event)
 {
     std::string userLoginName = loginName->GetValue().ToStdString();
 
@@ -55,12 +47,11 @@ void LoginPanel::OnLogin(wxCommandEvent& event)
 
     // Logowanie użytkownika
     // UserCRUD::Update_logged(userLoginName);
-    // formsPanel->Hide();
-    // successLabel->Show();
 }
 
+
 // Funkcja obsługi zdarzenia po naciśnięciu przycisku "Zarejestruj się"
-void LoginPanel::OnSignup(wxCommandEvent& event)
+void FormsPanel::OnSignup(wxCommandEvent& event)
 {
     std::string userSignupName = signupName->GetValue().ToStdString();
     // Sprawdzanie czy taki użytkownik już istnieje
@@ -93,19 +84,18 @@ void LoginPanel::OnSignup(wxCommandEvent& event)
     // Jeśli rejestracja przebiegła pomyślnie
     // Tworzenie nowego konta
     // UserCRUD::CreateUser(userSignupName, userSignupPassword)
-
+    
     // Logowanie użytkownika
     // UserCRUD::Update_logged(userSignupName);
-    formsPanel->Hide();
-    successLabel->Show();
+
 }
 
 // Funckja sprawdzająca login podany przez użytkownika przy rejestracji 
-bool LoginPanel::signupNameIsValid(std::string signupName)
+bool FormsPanel::signupNameIsValid(std::string signupName)
 {
-    constexpr int MIN_CHAR_NAME{ 3 };
-    constexpr int MAX_CHAR_NAME{ 15 };
-
+    constexpr int MIN_CHAR_NAME{3};
+    constexpr int MAX_CHAR_NAME{15};
+    
     std::string signupNameErrorMessage = "";
     int length = signupName.size();
 
@@ -135,7 +125,7 @@ bool LoginPanel::signupNameIsValid(std::string signupName)
 
 
 // Funckja sprawdzająca hasło podane przez użytkownika przy rejestracji
-bool LoginPanel::signupPasswordIsValid(std::string signupPassword)
+bool FormsPanel::signupPasswordIsValid(std::string signupPassword)
 {
     constexpr int MIN_CHAR_PSSWRD{ 8 };
     constexpr int MAX_CHAR_PSSWRD{ 30 };
@@ -146,7 +136,7 @@ bool LoginPanel::signupPasswordIsValid(std::string signupPassword)
     // Sprawdzanie długości hasła
     if (length < MIN_CHAR_PSSWRD || length > MAX_CHAR_PSSWRD)
         signupPasswordErrorMessage += "Hasło musi zawierać od " + std::to_string(MIN_CHAR_PSSWRD) + " do " + std::to_string(MAX_CHAR_PSSWRD) + " znaków.\n";
-
+    
     // Sprawdzanie zawartości hasła
     bool hasLower{ false }; bool hasUpper{ false }; bool hasDigit{ false }; bool hasSpecial{ false };
     for (int i = 0; i < length; i++)
@@ -173,7 +163,7 @@ bool LoginPanel::signupPasswordIsValid(std::string signupPassword)
         signupPasswordErrorMessage += "Hasło musi zawierać cyfry.\n";
     if (!hasSpecial)
         signupPasswordErrorMessage += "Hasło musi zawierać znaki specjalne.\n";
-
+    
     if (signupPasswordErrorMessage == "")
         return true;
 
