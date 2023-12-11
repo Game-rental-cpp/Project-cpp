@@ -21,7 +21,7 @@ LoginPanel::LoginPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, cons
 
     // Tworzenie formularza Zarejestruj
     signupName = new wxTextCtrl(formsPanel, wxID_ANY, "signup", wxPoint(10, 110), wxSize(200, 20));
-    signupPassword1 = new wxTextCtrl(formsPanel, wxID_ANY, "signup password", wxPoint(10, 140), wxSize(200, 20), wxTE_PASSWORD);
+    signupPassword1 = new wxTextCtrl(formsPanel, wxID_ANY, "signup password", wxPoint(10, 140), wxSize(200, 20));
     signupPassword2 = new wxTextCtrl(formsPanel, wxID_ANY, "confirm password", wxPoint(10, 170), wxSize(200, 20));
     signupBtn = new wxButton(formsPanel, wxID_ANY, "Zarejestruj się", wxPoint(10, 200));
 
