@@ -1,15 +1,27 @@
 #pragma once
 // LoginPanel.h
 #include <wx/wx.h>
-#include "FormsPanel.h"
 
 class LoginPanel : public wxPanel
 {
 public:
     LoginPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size);
-    void OnButtonClick(wxCommandEvent& event);
+    
+    void OnLogin(wxCommandEvent& event);
+    void OnSignup(wxCommandEvent& event);
+    bool signupNameIsValid(std::string signupName);
+    bool signupPasswordIsValid(std::string signupPassword);
 
 private:
-    wxStaticText* label;
-    FormsPanel* formsPanel;
+    wxStaticText* successLabel;
+    wxPanel* formsPanel;
+
+    wxTextCtrl* loginName;
+    wxTextCtrl* loginPassword;
+    wxButton* loginBtn;
+
+    wxTextCtrl* signupName;
+    wxTextCtrl* signupPassword1;
+    wxTextCtrl* signupPassword2;
+    wxButton* signupBtn;
 };

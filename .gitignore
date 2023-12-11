@@ -4,4 +4,5 @@ ProjectGUI/x64/
 # wxWidgets build and installation directories
 /build/
 /install/
+/Debug/
 
