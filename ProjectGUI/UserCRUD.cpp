@@ -100,11 +100,22 @@ void UserCRUD::Update_logged(std::string newContent) {
     }
 }
 
+std::string UserCRUD::ReadUser(std::string login) {
+    return "";
+}
+
+void UserCRUD::UpdateUser(std::string login, std::string body) {
+    
+}
+
 //delete
 
 //other
-bool UserCRUD::DoesExist(std::string) {
-    return true;
+bool UserCRUD::DoesExist(std::string login) {
+    std::string filePath = "./Users/" + login + ".json";
+    std::ifstream file(filePath.c_str()); 
+    // Returns true if the file exists and is readable
+    return file.good();
 }
 
 

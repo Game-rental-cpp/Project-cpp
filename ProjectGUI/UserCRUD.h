@@ -7,6 +7,8 @@ class UserCRUD {
 		static void CreateUser(std::string login, std::string password);
 		static std::string ReadLogged();
 		static void Update_logged(std::string newContent);
-		static bool DoesExist(std::string);
+		static std::string ReadUser(std::string login);
+		static void UpdateUser(std::string login, std::string body);
+		static bool DoesExist(std::string login);
 
 };
