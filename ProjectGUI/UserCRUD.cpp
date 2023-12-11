@@ -84,7 +84,7 @@ std::string UserCRUD::ReadLogged() {
 
 //update
 void UserCRUD::Update_logged(std::string newContent) {
-    //Open the file for 
+    //Open the file for writing
     std::ofstream inputFile("./Users/_logged.txt", std::ios::trunc);
 
     if (inputFile.is_open()) {
@@ -101,7 +101,24 @@ void UserCRUD::Update_logged(std::string newContent) {
 }
 
 std::string UserCRUD::ReadUser(std::string login) {
-    return "";
+    // Open the file for reading
+    std::ifstream inputFile("./Users/" + login + ".json");
+    std::string loginContent;
+
+    if (inputFile.is_open()) {
+        // Read the content of the file
+        std::stringstream buffer;
+        buffer << inputFile.rdbuf();
+        loginContent = buffer.str();
+
+        inputFile.close();
+        return loginContent;
+    }
+    else {
+        // Handle the case where the file couldn't be opened
+        std::cerr << "Unable to open the file for reading." << std::endl;
+        return ""; // You might want to return an error code here or throw an exception
+    }
 }
 
 void UserCRUD::UpdateUser(std::string login, std::string body) {
