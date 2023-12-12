@@ -19,10 +19,6 @@ int Game::GetNrOfLoans() const {
 
 
 // setters
-//void Game::SetName(const std::string& name) {
-//    this->name = name;
-//}
-
 void Game::SetQuantity(int quantity) {
     // Quantity cannot be negative
     if (quantity >= 0) {

@@ -7,6 +7,9 @@
 //for some reason code works without including <vector> and "GameCRUD.h"
 #include <vector>
 #include "GameCRUD.h"
+#include "UserNormal.h"
+
+
 
 std::vector<Game> gamesVector; 
 //
@@ -100,6 +103,9 @@ void MainPanel::OnPanelShow(wxShowEvent& event)
 void MainPanel::UpdateGame(wxCommandEvent& event)
 {
     bool logged = UserCRUD::isLogged();
+    UserNormal user("john_doe", "secure_password");
+
+
 
     if (!logged) {
         wxDialog* dialog = new wxDialog(this, wxID_ANY, "Musisz siê najpierw zalogowaæ, aby móc wypo¿yczyæ grê");
@@ -107,6 +113,7 @@ void MainPanel::UpdateGame(wxCommandEvent& event)
         dialog->Destroy();
         return;
     }
+
 
     //if (!user.isPremium()) {
     //    wxDialog* dialog = new wxDialog(this, wxID_ANY, "Przekroczono maksymaln¹ iloœæ grier wypo¿yczonych na raz. Aby wypo¿yczyæ now¹ grê zostañ cz³onkiem premium lub oddaj któr¹œ z ju¿ wypo¿yczonych gier.");
