@@ -7,7 +7,7 @@
 int gameCount = GameCRUD::countGames();
 
 MainPanel_Controller::MainPanel_Controller(MainPanel* parentEl, wxTextCtrl* searchInput, wxButton* resetBtn, wxChoice* sortChoice)
-    : parentEl(parentEl), searchInput(searchInput), resetBtn(resetBtn), sortChoice(sortChoice),
+    : parentEl(parentEl), searchInput(searchInput), resetBtn(resetBtn), sortChoice(sortChoice), gamesPanel(gamesPanel),
     gamesVector(MainPanel_Logic::fulfillGamesVector(gameCount)) {
     // Reszta kodu konstruktora, jeœli jest taka potrzebna
 }
@@ -19,11 +19,13 @@ void MainPanel_Controller::BindEvents() {
     sortChoice->Bind(wxEVT_CHOICE, &MainPanel_Controller::OnChoice, this);
     resetBtn->Bind(wxEVT_BUTTON, &MainPanel_Controller::OnResetButtonClick, this, wxID_ANY, wxID_ANY);
     resetBtn->Bind(wxEVT_ENTER_WINDOW, &MainPanel_Controller::OnMouseHover, this);
-    Bind(wxEVT_SHOW, &MainPanel_Controller::OnShowPanel, this);
+    //Bind(wxEVT_SHOW, &MainPanel_Controller::OnShowPanel, this);
+    parentEl->Bind(wxEVT_SHOW, &MainPanel_Controller::OnShowPanel, this);
+
 }
 
 void MainPanel_Controller::OnShowPanel(wxShowEvent& event) {
-
+    //wxLogMessage("Show");
     //Do if MainPanel has occured on the screen
     if (event.IsShown()) {
         parentEl->SetBackgroundColour(COLOR_BACKGROUND_PANEL); // Set background color (optional)
@@ -143,6 +145,7 @@ void MainPanel_Controller::UpdateGamesPanel(std::vector<Game> gamesVector)
 
     //This loop pushes appropriate vectors to filteredVector
     for (int i = 0; i < gameCount; i++) {
+        wxLogMessage("s");
         Game game = gamesVector[i];
         if (game.GetName().find(enteredText.Lower()) == std::string::npos && enteredText != "")
             continue;
@@ -212,7 +215,6 @@ void MainPanel_Controller::UpdateGamesPanel(std::vector<Game> gamesVector)
         hireBtn->Bind(wxEVT_ENTER_WINDOW, &MainPanel_Controller::OnMouseHover, this);
         hireBtn->SetFont(SetTheFont());
 
-        wxLogMessage("OK");
 
         if (gameQuantity == 0)
             MainPanel_Controller::disableButton(gameName);

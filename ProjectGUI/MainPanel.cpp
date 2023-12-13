@@ -60,4 +60,6 @@ MainPanel::MainPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const 
     // Create an instance of the controller and bind events
     MainPanel_Controller* controller = new MainPanel_Controller(this, searchInput, resetBtn, sortChoice);
     controller->BindEvents();
+
+    //Bind(wxEVT_SHOW, &MainPanel_Controller::OnShowPanel, this);
 }
