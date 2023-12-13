@@ -25,8 +25,9 @@ const std::vector<User::UserGame>& User::getUserGames() const {
 User::UserGame::UserGame(const std::string& name) : name(name) {
     // TODO: change the way of creating ID (use std::uuid)
     id = "some unique id";
-    // Set the date of now
-    date = wxDateTime::Now();
+
+    wxDateTime now = wxDateTime::Now(); // Today's date (including hours, minutes, seconds)
+    date = now.Format(wxT("%d-%m-%y__%H-%M-%S"), wxDateTime::CET).ToStdString(); // convert wxDateTime to string
 }
 
 std::string User::UserGame::getId() const {
@@ -37,7 +38,7 @@ std::string User::UserGame::getName() const {
     return name;
 }
 
-wxDateTime User::UserGame::getDate() const {
+std::string User::UserGame::getDate() const {
     return date;
 }
 
@@ -62,14 +63,23 @@ void User::removeUserGame(const std::string& id) {
     }
 }
 
-std::string User::toString()  {
-    std::string text = "login: "+ login+ ", password: "+ password;
+std::string User::stringifyGames() {
+    std::string strGames = "[";
 
     for (int i = 0; i < userGames.size(); i++) {
-        text += "\ngame name: "+ userGames[i].getName()+", id: "+ userGames[i].getId()+ ", ";
+        if (i > 0) {
+            strGames += ", ";
+        }
+
+        // Formatuj obiekt JSON dla ka¿dej gry z w³asnym formatem daty
+        strGames += "{\"id\": \"" + userGames[i].getId() + "\", \"name\": \"" + userGames[i].getName() +
+            "\", \"date\": \"" + userGames[i].getDate() + "\"}";
     }
 
-    return text;
+    strGames += "]";
+
+    return strGames;
 }
+
 
  

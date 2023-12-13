@@ -124,8 +124,8 @@ void MainPanel::UpdateGame(wxCommandEvent& event)
         dialog->Destroy();
         return;
     }
-        //std::string log = user.toString();
-        //wxLogMessage("Type of log: %s", log);
+        std::string log = user.stringifyGames();
+        wxLogMessage("Type of log: %s", log);
     
     gamesVector=  MainPanel_Controller::updateGame(buttonName, gamesPanel, gamesVector);
 }

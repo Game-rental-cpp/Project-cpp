@@ -13,14 +13,14 @@ public:
         UserGame(const std::string& name);
         std::string getId() const;
         std::string getName() const;
-        wxDateTime getDate() const;
+        std::string getDate() const;
 
         // Dodaj inne funkcje lub zmienne dla UserGame wed³ug potrzeb
 
     private:
         std::string id; // game unique id
         std::string name; // name
-        wxDateTime date; // date of loan
+        std::string date; // date of loan
     };
 
     User(const std::string& login);
@@ -35,7 +35,7 @@ public:
     virtual bool addUserGame(const std::string& name);
     void removeUserGame(const std::string& id);
 
-    std::string toString();
+    std::string stringifyGames();
 
 protected:
     std::string login;
