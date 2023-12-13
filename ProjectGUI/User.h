@@ -39,6 +39,8 @@ public:
     // @param std::string& id
     void removeUserGame(const std::string& id);
 
+    void setUserGames(std::vector<UserGame>& newUserGamesVector);
+
     std::string stringifyGames();
 
 protected:

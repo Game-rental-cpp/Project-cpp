@@ -99,8 +99,6 @@ void MainPanel::OnPanelShow(wxShowEvent& event)
     event.Skip();
 }
 
-//create user object (maybe get it from MyAccPanel)
-    UserNormal user("john_doe");
 
 //This metohod executes after clicking on "wypozycz" button
 void MainPanel::UpdateGame(wxCommandEvent& event)
@@ -118,13 +116,15 @@ void MainPanel::UpdateGame(wxCommandEvent& event)
     wxButton* button = dynamic_cast<wxButton*>(event.GetEventObject());
     wxString buttonName = button->GetName();
     
+        wxLogMessage("Type of log: %s", user->getLogin());
 
-    if (!user.addUserGame(buttonName.ToStdString())) {
+    if (user && !user->addUserGame(buttonName.ToStdString())) {
         wxDialog* dialog = new wxDialog(this, wxID_ANY, "Przekroczono maksymaln¹ iloœæ gier wypo¿yczonych na raz. Aby wypo¿yczyæ now¹ grê zostañ cz³onkiem premium lub oddaj któr¹œ z ju¿ wypo¿yczonych gier.");
         dialog->ShowModal();
         dialog->Destroy();
         return;
     }
+
         //std::string log = user.stringifyGames();
         //wxLogMessage("Type of log: %s", log);
     
@@ -260,3 +260,7 @@ void MainPanel::UpdateGamesPanel(std::vector<Game> gamesVector)
 
 
 
+void MainPanel::SetUser(User* u)
+{
+    user = u;
+}

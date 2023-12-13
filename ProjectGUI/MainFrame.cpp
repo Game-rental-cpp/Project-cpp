@@ -4,6 +4,7 @@
 #include <filesystem>
 #include "json.hpp"
 #include "Style.h"
+#include "User.h"
 
 using json = nlohmann::json;
 
@@ -25,6 +26,11 @@ MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& si
     mainPanel = new MainPanel(this, wxID_ANY, wxPoint(10, 100), wxSize(410, 500));
     loginPanel = new LoginPanel(this, wxID_ANY, wxPoint(20, 200), wxSize(410, 500));
     myAccPanel = new MyAccPanel(this, wxID_ANY, wxPoint(10, 100), wxSize(410, 500));
+
+
+    User* user = myAccPanel->GetUser();
+    mainPanel->SetUser(user);
+
 
     //default hidden
     mainPanel->Hide();

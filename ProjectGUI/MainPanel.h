@@ -2,12 +2,13 @@
 // MainPanel.h
 #include <wx/wx.h>
 #include "Game.h"
-
+#include "user.h";
 
 class MainPanel : public wxPanel
 {
 public:
     MainPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size);
+    void SetUser(User* user);
 
 private:
     wxStaticText* label;
@@ -15,6 +16,7 @@ private:
     wxChoice* sortChoice;
     wxTextCtrl* searchInput;
     wxButton* resetBtn;
+    User* user;
 
     int previousSortChoice;
     // Deklaracja metody obs³ugi zdarzenia wxShowEvent

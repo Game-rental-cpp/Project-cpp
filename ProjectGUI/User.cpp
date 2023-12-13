@@ -7,6 +7,7 @@ User::User(const std::string& login)
     : login(login) {
     // TODO: create user from json file
     // UserCRUD::ReadUser(login);
+    password = "pass";
 }
 
 std::string User::getLogin() const {
@@ -63,6 +64,12 @@ void User::removeUserGame(const std::string& id) {
         }
     }
 }
+
+
+void User::setUserGames(std::vector<User::UserGame>& newUserGamesVector) {
+    userGames = newUserGamesVector;
+}
+
 
 //this function creates a string representation of userGames vector in json format
 // @returns std::string
