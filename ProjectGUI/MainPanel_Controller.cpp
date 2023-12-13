@@ -145,17 +145,17 @@ void MainPanel_Controller::UpdateGamesPanel(std::vector<Game> gamesVector)
 
     //This loop pushes appropriate vectors to filteredVector
     for (int i = 0; i < gameCount; i++) {
-        wxLogMessage("s");
         Game game = gamesVector[i];
         if (game.GetName().find(enteredText.Lower()) == std::string::npos && enteredText != "")
             continue;
         filteredVector.push_back(game);
     }
+    //wxLogMessage("Formatted message: %s", filteredVector[0].GetName());
 
 
     gamesPanel = nullptr;
     int height = filteredVector.size() <= 3 ? 330 : filteredVector.size() * 80;
-    gamesPanel = new wxScrolledWindow(parentEl, wxID_ANY, wxPoint(0, 150), wxSize(GetClientSize().GetWidth(), 330));
+    gamesPanel = new wxScrolledWindow(parentEl, wxID_ANY, wxPoint(0, 150), wxSize(parentEl->GetSize().GetWidth(), 330));
     gamesPanel->SetScrollRate(0, 10);  // Ustawienia przewijania - drugi argument to liczba pikseli na jedno przewiniêcie
     //gamesPanel->Hide();
     gamesPanel->SetBackgroundColour(RED); // Set background color (optional)
@@ -175,6 +175,7 @@ void MainPanel_Controller::UpdateGamesPanel(std::vector<Game> gamesVector)
 
 
     for (int i = 0; i < filteredVector.size(); i++) {
+        //wxLogMessage("s");
 
         Game game = filteredVector[i];
 
@@ -206,7 +207,7 @@ void MainPanel_Controller::UpdateGamesPanel(std::vector<Game> gamesVector)
         std::string buttonText = "Wypo¿ycz";
 
         // (button name is the same as game name)
-        wxButton* hireBtn = new wxButton(gamesPanel, wxID_ANY, buttonText, wxPoint(GetClientSize().GetWidth() - 10 - 85, 10 + i * 85), wxSize(85, 35), 0, wxDefaultValidator, gameName);
+        wxButton* hireBtn = new wxButton(gamesPanel, wxID_ANY, buttonText, wxPoint(parentEl->GetSize().GetWidth() - 10 - 85, 10 + i * 85), wxSize(85, 35), 0, wxDefaultValidator, gameName);
 
         hireBtn->SetBackgroundColour(COLOR_BACKGROUND_BTN);
         hireBtn->SetForegroundColour(COLOR_TEXT_BTN);
