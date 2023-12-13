@@ -7,12 +7,10 @@
 #include "MyAccPanel.h"
 #include "MainFrame_Logic.h"
 #include "MainFrame_Controller.h"
-//#include "UserCRUD.h"
 
 class MainFrame : public wxFrame {
 public:
     MainFrame(const wxString& title, const wxPoint& pos, const wxSize& size);
-    // ... inne deklaracje funkcji i sk³adników klasy
 
 private:
     User* user;
@@ -22,9 +20,5 @@ private:
     MainPanel* mainPanel;
     LoginPanel* loginPanel;
     MyAccPanel* myAccPanel;
-    // ... inne prywatne sk³adniki klasy
-
-    // ... inne deklaracje funkcji prywatnych klasy
-    //void OnMouseHover(wxMouseEvent& event);
 };
 

@@ -4,18 +4,20 @@
 #include "LoginPanel.h"
 #include "MyAccPanel.h"
 
+class MainFrame;
+
 class MainFrame_Controller {
 public:
-    MainFrame_Controller(wxButton* goBackBtn, wxButton* loginBtn, wxButton* myAccBtn, MainPanel* mainPanel, LoginPanel* loginPanel, MyAccPanel* myAccPanel);
+    MainFrame_Controller(MainFrame* par, wxButton* goBackBtn, wxButton* loginBtn, wxButton* myAccBtn, MainPanel* mainPanel, LoginPanel* loginPanel, MyAccPanel* myAccPanel);
     void BindEvents();
 
 private:
-    // Dodaj funkcje obs³ugi zdarzeñ tutaj, na przyk³ad:
     void OnGoBack(wxCommandEvent& event);
     void OnLogin(wxCommandEvent& event);
     void OnMyAcc(wxCommandEvent& event);
     void OnMouseHover(wxMouseEvent& event);
 
+    MainFrame* par;
     wxButton* goBackBtn;
     wxButton* loginBtn;
     wxButton* myAccBtn;

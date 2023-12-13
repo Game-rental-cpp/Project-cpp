@@ -1,12 +1,10 @@
 #include "MainFrame_Controller.h"
 #include "UserCRUD.h"
 #include "Style.h"
+#include "MainFrame.h"
 
-MainFrame_Controller::MainFrame_Controller(wxButton* goBackBtn, wxButton* loginBtn, wxButton* myAccBtn, MainPanel* mainPanel, LoginPanel* loginPanel, MyAccPanel* myAccPanel)
-    : goBackBtn(goBackBtn), loginBtn(loginBtn), myAccBtn(myAccBtn), mainPanel(mainPanel), loginPanel(loginPanel), myAccPanel(myAccPanel) {
-    //loginBtn->Bind(wxEVT_ENTER_WINDOW, &MainFrame_Controller::OnMouseHover, this);
-    //goBackBtn->Bind(wxEVT_ENTER_WINDOW, &MainFrame_Controller::OnMouseHover, this);
-    //myAccBtn->Bind(wxEVT_ENTER_WINDOW, &MainFrame_Controller::OnMouseHover, this);
+MainFrame_Controller::MainFrame_Controller(MainFrame* parentEl, wxButton* goBackBtn, wxButton* loginBtn, wxButton* myAccBtn, MainPanel* mainPanel, LoginPanel* loginPanel, MyAccPanel* myAccPanel)
+    : par(parentEl), goBackBtn(goBackBtn), loginBtn(loginBtn), myAccBtn(myAccBtn), mainPanel(mainPanel), loginPanel(loginPanel), myAccPanel(myAccPanel) {
 }
 
 void MainFrame_Controller::BindEvents() {
@@ -33,6 +31,8 @@ void MainFrame_Controller::OnGoBack(wxCommandEvent& event) {
     mainPanel->Show();
     loginPanel->Hide();
     myAccPanel->Hide();
+
+    par->Layout();
 }
 
 void MainFrame_Controller::OnLogin(wxCommandEvent& event) {
@@ -44,7 +44,7 @@ void MainFrame_Controller::OnLogin(wxCommandEvent& event) {
     myAccPanel->Hide();
     mainPanel->Hide();
 
-    // Jeœli to konieczne, mo¿esz dodaæ kod do odœwie¿enia widoku
+    par->Layout();
 }
 
 void MainFrame_Controller::OnMyAcc(wxCommandEvent& event) {
@@ -55,6 +55,8 @@ void MainFrame_Controller::OnMyAcc(wxCommandEvent& event) {
     myAccPanel->Show();
     loginPanel->Hide();
     mainPanel->Hide();
+
+    par->Layout();
 }
 
 void MainFrame_Controller::OnMouseHover(wxMouseEvent& event) {

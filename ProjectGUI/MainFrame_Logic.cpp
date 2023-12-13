@@ -3,9 +3,8 @@
 //#include "User.h"
 #include "UserNormal.h"
 #include "UserPremium.h"
-/*
-	This function hides loginBtn or myAccBtn depending on whether the user is logged in 
-*/
+
+
 void MainFrame_Logic::HideButton(wxButton* loginBtn, wxButton* myAccBtn) {
 	if (UserCRUD::isLogged())
 		loginBtn->Hide();

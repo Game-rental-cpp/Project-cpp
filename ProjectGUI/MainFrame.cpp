@@ -12,7 +12,7 @@ MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& si
     myAccBtn = new wxButton(this, wxID_ANY, "Moje konto", wxDefaultPosition, wxSize(100, 40));
 
     goBackBtn->Hide();
-    MainFrame_Logic::HideButton(loginBtn, myAccBtn);
+    MainFrame_Logic::HideButton(loginBtn, myAccBtn); //hide one of the buttons
 
     // Creating and adding panels
     mainPanel = new MainPanel(this, wxID_ANY, wxPoint(10, 100), wxSize(410, 500));
@@ -22,17 +22,15 @@ MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& si
     MainFrame_Logic::CreateUser(user, mainPanel, myAccPanel, loginPanel);
 
     // Default hidden
-    mainPanel->Hide();
+    mainPanel->Hide(); //temporarily hide to trigger the OnPanelShow 
     loginPanel->Hide();
     myAccPanel->Hide();
-
-    mainPanel->Show();
+    mainPanel->Show(); 
 
     // Create an instance of the controller and bind events
-    MainFrame_Controller* controller = new MainFrame_Controller(goBackBtn, loginBtn, myAccBtn, mainPanel, loginPanel, myAccPanel);
+    MainFrame_Controller* controller = new MainFrame_Controller(this, goBackBtn, loginBtn, myAccBtn, mainPanel, loginPanel, myAccPanel);
     controller->BindEvents();
    
-
     // Navigation button style
     loginBtn->SetFont(SetTheFont(10).MakeBold());
     loginBtn->SetBackgroundColour(COLOR_BACKGROUND_LOGINBTN);
