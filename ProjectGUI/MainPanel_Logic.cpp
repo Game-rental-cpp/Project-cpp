@@ -117,3 +117,6 @@ std::vector<Game> MainPanel_Logic::sortVector(std::vector<Game> gamesVector, int
     }
     return gamesVector;
 }
+
+
+

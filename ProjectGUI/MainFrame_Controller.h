@@ -8,7 +8,7 @@ class MainFrame;
 
 class MainFrame_Controller {
 public:
-    MainFrame_Controller(MainFrame* par, wxButton* goBackBtn, wxButton* loginBtn, wxButton* myAccBtn, MainPanel* mainPanel, LoginPanel* loginPanel, MyAccPanel* myAccPanel);
+    MainFrame_Controller(MainFrame* parentEl, wxButton* goBackBtn, wxButton* loginBtn, wxButton* myAccBtn, MainPanel* mainPanel, LoginPanel* loginPanel, MyAccPanel* myAccPanel);
     void BindEvents();
 
 private:
@@ -17,7 +17,7 @@ private:
     void OnMyAcc(wxCommandEvent& event);
     void OnMouseHover(wxMouseEvent& event);
 
-    MainFrame* par;
+    MainFrame* parentEl;
     wxButton* goBackBtn;
     wxButton* loginBtn;
     wxButton* myAccBtn;

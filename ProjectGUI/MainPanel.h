@@ -12,21 +12,11 @@ public:
 
 private:
     wxStaticText* label;
-    wxScrolledWindow* gamesPanel;
     wxChoice* sortChoice;
     wxTextCtrl* searchInput;
     wxButton* resetBtn;
     User* user;
 
-    int previousSortChoice;
-    // Deklaracja metody obs³ugi zdarzenia wxShowEvent
-    void OnPanelShow(wxShowEvent& event);
-    void OnChoice(wxCommandEvent& event);
-    void UpdateGamesPanel(std::vector<Game>);
-    void UpdateGame(wxCommandEvent& event);
-    void OnSearchChange(wxCommandEvent& event);
-    void OnResetButtonClick(wxCommandEvent& event);
-    void OnMouseHover(wxMouseEvent& event);
 };
 
 

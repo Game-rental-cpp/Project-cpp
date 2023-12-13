@@ -4,8 +4,7 @@
 #include "MainFrame.h"
 
 MainFrame_Controller::MainFrame_Controller(MainFrame* parentEl, wxButton* goBackBtn, wxButton* loginBtn, wxButton* myAccBtn, MainPanel* mainPanel, LoginPanel* loginPanel, MyAccPanel* myAccPanel)
-    : par(parentEl), goBackBtn(goBackBtn), loginBtn(loginBtn), myAccBtn(myAccBtn), mainPanel(mainPanel), loginPanel(loginPanel), myAccPanel(myAccPanel) {
-}
+    : parentEl(parentEl), goBackBtn(goBackBtn), loginBtn(loginBtn), myAccBtn(myAccBtn), mainPanel(mainPanel), loginPanel(loginPanel), myAccPanel(myAccPanel) {}
 
 void MainFrame_Controller::BindEvents() {
     goBackBtn->Bind(wxEVT_BUTTON, &MainFrame_Controller::OnGoBack, this);
@@ -32,7 +31,7 @@ void MainFrame_Controller::OnGoBack(wxCommandEvent& event) {
     loginPanel->Hide();
     myAccPanel->Hide();
 
-    par->Layout();
+    parentEl->Layout();
 }
 
 void MainFrame_Controller::OnLogin(wxCommandEvent& event) {
@@ -44,7 +43,7 @@ void MainFrame_Controller::OnLogin(wxCommandEvent& event) {
     myAccPanel->Hide();
     mainPanel->Hide();
 
-    par->Layout();
+    parentEl->Layout();
 }
 
 void MainFrame_Controller::OnMyAcc(wxCommandEvent& event) {
@@ -56,7 +55,7 @@ void MainFrame_Controller::OnMyAcc(wxCommandEvent& event) {
     loginPanel->Hide();
     mainPanel->Hide();
 
-    par->Layout();
+    parentEl->Layout();
 }
 
 void MainFrame_Controller::OnMouseHover(wxMouseEvent& event) {
