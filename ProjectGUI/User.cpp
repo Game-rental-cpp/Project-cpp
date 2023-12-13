@@ -2,6 +2,8 @@
 
 #include "user.h"
 #include "UserCRUD.h"
+#include "uuid_v4.h"
+
 //#include <uuid/uuid.h> // Include the header for UUID generation
 
 User::User(const std::string& login)
@@ -23,10 +25,12 @@ const std::vector<User::UserGame>& User::getUserGames() const {
 }
 
 User::UserGame::UserGame(const std::string& name) : name(name) {
-    // TODO: change the way of creating ID (use std::uuid)
-    id = "some unique id";
+    // generate unique id
+    UUIDv4::UUIDGenerator<std::mt19937_64> uuidGenerator;
+    UUIDv4::UUID uuid = uuidGenerator.getUUID();
+    id = uuid.str(); // convert id to string
 
-    wxDateTime now = wxDateTime::Now(); // Today's date (including hours, minutes, seconds)
+    wxDateTime now = wxDateTime::Now(); // Today's date and time 
     date = now.Format(wxT("%d-%m-%y__%H-%M-%S"), wxDateTime::CET).ToStdString(); // convert wxDateTime to string
 }
 

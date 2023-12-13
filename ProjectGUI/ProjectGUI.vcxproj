@@ -149,6 +149,7 @@
     <ClCompile Include="UserNormal.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="endianness.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameCRUD.h" />
     <ClInclude Include="json.hpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="User.h" />
     <ClInclude Include="UserCRUD.h" />
     <ClInclude Include="UserNormal.h" />
+    <ClInclude Include="uuid_v4.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore" />

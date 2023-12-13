@@ -149,6 +149,12 @@
     <ClInclude Include="UserNormal.h">
       <Filter>Pliki nagłówkowe\Models</Filter>
     </ClInclude>
+    <ClInclude Include="endianness.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="uuid_v4.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore" />
