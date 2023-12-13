@@ -3,12 +3,12 @@
 #include "usernormal.h"
 
 UserNormal::UserNormal(const std::string& login, const std::string& password)
-    : User(login, password), isPremium(false) {}
+    : User(login, password) {}
 
 void UserNormal::someVirtualFunction() const {
     // Implementation for the pure virtual function
 }
 
-bool UserNormal::getIsPremium() const {
-    return isPremium;
+bool UserNormal::isPremium() const {
+    return false;
 }

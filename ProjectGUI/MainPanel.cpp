@@ -107,20 +107,20 @@ void MainPanel::UpdateGame(wxCommandEvent& event)
 
 
 
-    if (!logged) {
-        wxDialog* dialog = new wxDialog(this, wxID_ANY, "Musisz siê najpierw zalogowaæ, aby móc wypo¿yczyæ grê");
-        dialog->ShowModal();
-        dialog->Destroy();
-        return;
-    }
-
-
-    //if (!user.isPremium()) {
-    //    wxDialog* dialog = new wxDialog(this, wxID_ANY, "Przekroczono maksymaln¹ iloœæ grier wypo¿yczonych na raz. Aby wypo¿yczyæ now¹ grê zostañ cz³onkiem premium lub oddaj któr¹œ z ju¿ wypo¿yczonych gier.");
+    //if (!logged) {
+    //    wxDialog* dialog = new wxDialog(this, wxID_ANY, "Musisz siê najpierw zalogowaæ, aby móc wypo¿yczyæ grê");
     //    dialog->ShowModal();
     //    dialog->Destroy();
     //    return;
     //}
+
+
+    if (!user.isPremium()) {
+        wxDialog* dialog = new wxDialog(this, wxID_ANY, "Przekroczono maksymaln¹ iloœæ grier wypo¿yczonych na raz. Aby wypo¿yczyæ now¹ grê zostañ cz³onkiem premium lub oddaj któr¹œ z ju¿ wypo¿yczonych gier.");
+        dialog->ShowModal();
+        dialog->Destroy();
+        return;
+    }
 
     gamesVector=  MainPanel_Controller::updateGame(event, gamesPanel, gamesVector);
 }

@@ -13,8 +13,8 @@ public:
     void someVirtualFunction() const override;
 
     // Getter
-    bool getIsPremium() const;
+    bool isPremium() const; // Override from the base class
 
 private:
-    const bool isPremium;
+    // Brak pola isPremium
 };
