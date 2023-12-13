@@ -12,11 +12,16 @@ public:
     void SetUser(User* u){user = u;}
 
 private:
-    wxButton* button;
-    wxStaticText* label;
+    wxStaticText* logoutLabel;
+    wxPanel* userPanel;
+    wxStaticText* loginLabel;
+    wxButton* logoutBtn;
+    wxTextCtrl* premiumInput;
+    wxPanel* myGamesPanel;
+
     User* user;
 
     void OnPanelShow(wxShowEvent& event);
-    void ChangeToPremium(wxCommandEvent& event);
-    void LogOut();
+    void LogOut(wxCommandEvent& event);
+    void OnEnterPressed(wxKeyEvent& event);
 };

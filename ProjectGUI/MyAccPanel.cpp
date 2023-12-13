@@ -5,19 +5,24 @@
 #include "UserNormal.h"
 #include "UserPremium.h"
 
-bool shouldRefresh= true;
 
 
 MyAccPanel::MyAccPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size)
     : wxPanel(parent, id, pos, size)
 {
-    // Tworzenie przycisku
-    button = new wxButton(this, wxID_ANY, "Przycisk w MyAccPanel", wxPoint(10, 10));
-    //button->Bind(wxEVT_BUTTON, &MyAccPanel::LoadUser, this);
-    button->Bind(wxEVT_BUTTON, &MyAccPanel::ChangeToPremium, this);
 
+    logoutLabel = new wxStaticText(this, wxID_ANY, "wylogowano pomyœlnie", wxPoint(10, 10));
+
+    userPanel = new wxPanel(this, wxID_ANY, wxPoint(10, 10), wxSize(410, 500));
+    // Tworzenie przycisku
+    logoutBtn = new wxButton(userPanel, wxID_ANY, "Wyloguj", wxPoint(10, GetClientSize().GetHeight()-100));
+    //button->Bind(wxEVT_BUTTON, &MyAccPanel::LoadUser, this);
+    logoutBtn->Bind(wxEVT_BUTTON, &MyAccPanel::LogOut, this);
+
+    premiumInput = new wxTextCtrl(userPanel, wxID_ANY, wxEmptyString, wxPoint(GetClientSize().GetWidth() - 10 - 30 - 190, GetClientSize().GetHeight() - 100), wxSize(190, 30), wxBORDER_RAISED);
+    premiumInput->Bind(wxEVT_CHAR_HOOK, &MyAccPanel::OnEnterPressed, this, wxID_ANY);
+    premiumInput->SetHint("Wpisz kod, by zyskaæ konto premium");
     // Tworzenie etykiety
-    label = new wxStaticText(this, wxID_ANY, "To jest etykieta w MyAccPanel", wxPoint(10, 50));
 
 
 
@@ -48,19 +53,21 @@ void MyAccPanel::OnPanelShow(wxShowEvent& event)
     //Wykonaj jesli MyAccPanel zostal wyswietlony na ekranie
     if (event.IsShown()) {
 
+        loginLabel = new wxStaticText(userPanel, wxID_ANY, wxString::Format("Zalogowany/a jako: %s", user->getLogin()), wxPoint(10, 10));
+        logoutLabel->Hide();
+
         if (user) {
-            // Przyk³adowe u¿ycie informacji o u¿ytkowniku
-            std::string userInfo = "Login: " + user->getLogin() + "\nGames: " + user->stringifyGames();
-            wxLogMessage("%s", userInfo);
+            // SprawdŸ, czy user jest instancj¹ UserNormal
+            UserNormal* userN = dynamic_cast<UserNormal*>(user);
+            if (!userN) {
+                // User jest obiektem klasy UserNormal
+                premiumInput->Hide();
+            }
         }
 
-       //jeœli login jest pusty to znaczy, ze ktos dopiero siê zalogowal, wiec trzeba zasadowac info z pliku
-        if (shouldRefresh== true) {
 
-            //LoadUser();
-            //ukryj label z napisem "wylogowano pomyslnie"
-            //wyswietl userPanel
-        }
+        userPanel->Show();
+
 
         Layout(); // Zaktualizuj uklad
     }
@@ -69,28 +76,34 @@ void MyAccPanel::OnPanelShow(wxShowEvent& event)
     event.Skip();
 }
 
-void MyAccPanel::ChangeToPremium(wxCommandEvent& event) {
-    //wyszukaj w pliku /Users/_logged.txt kto jest zalogowany i pobierz login z tego pliku
-  
-    //if (isPremium())
-    // userPtr = new UserNormal("login");
-    // userPtr = new UserPremium("login");
 
-   // Zwolnij zasoby starego u¿ytkownika
-    std::vector<User::UserGame> vec = user->getUserGames();
 
-    delete user;
+void MyAccPanel::OnEnterPressed(wxKeyEvent& event) {
+    // SDetect Enter key
+    if (event.GetKeyCode() == WXK_RETURN) {
+        wxString enteredText = premiumInput->GetValue();
+        premiumInput->SetValue("");
+        
+        if (enteredText == "PREMIUM") {
+            premiumInput->Hide();
 
-    // Utwórz nowego u¿ytkownika typu UserPremium, ale nadal u¿ywaj¹c istniej¹cego obiektu
-    user = new (user) UserPremium("login_premium");
-    user->setUserGames(vec);
+            wxLogMessage("Jesteœ cz³onkiem premium");
+            delete user;
+            //pobierz login przez cruda albo od starego usera.
+            // Utwórz nowego u¿ytkownika typu UserPremium, ale nadal u¿ywaj¹c istniej¹cego obiektu
+            user = new (user) UserPremium("login_premium");
+        } else
+            wxLogMessage("Nieprawid³owy kod");
+    }
 
-    shouldRefresh = false;
+
+    event.Skip();
 }
 
-void MyAccPanel::LogOut() {
-    //ukryj userPanel
-    //wyswietl label z napisem "wylogowano pomyslnie"
-    shouldRefresh= true;
+void MyAccPanel::LogOut(wxCommandEvent& event) {
+    userPanel->Hide();
+    logoutLabel->Show();
+    //usuñ usera i pusty string do _logged.txt
     //user.reset();
+    
 }
