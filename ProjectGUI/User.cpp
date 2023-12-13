@@ -3,8 +3,8 @@
 #include "user.h"
 //#include <uuid/uuid.h> // Include the header for UUID generation
 
-User::User(const std::string& login, const std::string& password)
-    : login(login), password(password) {}
+User::User(const std::string& login)
+    : login(login) {}
 
 std::string User::getLogin() const {
     return login;
@@ -18,9 +18,10 @@ const std::vector<User::UserGame>& User::getUserGames() const {
     return userGames;
 }
 
-User::UserGame::UserGame(const std::string& id, const std::string& name)
-    : id(id), name(name) {
-    // Ustaw datê na obecn¹
+User::UserGame::UserGame(const std::string& name) : name(name) {
+    // TODO: change the way of creating ID (use std::uuid)
+    id = "idididi";
+    // Set the date of now
     date = wxDateTime::Now();
 }
 
@@ -37,16 +38,8 @@ wxDateTime User::UserGame::getDate() const {
 }
 
 void User::addUserGame(const std::string& name) {
-    // TODO: change the way of creating ID (use std::uuid)
-    //uuid_t uuid;
-    //uuid_generate(uuid);
-    //char uuidStr[37];
-    //uuid_unparse(uuid, uuidStr);
-    std::string uuidStr = "deded";
-    std::string newId(uuidStr);
-
     // Tworzymy now¹ grê i dodajemy j¹ do wektora
-    userGames.push_back(UserGame(newId, name));
+    userGames.push_back(UserGame(name));
 }
 
 void User::removeUserGame(const std::string& id) {

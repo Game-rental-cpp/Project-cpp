@@ -103,7 +103,7 @@ void MainPanel::OnPanelShow(wxShowEvent& event)
 void MainPanel::UpdateGame(wxCommandEvent& event)
 {
     bool logged = UserCRUD::isLogged();
-    UserNormal user("john_doe", "secure_password");
+    UserNormal user("john_doe");
 
 
 

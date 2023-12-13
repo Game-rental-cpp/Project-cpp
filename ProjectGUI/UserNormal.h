@@ -6,14 +6,15 @@
 
 class UserNormal : public User {
 public:
-    UserNormal(const std::string& login, const std::string& password);
+    UserNormal(const std::string& login);
     virtual ~UserNormal() = default;
 
     // Override
-    void someVirtualFunction() const override;
+    void addUserGame(const std::string& name)  override;
+
 
     // Getter
-    bool isPremium() const; // Override from the base class
+    bool isPremium() const; 
 
 private:
     // Brak pola isPremium

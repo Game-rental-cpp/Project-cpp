@@ -2,13 +2,18 @@
 
 #include "usernormal.h"
 
-UserNormal::UserNormal(const std::string& login, const std::string& password)
-    : User(login, password) {}
+UserNormal::UserNormal(const std::string& login)
+    : User(login) {}
 
-void UserNormal::someVirtualFunction() const {
-    // Implementation for the pure virtual function
-}
 
 bool UserNormal::isPremium() const {
     return false;
+}
+
+void UserNormal::addUserGame(const std::string& name) {
+    // Normal user can hire maximally 10 games
+    if (userGames.size() == 10)
+        return;
+
+    userGames.push_back(UserGame(name));
 }
