@@ -113,18 +113,21 @@ void MainPanel::UpdateGame(wxCommandEvent& event)
         return;
     }
 
-    std::string log = user.toString();
-    wxLogMessage("Type of log: %s", log);
+    //get the clicked button name
+    wxButton* button = dynamic_cast<wxButton*>(event.GetEventObject());
+    wxString buttonName = button->GetName();
+    
 
-
-    if (!user.addUserGame("nazwa gry")) {
-        wxDialog* dialog = new wxDialog(this, wxID_ANY, "Przekroczono maksymaln¹ iloœæ grier wypo¿yczonych na raz. Aby wypo¿yczyæ now¹ grê zostañ cz³onkiem premium lub oddaj któr¹œ z ju¿ wypo¿yczonych gier.");
+    if (!user.addUserGame(buttonName.ToStdString())) {
+        wxDialog* dialog = new wxDialog(this, wxID_ANY, "Przekroczono maksymaln¹ iloœæ gier wypo¿yczonych na raz. Aby wypo¿yczyæ now¹ grê zostañ cz³onkiem premium lub oddaj któr¹œ z ju¿ wypo¿yczonych gier.");
         dialog->ShowModal();
         dialog->Destroy();
         return;
     }
+        //std::string log = user.toString();
+        //wxLogMessage("Type of log: %s", log);
     
-    //gamesVector=  MainPanel_Controller::updateGame(event, gamesPanel, gamesVector);
+    gamesVector=  MainPanel_Controller::updateGame(buttonName, gamesPanel, gamesVector);
 }
 
 void MainPanel::OnSearchChange(wxCommandEvent& event) {
@@ -242,7 +245,7 @@ void MainPanel::UpdateGamesPanel(std::vector<Game> gamesVector)
         hireBtn->SetFont(SetTheFont());
       
         if (gameQuantity == 0) 
-            MainPanel_Controller::disableButton(hireBtn);
+            MainPanel_Controller::disableButton(gameName);
         
        /* else
             hireBtn->Enable(true);*/

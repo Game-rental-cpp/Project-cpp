@@ -1,10 +1,14 @@
 // user.cpp
 
 #include "user.h"
+#include "UserCRUD.h"
 //#include <uuid/uuid.h> // Include the header for UUID generation
 
 User::User(const std::string& login)
-    : login(login) {}
+    : login(login) {
+    // creates user from json file
+    // UserCRUD::ReadUser(login);
+}
 
 std::string User::getLogin() const {
     return login;
@@ -20,7 +24,7 @@ const std::vector<User::UserGame>& User::getUserGames() const {
 
 User::UserGame::UserGame(const std::string& name) : name(name) {
     // TODO: change the way of creating ID (use std::uuid)
-    id = "idididi";
+    id = "some unique id";
     // Set the date of now
     date = wxDateTime::Now();
 }
@@ -40,6 +44,7 @@ wxDateTime User::UserGame::getDate() const {
 bool User::addUserGame(const std::string& name) {
     // Tworzymy now¹ grê i dodajemy j¹ do wektora
     userGames.push_back(UserGame(name));
+    //update user json file
     return true;
 }
 
@@ -50,6 +55,8 @@ void User::removeUserGame(const std::string& id) {
         if (it->getId() == id) {
             // Usuñ element
             userGames.erase(it);
+            //update user json file
+            //UserCRUD::UpdateUser(std::string login, std::string stringifiedUser);
             break; // Przerwij pêtlê, poniewa¿ element zosta³ znaleziony i usuniêty
         }
     }

@@ -9,14 +9,11 @@ This function updates game label (and button)
 @param wxPanel* gamesPanel
 @param std::vector<Game> gamesVector
 */
-std::vector<Game> MainPanel_Controller::updateGame(wxCommandEvent& event, wxPanel* gamesPanel, std::vector<Game> gamesVector) {
+std::vector<Game> MainPanel_Controller::updateGame(wxString buttonName, wxPanel* gamesPanel, std::vector<Game> gamesVector) {
     
-    // Take the button that has been clicked
-    wxButton* button = dynamic_cast<wxButton*>(event.GetEventObject());
-    // Check if it was taken properly
-    if (button) {
+
         //take the unique name of the clicked button
-        wxString buttonName = button->GetName();
+
         //wxLogMessage(buttonName);
 
         //Search for the corresponding label for the clicked button 
@@ -53,7 +50,7 @@ std::vector<Game> MainPanel_Controller::updateGame(wxCommandEvent& event, wxPane
 
                 //If there are no games available, disable hire button
                 if (gamesVector[i].GetQuantity() == 0) {
-                    disableButton(button);               
+                    disableButton(buttonName);               
                 }
                     
 
@@ -63,15 +60,21 @@ std::vector<Game> MainPanel_Controller::updateGame(wxCommandEvent& event, wxPane
         }
 
         correspondingLabel1->Refresh();
-    }
+    
     return gamesVector;
 }
 
-void MainPanel_Controller::disableButton(wxButton* button) {
-    wxColour backgroundColor(200, 200, 200);  // Kolor t³a
-    wxColour textColor(55, 55, 55);        // Kolor tekstu
+// MainPanel_Controller.cpp
+void MainPanel_Controller::disableButton(const wxString& buttonName) {
+    // Wyszukaj przycisk na podstawie jego nazwy
+    wxButton* button = wxDynamicCast(FindWindowByName(buttonName), wxButton);
 
-    button->SetBackgroundColour(backgroundColor);
-    button->SetForegroundColour(textColor);
-    button->Enable(false);
+    if (button) {
+        wxColour backgroundColor(200, 200, 200);  // Kolor t³a
+        wxColour textColor(55, 55, 55);            // Kolor tekstu
+
+        button->SetBackgroundColour(backgroundColor);
+        button->SetForegroundColour(textColor);
+        button->Enable(false);
+    }
 }
