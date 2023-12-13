@@ -8,7 +8,8 @@ class MyAccPanel : public wxPanel
 {
 public:
     MyAccPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size);
-    User* GetUser()  { return user; }
+    //User* GetUser()  { return user; }
+    void SetUser(User* u){user = u;}
 
 private:
     wxButton* button;

@@ -116,7 +116,7 @@ void MainPanel::UpdateGame(wxCommandEvent& event)
     wxButton* button = dynamic_cast<wxButton*>(event.GetEventObject());
     wxString buttonName = button->GetName();
     
-        wxLogMessage("Type of log: %s", user->getLogin());
+        //wxLogMessage("Type of log: %s", user->getLogin());
 
     if (user && !user->addUserGame(buttonName.ToStdString())) {
         wxDialog* dialog = new wxDialog(this, wxID_ANY, "Przekroczono maksymaln¹ iloœæ gier wypo¿yczonych na raz. Aby wypo¿yczyæ now¹ grê zostañ cz³onkiem premium lub oddaj któr¹œ z ju¿ wypo¿yczonych gier.");
@@ -260,7 +260,3 @@ void MainPanel::UpdateGamesPanel(std::vector<Game> gamesVector)
 
 
 
-void MainPanel::SetUser(User* u)
-{
-    user = u;
-}

@@ -29,7 +29,6 @@ MyAccPanel::MyAccPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, cons
     else
         wxLogMessage("nikt nie jest zalogowany");*/
 
-    user = new UserNormal("login_normal");
     Bind(wxEVT_SHOW, &MyAccPanel::OnPanelShow, this);
 }
 

@@ -5,6 +5,8 @@
 #include "json.hpp"
 #include "Style.h"
 #include "User.h"
+#include "UserNormal.h"
+#include "UserPremium.h"
 
 using json = nlohmann::json;
 
@@ -27,9 +29,20 @@ MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& si
     loginPanel = new LoginPanel(this, wxID_ANY, wxPoint(20, 200), wxSize(410, 500));
     myAccPanel = new MyAccPanel(this, wxID_ANY, wxPoint(10, 100), wxSize(410, 500));
 
+    //creating user
+    if (UserCRUD::isLogged()) {
+        //std::string login= UserCRUD::WhoIsLogged();
+        //std::string userStr= UserCRUD::ReadUser(login);
+        // use json to extract information and pass it to the constructor
+        //if(isPremium)
+        //user = new UserPremium("login_normal");
+        //else
+        user = new UserNormal("login_normal");
 
-    User* user = myAccPanel->GetUser();
-    mainPanel->SetUser(user);
+
+        myAccPanel->SetUser(user);
+        mainPanel->SetUser(user);
+    }
 
 
     //default hidden
@@ -106,7 +119,11 @@ MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& si
     
 }
 
-
+    //User* MainFrame::GetUser()
+    //{
+    //    // Zwracanie wskaünika na obiekt klasy User
+    //    return static_cast<User*>(user);
+    //}
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -15,8 +15,12 @@ public:
     void OnGoBack(wxCommandEvent& event);
     void OnLogin(wxCommandEvent& event);
     void OnMyAcc(wxCommandEvent& event);
+    //User* GetUser() { return user; }
+
 
 private:
+    User* user;
+
     wxButton* goBackBtn;
     wxButton* loginBtn;
     wxButton* myAccBtn;

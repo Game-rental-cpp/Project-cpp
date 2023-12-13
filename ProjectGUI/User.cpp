@@ -72,6 +72,7 @@ void User::setUserGames(std::vector<User::UserGame>& newUserGamesVector) {
 
 
 //this function creates a string representation of userGames vector in json format
+//used to update user games in json file 
 // @returns std::string
 std::string User::stringifyGames() {
     std::string strGames = "[";

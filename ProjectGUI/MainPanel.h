@@ -8,7 +8,7 @@ class MainPanel : public wxPanel
 {
 public:
     MainPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size);
-    void SetUser(User* user);
+    void SetUser(User* u){user = u;}
 
 private:
     wxStaticText* label;
