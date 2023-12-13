@@ -4,6 +4,7 @@
 #include <wx/wx.h>
 
 
+
 LoginPanel::LoginPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size)
     : wxPanel(parent, id, pos, size)
 {
@@ -13,18 +14,33 @@ LoginPanel::LoginPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, cons
     successLabel->Hide();
 
     // Tworzenie panela z formularzami
-    formsPanel = new wxPanel(this, wxID_ANY, wxPoint(10, 100), wxSize(410, 500));
+    formsPanel = new wxPanel(this, wxID_ANY, wxPoint(10, 50), wxSize(410, 500));
 
     // Tworzenie formularza Zaloguj
-    loginName = new wxTextCtrl(formsPanel, wxID_ANY, "login", wxPoint(10, 0), wxSize(200, 20));
-    loginPassword = new wxTextCtrl(formsPanel, wxID_ANY, "login pass", wxPoint(10, 30), wxSize(200, 20));
-    loginBtn = new wxButton(formsPanel, wxID_ANY, "Zaloguj się", wxPoint(10, 60));
+    loginPrompt = new wxStaticText(formsPanel, wxID_ANY, "Zaloguj się", wxPoint(10, 10));
+
+    loginName = new wxTextCtrl(formsPanel, wxID_ANY, wxEmptyString, wxPoint(10, 40), wxSize(200, 20));
+    loginName->SetHint("Login");
+
+    loginPassword = new wxTextCtrl(formsPanel, wxID_ANY, wxEmptyString, wxPoint(10, 70), wxSize(200, 20));
+    loginPassword->SetHint("Hasło");
+
+    loginBtn = new wxButton(formsPanel, wxID_ANY, "Zaloguj", wxPoint(10, 100));
 
     // Tworzenie formularza Zarejestruj
-    signupName = new wxTextCtrl(formsPanel, wxID_ANY, "signup", wxPoint(10, 110), wxSize(200, 20));
-    signupPassword1 = new wxTextCtrl(formsPanel, wxID_ANY, "signup password", wxPoint(10, 140), wxSize(200, 20));
-    signupPassword2 = new wxTextCtrl(formsPanel, wxID_ANY, "confirm password", wxPoint(10, 170), wxSize(200, 20));
-    signupBtn = new wxButton(formsPanel, wxID_ANY, "Zarejestruj się", wxPoint(10, 200));
+    loginPrompt = new wxStaticText(formsPanel, wxID_ANY, "Nie masz konta? Zarejestruj się!", wxPoint(10, 160));
+
+    signupName = new wxTextCtrl(formsPanel, wxID_ANY, wxEmptyString, wxPoint(10, 190), wxSize(200, 20));
+    signupName->SetHint("Login");
+
+    signupPassword1 = new wxTextCtrl(formsPanel, wxID_ANY, wxEmptyString, wxPoint(10, 220), wxSize(200, 20));
+    signupPassword1->SetHint("Hasło");
+
+    signupPassword2 = new wxTextCtrl(formsPanel, wxID_ANY, wxEmptyString, wxPoint(10, 250), wxSize(200, 20));
+    signupPassword2->SetHint("Potwierdz hasło");
+
+    signupBtn = new wxButton(formsPanel, wxID_ANY, "Zarejestruj", wxPoint(10, 280));
+
 
     loginBtn->Bind(wxEVT_BUTTON, &LoginPanel::OnLogin, this);
     signupBtn->Bind(wxEVT_BUTTON, &LoginPanel::OnSignup, this);
@@ -71,6 +87,8 @@ void LoginPanel::OnLogin(wxCommandEvent& event)
     UserCRUD::Update_logged(userLoginName);
     formsPanel->Hide();
     successLabel->Show();
+
+    event.Skip();
 }
 
 // Funkcja obsługi zdarzenia po naciśnięciu przycisku "Zarejestruj się"
@@ -111,6 +129,8 @@ void LoginPanel::OnSignup(wxCommandEvent& event)
     UserCRUD::Update_logged(userSignupName);
     formsPanel->Hide();
     successLabel->Show();
+
+    event.Skip();
 }
 
 // Funckja sprawdzająca login podany przez użytkownika przy rejestracji 

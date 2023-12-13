@@ -17,10 +17,12 @@ private:
     wxStaticText* successLabel;
     wxPanel* formsPanel;
 
+    wxStaticText* loginPrompt;
     wxTextCtrl* loginName;
     wxTextCtrl* loginPassword;
     wxButton* loginBtn;
 
+    wxStaticText* signupPrompt;
     wxTextCtrl* signupName;
     wxTextCtrl* signupPassword1;
     wxTextCtrl* signupPassword2;
