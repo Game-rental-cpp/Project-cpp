@@ -4,39 +4,28 @@
 
 #include <string>
 #include <vector>
+#include <wx/datetime.h>
 
 class User {
 public:
     // Klasa wewn¹trzna UserGame
     class UserGame {
     public:
-        UserGame(int id, const std::string& name, const std::string& date)
-            : id(id), name(name), date(date) {}
-
-        int getId() const {
-            return id;
-        }
-
-        std::string getName() const {
-            return name;
-        }
-
-        std::string getDate() const {
-            return date;
-        }
+        UserGame(const std::string& id, const std::string& name);
+        std::string getId() const;
+        std::string getName() const;
+        wxDateTime getDate() const;
 
         // Dodaj inne funkcje lub zmienne dla UserGame wed³ug potrzeb
 
     private:
-        int id;
+        std::string id;
         std::string name;
-        std::string date;
+        wxDateTime date;
     };
 
     User(const std::string& login, const std::string& password);
-
     virtual ~User() = default;
-
     virtual void someVirtualFunction() const = 0;
 
     // Getters
@@ -46,7 +35,7 @@ public:
 
     // Add and remove functions
     void addUserGame(const std::string& name);
-    void removeUserGame(int id);
+    void removeUserGame(const std::string& id);
 
 private:
     std::string login;
