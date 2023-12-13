@@ -22,7 +22,8 @@ const std::vector<User::UserGame>& User::getUserGames() const {
     return userGames;
 }
 
-User::UserGame::UserGame(const std::string& name) : name(name) {
+User::UserGame::UserGame(const std::string& name) {
+    this->name = name;
     // generate unique id
     UUIDv4::UUIDGenerator<std::mt19937_64> uuidGenerator;
     UUIDv4::UUID uuid = uuidGenerator.getUUID();
@@ -36,7 +37,8 @@ std::string User::UserGame::getId() const {
     return id;
 }
 
-std::string User::UserGame::getName() const {
+
+const std::string& User::UserGame::GetName() const {
     return name;
 }
 
@@ -82,7 +84,7 @@ std::string User::stringifyGames() {
             strGames += ", ";
         }
 
-        strGames += "{\"id\": \"" + userGames[i].getId() + "\", \"name\": \"" + userGames[i].getName() +
+        strGames += "{\"id\": \"" + userGames[i].getId() + "\", \"name\": \"" + userGames[i].GetName() +
             "\", \"date\": \"" + userGames[i].getDate() + "\"}";
     }
 

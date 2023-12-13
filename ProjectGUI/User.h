@@ -4,21 +4,22 @@
 #include <string>
 #include <vector>
 #include <wx/datetime.h>
+#include "GameAbs.h"
 
 class User {
 public:
     // Inner class
-    class UserGame {
+    class UserGame : public GameAbs {
     public:
         /* @param std::string& name */
         UserGame(const std::string& name);
         std::string getId() const;
-        std::string getName() const;
+        const std::string& GetName() const override;
         std::string getDate() const;
 
     private:
         std::string id; // game unique id
-        std::string name; // name
+        //std::string name; // name
         std::string date; // date of loan
     };
 
