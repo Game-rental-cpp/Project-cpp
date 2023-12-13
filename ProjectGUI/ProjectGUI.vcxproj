@@ -152,6 +152,7 @@
   <ItemGroup>
     <ClInclude Include="endianness.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameAbs.h" />
     <ClInclude Include="GameCRUD.h" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="MainFrame_Controller.h" />

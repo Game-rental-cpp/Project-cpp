@@ -161,6 +161,9 @@
     <ClInclude Include="UserPremium.h">
       <Filter>Pliki nagłówkowe\Models</Filter>
     </ClInclude>
+    <ClInclude Include="GameAbs.h">
+      <Filter>Pliki nagłówkowe\Models</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore" />
