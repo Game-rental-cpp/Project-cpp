@@ -98,31 +98,33 @@ void MainPanel::OnPanelShow(wxShowEvent& event)
     event.Skip();
 }
 
+//create user object (maybe get it from MyAccPanel)
+    UserNormal user("john_doe");
 
 //This metohod executes after clicking on "wypozycz" button
 void MainPanel::UpdateGame(wxCommandEvent& event)
 {
     bool logged = UserCRUD::isLogged();
-    UserNormal user("john_doe");
 
-
-
-    //if (!logged) {
-    //    wxDialog* dialog = new wxDialog(this, wxID_ANY, "Musisz siê najpierw zalogowaæ, aby móc wypo¿yczyæ grê");
-    //    dialog->ShowModal();
-    //    dialog->Destroy();
-    //    return;
-    //}
-
-
-    if (!user.isPremium()) {
-        wxDialog* dialog = new wxDialog(this, wxID_ANY, "Przekroczono maksymaln¹ iloœæ grier wypo¿yczonych na raz. Aby wypo¿yczyæ now¹ grê zostañ cz³onkiem premium lub oddaj któr¹œ z ju¿ wypo¿yczonych gier.");
+    if (!logged) {
+        wxDialog* dialog = new wxDialog(this, wxID_ANY, "Musisz siê najpierw zalogowaæ, aby móc wypo¿yczyæ grê");
         dialog->ShowModal();
         dialog->Destroy();
         return;
     }
 
-    gamesVector=  MainPanel_Controller::updateGame(event, gamesPanel, gamesVector);
+    std::string log = user.toString();
+    wxLogMessage("Type of log: %s", log);
+
+
+    if (!user.addUserGame("nazwa gry")) {
+        wxDialog* dialog = new wxDialog(this, wxID_ANY, "Przekroczono maksymaln¹ iloœæ grier wypo¿yczonych na raz. Aby wypo¿yczyæ now¹ grê zostañ cz³onkiem premium lub oddaj któr¹œ z ju¿ wypo¿yczonych gier.");
+        dialog->ShowModal();
+        dialog->Destroy();
+        return;
+    }
+    
+    //gamesVector=  MainPanel_Controller::updateGame(event, gamesPanel, gamesVector);
 }
 
 void MainPanel::OnSearchChange(wxCommandEvent& event) {

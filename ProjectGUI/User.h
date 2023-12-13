@@ -1,5 +1,4 @@
 // user.h
-
 #pragma once
 
 #include <string>
@@ -32,9 +31,11 @@ public:
     std::string getPassword() const;
     const std::vector<UserGame>& getUserGames() const; // Getter for the vector of UserGame
 
-    // Add and remove functions
-    virtual void addUserGame(const std::string& name);
+    // returns true if added successfully
+    virtual bool addUserGame(const std::string& name);
     void removeUserGame(const std::string& id);
+
+    std::string toString();
 
 protected:
     std::string login;

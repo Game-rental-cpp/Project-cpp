@@ -37,9 +37,10 @@ wxDateTime User::UserGame::getDate() const {
     return date;
 }
 
-void User::addUserGame(const std::string& name) {
+bool User::addUserGame(const std::string& name) {
     // Tworzymy now¹ grê i dodajemy j¹ do wektora
     userGames.push_back(UserGame(name));
+    return true;
 }
 
 void User::removeUserGame(const std::string& id) {
@@ -53,3 +54,15 @@ void User::removeUserGame(const std::string& id) {
         }
     }
 }
+
+std::string User::toString()  {
+    std::string text = "login: "+ login+ ", password: "+ password;
+
+    for (int i = 0; i < userGames.size(); i++) {
+        text += "\ngame name: "+ userGames[i].getName()+", id: "+ userGames[i].getId()+ ", ";
+    }
+
+    return text;
+}
+
+ 

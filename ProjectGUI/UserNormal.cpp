@@ -10,10 +10,11 @@ bool UserNormal::isPremium() const {
     return false;
 }
 
-void UserNormal::addUserGame(const std::string& name) {
+bool UserNormal::addUserGame(const std::string& name) {
     // Normal user can hire maximally 10 games
     if (userGames.size() == 10)
-        return;
+        return false;
 
     userGames.push_back(UserGame(name));
+    return true;
 }
