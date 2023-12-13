@@ -41,6 +41,7 @@ public:
 
     void setUserGames(std::vector<UserGame>& newUserGamesVector);
 
+    virtual std::string stringifyUser() { return ""; };
     std::string stringifyGames();
 
 protected:

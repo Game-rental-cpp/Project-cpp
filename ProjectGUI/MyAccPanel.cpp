@@ -4,7 +4,7 @@
 #include <string>
 #include "UserNormal.h"
 #include "UserPremium.h"
-
+#include <vector>
 
 
 MyAccPanel::MyAccPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size)
@@ -52,7 +52,7 @@ void MyAccPanel::OnPanelShow(wxShowEvent& event)
 {
     //Wykonaj jesli MyAccPanel zostal wyswietlony na ekranie
     if (event.IsShown()) {
-
+        wxLogMessage(wxString::Format("%s",user->stringifyUser()));
         loginLabel = new wxStaticText(userPanel, wxID_ANY, wxString::Format("Zalogowany/a jako: %s", user->getLogin()), wxPoint(10, 10));
         logoutLabel->Hide();
 
@@ -88,10 +88,14 @@ void MyAccPanel::OnEnterPressed(wxKeyEvent& event) {
             premiumInput->Hide();
 
             wxLogMessage("Jesteœ cz³onkiem premium");
+
+            std::vector<User::UserGame> userGames = user->getUserGames();
             delete user;
             //pobierz login przez cruda albo od starego usera.
             // Utwórz nowego u¿ytkownika typu UserPremium, ale nadal u¿ywaj¹c istniej¹cego obiektu
             user = new (user) UserPremium("login_premium");
+            user->setUserGames(userGames);
+
         } else
             wxLogMessage("Nieprawid³owy kod");
     }

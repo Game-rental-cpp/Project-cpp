@@ -10,6 +10,8 @@ public:
     UserPremium(const std::string& login);
     virtual ~UserPremium() = default;
 
+    std::string stringifyUser() override;
+
     // Getter
     bool isPremium() const;
 

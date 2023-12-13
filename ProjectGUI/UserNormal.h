@@ -12,6 +12,7 @@ public:
 
     bool addUserGame(const std::string& name)  override;
 
+    std::string stringifyUser() override;
     // Getter
     bool isPremium() const; 
 };
