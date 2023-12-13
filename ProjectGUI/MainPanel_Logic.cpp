@@ -36,7 +36,7 @@ Game MainPanel_Logic::CreateGameFromJSON(int i)
             std::string truncatedFileName = fileName.ToStdString().substr(0, fileName.length() - 5);
 
             wxString fileContents = GameCRUD::readGame(truncatedFileName);
-
+            //wxLogMessage(fileContents);
             json jsonData = json::parse(fileContents);
 
             name = jsonData["name"];
