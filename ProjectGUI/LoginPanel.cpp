@@ -1,5 +1,6 @@
 ﻿// LoginPanel.cpp
 #include "LoginPanel.h"
+#include "LoginPanel_Logic.h"
 #include "UserCRUD.h"
 #include <wx/wx.h>
 
@@ -55,7 +56,6 @@ void LoginPanel::OnPanelShow(wxShowEvent& event)
     if (event.IsShown()) {
         successLabel->Hide();
         formsPanel->Show();
-
     }
 
     event.Skip();
@@ -65,30 +65,12 @@ void LoginPanel::OnPanelShow(wxShowEvent& event)
 void LoginPanel::OnLogin(wxCommandEvent& event)
 {
     std::string userLoginName = loginName->GetValue().ToStdString();
-
-    // Sprawdzanie czy istnieje użytkownik o podanym loginie
-    if (!UserCRUD::DoesExist(userLoginName))
-    {
-        wxMessageDialog* noKnownUserDlg = new wxMessageDialog(this, "Brak użytkownika o takim loginie.", "Błąd");
-        noKnownUserDlg->ShowModal();
+    std::string userLoginPassword = loginPassword->GetValue().ToStdString();
+    if (!LoginPanel_Logic::loginValidated(userLoginName, userLoginPassword, this))
         return;
-    }
 
-    // Sprawdzanie hasła
-    //if (UserCRUD::ReadPassword(userLoginName) != loginPassword->GetValue().ToStdString())
-    if (false)
-    {
-        wxMessageDialog* incorrectPasswordDlg = new wxMessageDialog(this, "Nieprawidłowe hasło.", "Błąd");
-        incorrectPasswordDlg->ShowModal();
-        return;
-    }
-
-    // Logowanie użytkownika
-    UserCRUD::Update_logged(userLoginName);
     formsPanel->Hide();
     successLabel->Show();
-
-    event.Skip();
 }
 
 // Funkcja obsługi zdarzenia po naciśnięciu przycisku "Zarejestruj się"
@@ -129,8 +111,6 @@ void LoginPanel::OnSignup(wxCommandEvent& event)
     UserCRUD::Update_logged(userSignupName);
     formsPanel->Hide();
     successLabel->Show();
-
-    event.Skip();
 }
 
 // Funckja sprawdzająca login podany przez użytkownika przy rejestracji 
