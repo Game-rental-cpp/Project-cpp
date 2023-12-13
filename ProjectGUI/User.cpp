@@ -1,14 +1,11 @@
 // user.cpp
-
 #include "user.h"
 #include "UserCRUD.h"
 #include "uuid_v4.h"
 
-//#include <uuid/uuid.h> // Include the header for UUID generation
-
 User::User(const std::string& login)
     : login(login) {
-    // creates user from json file
+    // TODO: create user from json file
     // UserCRUD::ReadUser(login);
 }
 
@@ -47,26 +44,28 @@ std::string User::UserGame::getDate() const {
 }
 
 bool User::addUserGame(const std::string& name) {
-    // Tworzymy now¹ grê i dodajemy j¹ do wektora
+    // Create new userGame and puch it to userGames vector
     userGames.push_back(UserGame(name));
-    //update user json file
+    //TODO: update user json file
     return true;
 }
 
 void User::removeUserGame(const std::string& id) {
-    // Iteruj przez wektor
+    
     for (auto it = userGames.begin(); it != userGames.end(); ++it) {
-        // SprawdŸ, czy identyfikator gry pasuje
+        // Check if game ID matches the id given in param
         if (it->getId() == id) {
-            // Usuñ element
+            // remove an element
             userGames.erase(it);
-            //update user json file
+            //TODO: update user json file
             //UserCRUD::UpdateUser(std::string login, std::string stringifiedUser);
-            break; // Przerwij pêtlê, poniewa¿ element zosta³ znaleziony i usuniêty
+            break; 
         }
     }
 }
 
+//this function creates a string representation of userGames vector in json format
+// @returns std::string
 std::string User::stringifyGames() {
     std::string strGames = "[";
 
@@ -75,7 +74,6 @@ std::string User::stringifyGames() {
             strGames += ", ";
         }
 
-        // Formatuj obiekt JSON dla ka¿dej gry z w³asnym formatem daty
         strGames += "{\"id\": \"" + userGames[i].getId() + "\", \"name\": \"" + userGames[i].getName() +
             "\", \"date\": \"" + userGames[i].getDate() + "\"}";
     }

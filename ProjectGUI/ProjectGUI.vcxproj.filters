@@ -102,6 +102,9 @@
     <ClCompile Include="UserNormal.cpp">
       <Filter>Pliki źródłowe\Models</Filter>
     </ClCompile>
+    <ClCompile Include="UserPremium.cpp">
+      <Filter>Pliki źródłowe\Models</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainFrame.h">
@@ -154,6 +157,9 @@
     </ClInclude>
     <ClInclude Include="uuid_v4.h">
       <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="UserPremium.h">
+      <Filter>Pliki nagłówkowe\Models</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

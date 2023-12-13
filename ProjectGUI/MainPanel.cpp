@@ -8,6 +8,7 @@
 #include <vector>
 #include "GameCRUD.h"
 #include "UserNormal.h"
+#include "UserPremium.h"
 
 
 
@@ -124,8 +125,8 @@ void MainPanel::UpdateGame(wxCommandEvent& event)
         dialog->Destroy();
         return;
     }
-        std::string log = user.stringifyGames();
-        wxLogMessage("Type of log: %s", log);
+        //std::string log = user.stringifyGames();
+        //wxLogMessage("Type of log: %s", log);
     
     gamesVector=  MainPanel_Controller::updateGame(buttonName, gamesPanel, gamesVector);
 }

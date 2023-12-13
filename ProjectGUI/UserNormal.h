@@ -1,4 +1,4 @@
-// user_normal.h
+// usernormal.h
 
 #pragma once
 
@@ -6,15 +6,12 @@
 
 class UserNormal : public User {
 public:
+    /* @param std::string& login */
     UserNormal(const std::string& login);
     virtual ~UserNormal() = default;
 
-    // Override
     bool addUserGame(const std::string& name)  override;
 
     // Getter
     bool isPremium() const; 
-
-private:
-    // Brak pola isPremium
 };

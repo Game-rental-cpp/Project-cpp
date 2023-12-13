@@ -7,15 +7,14 @@
 
 class User {
 public:
-    // Klasa wewn¹trzna UserGame
+    // Inner class
     class UserGame {
     public:
+        /* @param std::string& name */
         UserGame(const std::string& name);
         std::string getId() const;
         std::string getName() const;
         std::string getDate() const;
-
-        // Dodaj inne funkcje lub zmienne dla UserGame wed³ug potrzeb
 
     private:
         std::string id; // game unique id
@@ -23,6 +22,7 @@ public:
         std::string date; // date of loan
     };
 
+    /* @param std::string& login */
     User(const std::string& login);
     virtual ~User() = default;
 
@@ -31,8 +31,12 @@ public:
     std::string getPassword() const;
     const std::vector<UserGame>& getUserGames() const; // Getter for the vector of UserGame
 
+
+    // @param std::string& name
     // returns true if added successfully
     virtual bool addUserGame(const std::string& name);
+
+    // @param std::string& id
     void removeUserGame(const std::string& id);
 
     std::string stringifyGames();
