@@ -1,24 +1,29 @@
 #include "MainFrame_Logic.h"
-#include <iostream>
-#include <fstream>
-#include <sstream>
+#include "UserCRUD.h"
+//#include "User.h"
+#include "UserNormal.h"
+#include "UserPremium.h"
+/*
+	This function hides loginBtn or myAccBtn depending on whether the user is logged in 
+*/
+void MainFrame_Logic::HideButton(wxButton* loginBtn, wxButton* myAccBtn) {
+	if (UserCRUD::isLogged())
+		loginBtn->Hide();
+	else
+		myAccBtn->Hide();
+}
 
-//void mvcShowcase() {
-//    // Utwórz i otwórz plik do zapisu
-//    std::ofstream outputFile("mvc.txt");
-//    if (outputFile.is_open()) {
-//        // Wypisz coœ do konsoli
-//        std::cout << "Funkcja mvcShowcase() zosta³a wywo³ana." << std::endl;
-//
-//        // Zapisz tekst do pliku
-//        outputFile << "Funkcja mvcShowcase() zosta³a wywo³ana." << std::endl;
-//
-//        // Zamknij plik
-//        outputFile.close();
-//    }
-//    else {
-//        // Obs³u¿ b³¹d, jeœli nie uda³o siê otworzyæ pliku
-//        std::cerr << "Nie uda³o siê otworzyæ pliku do zapisu." << std::endl;
-//    }
-//}
+void MainFrame_Logic::CreateUser(User* user, MainPanel* mainPanel, MyAccPanel* myAccPanel, LoginPanel* loginPanel) {
+    //std::string login= UserCRUD::WhoIsLogged();
+      //std::string userStr= UserCRUD::ReadUser(login);
+      // use json to extract information and pass it to the constructor
+      //if(isPremium)
+      //user = new UserPremium("login_normal");
+      //else
+    user = new UserNormal("login_normal");
 
+
+    myAccPanel->SetUser(user);
+    mainPanel->SetUser(user);
+    //loginPanel->SetUser(user);
+};

@@ -5,6 +5,7 @@
 #include "UserNormal.h"
 #include "UserPremium.h"
 #include <vector>
+#include "Style.h"
 
 
 MyAccPanel::MyAccPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size)
@@ -26,6 +27,7 @@ MyAccPanel::MyAccPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, cons
 
 
 
+    this->SetBackgroundColour(RED); // Set background color (optional)
 
 
     //debugowanie
@@ -52,7 +54,7 @@ void MyAccPanel::OnPanelShow(wxShowEvent& event)
 {
     //Wykonaj jesli MyAccPanel zostal wyswietlony na ekranie
     if (event.IsShown()) {
-        wxLogMessage(wxString::Format("%s",user->stringifyUser()));
+        //wxLogMessage(wxString::Format("%s",user->stringifyUser()));
         loginLabel = new wxStaticText(userPanel, wxID_ANY, wxString::Format("Zalogowany/a jako: %s", user->getLogin()), wxPoint(10, 10));
         logoutLabel->Hide();
 
