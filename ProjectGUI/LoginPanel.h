@@ -10,8 +10,6 @@ public:
     
     void OnLogin(wxCommandEvent& event);
     void OnSignup(wxCommandEvent& event);
-    bool signupNameIsValid(std::string signupName);
-    bool signupPasswordIsValid(std::string signupPassword);
 
 private:
     wxStaticText* successLabel;

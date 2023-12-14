@@ -36,8 +36,8 @@ bool  LoginPanel_Logic::signupValidated(std::string signupName, std::string sign
     constexpr int MAX_CHAR_NAME{ 15 };
     
     // Login password min and max length
-    constexpr int MIN_CHAR_PASSWORD{ 3 };
-    constexpr int MAX_CHAR_PASSWORD{ 15 };
+    constexpr int MIN_CHAR_PASSWORD{ 8 };
+    constexpr int MAX_CHAR_PASSWORD{ 40 };
 
     ////////////////////////////////////////////////////////////////////////////////
     // Username validation //
@@ -56,14 +56,14 @@ bool  LoginPanel_Logic::signupValidated(std::string signupName, std::string sign
     // Variable for storing an error message 
     std::string signupNameErrorMessage = "";
 
-    int length = signupName.size();
+    int nameLength = signupName.size();
 
     // Check if username meets length requirements
-    if (length < MIN_CHAR_NAME || length > MAX_CHAR_NAME)
-        signupNameErrorMessage += "Login musi zawierać od " + std::to_string(MIN_CHAR_NAME) + " do " + std::to_string(MAX_CHAR_NAME) + " znaków.\n";
+    if (nameLength < MIN_CHAR_PASSWORD || nameLength > MAX_CHAR_PASSWORD)
+        signupNameErrorMessage += "Login musi zawierać od " + std::to_string(MIN_CHAR_PASSWORD) + " do " + std::to_string(MAX_CHAR_PASSWORD) + " znaków.\n";
 
     // Check if username meets character content requirements
-    for (int i = 0; i < length; i++)
+    for (int i = 0; i < nameLength; i++)
     {
         char c = signupName[i];
         if (!isalpha(c) && !isdigit(c) && c != '-' && c != '_')
@@ -84,7 +84,7 @@ bool  LoginPanel_Logic::signupValidated(std::string signupName, std::string sign
     // Password validation //
     //////////////////////////////////////////////////////////////////
 
-    // Hadnle passwords given by the user being different
+    // Handle passwords given by the user being different
     if (signupPassword1 != signupPassword2)
     {
         wxMessageDialog* differentPasswordsDlg = new wxMessageDialog(loginPanel, "Hasła muszą być takie same", "Błąd");
@@ -96,13 +96,13 @@ bool  LoginPanel_Logic::signupValidated(std::string signupName, std::string sign
     std::string signupPasswordErrorMessage = "";
 
     // Check if password meets length requirements
-    int length = signupPassword1.size();
-    if (length < MIN_CHAR_PASSWORD || length > MAX_CHAR_PASSWORD)
+    int passwordLength = signupPassword1.size();
+    if (passwordLength < MIN_CHAR_PASSWORD || passwordLength > MAX_CHAR_PASSWORD)
         signupPasswordErrorMessage += "Hasło musi zawierać od " + std::to_string(MIN_CHAR_PASSWORD) + " do " + std::to_string(MAX_CHAR_PASSWORD) + " znaków.\n";
 
     // Check if password meets character content requirements
     bool hasLower{ false }; bool hasUpper{ false }; bool hasDigit{ false }; bool hasSpecial{ false };
-    for (int i = 0; i < length; i++)
+    for (int i = 0; i < passwordLength; i++)
     {
         if (hasLower && hasUpper && hasDigit && hasSpecial)
             break;
