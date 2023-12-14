@@ -134,10 +134,10 @@
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameCRUD.cpp" />
+    <ClCompile Include="LoginPanel_Logic.cpp" />
     <ClCompile Include="MainFrame_Controller.cpp" />
     <ClCompile Include="MainFrame_Logic.cpp" />
     <ClCompile Include="LoginPanel.cpp" />
-    <ClCompile Include="FormsPanel.cpp" />
     <ClCompile Include="MainFrame.cpp" />
     <ClCompile Include="MainPanel.cpp" />
     <ClCompile Include="MainPanel_Controller.cpp" />
@@ -155,6 +155,7 @@
     <ClInclude Include="GameAbs.h" />
     <ClInclude Include="GameCRUD.h" />
     <ClInclude Include="json.hpp" />
+    <ClInclude Include="LoginPanel_Logic.h" />
     <ClInclude Include="MainFrame_Controller.h" />
     <ClInclude Include="MainFrame_Logic.h" />
     <ClInclude Include="LoginPanel.h" />

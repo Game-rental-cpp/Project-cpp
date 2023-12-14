@@ -96,6 +96,9 @@
     <ClCompile Include="Style.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="LoginPanel_Logic.cpp">
+      <Filter>Pliki źródłowe\LoginPanel</Filter>
+    </ClCompile>
     <ClCompile Include="User.cpp">
       <Filter>Pliki źródłowe\Models</Filter>
     </ClCompile>
@@ -163,6 +166,9 @@
     </ClInclude>
     <ClInclude Include="GameAbs.h">
       <Filter>Pliki nagłówkowe\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginPanel_Logic.h">
+      <Filter>Pliki nagłówkowe\LoginPanel</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
