@@ -11,7 +11,7 @@ MyAccPanel_Controller::MyAccPanel_Controller(MyAccPanel* parentEl, wxStaticText*
     wxStaticText* loginLabel,
     wxButton* logoutBtn,
     wxTextCtrl* premiumInput,
-    wxPanel* myGamesPanel) : parentEl(parentEl), logoutLabel(logoutLabel), userPanel(userPanel), loginLabel(loginLabel), logoutBtn(logoutBtn), premiumInput(premiumInput), myGamesPanel(myGamesPanel) {
+    wxScrolledWindow* gamesPanel) : parentEl(parentEl), logoutLabel(logoutLabel), userPanel(userPanel), loginLabel(loginLabel), logoutBtn(logoutBtn), premiumInput(premiumInput), gamesPanel(gamesPanel) {
     // Reszta kodu konstruktora, jeœli jest taka potrzebna
 }
 
@@ -70,6 +70,8 @@ void MyAccPanel_Controller::OnPanelShow(wxShowEvent& event)
 
         std::string login = UserCRUD::ReadLogged();
         std::string userStr = UserCRUD::ReadUser(login);
+
+        UpdateGamesPanel();
         //use json to extract information and pass it to the constructor
        /* if(isPremium)
             user = new UserPremium("login_normal");*/
@@ -101,4 +103,117 @@ void MyAccPanel_Controller::OnPanelShow(wxShowEvent& event)
 
 
     event.Skip();
+}
+
+
+
+
+
+
+
+
+
+
+
+void MyAccPanel_Controller::UpdateGamesPanel() {
+
+    if (gamesPanel) {
+        gamesPanel->Hide();
+        gamesPanel->Destroy();
+    }
+
+    //this vector will contain all games that should appear on screen (except those that shouldn't)
+    std::vector<User::UserGame> gamesVec; //= user.getUserGames();
+
+    //wxLogMessage("Formatted message: %s", filteredVector[0].GetName());
+
+
+    gamesPanel = nullptr;
+    int height = gamesVec.size() <= 3 ? 330 : gamesVec.size() * 80;
+    gamesPanel = new wxScrolledWindow(parentEl, wxID_ANY, wxPoint(0, 150), wxSize(parentEl->GetSize().GetWidth(), 330));
+    gamesPanel->SetScrollRate(0, 10);  // Ustawienia przewijania - drugi argument to liczba pikseli na jedno przewiniêcie
+    //gamesPanel->Hide();
+    gamesPanel->SetBackgroundColour(RED); // Set background color (optional)
+    gamesPanel->SetVirtualSize(wxSize(410, height));
+
+
+
+
+    if (gamesVec.size() == 0) {
+        wxStaticText* noGameLabel = new wxStaticText(gamesPanel, wxID_ANY, "nie wypozyczono jeszcze zadnej gry", wxPoint(33, 150), wxDefaultSize);
+        noGameLabel->SetForegroundColour(COLOR_LBL);
+        //noGameLabel->SetBackgroundColour(COLOR_BACKGROUND_LOGINBTN);
+        noGameLabel->SetFont(SetTheFont());
+    }
+
+
+
+
+    for (int i = 0; i < gamesVec.size(); i++) {
+        //wxLogMessage("s");
+
+        User::UserGame game = gamesVec[i];
+
+        std::string gameName = game.GetName();
+        std::string gameId = game.getId();
+        std::string date = game.getDate();
+        //int x = rand() % (100); // Losowa pozycja x na panelu
+        //int y = rand() % (200); // Losowa pozycja y na panelu
+
+        //Creating elements inside gamesPanel
+        wxString labelText0 = wxString::Format("Nazwa gry: %s", gameName);
+
+        // (label name is the same as game name + Lbl)
+        wxStaticText* gameLabel0 = new wxStaticText(gamesPanel, wxID_ANY, labelText0, wxPoint(10, 10 + i * 80), wxDefaultSize, 0, gameName + "Lbl0");
+
+        gameLabel0->SetForegroundColour(COLOR_LBL);
+        gameLabel0->SetFont(SetTheFont());
+
+
+        //wxStaticText* gameLabel = new wxStaticText(gamesPanel, wxID_ANY, labelText, wxPoint(x, y));
+
+        std::string buttonText = "Wypo¿ycz";
+
+        // (button name is the same as game name)
+        wxButton* hireBtn = new wxButton(gamesPanel, wxID_ANY, buttonText, wxPoint(parentEl->GetSize().GetWidth() - 10 - 85, 10 + i * 85), wxSize(85, 35), 0, wxDefaultValidator, gameId);
+
+        hireBtn->SetBackgroundColour(COLOR_BACKGROUND_BTN);
+        hireBtn->SetForegroundColour(COLOR_TEXT_BTN);
+
+        hireBtn->Bind(wxEVT_BUTTON, &MyAccPanel_Controller::UpdateUserGame, this, wxID_ANY, wxID_ANY);
+        //hireBtn->Bind(wxEVT_ENTER_WINDOW, &MyAccPanbel_Controller::OnMouseHover, this);
+        hireBtn->SetFont(SetTheFont());
+
+
+        
+
+        //    /* else
+        //         hireBtn->Enable(true);*/
+
+
+    }
+    gamesPanel->Show();
+}
+
+
+
+
+// This metohod executes after clicking on "oddaj" button
+void MyAccPanel_Controller::UpdateUserGame(wxCommandEvent & event)
+{
+
+
+    //get the clicked button name
+    wxButton* button = dynamic_cast<wxButton*>(event.GetEventObject());
+    wxString buttonName = button->GetName();
+
+
+    //user.removeUserGame(buttonName.ToStdString());
+    //wxLogMessage("Type of log: %s", user.getLogin());
+
+
+    //std::string log = user.stringifyGames();
+    //wxLogMessage("Type of log: %s", log);
+
+    //gamesVector = MainPanel_Controller::updateGame(buttonName, gamesPanel, gamesVector);
 }

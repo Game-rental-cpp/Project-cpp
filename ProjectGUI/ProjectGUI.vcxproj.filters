@@ -108,6 +108,15 @@
     <ClCompile Include="UserPremium.cpp">
       <Filter>Pliki źródłowe\Models</Filter>
     </ClCompile>
+    <ClCompile Include="FormsPanel.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="MyAccPanel_Controller.cpp">
+      <Filter>Pliki źródłowe\MyAccPanel</Filter>
+    </ClCompile>
+    <ClCompile Include="MyAccPanel_Controller.h">
+      <Filter>Pliki nagłówkowe\MyAccPanel</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainFrame.h">

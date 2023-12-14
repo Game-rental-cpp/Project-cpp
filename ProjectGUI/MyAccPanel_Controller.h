@@ -12,7 +12,7 @@ public:
     wxStaticText* loginLabel,
     wxButton* logoutBtn,
     wxTextCtrl* premiumInput,
-    wxPanel* myGamesPanel);
+    wxScrolledWindow* gamesPanel);
 
  
     void BindEvents();
@@ -27,8 +27,10 @@ private:
     wxStaticText* loginLabel;
     wxButton* logoutBtn;
     wxTextCtrl* premiumInput;
-    wxPanel* myGamesPanel;
+    wxScrolledWindow* gamesPanel;
     
+    void UpdateGamesPanel();
+    void UpdateUserGame(wxCommandEvent& event);
 };
 
 

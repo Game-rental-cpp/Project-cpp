@@ -17,7 +17,7 @@ private:
     wxStaticText* loginLabel;
     wxButton* logoutBtn;
     wxTextCtrl* premiumInput;
-    wxPanel* myGamesPanel;
+    wxScrolledWindow* gamesPanel;
 
     User* user;
 

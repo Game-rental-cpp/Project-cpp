@@ -34,7 +34,7 @@ MyAccPanel::MyAccPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, cons
         wxLogMessage("ktos jest zalogowany");
     else
         wxLogMessage("nikt nie jest zalogowany");*/
-    MyAccPanel_Controller* controller = new MyAccPanel_Controller(this, logoutLabel, userPanel, loginLabel, logoutBtn, premiumInput, myGamesPanel);
+    MyAccPanel_Controller* controller = new MyAccPanel_Controller(this, logoutLabel, userPanel, loginLabel, logoutBtn, premiumInput, gamesPanel);
     controller->BindEvents();
 
 
