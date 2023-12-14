@@ -5,7 +5,7 @@
 
 
 // Log in attempt validation
-bool LoginPanel_Logic::loginValidated(std::string loginName, std::string loginPassword, LoginPanel* loginPanel) {
+bool LoginPanel_Logic::LoginValidated(std::string loginName, std::string loginPassword, LoginPanel* loginPanel) {
     // Handle user not existing
     if (!UserCRUD::DoesExist(loginName))
     {
@@ -29,7 +29,7 @@ bool LoginPanel_Logic::loginValidated(std::string loginName, std::string loginPa
 }
 
 // Sign up attempt validation
-bool  LoginPanel_Logic::signupValidated(std::string signupName, std::string signupPassword1, std::string signupPassword2, LoginPanel* loginPanel) {
+bool  LoginPanel_Logic::SignupValidated(std::string signupName, std::string signupPassword1, std::string signupPassword2, LoginPanel* loginPanel) {
 
     // Login username min and max length
     constexpr int MIN_CHAR_NAME{ 3 };

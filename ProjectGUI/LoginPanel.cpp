@@ -9,35 +9,30 @@
 LoginPanel::LoginPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size)
     : wxPanel(parent, id, pos, size)
 {
-
-    // Tworzenie i ukrywanie etykiety sukces
     successLabel = new wxStaticText(this, wxID_ANY, "Zalogowano", wxPoint(10, 50));
-    successLabel->Hide();
-
-    // Tworzenie panela z formularzami
     formsPanel = new wxPanel(this, wxID_ANY, wxPoint(10, 50), wxSize(410, 500));
 
-    // Tworzenie formularza Zaloguj
+    // Log-in form
     loginPrompt = new wxStaticText(formsPanel, wxID_ANY, "Zaloguj się", wxPoint(10, 10));
 
     loginName = new wxTextCtrl(formsPanel, wxID_ANY, wxEmptyString, wxPoint(10, 40), wxSize(200, 20));
     loginName->SetHint("Login");
 
-    loginPassword = new wxTextCtrl(formsPanel, wxID_ANY, wxEmptyString, wxPoint(10, 70), wxSize(200, 20));
+    loginPassword = new wxTextCtrl(formsPanel, wxID_ANY, wxEmptyString, wxPoint(10, 70), wxSize(200, 20), wxTE_PASSWORD);
     loginPassword->SetHint("Hasło");
 
     loginBtn = new wxButton(formsPanel, wxID_ANY, "Zaloguj", wxPoint(10, 100));
 
-    // Tworzenie formularza Zarejestruj
+    // Sign-up form
     loginPrompt = new wxStaticText(formsPanel, wxID_ANY, "Nie masz konta? Zarejestruj się!", wxPoint(10, 160));
 
     signupName = new wxTextCtrl(formsPanel, wxID_ANY, wxEmptyString, wxPoint(10, 190), wxSize(200, 20));
     signupName->SetHint("Login");
 
-    signupPassword1 = new wxTextCtrl(formsPanel, wxID_ANY, wxEmptyString, wxPoint(10, 220), wxSize(200, 20));
+    signupPassword1 = new wxTextCtrl(formsPanel, wxID_ANY, wxEmptyString, wxPoint(10, 220), wxSize(200, 20), wxTE_PASSWORD);
     signupPassword1->SetHint("Hasło");
 
-    signupPassword2 = new wxTextCtrl(formsPanel, wxID_ANY, wxEmptyString, wxPoint(10, 250), wxSize(200, 20));
+    signupPassword2 = new wxTextCtrl(formsPanel, wxID_ANY, wxEmptyString, wxPoint(10, 250), wxSize(200, 20), wxTE_PASSWORD);
     signupPassword2->SetHint("Potwierdz hasło");
 
     signupBtn = new wxButton(formsPanel, wxID_ANY, "Zarejestruj", wxPoint(10, 280));
@@ -54,6 +49,12 @@ LoginPanel::LoginPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, cons
 void LoginPanel::OnPanelShow(wxShowEvent& event)
 {   
     if (event.IsShown()) {
+        loginName->Clear();
+        loginPassword->Clear();
+        signupName->Clear();
+        signupPassword1->Clear();
+        signupPassword2->Clear();
+
         successLabel->Hide();
         formsPanel->Show();
     }
@@ -67,7 +68,7 @@ void LoginPanel::OnLogin(wxCommandEvent& event)
     std::string userLoginName = loginName->GetValue().ToStdString();
     std::string userLoginPassword = loginPassword->GetValue().ToStdString();
 
-    if (!LoginPanel_Logic::loginValidated(userLoginName, userLoginPassword, this))
+    if (!LoginPanel_Logic::LoginValidated(userLoginName, userLoginPassword, this))
         return;
 
     formsPanel->Hide();
@@ -81,7 +82,7 @@ void LoginPanel::OnSignup(wxCommandEvent& event)
     std::string userSignupPassword1 = signupPassword1->GetValue().ToStdString();
     std::string userSignupPassword2 = signupPassword2->GetValue().ToStdString();
     
-    if (!LoginPanel_Logic::signupValidated(userSignupName, userSignupPassword1, userSignupPassword2, this))
+    if (!LoginPanel_Logic::SignupValidated(userSignupName, userSignupPassword1, userSignupPassword2, this))
         return;
 
     formsPanel->Hide();
