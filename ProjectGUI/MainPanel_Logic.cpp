@@ -136,5 +136,5 @@ User* MainPanel_Logic::user = nullptr;
 
 void MainPanel_Logic::SetUser(User* u) {
     MainPanel_Logic::user = u;
-    wxLogMessage(wxString::Format("%s",user->getLogin()));
+    //wxLogMessage(wxString::Format("%s",user->getLogin()));
 }

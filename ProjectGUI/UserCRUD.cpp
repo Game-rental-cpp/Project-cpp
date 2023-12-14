@@ -47,7 +47,8 @@ void UserCRUD::CreateUser(std::string login, std::string password) {
         json userJson = {
             {"login:", login},
             {"password:", password},
-            {"isPremium:", false}
+            {"isPremium:", false},
+            {"userGames", json::array()}
         };
         outputFile << userJson.dump(4) << std::endl;
 

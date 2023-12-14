@@ -122,9 +122,11 @@ void MyAccPanel_Controller::UpdateGamesPanel() {
         gamesPanel->Destroy();
     }
 
+    User* user = MyAccPanel_Logic::GetUser();
+
     //this vector will contain all games that should appear on screen (except those that shouldn't)
     //std::vector<User::UserGame> gamesVec; //= user.getUserGames();
-    std::vector<User::UserGame> gamesVec = { User::UserGame("Game1"), User::UserGame("Game2"), User::UserGame("Game3"), User::UserGame("Game3"), User::UserGame("Game3") };
+    std::vector<User::UserGame> gamesVec = user->getUserGames();
 
     //wxLogMessage("Formatted message: %s", filteredVector[0].GetName());
 
@@ -197,9 +199,10 @@ void MyAccPanel_Controller::UpdateGamesPanel() {
 void MyAccPanel_Controller::UpdateUserGames(wxCommandEvent & event)
 {
     User* user = MyAccPanel_Logic::GetUser();
-    wxLogMessage(wxString::Format("%s", user->getLogin()));
+    //wxLogMessage(wxString::Format("%s", user->stringifyUser()));
     //get the clicked button name
     wxButton* button = dynamic_cast<wxButton*>(event.GetEventObject());
     wxString buttonName = button->GetName();
-    wxLogMessage(buttonName);
+    user->removeUserGame(buttonName.ToStdString());
+    //wxLogMessage(buttonName);
 }

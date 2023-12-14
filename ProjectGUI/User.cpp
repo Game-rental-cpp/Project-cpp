@@ -49,6 +49,7 @@ std::string User::UserGame::getDate() const {
 bool User::addUserGame(const std::string& name) {
     // Create new userGame and puch it to userGames vector
     userGames.push_back(UserGame(name));
+
     //TODO: update user json file
     return true;
 }

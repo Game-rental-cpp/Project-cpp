@@ -251,8 +251,7 @@ void MainPanel_Controller::UpdateGame(wxCommandEvent& event)
 
     //return;
      //return;
-     wxLogMessage("%s", user->getLogin());
-     wxLogMessage("%s", user->getPassword());
+    //user->addUserGame(buttonName.ToStdString());
      //wxLogMessage("Type of log: %s", user->getUserGames());
     
     if (!user->addUserGame(buttonName.ToStdString())) {
@@ -261,6 +260,7 @@ void MainPanel_Controller::UpdateGame(wxCommandEvent& event)
         dialog->Destroy();
         return;
     }
+     //wxLogMessage("%s", user->stringifyUser());
 
     //std::string log = user.stringifyGames();
     //wxLogMessage("Type of log: %s", log);
