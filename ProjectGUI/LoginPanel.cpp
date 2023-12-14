@@ -50,9 +50,9 @@ LoginPanel::LoginPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, cons
 }
 
 
-// Funkcja obsługi zdarzenia wyświetlenia LoginPanel
+// Function called when LoginPanel is shown
 void LoginPanel::OnPanelShow(wxShowEvent& event)
-{
+{   
     if (event.IsShown()) {
         successLabel->Hide();
         formsPanel->Show();
@@ -61,11 +61,12 @@ void LoginPanel::OnPanelShow(wxShowEvent& event)
     event.Skip();
 }
 
-// Funkcja obsługi zdarzenia po naciśnięciu przycisku "Zaloguj się"
+//  Function called when loginBtn is pressed
 void LoginPanel::OnLogin(wxCommandEvent& event)
 {
     std::string userLoginName = loginName->GetValue().ToStdString();
     std::string userLoginPassword = loginPassword->GetValue().ToStdString();
+
     if (!LoginPanel_Logic::loginValidated(userLoginName, userLoginPassword, this))
         return;
 
@@ -73,7 +74,7 @@ void LoginPanel::OnLogin(wxCommandEvent& event)
     successLabel->Show();
 }
 
-// Funkcja obsługi zdarzenia po naciśnięciu przycisku "Zarejestruj się"
+// Function called when signupBtn is pressed
 void LoginPanel::OnSignup(wxCommandEvent& event)
 {
     std::string userSignupName = signupName->GetValue().ToStdString();
