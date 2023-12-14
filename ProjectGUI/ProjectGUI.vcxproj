@@ -176,6 +176,7 @@
   <ItemGroup>
     <None Include="..\.gitignore" />
     <None Include="..\README.md" />
+    <None Include="userLogin.json" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Games\bierki.json" />

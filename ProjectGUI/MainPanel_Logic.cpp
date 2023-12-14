@@ -10,6 +10,8 @@
 #include "User.h"
 #include "UserNormal.h"
 #include "UserPremium.h"
+#include <wx/wx.h>
+
 
 using json = nlohmann::json;
 
@@ -125,12 +127,14 @@ std::vector<Game> MainPanel_Logic::sortVector(std::vector<Game> gamesVector, int
 
 
 User* MainPanel_Logic::createUser() {
-    std::string login = UserCRUD::ReadLogged();
-    std::string userStr = UserCRUD::ReadUser(login);
-    // Use JSON to extract information and pass it to the constructor
-    /* if(isPremium)
-        user = new UserPremium("login_normal");*/
-        // else
-    User* user = new User("piotrek123");
-    return user;
+   
+    return MainPanel_Logic::user;
+    //return user;
+}
+
+User* MainPanel_Logic::user = nullptr;
+
+void MainPanel_Logic::SetUser(User* u) {
+    MainPanel_Logic::user = u;
+    wxLogMessage(wxString::Format("%s",user->getLogin()));
 }

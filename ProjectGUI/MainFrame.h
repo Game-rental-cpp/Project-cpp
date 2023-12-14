@@ -13,7 +13,6 @@ public:
     MainFrame(const wxString& title, const wxPoint& pos, const wxSize& size);
 
 private:
-    User* user;
     wxButton* goBackBtn;
     wxButton* loginBtn;
     wxButton* myAccBtn;

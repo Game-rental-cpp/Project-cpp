@@ -4,6 +4,7 @@
 #include "MainPanel.h"
 #include "MyAccPanel.h"
 #include "LoginPanel.h"
+#include "User.h"
 
 class MainFrame_Logic {
 public:
@@ -12,6 +13,8 @@ public:
     static void HideButton(wxButton* loginBtn, wxButton* myAccBtn);
 
     // Creates user object if someone is logged in right after opening the app
-    static void CreateUser(User* user, MainPanel* mainPanel, MyAccPanel* myAccPanel, LoginPanel* loginPanel);
+    static User* CreateUser();
+private:
+    User user;
 };
 

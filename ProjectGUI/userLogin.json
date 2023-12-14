@@ -1,0 +1,6 @@
+{
+    "login": "userLogin",
+    "password": "haslo123",
+    "isPremium": false,
+    "userGames":  []
+}

@@ -3,6 +3,8 @@
 //#include "User.h"
 #include "UserNormal.h"
 #include "UserPremium.h"
+#include "User.h"
+#include "MainPanel_Logic.h"
 
 
 void MainFrame_Logic::HideButton(wxButton* loginBtn, wxButton* myAccBtn) {
@@ -12,17 +14,15 @@ void MainFrame_Logic::HideButton(wxButton* loginBtn, wxButton* myAccBtn) {
 		myAccBtn->Hide();
 }
 
-void MainFrame_Logic::CreateUser(User* user, MainPanel* mainPanel, MyAccPanel* myAccPanel, LoginPanel* loginPanel) {
-    //std::string login= UserCRUD::WhoIsLogged();
-      //std::string userStr= UserCRUD::ReadUser(login);
-      // use json to extract information and pass it to the constructor
-      //if(isPremium)
-      //user = new UserPremium("login_normal");
-      //else
-    user = new UserNormal("login_normal");
+User* MainFrame_Logic::CreateUser() {
+    std::string login = UserCRUD::ReadLogged();
+    if (login == "")
+        return nullptr;
 
+    // use json to extract information and determine user type
+    // For now, let's assume it's UserNormal
+    User* user = new UserNormal(login);
 
-    //myAccPanel->SetUser(user);
-    //mainPanel->SetUser(user);
-    //loginPanel->SetUser(user);
-};
+    MainPanel_Logic::SetUser(user);
+    return user;
+}

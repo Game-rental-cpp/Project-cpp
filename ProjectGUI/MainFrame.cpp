@@ -19,7 +19,7 @@ MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& si
     loginPanel = new LoginPanel(this, wxID_ANY, wxPoint(20, 200), wxSize(410, 500));
     myAccPanel = new MyAccPanel(this, wxID_ANY, wxPoint(10, 100), wxSize(410, 500));
 
-    //MainFrame_Logic::CreateUser(user, mainPanel, myAccPanel, loginPanel);
+    MainFrame_Logic::CreateUser();
 
     // Default hidden
     mainPanel->Hide(); //temporarily hide to trigger the OnPanelShow 
