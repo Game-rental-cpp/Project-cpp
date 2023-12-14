@@ -22,7 +22,7 @@ void MainFrame_Logic::CreateUser(User* user, MainPanel* mainPanel, MyAccPanel* m
     user = new UserNormal("login_normal");
 
 
-    myAccPanel->SetUser(user);
-    mainPanel->SetUser(user);
+    //myAccPanel->SetUser(user);
+    //mainPanel->SetUser(user);
     //loginPanel->SetUser(user);
 };

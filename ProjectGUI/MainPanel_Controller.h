@@ -15,6 +15,7 @@ public:
     static void disableButton(const wxString& buttonName);
     void BindEvents();
     void OnShowPanel(wxShowEvent& event);
+    //void SetUser(User* u) { user = u; }
 
 private:
     MainPanel* parentEl;
@@ -25,7 +26,7 @@ private:
 
     std::vector<Game> gamesVector;
     int previousSortChoice;
-    User* user;
+    User user;
 
     void OnSearchChange(wxCommandEvent& event);
     void UpdateGamesPanel(std::vector<Game> gamesVector);

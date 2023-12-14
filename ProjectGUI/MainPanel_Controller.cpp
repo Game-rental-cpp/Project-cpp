@@ -3,12 +3,14 @@
 #include "MainPanel.h"
 #include "Style.h"
 #include "UserCRUD.h"
+#include "UserNormal.h"
+#include "UserPremium.h"
 
 int gameCount = GameCRUD::countGames();
 
 MainPanel_Controller::MainPanel_Controller(MainPanel* parentEl, wxTextCtrl* searchInput, wxButton* resetBtn, wxChoice* sortChoice)
     : parentEl(parentEl), searchInput(searchInput), resetBtn(resetBtn), sortChoice(sortChoice), gamesPanel(gamesPanel),
-    gamesVector(MainPanel_Logic::fulfillGamesVector(gameCount)) {
+    gamesVector(MainPanel_Logic::fulfillGamesVector(gameCount)), user(MainPanel_Logic::createUser()) {
     // Reszta kodu konstruktora, jeœli jest taka potrzebna
 }
 
@@ -244,9 +246,12 @@ void MainPanel_Controller::UpdateGame(wxCommandEvent& event)
     wxButton* button = dynamic_cast<wxButton*>(event.GetEventObject());
     wxString buttonName = button->GetName();
 
-    //wxLogMessage("Type of log: %s", user->getLogin());
 
-    if (user && !user->addUserGame(buttonName.ToStdString())) {
+     user.addUserGame(buttonName.ToStdString());
+     wxLogMessage("Type of log: %s", user.getLogin());
+    
+
+    if (!user.addUserGame(buttonName.ToStdString())) {
         wxDialog* dialog = new wxDialog(this, wxID_ANY, "Przekroczono maksymaln¹ iloœæ gier wypo¿yczonych na raz. Aby wypo¿yczyæ now¹ grê zostañ cz³onkiem premium lub oddaj któr¹œ z ju¿ wypo¿yczonych gier.");
         dialog->ShowModal();
         dialog->Destroy();

@@ -4,8 +4,12 @@
 #include <string>
 #include <wx/textfile.h>
 
+#include "UserCRUD.h"
 #include "GameCRUD.h"
 #include "json.hpp"
+#include "User.h"
+#include "UserNormal.h"
+#include "UserPremium.h"
 
 using json = nlohmann::json;
 
@@ -120,3 +124,13 @@ std::vector<Game> MainPanel_Logic::sortVector(std::vector<Game> gamesVector, int
 
 
 
+User MainPanel_Logic::createUser() {
+    std::string login = UserCRUD::ReadLogged();
+    std::string userStr = UserCRUD::ReadUser(login);
+    //use json to extract information and pass it to the constructor
+   /* if(isPremium)
+        user = new UserPremium("login_normal");*/
+        //else
+    User user("piotrek123");
+    return user;
+}
