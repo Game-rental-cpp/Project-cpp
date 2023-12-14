@@ -4,7 +4,7 @@
 #include "UserCRUD.h"
 #include "UserNormal.h"
 #include "UserPremium.h"
-
+#include "MyAccPanel_Logic.h"
 
 MyAccPanel_Controller::MyAccPanel_Controller(MyAccPanel* parentEl, wxStaticText* logoutLabel,
     wxPanel* userPanel,
@@ -196,6 +196,8 @@ void MyAccPanel_Controller::UpdateGamesPanel() {
 // This metohod executes after clicking on "oddaj" button
 void MyAccPanel_Controller::UpdateUserGames(wxCommandEvent & event)
 {
+    User* user = MyAccPanel_Logic::GetUser();
+    wxLogMessage(wxString::Format("%s", user->getLogin()));
     //get the clicked button name
     wxButton* button = dynamic_cast<wxButton*>(event.GetEventObject());
     wxString buttonName = button->GetName();

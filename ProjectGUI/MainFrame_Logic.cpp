@@ -5,6 +5,7 @@
 #include "UserPremium.h"
 #include "User.h"
 #include "MainPanel_Logic.h"
+#include "MyAccPanel_Logic.h"
 
 
 void MainFrame_Logic::HideButton(wxButton* loginBtn, wxButton* myAccBtn) {
@@ -24,5 +25,6 @@ User* MainFrame_Logic::CreateUser() {
     User* user = new UserNormal(login);
 
     MainPanel_Logic::SetUser(user);
+    MyAccPanel_Logic::SetUser(user);
     return user;
 }
