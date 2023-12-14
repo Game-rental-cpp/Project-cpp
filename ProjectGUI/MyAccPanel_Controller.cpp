@@ -6,7 +6,12 @@
 #include "UserPremium.h"
 
 
-MyAccPanel_Controller::MyAccPanel_Controller(MyAccPanel* parentEl) : parentEl(parentEl) {
+MyAccPanel_Controller::MyAccPanel_Controller(MyAccPanel* parentEl, wxStaticText* logoutLabel,
+    wxPanel* userPanel,
+    wxStaticText* loginLabel,
+    wxButton* logoutBtn,
+    wxTextCtrl* premiumInput,
+    wxPanel* myGamesPanel) : parentEl(parentEl), logoutLabel(logoutLabel), userPanel(userPanel), loginLabel(loginLabel), logoutBtn(logoutBtn), premiumInput(premiumInput), myGamesPanel(myGamesPanel) {
     // Reszta kodu konstruktora, jeœli jest taka potrzebna
 }
 
@@ -14,6 +19,46 @@ MyAccPanel_Controller::MyAccPanel_Controller(MyAccPanel* parentEl) : parentEl(pa
 void MyAccPanel_Controller::BindEvents() {
 
     parentEl->Bind(wxEVT_SHOW, &MyAccPanel_Controller::OnPanelShow, this);
+    logoutBtn->Bind(wxEVT_BUTTON, &MyAccPanel_Controller::LogOut, this);
+    premiumInput->Bind(wxEVT_CHAR_HOOK, &MyAccPanel_Controller::OnEnterPressed, this, wxID_ANY);
+
+
+}
+
+void MyAccPanel_Controller::OnEnterPressed(wxKeyEvent& event) {
+    // Detect Enter key
+    if (event.GetKeyCode() == WXK_RETURN) {
+        wxString enteredText = premiumInput->GetValue();
+        premiumInput->SetValue("");
+
+        if (enteredText == "PREMIUM") {
+            premiumInput->Hide();
+
+            wxLogMessage("Jesteœ cz³onkiem premium");
+
+            //std::vector<User::UserGame> userGames = user->getUserGames();
+            //delete user;
+            //pobierz login przez cruda albo od starego usera.
+            // Utwórz nowego u¿ytkownika typu UserPremium, ale nadal u¿ywaj¹c istniej¹cego obiektu
+         /*   user = new (user) UserPremium("login_premium");
+            user->setUserGames(userGames);*/
+
+        }
+        else
+            wxLogMessage("Nieprawid³owy kod");
+    }
+
+
+    event.Skip();
+}
+
+void MyAccPanel_Controller::LogOut(wxCommandEvent& event) {
+    userPanel->Hide();
+
+    logoutLabel->Show();
+    //usuñ usera i pusty string do _logged.txt
+    //user.reset();
+    event.Skip();
 
 }
 
@@ -36,7 +81,7 @@ void MyAccPanel_Controller::OnPanelShow(wxShowEvent& event)
 
         //wxLogMessage(wxString::Format("%s",user->stringifyUser()));
         //loginLabel = new wxStaticText(userPanel, wxID_ANY, wxString::Format("Zalogowany/a jako: %s", user->getLogin()), wxPoint(10, 10));
-        //logoutLabel->Hide();
+        logoutLabel->Hide();
 
         if (true) {
             // SprawdŸ, czy user jest instancj¹ UserNormal
@@ -48,7 +93,7 @@ void MyAccPanel_Controller::OnPanelShow(wxShowEvent& event)
         }
 
 
-        //userPanel->Show();
+        userPanel->Show();
 
 
         Layout(); // Zaktualizuj uklad

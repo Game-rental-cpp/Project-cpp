@@ -21,7 +21,7 @@ private:
 
     User* user;
 
-    void OnPanelShow(wxShowEvent& event);
-    void LogOut(wxCommandEvent& event);
-    void OnEnterPressed(wxKeyEvent& event);
+    //void OnPanelShow(wxShowEvent& event);
+    //void LogOut(wxCommandEvent& event);
+    //void OnEnterPressed(wxKeyEvent& event);
 };
