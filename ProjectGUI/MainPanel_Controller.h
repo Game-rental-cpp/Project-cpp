@@ -26,7 +26,7 @@ private:
 
     std::vector<Game> gamesVector;
     int previousSortChoice;
-    User user;
+    User* user;
 
     void OnSearchChange(wxCommandEvent& event);
     void UpdateGamesPanel(std::vector<Game> gamesVector);

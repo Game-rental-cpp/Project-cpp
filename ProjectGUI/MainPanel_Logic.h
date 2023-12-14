@@ -12,7 +12,7 @@ public:
     static std::vector<Game> fulfillGamesVector(int n);
     static std::vector<Game> sortVector(std::vector<Game> gamesVector, int choice, int gameCount);
     //void SetUser(User* u) { user = u; }
-    static User createUser();
+    static User* createUser();
 
 private:
     static std::vector<Game> vec;

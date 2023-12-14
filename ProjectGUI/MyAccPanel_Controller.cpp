@@ -199,4 +199,5 @@ void MyAccPanel_Controller::UpdateUserGames(wxCommandEvent & event)
     //get the clicked button name
     wxButton* button = dynamic_cast<wxButton*>(event.GetEventObject());
     wxString buttonName = button->GetName();
+    wxLogMessage(buttonName);
 }
