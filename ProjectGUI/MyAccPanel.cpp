@@ -15,7 +15,7 @@ MyAccPanel::MyAccPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, cons
 
     logoutLabel = new wxStaticText(this, wxID_ANY, "wylogowano pomyœlnie", wxPoint(10, 10));
     //logoutLabel->Hide();
-    userPanel = new wxPanel(this, wxID_ANY, wxPoint(10, 10), wxSize(410, 500));
+    userPanel = new wxPanel(this, wxID_ANY, wxPoint(0, 10), wxSize(410, 500));
     // Tworzenie przycisku
     logoutBtn = new wxButton(userPanel, wxID_ANY, "Wyloguj", wxPoint(10, GetClientSize().GetHeight()-100));
     //button->Bind(wxEVT_BUTTON, &MyAccPanel::LoadUser, this);

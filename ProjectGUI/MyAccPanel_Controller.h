@@ -30,7 +30,7 @@ private:
     wxScrolledWindow* gamesPanel;
     
     void UpdateGamesPanel();
-    void UpdateUserGame(wxCommandEvent& event);
+    void UpdateUserGames(wxCommandEvent& event);
 };
 
 
