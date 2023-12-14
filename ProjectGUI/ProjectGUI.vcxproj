@@ -143,6 +143,8 @@
     <ClCompile Include="MainPanel_Controller.cpp" />
     <ClCompile Include="MainPanel_Logic.cpp" />
     <ClCompile Include="MyAccPanel.cpp" />
+    <ClCompile Include="MyAccPanel_Controller.cpp" />
+    <ClCompile Include="MyAccPanel_Controller.h" />
     <ClCompile Include="Style.cpp" />
     <ClCompile Include="User.cpp" />
     <ClCompile Include="UserCRUD.cpp" />

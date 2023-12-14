@@ -1,5 +1,6 @@
 // MyAccPanel.cpp
 #include "MyAccPanel.h"
+#include "MyAccPanel_Controller.h"
 #include <string>
 #include <string>
 #include "UserNormal.h"
@@ -35,8 +36,10 @@ MyAccPanel::MyAccPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, cons
         wxLogMessage("ktos jest zalogowany");
     else
         wxLogMessage("nikt nie jest zalogowany");*/
+    MyAccPanel_Controller* controller = new MyAccPanel_Controller(this);
+    controller->BindEvents();
 
-    Bind(wxEVT_SHOW, &MyAccPanel::OnPanelShow, this);
+    //Bind(wxEVT_SHOW, &MyAccPanel::OnPanelShow, this);
 }
 
 
@@ -49,46 +52,7 @@ MyAccPanel::MyAccPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, cons
 
 
 
-//OnPanelShow wykonuje siÍ za kaødym wyswietleniem i ukryciem myAccPanel na ekranie;
-void MyAccPanel::OnPanelShow(wxShowEvent& event)
-{
-    //Wykonaj jesli MyAccPanel zostal wyswietlony na ekranie
-    if (event.IsShown()) {
 
-        std::string login = UserCRUD::ReadLogged();
-        std::string userStr = UserCRUD::ReadUser(login);
-        //use json to extract information and pass it to the constructor
-       /* if(isPremium)
-            user = new UserPremium("login_normal");*/
-            //else
-        user = new UserNormal("piotrek123");
-
-        wxLogMessage("Type of log: %s", user->stringifyUser());
-
-
-        //wxLogMessage(wxString::Format("%s",user->stringifyUser()));
-        loginLabel = new wxStaticText(userPanel, wxID_ANY, wxString::Format("Zalogowany/a jako: %s", user->getLogin()), wxPoint(10, 10));
-        logoutLabel->Hide();
-
-        if (user) {
-            // Sprawdü, czy user jest instancjπ UserNormal
-            UserNormal* userN = dynamic_cast<UserNormal*>(user);
-            if (!userN) {
-                // User jest obiektem klasy UserNormal
-                premiumInput->Hide();
-            }
-        }
-
-
-        userPanel->Show();
-
-
-        Layout(); // Zaktualizuj uklad
-    }
-
-    
-    event.Skip();
-}
 
 
 
