@@ -2,6 +2,9 @@
 #include "user.h"
 #include "UserCRUD.h"
 #include "uuid_v4.h"
+#include "json.hpp"
+
+using json = nlohmann::json;
 
 User::User(const std::string& login)
     : login(login) {
@@ -51,6 +54,7 @@ bool User::addUserGame(const std::string& name) {
     userGames.push_back(UserGame(name));
 
     //TODO: update user json file
+    UserCRUD::UpdateUser(login, stringifyUser());
     return true;
 }
 
@@ -66,6 +70,8 @@ void User::removeUserGame(const std::string& id) {
             break; 
         }
     }
+
+    UserCRUD::UpdateUser(login, stringifyUser());
 }
 
 
@@ -73,11 +79,23 @@ void User::setUserGames(std::vector<User::UserGame>& newUserGamesVector) {
     userGames = newUserGamesVector;
 }
 
+std::string User::stringifyUser() {
+    json userGames = json::parse(User::stringifyGames()); //tworzy tablicê
+    json user = {
+        {"login", login},
+        {"password", password},
+        {"isPremium", isPremium},
+        {"userGames", userGames}
+    };
+
+    return user.dump(4);
+}
 
 //this function creates a string representation of userGames vector in json format
 //used to update user games in json file 
 // @returns std::string
 std::string User::stringifyGames() {
+
     std::string strGames = "[";
 
     for (int i = 0; i < userGames.size(); i++) {

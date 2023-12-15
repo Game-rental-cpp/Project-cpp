@@ -71,7 +71,8 @@ void MainPanel_Controller::UpdateGame(wxCommandEvent& event)
         return;
     }
 
-
+    //wxLogMessage(wxString::Format("%s", user->stringifyUser()));
+    //UserCRUD::UpdateUser(user->getLogin(), user->stringifyUser());
         //Search for the corresponding label for the clicked button 
     wxStaticText* correspondingLabel1 = wxDynamicCast(gamesPanel->FindWindowByName(buttonName + "Lbl1"), wxStaticText);
     wxStaticText* correspondingLabel2 = wxDynamicCast(gamesPanel->FindWindowByName(buttonName + "Lbl2"), wxStaticText);

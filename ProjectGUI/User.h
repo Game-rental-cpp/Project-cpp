@@ -41,12 +41,14 @@ public:
     void removeUserGame(const std::string& id);
 
     void setUserGames(std::vector<UserGame>& newUserGamesVector);
+    void SetIsPremium(bool status) { isPremium = status; }
 
-    virtual std::string stringifyUser() { return ""; };
+    std::string stringifyUser();
     std::string stringifyGames();
 
 protected:
     std::string login;
     std::string password;
+    bool isPremium = false;
     std::vector<UserGame> userGames; // Vector of UserGame
 };

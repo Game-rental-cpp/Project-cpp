@@ -23,6 +23,7 @@ User* MainFrame_Logic::CreateUser() {
     // use json to extract information and determine user type
     // For now, let's assume it's UserNormal
     User* user = new UserNormal(login);
+    //user->SetIsPremium(false);
 
     MainPanel_Logic::SetUser(user);
     MyAccPanel_Logic::SetUser(user);
