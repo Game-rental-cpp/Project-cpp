@@ -1,23 +1,20 @@
+// Game.h
 #pragma once
 
-#include <string>
+#include "GameAbs.h"
+#include "GameCRUD.h"
 
-class Game {
+class Game : public GameAbs {
+private:
+    //std::string name;
+    int quantity;
+    int nrOfLoans;
 public:
     Game(const std::string& name, int quantity, int nrOfLoans);
 
-    // getters
-    const std::string& GetName() const;
+    const std::string& GetName() const override;
     int GetQuantity() const;
     int GetNrOfLoans() const;
-
-    // setters
-    //void SetName(const std::string& name);
     void SetQuantity(int quantity);
     void SetNrOfLoans(int nrOfLoans);
-
-private:
-    std::string name;
-    int quantity;
-    int nrOfLoans;
 };

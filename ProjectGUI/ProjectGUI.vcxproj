@@ -134,6 +134,7 @@
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameCRUD.cpp" />
+    <ClCompile Include="LoginPanel_Logic.cpp" />
     <ClCompile Include="MainFrame_Controller.cpp" />
     <ClCompile Include="MainFrame_Logic.cpp" />
     <ClCompile Include="LoginPanel.cpp" />
@@ -142,13 +143,22 @@
     <ClCompile Include="MainPanel_Controller.cpp" />
     <ClCompile Include="MainPanel_Logic.cpp" />
     <ClCompile Include="MyAccPanel.cpp" />
+    <ClCompile Include="MyAccPanel_Controller.cpp" />
+    <ClCompile Include="MyAccPanel_Controller.h" />
+    <ClCompile Include="MyAccPanel_Logic.cpp" />
     <ClCompile Include="Style.cpp" />
+    <ClCompile Include="User.cpp" />
     <ClCompile Include="UserCRUD.cpp" />
+    <ClCompile Include="UserNormal.cpp" />
+    <ClCompile Include="UserPremium.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="endianness.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameAbs.h" />
     <ClInclude Include="GameCRUD.h" />
     <ClInclude Include="json.hpp" />
+    <ClInclude Include="LoginPanel_Logic.h" />
     <ClInclude Include="MainFrame_Controller.h" />
     <ClInclude Include="MainFrame_Logic.h" />
     <ClInclude Include="LoginPanel.h" />
@@ -157,12 +167,18 @@
     <ClInclude Include="MainPanel_Controller.h" />
     <ClInclude Include="MainPanel_Logic.h" />
     <ClInclude Include="MyAccPanel.h" />
+    <ClInclude Include="MyAccPanel_Logic.h" />
     <ClInclude Include="Style.h" />
+    <ClInclude Include="User.h" />
     <ClInclude Include="UserCRUD.h" />
+    <ClInclude Include="UserNormal.h" />
+    <ClInclude Include="UserPremium.h" />
+    <ClInclude Include="uuid_v4.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore" />
     <None Include="..\README.md" />
+    <None Include="userLogin.json" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Games\bierki.json" />

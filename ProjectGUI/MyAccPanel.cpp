@@ -1,23 +1,32 @@
 // MyAccPanel.cpp
 #include "MyAccPanel.h"
+#include "MyAccPanel_Controller.h"
 #include <string>
 #include <string>
+#include "UserNormal.h"
+#include "UserPremium.h"
+#include <vector>
+#include "Style.h"
 
-
-bool shouldRefresh= true;
-//User* userPtr = nullptr;
 
 MyAccPanel::MyAccPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size)
     : wxPanel(parent, id, pos, size)
 {
+
+    logoutLabel = new wxStaticText(this, wxID_ANY, "wylogowano pomyœlnie", wxPoint(10, 10));
+    //logoutLabel->Hide();
+    userPanel = new wxPanel(this, wxID_ANY, wxPoint(0, 10), wxSize(410, 500));
     // Tworzenie przycisku
-    button = new wxButton(this, wxID_ANY, "Przycisk w MyAccPanel", wxPoint(10, 10));
+    logoutBtn = new wxButton(userPanel, wxID_ANY, "Wyloguj", wxPoint(10, GetClientSize().GetHeight()-100));
+    //button->Bind(wxEVT_BUTTON, &MyAccPanel::LoadUser, this);
 
+    premiumInput = new wxTextCtrl(userPanel, wxID_ANY, wxEmptyString, wxPoint(GetClientSize().GetWidth() - 10 - 30 - 190, GetClientSize().GetHeight() - 100), wxSize(190, 30), wxBORDER_RAISED);
+    premiumInput->SetHint("Wpisz kod, by zyskaæ konto premium");
     // Tworzenie etykiety
-    label = new wxStaticText(this, wxID_ANY, "To jest etykieta w MyAccPanel", wxPoint(10, 50));
 
 
 
+    this->SetBackgroundColour(RED); // Set background color (optional)
 
 
     //debugowanie
@@ -25,8 +34,12 @@ MyAccPanel::MyAccPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, cons
         wxLogMessage("ktos jest zalogowany");
     else
         wxLogMessage("nikt nie jest zalogowany");*/
+    MyAccPanel_Controller* controller = new MyAccPanel_Controller(this, logoutLabel, userPanel, loginLabel, logoutBtn, premiumInput, gamesPanel);
+    controller->BindEvents();
 
-    Bind(wxEVT_SHOW, &MyAccPanel::OnPanelShow, this);
+
+
+    //Bind(wxEVT_SHOW, &MyAccPanel::OnPanelShow, this);
 }
 
 
@@ -38,41 +51,10 @@ MyAccPanel::MyAccPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, cons
 
 
 
-//OnPanelShow wykonuje siê za ka¿dym wyswietleniem i ukryciem myAccPanel na ekranie;
-void MyAccPanel::OnPanelShow(wxShowEvent& event)
-{
-    //Wykonaj jesli MyAccPanel zostal wyswietlony na ekranie
-    if (event.IsShown()) {
 
-       //jeœli login jest pusty to znaczy, ze ktos dopiero siê zalogowal, wiec trzeba zasadowac info z pliku
-        if (shouldRefresh== true) {
 
-            LoadUser();
-            //ukryj label z napisem "wylogowano pomyslnie"
-            //wyswietl userPanel
-        }
 
-        Layout(); // Zaktualizuj uklad
-    }
 
-    
-    event.Skip();
-}
 
-void MyAccPanel::LoadUser() {
-    //wyszukaj w pliku /Users/_logged.txt kto jest zalogowany i pobierz login z tego pliku
-  
-    //if (isPremium())
-    // userPtr = new UserNormal("login");
-    // userPtr = new UserPremium("login");
 
-    
-    shouldRefresh = false;
-}
 
-void MyAccPanel::LogOut() {
-    //ukryj userPanel
-    //wyswietl label z napisem "wylogowano pomyslnie"
-    shouldRefresh= true;
-    //user.reset();
-}

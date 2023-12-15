@@ -1,24 +1,30 @@
 #include "MainFrame_Logic.h"
-#include <iostream>
-#include <fstream>
-#include <sstream>
+#include "UserCRUD.h"
+//#include "User.h"
+#include "UserNormal.h"
+#include "UserPremium.h"
+#include "User.h"
+#include "MainPanel_Logic.h"
+#include "MyAccPanel_Logic.h"
 
-//void mvcShowcase() {
-//    // Utwórz i otwórz plik do zapisu
-//    std::ofstream outputFile("mvc.txt");
-//    if (outputFile.is_open()) {
-//        // Wypisz coœ do konsoli
-//        std::cout << "Funkcja mvcShowcase() zosta³a wywo³ana." << std::endl;
-//
-//        // Zapisz tekst do pliku
-//        outputFile << "Funkcja mvcShowcase() zosta³a wywo³ana." << std::endl;
-//
-//        // Zamknij plik
-//        outputFile.close();
-//    }
-//    else {
-//        // Obs³u¿ b³¹d, jeœli nie uda³o siê otworzyæ pliku
-//        std::cerr << "Nie uda³o siê otworzyæ pliku do zapisu." << std::endl;
-//    }
-//}
 
+void MainFrame_Logic::HideButton(wxButton* loginBtn, wxButton* myAccBtn) {
+	if (UserCRUD::isLogged())
+		loginBtn->Hide();
+	else
+		myAccBtn->Hide();
+}
+
+User* MainFrame_Logic::CreateUser() {
+    std::string login = UserCRUD::ReadLogged();
+    if (login == "")
+        return nullptr;
+
+    // use json to extract information and determine user type
+    // For now, let's assume it's UserNormal
+    User* user = new UserNormal(login);
+
+    MainPanel_Logic::SetUser(user);
+    MyAccPanel_Logic::SetUser(user);
+    return user;
+}

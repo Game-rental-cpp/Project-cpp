@@ -1,10 +1,11 @@
+// Game.cpp
 #include "Game.h"
 #include "GameCRUD.h"
 
 // Implementacja konstruktora
-Game::Game(const std::string& name, int quantity, int nrOfLoans) : name(name), quantity(quantity), nrOfLoans(nrOfLoans) {}
+Game::Game(const std::string& name, int quantity, int nrOfLoans) : quantity(quantity), nrOfLoans(nrOfLoans) { this->name = name; }
 
-// getters
+// Implementacje funkcji z GameAbs
 const std::string& Game::GetName() const {
     return name;
 }
@@ -16,12 +17,6 @@ int Game::GetQuantity() const {
 int Game::GetNrOfLoans() const {
     return nrOfLoans;
 }
-
-
-// setters
-//void Game::SetName(const std::string& name) {
-//    this->name = name;
-//}
 
 void Game::SetQuantity(int quantity) {
     // Quantity cannot be negative

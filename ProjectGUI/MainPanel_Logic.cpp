@@ -4,8 +4,14 @@
 #include <string>
 #include <wx/textfile.h>
 
+#include "UserCRUD.h"
 #include "GameCRUD.h"
 #include "json.hpp"
+#include "User.h"
+#include "UserNormal.h"
+#include "UserPremium.h"
+#include <wx/wx.h>
+
 
 using json = nlohmann::json;
 
@@ -36,7 +42,7 @@ Game MainPanel_Logic::CreateGameFromJSON(int i)
             std::string truncatedFileName = fileName.ToStdString().substr(0, fileName.length() - 5);
 
             wxString fileContents = GameCRUD::readGame(truncatedFileName);
-
+            //wxLogMessage(fileContents);
             json jsonData = json::parse(fileContents);
 
             name = jsonData["name"];
@@ -116,4 +122,19 @@ std::vector<Game> MainPanel_Logic::sortVector(std::vector<Game> gamesVector, int
            break;
     }
     return gamesVector;
+}
+
+
+
+User* MainPanel_Logic::createUser() {
+   
+    return MainPanel_Logic::user;
+    //return user;
+}
+
+User* MainPanel_Logic::user = nullptr;
+
+void MainPanel_Logic::SetUser(User* u) {
+    MainPanel_Logic::user = u;
+    //wxLogMessage(wxString::Format("%s",user->getLogin()));
 }
