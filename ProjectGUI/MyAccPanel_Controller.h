@@ -14,11 +14,8 @@ public:
     wxTextCtrl* premiumInput,
     wxScrolledWindow* gamesPanel);
 
- 
     void BindEvents();
-    void OnPanelShow(wxShowEvent& event);
-    void LogOut(wxCommandEvent& event);
-    void OnEnterPressed(wxKeyEvent& event);
+ 
 
 private:
     MyAccPanel* parentEl;
@@ -29,8 +26,12 @@ private:
     wxTextCtrl* premiumInput;
     wxScrolledWindow* gamesPanel;
     
+    void OnPanelShow(wxShowEvent& event);
+    void LogOut(wxCommandEvent& event);
+    void OnEnterPressed(wxKeyEvent& event);
     void UpdateGamesPanel();
     void UpdateUserGames(wxCommandEvent& event);
+    void OnMouseHover(wxMouseEvent& event);
 };
 
 

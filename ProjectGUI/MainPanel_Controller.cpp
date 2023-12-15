@@ -126,7 +126,6 @@ void MainPanel_Controller::disableButton(const wxString& buttonName) {
 
 void MainPanel_Controller::OnMouseHover(wxMouseEvent& event) {
     OnCursorHover(event);
-
 }
 
 /*
