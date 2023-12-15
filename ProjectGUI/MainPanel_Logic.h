@@ -16,6 +16,6 @@ public:
     static void SetUser(User* u);
     
 private:
-    static std::vector<Game> vec;
+    //static std::vector<Game> vec;
     static User* user;
 };

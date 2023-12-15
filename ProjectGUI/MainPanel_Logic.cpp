@@ -58,7 +58,7 @@ Game MainPanel_Logic::CreateGameFromJSON(int i)
     return game;
 }
 
-std::vector<Game> MainPanel_Logic::vec;
+//std::vector<Game> MainPanel_Logic::vec;
 
 /*
 Creates vector of games
@@ -66,15 +66,18 @@ Creates vector of games
 @returns std::vector<Game>
 */
 std::vector<Game> MainPanel_Logic::fulfillGamesVector(int gameCount) {
+
+    std::vector<Game> vector;
+
     for (int i = 0; i < gameCount; i++)
     {
         Game game = MainPanel_Logic::CreateGameFromJSON(i);
 
         //wxLogMessage("ededewd");
-        vec.push_back(game); // Add game to vector
+        vector.push_back(game); // Add game to vector
 
     }
-    return vec;
+    return vector;
 }
 
 /*
