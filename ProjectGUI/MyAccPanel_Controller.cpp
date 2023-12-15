@@ -53,7 +53,10 @@ void MyAccPanel_Controller::LogOut(wxCommandEvent& event) {
 
     logoutLabel->Show();
     //TODO: usuñ usera i pusty string do _logged.txt
-    //user.reset();
+    UserCRUD::Update_logged("");
+    User* user = MyAccPanel_Logic::GetUser();
+    delete user;
+    user = nullptr;
     event.Skip();
 }
 
