@@ -33,6 +33,7 @@ void MainPanel_Controller::OnShowPanel(wxShowEvent& event) {
         parentEl->SetBackgroundColour(COLOR_BACKGROUND_PANEL); // Set background color (optional)
         searchInput->SetFocus();
         //if (gamesPanel) {
+        gamesVector = MainPanel_Logic::fulfillGamesVector(gameCount);
         UpdateGamesPanel(gamesVector);
         //}
 
@@ -41,66 +42,85 @@ void MainPanel_Controller::OnShowPanel(wxShowEvent& event) {
     event.Skip();
 }
 
-/*
-This function updates game label (and button) 
-@param wxCommandEvent& event
-@param wxPanel* gamesPanel
-@param std::vector<Game> gamesVector
-*/
-std::vector<Game> MainPanel_Controller::updateGame(wxString buttonName, wxPanel* gamesPanel, std::vector<Game> gamesVector) {
-    
 
-        //take the unique name of the clicked button
 
-        //wxLogMessage(buttonName);
+//This metohod executes after clicking on "wypozycz" button
+void MainPanel_Controller::UpdateGame(wxCommandEvent& event)
+{
+    bool logged = UserCRUD::isLogged();
+
+    if (!logged) {
+        wxDialog* dialog = new wxDialog(this, wxID_ANY, "Musisz siê najpierw zalogowaæ, aby móc wypo¿yczyæ grê");
+        dialog->ShowModal();
+        dialog->Destroy();
+        return;
+    }
+
+    //get the clicked button name
+    wxButton* button = dynamic_cast<wxButton*>(event.GetEventObject());
+    wxString buttonName = button->GetName();
+
+    User* user = MainPanel_Logic::createUser();
+    //user->addUserGame(buttonName.ToStdString());
+
+
+    if (!user->addUserGame(buttonName.ToStdString())) {
+        wxDialog* dialog = new wxDialog(this, wxID_ANY, "Przekroczono maksymaln¹ iloœæ gier wypo¿yczonych na raz. Aby wypo¿yczyæ now¹ grê zostañ cz³onkiem premium lub oddaj któr¹œ z ju¿ wypo¿yczonych gier.");
+        dialog->ShowModal();
+        dialog->Destroy();
+        return;
+    }
+
 
         //Search for the corresponding label for the clicked button 
-        wxStaticText* correspondingLabel1 = wxDynamicCast(gamesPanel->FindWindowByName(buttonName + "Lbl1"), wxStaticText);
-        wxStaticText* correspondingLabel2 = wxDynamicCast(gamesPanel->FindWindowByName(buttonName + "Lbl2"), wxStaticText);
-        
-        // Take current label text
-        wxString labelText1 = correspondingLabel1->GetLabel();
-        wxString labelText2 = correspondingLabel2->GetLabel();
+    wxStaticText* correspondingLabel1 = wxDynamicCast(gamesPanel->FindWindowByName(buttonName + "Lbl1"), wxStaticText);
+    wxStaticText* correspondingLabel2 = wxDynamicCast(gamesPanel->FindWindowByName(buttonName + "Lbl2"), wxStaticText);
 
-        // Take number (quantity) from label
-        int quantity;
-        int nrOfLoans;
+    // Take current label text
+    wxString labelText1 = correspondingLabel1->GetLabel();
+    wxString labelText2 = correspondingLabel2->GetLabel();
 
-        labelText1.AfterLast(' ').ToInt(&quantity);
-        labelText2.AfterLast(' ').ToInt(&nrOfLoans);
+    // Take number (quantity) from label
+    int quantity;
+    int nrOfLoans;
 
-        //In loop the Game object from the vector is updated and then the label is updated
-        for (int i = 0; i < gamesVector.size(); i++) {
+    labelText1.AfterLast(' ').ToInt(&quantity);
+    labelText2.AfterLast(' ').ToInt(&nrOfLoans);
 
-            //search for the Game which name is the same as the name of clicked button
-            if (gamesVector[i].GetName() == buttonName) {
+    //In loop the Game object from the vector is updated and then the label is updated
+    for (int i = 0; i < gamesVector.size(); i++) {
 
-                //wxLogMessage(wxString(gamesVector[i].GetName().c_str()));
-                
-                //update json file - set the current value of available games (quantity) decreased by one
-                gamesVector[i].SetQuantity(gamesVector[i].GetQuantity() - 1);
-                gamesVector[i].SetNrOfLoans(gamesVector[i].GetNrOfLoans() + 1);
+        //search for the Game which name is the same as the name of clicked button
+        if (gamesVector[i].GetName() == buttonName) {
 
-                wxString newLabelText1 = labelText1.BeforeLast(' ') + wxString::Format(" %ld", gamesVector[i].GetQuantity());
-                correspondingLabel1->SetLabel(newLabelText1);
-                wxString newLabelText2 = labelText2.BeforeLast(' ') + wxString::Format(" %ld", gamesVector[i].GetNrOfLoans());
-                correspondingLabel2->SetLabel(newLabelText2);
+            //wxLogMessage(wxString(gamesVector[i].GetName().c_str()));
 
-                //If there are no games available, disable hire button
-                if (gamesVector[i].GetQuantity() == 0) {
-                    disableButton(buttonName);               
-                }
-                    
+            //update json file - set the current value of available games (quantity) decreased by one
+            gamesVector[i].SetQuantity(gamesVector[i].GetQuantity() - 1);
+            gamesVector[i].SetNrOfLoans(gamesVector[i].GetNrOfLoans() + 1);
 
-                break; // The game has been found, break the loop
+            wxString newLabelText1 = labelText1.BeforeLast(' ') + wxString::Format(" %ld", gamesVector[i].GetQuantity());
+            correspondingLabel1->SetLabel(newLabelText1);
+            wxString newLabelText2 = labelText2.BeforeLast(' ') + wxString::Format(" %ld", gamesVector[i].GetNrOfLoans());
+            correspondingLabel2->SetLabel(newLabelText2);
+
+            //If there are no games available, disable hire button
+            if (gamesVector[i].GetQuantity() == 0) {
+                disableButton(buttonName);
             }
 
+
+            break; // The game has been found, break the loop
         }
 
-        correspondingLabel1->Refresh();
-    
-    return gamesVector;
+    }
+
+    correspondingLabel1->Refresh();
 }
+
+
+
+
 
 void MainPanel_Controller::OnSearchChange(wxCommandEvent& event) {
     //wxLogMessage("qwqw");
@@ -229,43 +249,7 @@ void MainPanel_Controller::UpdateGamesPanel(std::vector<Game> gamesVector)
     gamesPanel->Show();
 }
 
-//This metohod executes after clicking on "wypozycz" button
-void MainPanel_Controller::UpdateGame(wxCommandEvent& event)
-{
-    bool logged = UserCRUD::isLogged();
 
-    if (!logged) {
-        wxDialog* dialog = new wxDialog(this, wxID_ANY, "Musisz siê najpierw zalogowaæ, aby móc wypo¿yczyæ grê");
-        dialog->ShowModal();
-        dialog->Destroy();
-        return;
-    }
-
-    //get the clicked button name
-    wxButton* button = dynamic_cast<wxButton*>(event.GetEventObject());
-    wxString buttonName = button->GetName();
-
-    User* user = MainPanel_Logic::createUser();
-     //user->addUserGame(buttonName.ToStdString());
-
-    //return;
-     //return;
-    //user->addUserGame(buttonName.ToStdString());
-     //wxLogMessage("Type of log: %s", user->getUserGames());
-    
-    if (!user->addUserGame(buttonName.ToStdString())) {
-        wxDialog* dialog = new wxDialog(this, wxID_ANY, "Przekroczono maksymaln¹ iloœæ gier wypo¿yczonych na raz. Aby wypo¿yczyæ now¹ grê zostañ cz³onkiem premium lub oddaj któr¹œ z ju¿ wypo¿yczonych gier.");
-        dialog->ShowModal();
-        dialog->Destroy();
-        return;
-    }
-     //wxLogMessage("%s", user->stringifyUser());
-
-    //std::string log = user.stringifyGames();
-    //wxLogMessage("Type of log: %s", log);
-
-    gamesVector = MainPanel_Controller::updateGame(buttonName, gamesPanel, gamesVector);
-}
 
 //This functions executes when choosing sorting method (A-Z or Z-A)
 void MainPanel_Controller::OnChoice(wxCommandEvent& event) {

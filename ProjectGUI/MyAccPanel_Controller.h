@@ -30,7 +30,7 @@ private:
     void LogOut(wxCommandEvent& event);
     void OnEnterPressed(wxKeyEvent& event);
     void UpdateGamesPanel();
-    void UpdateUserGames(wxCommandEvent& event);
+    void UpdateUserGames(wxCommandEvent& event, std::string gameName);
     void OnMouseHover(wxMouseEvent& event);
 };
 

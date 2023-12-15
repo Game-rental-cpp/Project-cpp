@@ -5,6 +5,8 @@
 #include "UserNormal.h"
 #include "UserPremium.h"
 #include "MyAccPanel_Logic.h"
+//#include "MainPanel_Logic.h"
+#include "Game.h"
 
 MyAccPanel_Controller::MyAccPanel_Controller(MyAccPanel* parentEl, wxStaticText* logoutLabel,
     wxPanel* userPanel,
@@ -74,13 +76,17 @@ void MyAccPanel_Controller::OnPanelShow(wxShowEvent& event) {
 }
 
 // This metohod executes after clicking on "oddaj" button
-void MyAccPanel_Controller::UpdateUserGames(wxCommandEvent& event)
+void MyAccPanel_Controller::UpdateUserGames(wxCommandEvent& event, std::string gameName)
 {
     User* user = MyAccPanel_Logic::GetUser();
     wxButton* button = dynamic_cast<wxButton*>(event.GetEventObject());
     wxString buttonName = button->GetName();
     user->removeUserGame(buttonName.ToStdString());
     UpdateGamesPanel();
+
+    Game* game = MyAccPanel_Logic::CreateGameFromJSON(gameName);
+    game->SetQuantity(game->GetQuantity()+1);
+
 }
 
 
@@ -130,12 +136,20 @@ void MyAccPanel_Controller::UpdateGamesPanel() {
         std::string buttonText = "Oddaj";
 
         // (button name is the same as game id)
+         // Utwórz lambda funkcjê, która przekazuje dodatkowy argument (gameName)
+        auto updateGamesLambda = [this, gameName](wxCommandEvent& event) {
+            // Wywo³aj funkcjê obs³uguj¹c¹ zdarzenie z dodatkowym argumentem
+            UpdateUserGames(event, gameName);
+            };
+
+        // (button name is the same as game id)
         wxButton* hireBtn = new wxButton(gamesPanel, wxID_ANY, buttonText, wxPoint(parentEl->GetSize().GetWidth() - 10 - 85, 10 + i * 85), wxSize(85, 35), 0, wxDefaultValidator, gameId);
 
         hireBtn->SetBackgroundColour(COLOR_BACKGROUND_BTN);
         hireBtn->SetForegroundColour(COLOR_TEXT_BTN);
 
-        hireBtn->Bind(wxEVT_BUTTON, &MyAccPanel_Controller::UpdateUserGames, this, wxID_ANY, wxID_ANY);
+        // Zamiast bezpoœredniego bindowania do UpdateUserGames, u¿yj lambda funkcji
+        hireBtn->Bind(wxEVT_BUTTON, updateGamesLambda);
         hireBtn->Bind(wxEVT_ENTER_WINDOW, &MyAccPanel_Controller::OnMouseHover, this);
         hireBtn->SetFont(SetTheFont());
     }

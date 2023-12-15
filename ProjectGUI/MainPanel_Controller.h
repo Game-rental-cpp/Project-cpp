@@ -11,7 +11,7 @@ class MainPanel_Controller : public wxPanel
 public:
     MainPanel_Controller(MainPanel* parenEl, wxTextCtrl* searchInput, wxButton* resetBtn, wxChoice* sortChoice);
 
-    static std::vector<Game> updateGame(wxString buttonName, wxPanel* gamesPanel, std::vector<Game> gamesVector);
+    //static std::vector<Game> updateGame(wxString buttonName, wxPanel* gamesPanel, std::vector<Game> gamesVector);
     static void disableButton(const wxString& buttonName);
     void BindEvents();
     void OnShowPanel(wxShowEvent& event);
