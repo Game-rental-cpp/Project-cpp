@@ -178,6 +178,7 @@
   <ItemGroup>
     <None Include="..\.gitignore" />
     <None Include="..\README.md" />
+    <None Include="Users\jakisLogin.json" />
     <None Include="Users\userek123.json" />
     <None Include="Users\userLogin.json" />
   </ItemGroup>

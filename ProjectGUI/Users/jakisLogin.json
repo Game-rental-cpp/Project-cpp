@@ -1,0 +1,12 @@
+{
+    "isPremium": false,
+    "login": "jakisLogin",
+    "password": "123",
+    "userGames": [
+        {
+            "date": "16-12-23__10-50-11",
+            "id": "111",
+            "name": "bierki"
+        }
+    ]
+}

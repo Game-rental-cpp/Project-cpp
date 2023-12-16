@@ -17,6 +17,7 @@ UserNormal::UserNormal(const std::string& login)
     //isPremium password = jsonData.at("password"); //get value of key "password"
     password = passwordStr;
     json gamesArray = jsonData.at("userGames");
+    //if(gamesArray.size()>0)
     // Iterowanie po elementach tablicy
     for (const auto& game : gamesArray) {
         // Wyci¹ganie wartoœci z obiektu w tablicy
@@ -26,7 +27,8 @@ UserNormal::UserNormal(const std::string& login)
         userGames.push_back(userGame);
     }
 
-}//TODO: read from file and update user properties
+
+}
 
 
 bool UserNormal::isPremium() const {

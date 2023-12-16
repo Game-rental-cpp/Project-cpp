@@ -189,7 +189,10 @@
     <None Include="Users\userLogin.json">
       <Filter>Pliki zasobów\Users</Filter>
     </None>
-    <None Include="userek123.json">
+    <None Include="Users\jakisLogin.json">
+      <Filter>Pliki zasobów\Users</Filter>
+    </None>
+    <None Include="Users\userek123.json">
       <Filter>Pliki zasobów\Users</Filter>
     </None>
   </ItemGroup>

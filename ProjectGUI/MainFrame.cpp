@@ -20,7 +20,7 @@ MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& si
     myAccPanel = new MyAccPanel(this, wxID_ANY, wxPoint(10, 100), wxSize(410, 500));
 
     
-        //wxLogMessage(wxString::Format("%s", UserCRUD::ReadUser("userek123")));
+        //wxLogMessage(wxString::Format("%s", UserCRUD::ReadUser("jakisLogin")));
 
     MainFrame_Logic::CreateUser();
 
