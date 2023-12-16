@@ -16,7 +16,8 @@ public:
         std::string getId() const;
         const std::string& GetName() const override;
         std::string getDate() const;
-
+        void SetId(std::string idToSet) { id = idToSet; }
+        void SetDate(std::string dateToSet) { date = dateToSet; }
     private:
         std::string id; // game unique id
         //std::string name; // name
