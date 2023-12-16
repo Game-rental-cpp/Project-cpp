@@ -1,0 +1,17 @@
+{
+    "isPremium": false,
+    "login": "userek123",
+    "password": "zaq1@WSX",
+    "userGames": [
+        {
+            "date": "16-12-23__10-50-11",
+            "id": "111",
+            "name": "bierki"
+        },
+        {
+            "date": "16-12-23__10-50-16",
+            "id": "222",
+            "name": "uno"
+        }
+    ]
+}

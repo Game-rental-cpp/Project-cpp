@@ -189,6 +189,9 @@
     <None Include="Users\userLogin.json">
       <Filter>Pliki zasobów\Users</Filter>
     </None>
+    <None Include="userek123.json">
+      <Filter>Pliki zasobów\Users</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Games\statki.json">

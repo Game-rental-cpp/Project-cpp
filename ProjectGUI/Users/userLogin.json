@@ -2,5 +2,21 @@
     "isPremium": false,
     "login": "userLogin",
     "password": "qweQWE123!@#",
-    "userGames": []
+    "userGames": [
+        {
+            "date": "16-12-23__10-50-10",
+            "id": "12345rtyuio111",
+            "name": "statki"
+        },
+        {
+            "date": "16-12-23__10-50-11",
+            "id": "1da89090-49a4-4123-b100-28972d35c37b",
+            "name": "bierki"
+        },
+        {
+            "date": "16-12-23__10-50-16",
+            "id": "19a51157-e46c-4fce-89e4-68c851187f63",
+            "name": "uno"
+        }
+    ]
 }
