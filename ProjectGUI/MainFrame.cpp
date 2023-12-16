@@ -19,6 +19,9 @@ MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& si
     loginPanel = new LoginPanel(this, wxID_ANY, wxPoint(20, 200), wxSize(410, 500));
     myAccPanel = new MyAccPanel(this, wxID_ANY, wxPoint(10, 100), wxSize(410, 500));
 
+    
+        //wxLogMessage(wxString::Format("%s", UserCRUD::ReadUser("userek123")));
+
     MainFrame_Logic::CreateUser();
 
     // Default hidden

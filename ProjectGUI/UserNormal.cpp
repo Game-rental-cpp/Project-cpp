@@ -3,12 +3,15 @@
 #include "usernormal.h"
 #include "UserCRUD.h"
 #include "json.hpp"
+//#include <wx/wx.h>
 
 using json = nlohmann::json;
 
 UserNormal::UserNormal(const std::string& login)
     : User(login) {
     std::string userStr = UserCRUD::ReadUser(login);
+    //wxLogMessage(wxString::Format("%s", userStr));
+
     json jsonData = json::parse(userStr); //parsing JSON string
     std::string passwordStr = jsonData.at("password"); //get value of key "password"
     //isPremium password = jsonData.at("password"); //get value of key "password"

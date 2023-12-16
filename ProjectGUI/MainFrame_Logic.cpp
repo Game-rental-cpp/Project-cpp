@@ -6,7 +6,7 @@
 #include "User.h"
 #include "MainPanel_Logic.h"
 #include "MyAccPanel_Logic.h"
-
+#include <wx/wx.h>
 
 void MainFrame_Logic::HideButton(wxButton* loginBtn, wxButton* myAccBtn) {
 	if (UserCRUD::isLogged())
@@ -22,6 +22,7 @@ User* MainFrame_Logic::CreateUser() {
 
     // use json to extract information and determine user type
     // For now, let's assume it's UserNormal
+
     User* user = new UserNormal(login);
     //user->SetIsPremium(false);
 

@@ -1,13 +1,8 @@
 {
     "isPremium": false,
     "login": "userLogin",
-    "password": "qweQWE123!@#",
+    "password": "123",
     "userGames": [
-        {
-            "date": "16-12-23__10-50-10",
-            "id": "12345rtyuio111",
-            "name": "statki"
-        },
         {
             "date": "16-12-23__10-50-11",
             "id": "1da89090-49a4-4123-b100-28972d35c37b",
@@ -17,6 +12,16 @@
             "date": "16-12-23__10-50-16",
             "id": "19a51157-e46c-4fce-89e4-68c851187f63",
             "name": "uno"
+        },
+        {
+            "date": "16-12-23__13-53-16",
+            "id": "63f4d678-d68f-4cc8-937b-a76cc9e6add2",
+            "name": "statki"
+        },
+        {
+            "date": "16-12-23__13-53-16",
+            "id": "c3dd5735-675a-45f8-a894-13d2d65267e4",
+            "name": "statki"
         }
     ]
 }
