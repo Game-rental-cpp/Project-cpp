@@ -108,14 +108,14 @@
     <ClCompile Include="UserPremium.cpp">
       <Filter>Pliki źródłowe\Models</Filter>
     </ClCompile>
-    <ClCompile Include="FormsPanel.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
     <ClCompile Include="MyAccPanel_Controller.cpp">
       <Filter>Pliki źródłowe\MyAccPanel</Filter>
     </ClCompile>
     <ClCompile Include="MyAccPanel_Controller.h">
       <Filter>Pliki nagłówkowe\MyAccPanel</Filter>
+    </ClCompile>
+    <ClCompile Include="MyAccPanel_Logic.cpp">
+      <Filter>Pliki źródłowe\MyAccPanel</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -179,10 +179,16 @@
     <ClInclude Include="LoginPanel_Logic.h">
       <Filter>Pliki nagłówkowe\LoginPanel</Filter>
     </ClInclude>
+    <ClInclude Include="MyAccPanel_Logic.h">
+      <Filter>Pliki nagłówkowe\MyAccPanel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore" />
     <None Include="..\README.md" />
+    <None Include="Users\userLogin.json">
+      <Filter>Pliki zasobów\Users</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Games\statki.json">

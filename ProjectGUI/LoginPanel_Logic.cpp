@@ -7,6 +7,9 @@
 #include "User.h"
 #include "UserNormal.h"
 #include "UserPremium.h"
+#include "json.hpp"
+
+using json = nlohmann::json;
 
 // Log in attempt validation
 bool LoginPanel_Logic::LoginValidated(std::string loginName, std::string loginPassword, LoginPanel* loginPanel) {
@@ -18,10 +21,12 @@ bool LoginPanel_Logic::LoginValidated(std::string loginName, std::string loginPa
         return false;
     }
 
+    std::string userStr = UserCRUD::ReadUser(loginName); //string representation of user model
+    json jsonData = json::parse(userStr); //parsing JSON string
+    std::string password = jsonData.at("password"); //get value of key "password"
+
     // Handle incorrect password
-    // if (UserCRUD::ReadPassword(loginName) != loginPassword)
-    if (false)
-    {
+     if (password != loginPassword){
         wxMessageDialog* incorrectPasswordDlg = new wxMessageDialog(loginPanel, "Nieprawidłowe hasło.", "Błąd");
         incorrectPasswordDlg->ShowModal();
         return false;

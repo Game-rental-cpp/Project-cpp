@@ -7,11 +7,7 @@
 using json = nlohmann::json;
 
 User::User(const std::string& login)
-    : login(login) {
-    // TODO: create user from json file
-    // UserCRUD::ReadUser(login);
-    password = "pass";
-}
+    : login(login) {}
 
 std::string User::getLogin() const {
     return login;
