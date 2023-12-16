@@ -2,7 +2,11 @@
 #include "LoginPanel_Logic.h"
 #include <wx/wx.h>
 #include "UserCRUD.h"
-
+#include "MainPanel_Logic.h"
+#include "MyAccPanel_Logic.h"
+#include "User.h"
+#include "UserNormal.h"
+#include "UserPremium.h"
 
 // Log in attempt validation
 bool LoginPanel_Logic::LoginValidated(std::string loginName, std::string loginPassword, LoginPanel* loginPanel) {
@@ -25,6 +29,11 @@ bool LoginPanel_Logic::LoginValidated(std::string loginName, std::string loginPa
 
     // Log in user if there aren't any issues
     UserCRUD::Update_logged(loginName);
+    //TODO: do the same for UserPremium
+    User* user = new UserNormal(loginName);
+    MainPanel_Logic::SetUser(user);
+    MyAccPanel_Logic::SetUser(user);
+
     return true;
 }
 
@@ -138,6 +147,10 @@ bool  LoginPanel_Logic::SignupValidated(std::string signupName, std::string sign
     // Create and log in new user
     UserCRUD::CreateUser(signupName, signupPassword1);
     UserCRUD::Update_logged(signupName);
+
+    User* user = new UserNormal(signupName);
+    MainPanel_Logic::SetUser(user);
+    MyAccPanel_Logic::SetUser(user);
 
     return true;
 }

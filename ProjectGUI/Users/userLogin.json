@@ -2,11 +2,5 @@
     "isPremium": false,
     "login": "userLogin",
     "password": "pass",
-    "userGames": [
-        {
-            "date": "15-12-23__22-11-22",
-            "id": "2c7a285d-d281-4aa6-9fa3-221d60495e9c",
-            "name": "domino"
-        }
-    ]
+    "userGames": []
 }
