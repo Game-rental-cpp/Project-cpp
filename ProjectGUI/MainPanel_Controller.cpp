@@ -96,7 +96,11 @@ void MainPanel_Controller::UpdateGame(wxCommandEvent& event)
         //search for the Game which name is the same as the name of clicked button
         if (gamesVector[i].GetName() == buttonName) {
 
-            //wxLogMessage(wxString(gamesVector[i].GetName().c_str()));
+            wxLogMessage(wxString::Format("%.3f", gamesVector[i].GetRate()));
+            for (const auto& pair : gamesVector[i].GetUserRates()) {
+                wxLogMessage(wxString::Format("Key: %s, Value: %d", pair.first, pair.second));
+            }
+
 
             //update json file - set the current value of available games (quantity) decreased by one
             gamesVector[i].SetQuantity(gamesVector[i].GetQuantity() - 1);
@@ -206,6 +210,7 @@ void MainPanel_Controller::UpdateGamesPanel(std::vector<Game> gamesVector)
         std::string gameName = std::string(game.GetName());
         int gameQuantity = game.GetQuantity();
         int nrOfLoans = game.GetNrOfLoans();
+        float rate = game.GetRate();
         //int x = rand() % (100); // Losowa pozycja x na panelu
         //int y = rand() % (200); // Losowa pozycja y na panelu
 
@@ -213,17 +218,21 @@ void MainPanel_Controller::UpdateGamesPanel(std::vector<Game> gamesVector)
         wxString labelText0 = wxString::Format("Nazwa gry: %s", gameName);
         wxString labelText1 = wxString::Format("Iloœæ dostêpnych sztuk: %d", gameQuantity);
         wxString labelText2 = wxString::Format("Ca³kowita iloœæ wypo¿yczeñ: %d", nrOfLoans);
+        wxString labelText3 = wxString::Format("Œrednia ocena: %.2f", rate);
         // (label name is the same as game name + Lbl)
         wxStaticText* gameLabel0 = new wxStaticText(gamesPanel, wxID_ANY, labelText0, wxPoint(10, 10 + i * 80), wxDefaultSize, 0, gameName + "Lbl0");
         wxStaticText* gameLabel1 = new wxStaticText(gamesPanel, wxID_ANY, labelText1, wxPoint(10, 30 + i * 80), wxDefaultSize, 0, gameName + "Lbl1");
         wxStaticText* gameLabel2 = new wxStaticText(gamesPanel, wxID_ANY, labelText2, wxPoint(10, 50 + i * 80), wxDefaultSize, 0, gameName + "Lbl2");
+        wxStaticText* gameLabel3 = new wxStaticText(gamesPanel, wxID_ANY, labelText3, wxPoint(10, 70 + i * 80), wxDefaultSize, 0, gameName + "Lbl3");
 
         gameLabel0->SetForegroundColour(COLOR_LBL);
         gameLabel0->SetFont(SetTheFont());
         gameLabel1->SetForegroundColour(COLOR_LBL);
         gameLabel1->SetFont(SetTheFont());
         gameLabel2->SetForegroundColour(COLOR_LBL);
-        gameLabel2->SetFont(SetTheFont());
+        gameLabel2->SetFont(SetTheFont());        
+        gameLabel3->SetForegroundColour(COLOR_LBL);
+        gameLabel3->SetFont(SetTheFont());
 
 
         //wxStaticText* gameLabel = new wxStaticText(gamesPanel, wxID_ANY, labelText, wxPoint(x, y));

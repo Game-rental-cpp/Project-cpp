@@ -1,6 +1,7 @@
 #pragma once
 #include <wx/wx.h>
 #include "User.h"
+#include "Game.h"
 
 class MyAccPanel;
 
@@ -32,6 +33,8 @@ private:
     void UpdateGamesPanel();
     void UpdateUserGames(wxCommandEvent& event, std::string gameName);
     void OnMouseHover(wxMouseEvent& event);
+    void OnSliderChange(wxScrollEvent& event, std::string gameName, std::string login);
+
 };
 
 

@@ -15,6 +15,10 @@ public:
         UserGame(const std::string& name);
         std::string getId() const;
         const std::string& GetName() const override;
+        const float& GetRate() const override { return rate; };
+        const std::map<std::string, int>& GetUserRates() const override { return userRates; };
+        void SetRate(int r, std::string login) override;
+
         std::string getDate() const;
         void SetId(std::string idToSet) { id = idToSet; }
         void SetDate(std::string dateToSet) { date = dateToSet; }

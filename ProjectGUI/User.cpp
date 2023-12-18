@@ -1,6 +1,7 @@
 // user.cpp
 #include "user.h"
 #include "UserCRUD.h"
+#include "GameCRUD.h"
 #include "uuid_v4.h"
 #include "json.hpp"
 
@@ -120,19 +121,27 @@ std::string User::stringifyGames() {
     return strGames;
 }
 
+void User::UserGame::SetRate(int r, std::string login) {
+    // Dodaj now¹ ocenê u¿ytkownika do mapy
+    //TODO: jeœli user ju¿ oceni³ tê grê, nie dodawaj tylko edytuj
+    userRates[login] = r;
 
+    // Zaktualizuj œredni¹ ocenê
+    int totalRates = 0;
+    for (const auto& pair : userRates) {
+        totalRates += pair.second;
+    }
 
-//std::string User::stringifyUser() {
-//    return "";
-//}
-//std::string User::stringifyUser() {
-//    json userGames = json::parse(stringifyGames()); //tworzy tablicê
-//    json user = {
-//        {"login", login},
-//        {"password", password},
-//        {"isPremium", false},
-//        {"userGames", userGames}
-//    };
-//
-//    return user.dump(4);
-//}
+    if (!userRates.empty()) {
+        rate = static_cast<float>(totalRates) / userRates.size();
+    }
+    else {
+        // Jeœli userRates jest puste, ustaw rate na 0 lub inny domyœlny wartoœæ
+        rate = 0.0f;
+    }
+
+    // Przyk³adowa logika obs³ugi aktualizacji pliku JSON lub innej formy przechowywania danych
+    // w zale¿noœci od Twoich potrzeb
+    //GameCRUD::updateGame(name, quantity, nrOfLoans, rate, userRates);
+}
+

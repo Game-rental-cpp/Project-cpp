@@ -1,5 +1,7 @@
 {
     "name": "uno",
     "nrOfLoans": 32,
-    "quantity": 17
+    "quantity": 17,
+    "rate": 2.5,
+    "userRates": { "jakisLogin": 5 }
 }

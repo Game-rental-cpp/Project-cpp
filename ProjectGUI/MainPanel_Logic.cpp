@@ -25,6 +25,8 @@ Game MainPanel_Logic::CreateGameFromJSON(int i)
     std::string name;
     int quantity;
     int nrOfLoans;
+    float rate;
+    std::map<std::string, int> userRates;
 
     wxString parentDir = wxGetCwd();
     wxString gamesDir = parentDir + "/Games";
@@ -48,12 +50,14 @@ Game MainPanel_Logic::CreateGameFromJSON(int i)
             name = jsonData["name"];
             quantity = jsonData["quantity"];
             nrOfLoans = jsonData["nrOfLoans"];
+            rate = jsonData["rate"];
+            userRates = jsonData["userRates"];
 
             file.Close();
         }
     }
 
-    Game game(name, quantity, nrOfLoans);
+    Game game(name, quantity, nrOfLoans, rate, userRates);
 
     return game;
 }

@@ -38,6 +38,8 @@ Game* MyAccPanel_Logic::CreateGameFromJSON(std::string gameName)
     std::string name;
     int quantity;
     int nrOfLoans;
+    float rate;
+    std::map<std::string, int> userRates;
 
     std::string gameStr = GameCRUD::readGame(gameName);
 
@@ -46,9 +48,10 @@ Game* MyAccPanel_Logic::CreateGameFromJSON(std::string gameName)
     name = jsonData["name"];
     quantity = jsonData["quantity"];
     nrOfLoans = jsonData["nrOfLoans"];
-
+    rate = jsonData["rate"];
+    userRates = jsonData["userRates"];
         
-    Game* game = new Game(name, quantity, nrOfLoans); // Utwórz obiekt za pomoc¹ standardowego konstruktora
+    Game* game = new Game(name, quantity, nrOfLoans, rate, userRates); // Utwórz obiekt za pomoc¹ standardowego konstruktora
 
     return game;
 }

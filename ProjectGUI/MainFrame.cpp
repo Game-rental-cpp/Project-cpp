@@ -6,6 +6,16 @@
 MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
     : wxFrame(NULL, wxID_ANY, title, pos, size) {
 
+    //std::map<std::string, int> myMap = {
+    //    {"key1", 1},
+    //    {"key2", 2},
+    //    {"key3", 3}
+    //};
+
+    //GameCRUD::updateGame("bierki", 12, 120, 3.2, myMap);
+    //wxLogMessage(wxString::Format("%s",GameCRUD::readGame("bierki")));
+
+
     // Creating buttons
     goBackBtn = new wxButton(this, wxID_ANY, "Wróæ", wxDefaultPosition, wxSize(80, 40));
     loginBtn = new wxButton(this, wxID_ANY, "Zaloguj / Zarejestruj", wxDefaultPosition, wxSize(170, 40), wxBORDER_RAISED);
@@ -13,6 +23,7 @@ MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& si
 
     goBackBtn->Hide();
     MainFrame_Logic::HideButton(loginBtn, myAccBtn); //hide one of the buttons
+
 
     // Creating and adding panels
     mainPanel = new MainPanel(this, wxID_ANY, wxPoint(10, 100), wxSize(410, 500));

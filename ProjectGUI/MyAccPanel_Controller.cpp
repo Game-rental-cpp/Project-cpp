@@ -113,6 +113,7 @@ void MyAccPanel_Controller::UpdateUserGames(wxCommandEvent& event, std::string g
 
     Game* game = MyAccPanel_Logic::CreateGameFromJSON(gameName);
     game->SetQuantity(game->GetQuantity()+1);
+    wxLogMessage(wxString::Format("%.3f", game->GetRate()));
 
 }
 
@@ -197,9 +198,51 @@ void MyAccPanel_Controller::UpdateGamesPanel() {
         hireBtn->Bind(wxEVT_BUTTON, updateGamesLambda);
         hireBtn->Bind(wxEVT_ENTER_WINDOW, &MyAccPanel_Controller::OnMouseHover, this);
         hireBtn->SetFont(SetTheFont());
+
+
+        //wxSlider* slider = new wxSlider(gamePanel, wxID_ANY, 0, 0, 5, wxPoint(parentEl->GetSize().GetWidth() - 10 - 100, 50), wxDefaultSize, wxSL_HORIZONTAL);
+
+        wxSlider* slider = new wxSlider(gamePanel, wxID_ANY, 0, 0, 5, wxPoint(parentEl->GetSize().GetWidth() - 10 - 100, 50), wxDefaultSize, wxSL_HORIZONTAL);
+        //slider->Bind(wxEVT_SLIDER, &MyAccPanel_Controller::OnSliderChange, this);
+        //slider->Bind(wxEVT_SCROLL_CHANGED, std::bind(&MyAccPanel_Controller::OnSliderChange, this, std::placeholders::_1, game));
+        std::string login = user->getLogin();
+        slider->Bind(wxEVT_SCROLL_CHANGED, [this, gameName, login](wxScrollEvent& event) {
+            OnSliderChange(event, gameName, login);
+            });
+
+
+
+        User* user = MyAccPanel_Logic::GetUser();
+
+        auto it = game.GetUserRates().find(user->getLogin());
+
+        // SprawdŸ, czy login zosta³ znaleziony
+        if (it != game.GetUserRates().end()) {
+            // Znaleziono ocenê dla danego u¿ytkownika
+            int userRating = it->second;
+            slider->SetValue(userRating);
+        }
+
     }
     gamesPanel->Show();
 }
+
+
+
+void MyAccPanel_Controller::OnSliderChange(wxScrollEvent& event, std::string gameName, std::string login) {
+    // Tutaj mo¿esz uzyskaæ wartoœæ suwaka za pomoc¹: event.GetPosition()
+    int sliderValue = event.GetPosition();
+
+    Game* game = MyAccPanel_Logic::CreateGameFromJSON(gameName);
+
+    game->SetRate(sliderValue, login);
+
+    wxLogMessage("Zmieniono wartoœæ suwaka dla gry : %d",  sliderValue);
+
+    // Dodatkowa logika lub przekazywanie informacji do innych funkcji
+}
+
+
 
 
 

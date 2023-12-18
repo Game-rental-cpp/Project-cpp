@@ -1,5 +1,11 @@
 {
     "name": "bierki",
-    "nrOfLoans": 180,
-    "quantity": 16
+    "nrOfLoans": 122,
+    "quantity": 14,
+    "rate": 3.200000047683716,
+    "userRates": {
+        "key1": 1,
+        "key2": 2,
+        "key3": 3
+    }
 }

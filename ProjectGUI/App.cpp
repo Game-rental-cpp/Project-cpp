@@ -7,6 +7,7 @@ class MyApp : public wxApp
 public:
     virtual bool OnInit()
     {
+
         MainFrame* frame = new MainFrame("Wypo¿yczalnia gier planszowych", wxPoint(50, 50), wxSize(435, 597));
         frame->Show(true);
         return true;
