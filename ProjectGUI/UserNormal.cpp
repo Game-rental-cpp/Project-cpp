@@ -25,4 +25,14 @@ bool UserNormal::addUserGame(const std::string& name) {
     return true; //game has been added
 }
 
+std::string UserNormal::stringifyUser() {
+    json userGames = json::parse(User::stringifyGames()); //tworzy tablicê
+    json user = {
+        {"login", login},
+        {"password", password},
+        {"isPremium", false},
+        {"userGames", userGames}
+    };
 
+    return user.dump(4);
+}

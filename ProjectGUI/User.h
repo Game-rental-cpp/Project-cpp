@@ -44,7 +44,7 @@ public:
     void setUserGames(std::vector<UserGame>& newUserGamesVector);
     //void SetIsPremium(bool status) { isPremium = status; }
 
-    std::string stringifyUser();
+    virtual std::string stringifyUser() { return ""; };
     std::string stringifyGames();
 
 protected:

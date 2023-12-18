@@ -97,17 +97,7 @@ void User::setUserGames(std::vector<User::UserGame>& newUserGamesVector) {
     userGames = newUserGamesVector;
 }
 
-std::string User::stringifyUser() {
-    json userGames = json::parse(User::stringifyGames()); //tworzy tablicê
-    json user = {
-        {"login", login},
-        {"password", password},
-        {"isPremium", isPremium},
-        {"userGames", userGames}
-    };
 
-    return user.dump(4);
-}
 
 //this function creates a string representation of userGames vector in json format
 //used to update user games in json file 
@@ -132,4 +122,17 @@ std::string User::stringifyGames() {
 
 
 
- 
+//std::string User::stringifyUser() {
+//    return "";
+//}
+//std::string User::stringifyUser() {
+//    json userGames = json::parse(stringifyGames()); //tworzy tablicê
+//    json user = {
+//        {"login", login},
+//        {"password", password},
+//        {"isPremium", false},
+//        {"userGames", userGames}
+//    };
+//
+//    return user.dump(4);
+//}
