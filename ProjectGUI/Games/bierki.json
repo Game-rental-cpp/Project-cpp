@@ -1,7 +1,7 @@
 {
     "name": "bierki",
     "nrOfLoans": 125,
-    "quantity": 18,
+    "quantity": 19,
     "rate": 2.4000000953674316,
     "userRates": {
         "jakisLogin": 1,

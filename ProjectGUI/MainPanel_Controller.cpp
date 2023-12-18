@@ -96,10 +96,10 @@ void MainPanel_Controller::UpdateGame(wxCommandEvent& event)
         //search for the Game which name is the same as the name of clicked button
         if (gamesVector[i].GetName() == buttonName) {
 
-            wxLogMessage(wxString::Format("%.3f", gamesVector[i].GetRate()));
-            for (const auto& pair : gamesVector[i].GetUserRates()) {
+            //wxLogMessage(wxString::Format("%.3f", gamesVector[i].GetRate()));
+       /*     for (const auto& pair : gamesVector[i].GetUserRates()) {
                 wxLogMessage(wxString::Format("Key: %s, Value: %d", pair.first, pair.second));
-            }
+            }*/
 
 
             //update json file - set the current value of available games (quantity) decreased by one

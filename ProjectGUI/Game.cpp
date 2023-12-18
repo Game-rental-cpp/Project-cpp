@@ -33,16 +33,25 @@ void Game::SetNrOfLoans(int nrOfLoans) {
 
 
 void Game::SetRate(int r, std::string login) {
+    if (r == -1) return;
     // SprawdŸ, czy u¿ytkownik ju¿ oceni³ tê grê
-    //this->rate = 5.0;
-    auto it = userRates.find(login);
-    if (it != userRates.end()) {
-        // U¿ytkownik ju¿ wczeœniej oceni³ tê grê, wiêc edytuj ocenê
-        it->second = r;
+    if (r == 0) {
+        // Jeœli r wynosi 0, usuñ ocenê u¿ytkownika z mapy
+        auto it = userRates.find(login);
+        if (it != userRates.end()) {
+            userRates.erase(it);
+        }
     }
     else {
-        // Dodaj now¹ ocenê u¿ytkownika do mapy
-        userRates[login] = r;
+        auto it = userRates.find(login);
+        if (it != userRates.end()) {
+            // U¿ytkownik ju¿ wczeœniej oceni³ tê grê, wiêc edytuj ocenê
+            it->second = r;
+        }
+        else {
+            // Dodaj now¹ ocenê u¿ytkownika do mapy
+            userRates[login] = r;
+        }
     }
 
     // Zaktualizuj œredni¹ ocenê
@@ -58,8 +67,6 @@ void Game::SetRate(int r, std::string login) {
         // Jeœli userRates jest puste, ustaw rate na 0 lub inny domyœlny wartoœæ
         this->rate = 0.0f;
     }
-    //wxLogMessage("%d", rate);
-    //rate = 5;
 
     // Przyk³adowa logika obs³ugi aktualizacji pliku JSON lub innej formy przechowywania danych
     // w zale¿noœci od Twoich potrzeb

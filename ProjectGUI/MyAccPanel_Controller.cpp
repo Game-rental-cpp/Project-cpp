@@ -245,8 +245,9 @@ void MyAccPanel_Controller::RateGame(wxCommandEvent& event, std::string gameName
     std::map <std::string, int> userRates = game->GetUserRates();
     auto it = userRates.find(login);
     int currentRate;
-    if (it != userRates.end()) 
+    if (it != userRates.end())
         currentRate = it->second;
+    else currentRate = 0;
       
     GameCRUD::updateGame(game->GetName(), game->GetQuantity(), game->GetNrOfLoans(), game->GetRate(), game->GetUserRates());
 
@@ -258,6 +259,7 @@ void MyAccPanel_Controller::RateGame(wxCommandEvent& event, std::string gameName
     wxRadioButton* radio3 = new wxRadioButton(rateGameDialog, wxID_ANY, "Ocena 3", wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, "radio3");
     wxRadioButton* radio4 = new wxRadioButton(rateGameDialog, wxID_ANY, "Ocena 4", wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, "radio4");
     wxRadioButton* radio5 = new wxRadioButton(rateGameDialog, wxID_ANY, "Ocena 5", wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, "radio5");
+
 
 
     radio1->Bind(wxEVT_RADIOBUTTON, &MyAccPanel_Controller::OnRadioSelect, this);
@@ -277,10 +279,14 @@ void MyAccPanel_Controller::RateGame(wxCommandEvent& event, std::string gameName
         break;
     case 5: radio5->SetValue(true);
         break;
-    default: radio1->SetValue(true);
+    default: radio5->SetValue(true);
         break;
     }
 
+    //if (currentRate == 0) {
+    //    wxLogMessage("%d", currentRate);
+    //    radio1->SetValue(false);
+    //}
     // Dodaj radio buttony do sizer'a (jeœli u¿ywasz sizer'a)
     wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
     sizer->Add(radio1, 0, wxALL, 5);
@@ -298,7 +304,17 @@ void MyAccPanel_Controller::RateGame(wxCommandEvent& event, std::string gameName
         OnOKButtonClick(event, game, login);
         });
 
-    wxButton* resetBtn = new wxButton(rateGameDialog, wxID_OK, "Cofnij ocenê", wxPoint(100, 50), wxSize(85, 35), 0, wxDefaultValidator, "OK");
+
+    std::vector<wxRadioButton*> radioButtons = { radio1, radio2, radio3, radio4, radio5 };
+    wxButton* resetBtn = new wxButton(rateGameDialog, wxID_OK, "Cofnij ocenê", wxPoint(150, 50), wxSize(85, 35), 0, wxDefaultValidator, "OK");
+    resetBtn->Bind(wxEVT_BUTTON, [this, &radioButtons](wxCommandEvent& event) {
+        newRate = 0;
+
+        // Odznacz wszystkie przyciski radio
+        for (auto& radioButton : radioButtons) {
+            radioButton->SetValue(false);
+        }
+        });
 
     // Wyœwietlamy dialog
     int result = rateGameDialog->ShowModal();
@@ -333,7 +349,7 @@ void MyAccPanel_Controller::OnRadioSelect(wxCommandEvent& event) {
 
 void MyAccPanel_Controller::OnOKButtonClick(wxCommandEvent& event, Game* game, std::string login) {
 
-    wxLogMessage(wxString::Format("%d %s", newRate, login));
+    //wxLogMessage(wxString::Format("%d %s", newRate, login));
     game->SetRate(newRate, login);
     GameCRUD::updateGame(game->GetName(), game->GetQuantity(), game->GetNrOfLoans(), game->GetRate(), game->GetUserRates());
     newRate = -1;
