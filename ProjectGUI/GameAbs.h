@@ -7,7 +7,7 @@ class GameAbs {
 protected:
     std::string name;
     float rate;
-    std::map<std::string, int> userRates;  /
+    std::map<std::string, int> userRates;  
 
 public:
     virtual ~GameAbs() = default;

@@ -13,7 +13,7 @@ public:
     Game(const std::string& name, int quantity, int nrOfLoans, float rate, std::map<std::string, int> userRates);
     const float& GetRate() const override { return rate; };
     const std::map<std::string, int>& GetUserRates() const override {return userRates;};
-    void SetRate(int r, std::string login) override {};
+    void SetRate(int r, std::string login) override;
 
     const std::string& GetName() const override;
     int GetQuantity() const;

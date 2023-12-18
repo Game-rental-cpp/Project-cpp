@@ -1,0 +1,12 @@
+{
+    "name": "www",
+    "nrOfLoans": 122,
+    "quantity": 14,
+    "rate": 5.0,
+    "userRates": {
+        "jakisLogin": 1,
+        "key1": 1,
+        "key2": 2,
+        "key3": 3
+    }
+}

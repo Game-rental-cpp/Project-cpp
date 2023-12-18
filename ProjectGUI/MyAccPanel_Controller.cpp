@@ -166,7 +166,6 @@ void MyAccPanel_Controller::UpdateGamesPanel() {
         //Creating gamePanel
         wxPanel* gamePanel = new wxPanel(gamesPanel, wxID_ANY, wxPoint(0, i*100), wxSize(userPanel->GetSize().GetWidth(), 100));
         //gamePanel->SetBackgroundColour(COLOR_BACKGROUND_FRAME); // Set background color (optional)
-
         wxGauge* progressBar = new wxGauge(gamePanel, wxID_ANY, 100, wxPoint(0, 50), wxDefaultSize, wxGA_SMOOTH);
         progressBar->SetValue(15);
         progressBar->SetRange(30);
@@ -202,14 +201,7 @@ void MyAccPanel_Controller::UpdateGamesPanel() {
 
         //wxSlider* slider = new wxSlider(gamePanel, wxID_ANY, 0, 0, 5, wxPoint(parentEl->GetSize().GetWidth() - 10 - 100, 50), wxDefaultSize, wxSL_HORIZONTAL);
 
-        wxSlider* slider = new wxSlider(gamePanel, wxID_ANY, 0, 0, 5, wxPoint(parentEl->GetSize().GetWidth() - 10 - 100, 50), wxDefaultSize, wxSL_HORIZONTAL);
-        //slider->Bind(wxEVT_SLIDER, &MyAccPanel_Controller::OnSliderChange, this);
-        //slider->Bind(wxEVT_SCROLL_CHANGED, std::bind(&MyAccPanel_Controller::OnSliderChange, this, std::placeholders::_1, game));
         std::string login = user->getLogin();
-        slider->Bind(wxEVT_SCROLL_CHANGED, [this, gameName, login](wxScrollEvent& event) {
-            OnSliderChange(event, gameName, login);
-            });
-
 
 
         User* user = MyAccPanel_Logic::GetUser();
@@ -220,7 +212,7 @@ void MyAccPanel_Controller::UpdateGamesPanel() {
         if (it != game.GetUserRates().end()) {
             // Znaleziono ocenê dla danego u¿ytkownika
             int userRating = it->second;
-            slider->SetValue(userRating);
+            //slider->SetValue(userRating);
         }
 
     }
@@ -237,7 +229,8 @@ void MyAccPanel_Controller::OnSliderChange(wxScrollEvent& event, std::string gam
 
     game->SetRate(sliderValue, login);
 
-    wxLogMessage("Zmieniono wartoœæ suwaka dla gry : %d",  sliderValue);
+    //wxLogMessage("Zmieniono wartoœæ suwaka dla gry : %d",  sliderValue);
+    GameCRUD::updateGame(game->GetName(), game->GetQuantity(), game->GetNrOfLoans(), game->GetRate(), game->GetUserRates());
 
     // Dodatkowa logika lub przekazywanie informacji do innych funkcji
 }

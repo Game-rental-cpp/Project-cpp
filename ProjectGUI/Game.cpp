@@ -32,3 +32,36 @@ void Game::SetNrOfLoans(int nrOfLoans) {
 }
 
 
+void Game::SetRate(int r, std::string login) {
+    // SprawdŸ, czy u¿ytkownik ju¿ oceni³ tê grê
+    //this->rate = 5.0;
+    auto it = userRates.find(login);
+    if (it != userRates.end()) {
+        // U¿ytkownik ju¿ wczeœniej oceni³ tê grê, wiêc edytuj ocenê
+        it->second = r;
+    }
+    else {
+        // Dodaj now¹ ocenê u¿ytkownika do mapy
+        userRates[login] = r;
+    }
+
+    // Zaktualizuj œredni¹ ocenê
+    int totalRates = 0;
+    for (const auto& pair : userRates) {
+        totalRates += pair.second;
+    }
+
+    if (!userRates.empty()) {
+        this->rate = static_cast<float>(totalRates) / userRates.size();
+    }
+    else {
+        // Jeœli userRates jest puste, ustaw rate na 0 lub inny domyœlny wartoœæ
+        this->rate = 0.0f;
+    }
+    //wxLogMessage("%d", rate);
+    //rate = 5;
+
+    // Przyk³adowa logika obs³ugi aktualizacji pliku JSON lub innej formy przechowywania danych
+    // w zale¿noœci od Twoich potrzeb
+    //GameCRUD::updateGame(name, quantity, nrOfLoans, rate, userRates);
+}
