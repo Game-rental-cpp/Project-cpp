@@ -80,6 +80,9 @@ void MyAccPanel_Controller::OnPanelShow(wxShowEvent& event) {
         if(user->getPremium())
                 premiumInput->Hide();
 
+        wxLogMessage(wxString::Format("Wartoœæ bool: %s", user->getPremium() ? "true" : "false"));
+
+
         Layout();
     }
     event.Skip();
