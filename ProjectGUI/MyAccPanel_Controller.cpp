@@ -76,10 +76,15 @@ void MyAccPanel_Controller::OnPanelShow(wxShowEvent& event) {
         logoutLabel->Hide();
         userPanel->Show();
 
-        Layout(); 
+        // Check if user is premium
+        if(user->getPremium())
+                premiumInput->Hide();
+
+        Layout();
     }
     event.Skip();
 }
+
 
 // This metohod executes after clicking on "oddaj" button
 void MyAccPanel_Controller::UpdateUserGames(wxCommandEvent& event, std::string gameName)

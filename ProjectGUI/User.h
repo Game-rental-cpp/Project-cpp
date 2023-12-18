@@ -31,6 +31,7 @@ public:
     // Getters
     std::string getLogin() const;
     std::string getPassword() const;
+    virtual bool getPremium() const { return false; };
     const std::vector<UserGame>& getUserGames() const; // Getter for the vector of UserGame
 
 

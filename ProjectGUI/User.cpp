@@ -7,7 +7,25 @@
 using json = nlohmann::json;
 
 User::User(const std::string& login)
-    : login(login) {}
+    : login(login) {
+    std::string userStr = UserCRUD::ReadUser(login);
+
+    json jsonData = json::parse(userStr); //parsing JSON string
+    std::string passwordStr = jsonData.at("password"); //get value of key "password"
+    //isPremium password = jsonData.at("password"); //get value of key "password"
+    password = passwordStr;
+    json gamesArray = jsonData.at("userGames");
+    //if(gamesArray.size()>0)
+    // Iterowanie po elementach tablicy
+    for (const auto& game : gamesArray) {
+        // Wyci¹ganie wartoœci z obiektu w tablicy
+        User::UserGame userGame(game.at("name"));
+        userGame.SetId(game.at("id"));
+        userGame.SetDate(game.at("date"));
+        userGames.push_back(userGame);
+    }
+
+}
 
 std::string User::getLogin() const {
     return login;

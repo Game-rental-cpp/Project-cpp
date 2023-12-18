@@ -9,25 +9,8 @@ using json = nlohmann::json;
 
 UserNormal::UserNormal(const std::string& login)
     : User(login) {
-    std::string userStr = UserCRUD::ReadUser(login);
-    //wxLogMessage(wxString::Format("%s", userStr));
     setPremium(false);
-
-    json jsonData = json::parse(userStr); //parsing JSON string
-    std::string passwordStr = jsonData.at("password"); //get value of key "password"
-    //isPremium password = jsonData.at("password"); //get value of key "password"
-    password = passwordStr;
-    json gamesArray = jsonData.at("userGames");
-    //if(gamesArray.size()>0)
-    // Iterowanie po elementach tablicy
-    for (const auto& game : gamesArray) {
-        // Wyci¹ganie wartoœci z obiektu w tablicy
-        User::UserGame userGame(game.at("name"));
-        userGame.SetId(game.at("id"));
-        userGame.SetDate(game.at("date"));
-        userGames.push_back(userGame);
-    }
-
+   
 
 }
 
@@ -43,9 +26,9 @@ UserNormal::UserNormal(const std::string& login)
 //    return user.dump(4);
 //}
 
-bool UserNormal::isPremium() const {
-    return false; //user is not premium
-}
+//bool UserNormal::isPremium() const {
+//    return false; //user is not premium
+//}
 
 //bool UserNormal::addUserGame(const std::string& name) {
 //    // Normal user can hire maximally 10 games
