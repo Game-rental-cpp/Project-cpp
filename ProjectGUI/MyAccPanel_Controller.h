@@ -33,7 +33,11 @@ private:
     void UpdateGamesPanel();
     void UpdateUserGames(wxCommandEvent& event, std::string gameName);
     void OnMouseHover(wxMouseEvent& event);
-    void OnSliderChange(wxScrollEvent& event, std::string gameName, std::string login);
+    void RateGame(wxCommandEvent& event, std::string gameName, std::string login);
+    void OnOKButtonClick(wxCommandEvent& event, Game* game, std::string login);
+    void OnRadioSelect(wxCommandEvent& event);
+
+    int newRate = -1;
 
 };
 

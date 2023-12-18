@@ -179,7 +179,6 @@ void MyAccPanel_Controller::UpdateGamesPanel() {
         labelName->SetForegroundColour(COLOR_LBL);
         labelName->SetFont(SetTheFont());
 
-        std::string buttonText = "Oddaj";
 
         // Create lambda expression wihich passes additional argument (gameName)
         auto updateGamesLambda = [this, gameName](wxCommandEvent& event) {
@@ -187,6 +186,7 @@ void MyAccPanel_Controller::UpdateGamesPanel() {
             UpdateUserGames(event, gameName);
             };
 
+        std::string buttonText = "Oddaj";
         // (button name is the same as game id)
         wxButton* hireBtn = new wxButton(gamePanel, wxID_ANY, buttonText, wxPoint(parentEl->GetSize().GetWidth() - 10 - 85, 10), wxSize(85, 35), 0, wxDefaultValidator, gameId);
 
@@ -197,14 +197,28 @@ void MyAccPanel_Controller::UpdateGamesPanel() {
         hireBtn->Bind(wxEVT_BUTTON, updateGamesLambda);
         hireBtn->Bind(wxEVT_ENTER_WINDOW, &MyAccPanel_Controller::OnMouseHover, this);
         hireBtn->SetFont(SetTheFont());
-
-
-        //wxSlider* slider = new wxSlider(gamePanel, wxID_ANY, 0, 0, 5, wxPoint(parentEl->GetSize().GetWidth() - 10 - 100, 50), wxDefaultSize, wxSL_HORIZONTAL);
+        ////////////////////
+        /////////////////////
 
         std::string login = user->getLogin();
-
-
         User* user = MyAccPanel_Logic::GetUser();
+
+        auto rateGameLambda = [this, gameName, login](wxCommandEvent& event) {
+            // Call function with an additional argument
+            RateGame(event, gameName, login);
+            };
+
+        // (button name is the same as game id)
+        wxButton* rateBtn = new wxButton(gamePanel, wxID_ANY, "Oceñ", wxPoint(parentEl->GetSize().GetWidth() - 10 - 85, 50), wxSize(85, 35), 0, wxDefaultValidator, gameId);
+
+        rateBtn->SetBackgroundColour(COLOR_BACKGROUND_BTN);
+        rateBtn->SetForegroundColour(COLOR_TEXT_BTN);
+
+        //instead of direct binding with UpdateUserGames use lambda expression
+        rateBtn->Bind(wxEVT_BUTTON, rateGameLambda);
+        rateBtn->Bind(wxEVT_ENTER_WINDOW, &MyAccPanel_Controller::OnMouseHover, this);
+        rateBtn->SetFont(SetTheFont());
+
 
         auto it = game.GetUserRates().find(user->getLogin());
 
@@ -221,21 +235,113 @@ void MyAccPanel_Controller::UpdateGamesPanel() {
 
 
 
-void MyAccPanel_Controller::OnSliderChange(wxScrollEvent& event, std::string gameName, std::string login) {
+
+void MyAccPanel_Controller::RateGame(wxCommandEvent& event, std::string gameName, std::string login) {
     // Tutaj mo¿esz uzyskaæ wartoœæ suwaka za pomoc¹: event.GetPosition()
-    int sliderValue = event.GetPosition();
 
     Game* game = MyAccPanel_Logic::CreateGameFromJSON(gameName);
 
-    game->SetRate(sliderValue, login);
-
-    //wxLogMessage("Zmieniono wartoœæ suwaka dla gry : %d",  sliderValue);
+    //get current user rate
+    std::map <std::string, int> userRates = game->GetUserRates();
+    auto it = userRates.find(login);
+    int currentRate;
+    if (it != userRates.end()) 
+        currentRate = it->second;
+      
     GameCRUD::updateGame(game->GetName(), game->GetQuantity(), game->GetNrOfLoans(), game->GetRate(), game->GetUserRates());
 
-    // Dodatkowa logika lub przekazywanie informacji do innych funkcji
+    wxDialog* rateGameDialog= new wxDialog(parentEl, wxID_ANY, wxString::Format("Oceñ grê %s", gameName), wxDefaultPosition, wxSize(300, 150));
+    rateGameDialog->SetMinSize(wxSize(500, 450));
+
+    wxRadioButton* radio1 = new wxRadioButton(rateGameDialog, wxID_ANY, "Ocena 1", wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, "radio1");
+    wxRadioButton* radio2 = new wxRadioButton(rateGameDialog, wxID_ANY, "Ocena 2", wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, "radio2");
+    wxRadioButton* radio3 = new wxRadioButton(rateGameDialog, wxID_ANY, "Ocena 3", wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, "radio3");
+    wxRadioButton* radio4 = new wxRadioButton(rateGameDialog, wxID_ANY, "Ocena 4", wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, "radio4");
+    wxRadioButton* radio5 = new wxRadioButton(rateGameDialog, wxID_ANY, "Ocena 5", wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, "radio5");
+
+
+    radio1->Bind(wxEVT_RADIOBUTTON, &MyAccPanel_Controller::OnRadioSelect, this);
+    radio2->Bind(wxEVT_RADIOBUTTON, &MyAccPanel_Controller::OnRadioSelect, this);
+    radio3->Bind(wxEVT_RADIOBUTTON, &MyAccPanel_Controller::OnRadioSelect, this);
+    radio4->Bind(wxEVT_RADIOBUTTON, &MyAccPanel_Controller::OnRadioSelect, this);
+    radio5->Bind(wxEVT_RADIOBUTTON, &MyAccPanel_Controller::OnRadioSelect, this);
+
+    switch (currentRate) {
+    case 1: radio1->SetValue(true);
+        break;
+    case 2: radio2->SetValue(true);
+        break;
+    case 3: radio3->SetValue(true);
+        break;
+    case 4: radio4->SetValue(true);
+        break;
+    case 5: radio5->SetValue(true);
+        break;
+    default: radio1->SetValue(true);
+        break;
+    }
+
+    // Dodaj radio buttony do sizer'a (jeœli u¿ywasz sizer'a)
+    wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
+    sizer->Add(radio1, 0, wxALL, 5);
+    sizer->Add(radio2, 0, wxALL, 5);
+    sizer->Add(radio3, 0, wxALL, 5);
+    sizer->Add(radio4, 0, wxALL, 5);
+    sizer->Add(radio5, 0, wxALL, 5);
+
+    rateGameDialog->SetSizer(sizer);
+    rateGameDialog->Layout();
+    rateGameDialog->Fit();
+
+    wxButton* okButton = new wxButton(rateGameDialog, wxID_OK, "OK", wxPoint(50, 50), wxSize(85, 35), 0, wxDefaultValidator, "OK");
+    okButton->Bind(wxEVT_BUTTON, [this, game, login](wxCommandEvent& event) {
+        OnOKButtonClick(event, game, login);
+        });
+
+    wxButton* resetBtn = new wxButton(rateGameDialog, wxID_OK, "Cofnij ocenê", wxPoint(100, 50), wxSize(85, 35), 0, wxDefaultValidator, "OK");
+
+    // Wyœwietlamy dialog
+    int result = rateGameDialog->ShowModal();
 }
 
+void MyAccPanel_Controller::OnRadioSelect(wxCommandEvent& event) {
+    wxRadioButton* radioButton = dynamic_cast<wxRadioButton*>(event.GetEventObject());
+    if (radioButton) {
+        wxString label = radioButton->GetLabel();
+        //wxLogMessage("Wybrano ocenê: %s", label);
 
 
+        // Przyk³adowy kod, który zwraca wartoœæ int w zale¿noœci od wybranego przycisku radio
+        if (label == "Ocena 1") {
+            newRate= 1;
+        }
+        else if (label == "Ocena 2") {
+            newRate = 2;
+        }
+        else if (label == "Ocena 3") {
+            newRate = 3;
+        }
+        else if (label == "Ocena 4") {
+            newRate = 4;
+        }
+        else if (label == "Ocena 5") {
+            newRate = 5;
+        }
+    }
 
+}
 
+void MyAccPanel_Controller::OnOKButtonClick(wxCommandEvent& event, Game* game, std::string login) {
+
+    wxLogMessage(wxString::Format("%d %s", newRate, login));
+    game->SetRate(newRate, login);
+    GameCRUD::updateGame(game->GetName(), game->GetQuantity(), game->GetNrOfLoans(), game->GetRate(), game->GetUserRates());
+    newRate = -1;
+    wxButton* okButton = dynamic_cast<wxButton*>(event.GetEventObject());
+    if (okButton) {
+        wxDialog* dialog = dynamic_cast<wxDialog*>(okButton->GetParent());
+        if (dialog) {
+            dialog->EndModal(wxID_OK);  // Zamknij dialog po naciœniêciu OK
+        }
+    }
+}
