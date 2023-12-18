@@ -86,6 +86,7 @@ void MyAccPanel_Controller::UpdateUserGames(wxCommandEvent& event, std::string g
 {
     User* user = MyAccPanel_Logic::GetUser();
     wxButton* button = dynamic_cast<wxButton*>(event.GetEventObject());
+    //button name is the same as game id
     wxString buttonName = button->GetName();
     user->removeUserGame(buttonName.ToStdString());
     UpdateGamesPanel();
@@ -110,7 +111,7 @@ void MyAccPanel_Controller::UpdateGamesPanel() {
     gamesPanel = nullptr;
     int height = gamesVec.size() <= 3 ? 330 : gamesVec.size() * 80;
     gamesPanel = new wxScrolledWindow(userPanel, wxID_ANY, wxPoint(0, 15), wxSize(userPanel->GetSize().GetWidth(), 330));
-    gamesPanel->SetScrollRate(0, 10);  // Ustawienia przewijania - drugi argument to liczba pikseli na jedno przewiniêcie
+    gamesPanel->SetScrollRate(0, 10);  
     gamesPanel->SetBackgroundColour(COLOR_BACKGROUND_PANEL); // Set background color (optional)
     gamesPanel->SetVirtualSize(wxSize(410, height));
 
@@ -130,39 +131,49 @@ void MyAccPanel_Controller::UpdateGamesPanel() {
         std::string gameId = game.getId();
         std::string date = game.getDate();
 
-        wxDateTime dt;
-        wxString str = date;
-        wxString::const_iterator end;
+        wxDateTime dt; //declare wxDateTime variable
+        wxString::const_iterator end; // iterator
 
-        dt.ParseFormat(str, "%d-%m-%y__%H-%M-%S", &end);
-        wxLogMessage("Day: %d", dt.GetDay());
+        dt.ParseFormat(date, "%d-%m-%y__%H-%M-%S", &end); //define formatted wxdateTime variable
+
+        wxDateTime today = wxDateTime::Today();
+        wxTimeSpan diff = dt - today; //time difference between the day of hiring the game and today
+
+        int daysDifference = diff.GetDays(); //how many days passed from the day of hiring the game to today
+        int daysLeft = (30 - daysDifference) < 0 ? 0 : (30 - daysDifference);
+
+        //Creating gamePanel
+        wxPanel* gamePanel = new wxPanel(gamesPanel, wxID_ANY, wxPoint(0, i*100), wxSize(userPanel->GetSize().GetWidth(), 100));
+        gamePanel->SetBackgroundColour(COLOR_BACKGROUND_FRAME); // Set background color (optional)
+
+        wxGauge* progressBar = new wxGauge(gamePanel, wxID_ANY, 100, wxPoint(0, 50), wxDefaultSize, wxGA_SMOOTH);
+        progressBar->SetValue(15);
+        progressBar->SetRange(30);
 
 
-        //Creating elements inside gamesPanel
-        wxString labelText0 = wxString::Format("Nazwa gry: %s", gameName);
+        wxString labelNameText = wxString::Format("Nazwa gry: %s", gameName);
 
         // (label name is the same as game id + Lbl)
-        wxStaticText* gameLabel0 = new wxStaticText(gamesPanel, wxID_ANY, labelText0, wxPoint(10, 10 + i * 80), wxDefaultSize, 0, gameId + "Lbl0");
+        wxStaticText* labelName = new wxStaticText(gamePanel, wxID_ANY, labelNameText, wxPoint(10, 10), wxDefaultSize, 0, gameId + "Lbl0");
 
-        gameLabel0->SetForegroundColour(COLOR_LBL);
-        gameLabel0->SetFont(SetTheFont());
+        labelName->SetForegroundColour(COLOR_LBL);
+        labelName->SetFont(SetTheFont());
 
         std::string buttonText = "Oddaj";
 
-        // (button name is the same as game id)
-         // Utwórz lambda funkcjê, która przekazuje dodatkowy argument (gameName)
+        // Create lambda expression wihich passes additional argument (gameName)
         auto updateGamesLambda = [this, gameName](wxCommandEvent& event) {
-            // Wywo³aj funkcjê obs³uguj¹c¹ zdarzenie z dodatkowym argumentem
+            // Call function with an additional argument
             UpdateUserGames(event, gameName);
             };
 
         // (button name is the same as game id)
-        wxButton* hireBtn = new wxButton(gamesPanel, wxID_ANY, buttonText, wxPoint(parentEl->GetSize().GetWidth() - 10 - 85, 10 + i * 85), wxSize(85, 35), 0, wxDefaultValidator, gameId);
+        wxButton* hireBtn = new wxButton(gamePanel, wxID_ANY, buttonText, wxPoint(parentEl->GetSize().GetWidth() - 10 - 85, 10), wxSize(85, 35), 0, wxDefaultValidator, gameId);
 
         hireBtn->SetBackgroundColour(COLOR_BACKGROUND_BTN);
         hireBtn->SetForegroundColour(COLOR_TEXT_BTN);
 
-        // Zamiast bezpoœredniego bindowania do UpdateUserGames, u¿yj lambda funkcji
+        //instead of direct binding with UpdateUserGames use lambda expression
         hireBtn->Bind(wxEVT_BUTTON, updateGamesLambda);
         hireBtn->Bind(wxEVT_ENTER_WINDOW, &MyAccPanel_Controller::OnMouseHover, this);
         hireBtn->SetFont(SetTheFont());
