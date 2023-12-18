@@ -11,6 +11,7 @@ public:
     virtual ~UserPremium() = default;
 
     //std::string stringifyUser() override;
+    //std::string stringifyUser();
 
     // Getter
     bool isPremium() const;

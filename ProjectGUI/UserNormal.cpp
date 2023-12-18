@@ -11,6 +11,7 @@ UserNormal::UserNormal(const std::string& login)
     : User(login) {
     std::string userStr = UserCRUD::ReadUser(login);
     //wxLogMessage(wxString::Format("%s", userStr));
+    setPremium(false);
 
     json jsonData = json::parse(userStr); //parsing JSON string
     std::string passwordStr = jsonData.at("password"); //get value of key "password"
@@ -30,6 +31,17 @@ UserNormal::UserNormal(const std::string& login)
 
 }
 
+//std::string UserNormal::stringifyUser() {
+//    json userGames = json::parse(User::stringifyGames()); //tworzy tablicê
+//    json user = {
+//        {"login", login},
+//        {"password", password},
+//        {"isPremium", false},
+//        {"userGames", userGames}
+//    };
+//
+//    return user.dump(4);
+//}
 
 bool UserNormal::isPremium() const {
     return false; //user is not premium

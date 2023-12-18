@@ -42,7 +42,7 @@ public:
     void removeUserGame(const std::string& id);
 
     void setUserGames(std::vector<UserGame>& newUserGamesVector);
-    void SetIsPremium(bool status) { isPremium = status; }
+    //void SetIsPremium(bool status) { isPremium = status; }
 
     std::string stringifyUser();
     std::string stringifyGames();
@@ -52,4 +52,5 @@ protected:
     std::string password;
     bool isPremium = false;
     std::vector<UserGame> userGames; // Vector of UserGame
+    void setPremium(bool value) { isPremium = value; }
 };
