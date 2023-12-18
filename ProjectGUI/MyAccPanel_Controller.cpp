@@ -7,6 +7,9 @@
 #include "MyAccPanel_Logic.h"
 //#include "MainPanel_Logic.h"
 #include "Game.h"
+#include <wx/datetime.h>
+//#include <wx/timespan.h>
+
 
 MyAccPanel_Controller::MyAccPanel_Controller(MyAccPanel* parentEl, wxStaticText* logoutLabel,
     wxPanel* userPanel,
@@ -126,6 +129,14 @@ void MyAccPanel_Controller::UpdateGamesPanel() {
         std::string gameName = game.GetName();
         std::string gameId = game.getId();
         std::string date = game.getDate();
+
+        wxDateTime dt;
+        wxString str = date;
+        wxString::const_iterator end;
+
+        dt.ParseFormat(str, "%d-%m-%y__%H-%M-%S", &end);
+        wxLogMessage("Day: %d", dt.GetDay());
+
 
         //Creating elements inside gamesPanel
         wxString labelText0 = wxString::Format("Nazwa gry: %s", gameName);

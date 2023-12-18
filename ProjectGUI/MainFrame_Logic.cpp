@@ -26,8 +26,8 @@ User* MainFrame_Logic::CreateUser() {
 
     // use json to extract information and determine user type
     // For now, let's assume it's UserNormal
-    wxLogMessage(wxString::Format("%s", UserCRUD::ReadUser(login)));
-    wxLogMessage(wxString::Format("%s", UserCRUD::ReadLogged()));
+    //wxLogMessage(wxString::Format("%s", UserCRUD::ReadUser(login)));
+    //wxLogMessage(wxString::Format("%s", UserCRUD::ReadLogged()));
     //wxLogMessage(wxString::Format("User existence: %s", std::to_string(UserCRUD::DoesExist(login)).c_str()));
 
 
