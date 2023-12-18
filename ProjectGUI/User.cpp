@@ -66,6 +66,9 @@ std::string User::UserGame::getDate() const {
 }
 
 bool User::addUserGame(const std::string& name) {
+    if (!isPremium && userGames.size() == 5)
+        return false;
+
     // Create new userGame and puch it to userGames vector
     userGames.push_back(UserGame(name));
 

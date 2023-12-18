@@ -1,7 +1,7 @@
 {
     "name": "domino",
-    "nrOfLoans": 118,
-    "quantity": 69,
+    "nrOfLoans": 124,
+    "quantity": 65,
     "rate": 2.5,
     "userRates": {
         "jakisLogin": 1,

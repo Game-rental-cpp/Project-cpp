@@ -1,8 +1,8 @@
 // userpremium.cpp
 
 #include "userpremium.h"
-#include "json.hpp"
 #include "UserCRUD.h"
+#include "json.hpp"
 
 using json = nlohmann::json;
 
@@ -12,11 +12,11 @@ UserPremium::UserPremium(const std::string& login)
 }
 
 std::string UserPremium::stringifyUser() {
-    json userGames = json::parse(User::stringifyGames()); //tworzy tablicê
+    json userGames = json::parse(User::stringifyGames()); //creates an array
     json user = {
         {"login", login},
         {"password", password},
-        {"isPremium", true},
+        {"isPremium", true}, //
         {"userGames", userGames}
     };
 

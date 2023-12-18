@@ -1,7 +1,9 @@
 {
     "name": "statki",
-    "nrOfLoans": 158,
-    "quantity": 25,
+    "nrOfLoans": 161,
+    "quantity": 23,
     "rate": 2.5,
-    "userRates": { "jakisLogin": 5 }
+    "userRates": {
+        "jakisLogin": 5
+    }
 }

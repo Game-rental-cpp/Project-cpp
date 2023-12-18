@@ -51,11 +51,11 @@ MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& si
     loginBtn->SetForegroundColour(COLOR_TEXT_LOGINBTN);
 
     myAccBtn->SetFont(SetTheFont(10).MakeBold());
-    myAccBtn->SetBackgroundColour(COLOR_BACKGROUND_PANEL);
+    myAccBtn->SetBackgroundColour(COLOR_BACKGROUND_NAVBTN);
     myAccBtn->SetForegroundColour(COLOR_TEXT_BTN);
 
     goBackBtn->SetFont(SetTheFont(10).MakeBold());
-    goBackBtn->SetBackgroundColour(COLOR_BACKGROUND_PANEL);
+    goBackBtn->SetBackgroundColour(COLOR_BACKGROUND_NAVBTN);
     goBackBtn->SetForegroundColour(COLOR_TEXT_BTN);
 
     wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);

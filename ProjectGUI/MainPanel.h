@@ -12,6 +12,7 @@ public:
 
 private:
     wxStaticText* label;
+    wxStaticText* label2;
     wxChoice* sortChoice;
     wxTextCtrl* searchInput;
     wxButton* resetBtn;

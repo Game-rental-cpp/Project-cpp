@@ -6,10 +6,22 @@
 
 // Helps to set font size
 // @param int fontSize (optional)
+// @param bool bold (optional)
 // @returns wxFont
-wxFont SetTheFont(int fontSize) {
-    return wxFont(wxFontInfo(fontSize).Family(wxFONTFAMILY_DEFAULT));
+wxFont SetTheFont(int fontSize, bool bold) {
+    wxFontInfo fontInfo(fontSize);
+
+    // Ustawienie rodziny czcionki
+    fontInfo.Family(wxFONTFAMILY_DEFAULT);
+
+    // Jeœli bold == true, ustaw pogrubienie
+    if (bold) {
+        fontInfo.Bold();
+    }
+
+    return wxFont(fontInfo);
 }
+
 
 // set cursor
 void OnCursorHover(wxMouseEvent& event) {
