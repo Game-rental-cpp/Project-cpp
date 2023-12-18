@@ -144,7 +144,7 @@ void MyAccPanel_Controller::UpdateGamesPanel() {
 
         //Creating gamePanel
         wxPanel* gamePanel = new wxPanel(gamesPanel, wxID_ANY, wxPoint(0, i*100), wxSize(userPanel->GetSize().GetWidth(), 100));
-        gamePanel->SetBackgroundColour(COLOR_BACKGROUND_FRAME); // Set background color (optional)
+        //gamePanel->SetBackgroundColour(COLOR_BACKGROUND_FRAME); // Set background color (optional)
 
         wxGauge* progressBar = new wxGauge(gamePanel, wxID_ANY, 100, wxPoint(0, 50), wxDefaultSize, wxGA_SMOOTH);
         progressBar->SetValue(15);

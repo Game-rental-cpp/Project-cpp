@@ -1,12 +1,17 @@
 {
     "isPremium": false,
     "login": "userek123",
-    "password": "123",
+    "password": "",
     "userGames": [
         {
-            "date": "16-12-23__16-33-04",
-            "id": "62435f41-c92d-42ce-8c1d-883c83286923",
-            "name": "statki"
+            "date": "16-12-23__16-46-20",
+            "id": "1af12592-4e6f-4c1f-9a27-ffb3181e7ed6",
+            "name": "bierki"
+        },
+        {
+            "date": "16-12-23__16-46-24",
+            "id": "c4e30ad5-2cc7-4b42-b337-ddb142957091",
+            "name": "domino"
         }
     ]
 }
