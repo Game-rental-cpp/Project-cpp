@@ -1,27 +1,17 @@
 {
-    "isPremium": false,
+    "isPremium": true,
     "login": "jakisLogin",
     "password": "123",
     "userGames": [
-        {
-            "date": "16-12-23__18-49-10",
-            "id": "18e303c9-ea33-432e-bc78-da278a107384",
-            "name": "bierki"
-        },
-        {
-            "date": "16-12-23__18-49-12",
-            "id": "7d6e3139-6a3b-4e3f-b7a9-59f0ae0ab978",
-            "name": "domino"
-        },
         {
             "date": "16-12-23__18-49-13",
             "id": "5ae3467a-f600-4e72-9c37-385290009e81",
             "name": "statki"
         },
         {
-            "date": "16-12-23__18-49-15",
-            "id": "a6f782e0-f37a-42ba-9b09-dba7f9f4a809",
-            "name": "uno"
+            "date": "16-12-23__20-04-49",
+            "id": "47538a21-ac82-4076-ab77-7431d2d3e6ca",
+            "name": "bierki"
         }
     ]
 }

@@ -12,6 +12,6 @@ public:
 
     bool addUserGame(const std::string& name)  override;
     std::string stringifyUser() override;
-    bool getPremium() const override { return false; };
+    //bool getPremium() const override { return false; };
 
 };
