@@ -34,6 +34,7 @@ MainPanel::MainPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const 
     sortOptions.Add("Alfabetycznie (A-Z)");
     sortOptions.Add("Alfabetycznie (Z-A)");
     sortOptions.Add("Liczba wypo¿yczeñ");
+    sortOptions.Add("Ocena");
 
     sortChoice = new wxChoice(this, wxID_ANY, wxPoint(10, 75+3), wxSize(146, 175), sortOptions);
     sortChoice->SetSelection(0);

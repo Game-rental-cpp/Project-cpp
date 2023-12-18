@@ -127,6 +127,17 @@ std::vector<Game> MainPanel_Logic::sortVector(std::vector<Game> gamesVector, int
                 }
             }
            break;
+        case 3:
+            //Rate
+            for (int i = 0; i < gameCount - 1; i++) {
+                for (int j = 0; j < gameCount - i - 1; j++) {
+                    if (gamesVector[j].GetRate() < gamesVector[j + 1].GetRate()) {
+
+                        std::swap(gamesVector[j], gamesVector[j + 1]);
+                    }
+                }
+            }
+            break;
     }
     return gamesVector;
 }
