@@ -25,9 +25,14 @@ MainPanel::MainPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const 
     wxString gameCountStr = wxString::Format("%d", gameCount1);
     // Creating a label
     //Witaj w wypo¿yczalni gier planszowych! Mamy do zaoferowania n ró¿nych gier. Wybierz któr¹œ z listy i kliknij "Wypo¿ycz"
-    label = new wxStaticText(this, wxID_ANY, "Liczba ró¿nych gier: " + gameCountStr, wxPoint(10, 50));
+    label = new wxStaticText(this, wxID_ANY, "Witaj w wypo¿yczalni gier planszowych!", wxPoint(10, 10));
     label->SetForegroundColour(COLOR_LBL);
-    label->SetFont(SetTheFont());
+    label->SetFont(SetTheFont(15, true));
+
+    label2 = new wxStaticText(this, wxID_ANY, "Wybierz coœ z listy i kliknij \"wypo¿ycz\".", wxPoint(10, 40));
+    label2->SetForegroundColour(COLOR_LBL);
+    label2->SetFont(SetTheFont(13, true));
+
 
     /////////
     wxArrayString sortOptions;
@@ -36,18 +41,19 @@ MainPanel::MainPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const 
     sortOptions.Add("Liczba wypo¿yczeñ");
     sortOptions.Add("Ocena");
 
-    sortChoice = new wxChoice(this, wxID_ANY, wxPoint(10, 75+3), wxSize(146, 175), sortOptions);
+    int y = 70; //height
+    sortChoice = new wxChoice(this, wxID_ANY, wxPoint(10, y+3), wxSize(146, 175), sortOptions);
     sortChoice->SetSelection(0);
     //sortChoice->Bind(wxEVT_CHOICE, &MainPanel::OnChoice, this);
     sortChoice->SetFont(SetTheFont(11));  
     ////////////
 
-    searchInput = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxPoint(GetClientSize().GetWidth() - 10 - 30 - 190, 75), wxSize(190, 30), wxBORDER_RAISED);
+    searchInput = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxPoint(GetClientSize().GetWidth() - 10 - 30 - 190, y), wxSize(190, 30), wxBORDER_RAISED);
     searchInput->SetHint("Wyszukaj grê...");
     //searchInput->Connect(wxEVT_TEXT, wxCommandEventHandler(MainPanel::OnSearchChange), nullptr, this);
     searchInput->SetFont(SetTheFont());
 
-    resetBtn = new wxButton(this, wxID_ANY, "X", wxPoint(GetClientSize().GetWidth() - 10 - 30, 74), wxSize(30, 31), wxBORDER_NONE);
+    resetBtn = new wxButton(this, wxID_ANY, "X", wxPoint(GetClientSize().GetWidth() - 10 - 30, y-1), wxSize(30, 31), wxBORDER_NONE);
     resetBtn->SetBackgroundColour(RED);
     resetBtn->SetForegroundColour(COLOR_TEXT_BTN);
     //resetBtn->Bind(wxEVT_BUTTON, &MainPanel::OnResetButtonClick, this, wxID_ANY, wxID_ANY);

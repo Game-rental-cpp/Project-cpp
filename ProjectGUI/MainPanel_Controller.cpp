@@ -21,6 +21,7 @@ void MainPanel_Controller::BindEvents() {
     sortChoice->Bind(wxEVT_CHOICE, &MainPanel_Controller::OnChoice, this);
     resetBtn->Bind(wxEVT_BUTTON, &MainPanel_Controller::OnResetButtonClick, this, wxID_ANY, wxID_ANY);
     resetBtn->Bind(wxEVT_ENTER_WINDOW, &MainPanel_Controller::OnMouseHover, this);
+    sortChoice->Bind(wxEVT_ENTER_WINDOW, &MainPanel_Controller::OnMouseHover, this);
     //Bind(wxEVT_SHOW, &MainPanel_Controller::OnShowPanel, this);
     parentEl->Bind(wxEVT_SHOW, &MainPanel_Controller::OnShowPanel, this);
 
@@ -48,13 +49,12 @@ void MainPanel_Controller::OnShowPanel(wxShowEvent& event) {
 void MainPanel_Controller::UpdateGame(wxCommandEvent& event)
 {
     bool logged = UserCRUD::isLogged();
-
     if (!logged) {
-        wxDialog* dialog = new wxDialog(this, wxID_ANY, "Musisz siê najpierw zalogowaæ, aby móc wypo¿yczyæ grê");
-        dialog->ShowModal();
-        dialog->Destroy();
+        wxMessageDialog* signupNameErrorDlg = new wxMessageDialog(parentEl, "Aby wypo¿yczyæ grê najpierw musisz siê zalogowaæ", "Informacja");
+        signupNameErrorDlg->ShowModal();
         return;
     }
+
 
     //get the clicked button name
     wxButton* button = dynamic_cast<wxButton*>(event.GetEventObject());
@@ -65,11 +65,9 @@ void MainPanel_Controller::UpdateGame(wxCommandEvent& event)
 
 
     if (!user->addUserGame(buttonName.ToStdString())) {
-        //TODO show info
-        // 
-        //wxDialog* dialog = new wxDialog(this, wxID_ANY, "Przekroczono maksymaln¹ iloœæ gier wypo¿yczonych na raz. Aby wypo¿yczyæ now¹ grê zostañ cz³onkiem premium lub oddaj któr¹œ z ju¿ wypo¿yczonych gier.");
-        //dialog->ShowModal();
-        //dialog->Destroy();
+        wxMessageDialog* signupNameErrorDlg = new wxMessageDialog(parentEl, "Przekroczono maksymaln¹ iloœæ gier wypo¿yczonych na raz. Aby wypo¿yczyæ now¹ grê zostañ cz³onkiem premium lub oddaj któr¹œ z ju¿ wypo¿yczonych gier.", "Informacja");
+        signupNameErrorDlg->ShowModal();
+
         return;
     }
 
@@ -182,21 +180,21 @@ void MainPanel_Controller::UpdateGamesPanel(std::vector<Game> gamesVector)
 
 
     gamesPanel = nullptr;
-    int height = filteredVector.size() <= 3 ? 330 : filteredVector.size() * 80;
-    gamesPanel = new wxScrolledWindow(parentEl, wxID_ANY, wxPoint(0, 150), wxSize(parentEl->GetSize().GetWidth(), 330));
+    int height = filteredVector.size() <= 3 ? 330 : filteredVector.size() * 85;
+    gamesPanel = new wxScrolledWindow(parentEl, wxID_ANY, wxPoint(0, 120), wxSize(parentEl->GetSize().GetWidth(), 380));
     gamesPanel->SetScrollRate(0, 10);  // Ustawienia przewijania - drugi argument to liczba pikseli na jedno przewiniêcie
+    //gamesPanel->SetScrollbars(10);
     //gamesPanel->Hide();
-    gamesPanel->SetBackgroundColour(RED); // Set background color (optional)
+    gamesPanel->SetBackgroundColour(COLOR_BACKGROUND_PANEL); // Set background color (optional)
     gamesPanel->SetVirtualSize(wxSize(410, height));
 
 
 
-
     if (filteredVector.size() == 0) {
-        wxStaticText* noGameLabel = new wxStaticText(gamesPanel, wxID_ANY, "¯adna z gier nie spe³nia warunków wyszukiwania", wxPoint(33, 150), wxDefaultSize);
+        wxStaticText* noGameLabel = new wxStaticText(gamesPanel, wxID_ANY, "¯adna z gier nie spe³nia warunków wyszukiwania", wxPoint(21, 150), wxDefaultSize);
         noGameLabel->SetForegroundColour(COLOR_LBL);
         //noGameLabel->SetBackgroundColour(COLOR_BACKGROUND_LOGINBTN);
-        noGameLabel->SetFont(SetTheFont());
+        noGameLabel->SetFont(SetTheFont(12, true));
     }
 
 
@@ -212,27 +210,29 @@ void MainPanel_Controller::UpdateGamesPanel(std::vector<Game> gamesVector)
         int nrOfLoans = game.GetNrOfLoans();
         float rate = game.GetRate();
         //int x = rand() % (100); // Losowa pozycja x na panelu
-        //int y = rand() % (200); // Losowa pozycja y na panelu
 
+        //wxPanel* gamePanel = new wxPanel(gamesPanel, wxID_ANY, wxPoint(0, i * 100), wxSize(gamesPanel->GetSize().GetWidth(), 90));
+        //gamePanel->SetBackgroundColour(COLOR_TEXT_BTN);
+        // 
         //Creating elements inside gamesPanel
-        wxString labelText0 = wxString::Format("Nazwa gry: %s", gameName);
+        wxString labelText0 = wxString::Format("%s", gameName);
         wxString labelText1 = wxString::Format("Iloœæ dostêpnych sztuk: %d", gameQuantity);
         wxString labelText2 = wxString::Format("Ca³kowita iloœæ wypo¿yczeñ: %d", nrOfLoans);
-        wxString labelText3 = wxString::Format("Œrednia ocena: %.2f", rate);
+        wxString labelText3 = wxString::Format("ocena: %.2f/5", rate);
         // (label name is the same as game name + Lbl)
-        wxStaticText* gameLabel0 = new wxStaticText(gamesPanel, wxID_ANY, labelText0, wxPoint(10, 10 + i * 80), wxDefaultSize, 0, gameName + "Lbl0");
-        wxStaticText* gameLabel1 = new wxStaticText(gamesPanel, wxID_ANY, labelText1, wxPoint(10, 30 + i * 80), wxDefaultSize, 0, gameName + "Lbl1");
-        wxStaticText* gameLabel2 = new wxStaticText(gamesPanel, wxID_ANY, labelText2, wxPoint(10, 50 + i * 80), wxDefaultSize, 0, gameName + "Lbl2");
-        wxStaticText* gameLabel3 = new wxStaticText(gamesPanel, wxID_ANY, labelText3, wxPoint(10, 70 + i * 80), wxDefaultSize, 0, gameName + "Lbl3");
+        wxStaticText* gameLabel0 = new wxStaticText(gamesPanel, wxID_ANY, labelText0, wxPoint(50, 10 + i * 80), wxDefaultSize, 0, gameName + "Lbl0");
+        wxStaticText* gameLabel1 = new wxStaticText(gamesPanel, wxID_ANY, labelText1, wxPoint(50, 40 + i * 80), wxDefaultSize, 0, gameName + "Lbl1");
+        wxStaticText* gameLabel2 = new wxStaticText(gamesPanel, wxID_ANY, labelText2, wxPoint(50, 60 + i * 80), wxDefaultSize, 0, gameName + "Lbl2");
+        wxStaticText* gameLabel3 = new wxStaticText(gamesPanel, wxID_ANY, labelText3, wxPoint(130, 15 + i * 80), wxDefaultSize, 0, gameName + "Lbl3");
 
         gameLabel0->SetForegroundColour(COLOR_LBL);
-        gameLabel0->SetFont(SetTheFont());
+        gameLabel0->SetFont(SetTheFont(15, true));
         gameLabel1->SetForegroundColour(COLOR_LBL);
         gameLabel1->SetFont(SetTheFont());
         gameLabel2->SetForegroundColour(COLOR_LBL);
         gameLabel2->SetFont(SetTheFont());        
         gameLabel3->SetForegroundColour(COLOR_LBL);
-        gameLabel3->SetFont(SetTheFont());
+        gameLabel3->SetFont(SetTheFont(13));
 
 
         //wxStaticText* gameLabel = new wxStaticText(gamesPanel, wxID_ANY, labelText, wxPoint(x, y));
@@ -240,7 +240,7 @@ void MainPanel_Controller::UpdateGamesPanel(std::vector<Game> gamesVector)
         std::string buttonText = "Wypo¿ycz";
 
         // (button name is the same as game name)
-        wxButton* hireBtn = new wxButton(gamesPanel, wxID_ANY, buttonText, wxPoint(parentEl->GetSize().GetWidth() - 10 - 85, 10 + i * 85), wxSize(85, 35), 0, wxDefaultValidator, gameName);
+        wxButton* hireBtn = new wxButton(gamesPanel, wxID_ANY, buttonText, wxPoint(parentEl->GetSize().GetWidth() - 10 - 150, 10 + i * 80), wxSize(85, 35), 0, wxDefaultValidator, gameName);
 
         hireBtn->SetBackgroundColour(COLOR_BACKGROUND_BTN);
         hireBtn->SetForegroundColour(COLOR_TEXT_BTN);
