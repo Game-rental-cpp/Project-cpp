@@ -88,6 +88,10 @@ void User::removeUserGame(const std::string& id) {
     UserCRUD::UpdateUser(login, stringifyUser());
 }
 
+void User::setPremium(bool value) {
+    isPremium = value;
+    UserCRUD::UpdateUser(login, stringifyUser());
+}
 
 void User::setUserGames(std::vector<User::UserGame>& newUserGamesVector) {
     userGames = newUserGamesVector;

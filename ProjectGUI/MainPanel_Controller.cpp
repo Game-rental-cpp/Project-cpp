@@ -65,9 +65,11 @@ void MainPanel_Controller::UpdateGame(wxCommandEvent& event)
 
 
     if (!user->addUserGame(buttonName.ToStdString())) {
-        wxDialog* dialog = new wxDialog(this, wxID_ANY, "Przekroczono maksymaln¹ iloœæ gier wypo¿yczonych na raz. Aby wypo¿yczyæ now¹ grê zostañ cz³onkiem premium lub oddaj któr¹œ z ju¿ wypo¿yczonych gier.");
-        dialog->ShowModal();
-        dialog->Destroy();
+        //TODO show info
+        // 
+        //wxDialog* dialog = new wxDialog(this, wxID_ANY, "Przekroczono maksymaln¹ iloœæ gier wypo¿yczonych na raz. Aby wypo¿yczyæ now¹ grê zostañ cz³onkiem premium lub oddaj któr¹œ z ju¿ wypo¿yczonych gier.");
+        //dialog->ShowModal();
+        //dialog->Destroy();
         return;
     }
 

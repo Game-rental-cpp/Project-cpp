@@ -20,7 +20,6 @@ public:
         void SetDate(std::string dateToSet) { date = dateToSet; }
     private:
         std::string id; // game unique id
-        //std::string name; // name
         std::string date; // date of loan
     };
 
@@ -31,7 +30,7 @@ public:
     // Getters
     std::string getLogin() const;
     std::string getPassword() const;
-    virtual bool getPremium() const { return false; };
+    virtual bool getPremium() const { return false; }; //you can also have return isPremium;
     const std::vector<UserGame>& getUserGames() const; // Getter for the vector of UserGame
 
 
@@ -53,5 +52,5 @@ protected:
     std::string password;
     bool isPremium = false;
     std::vector<UserGame> userGames; // Vector of UserGame
-    void setPremium(bool value) { isPremium = value; }
+    void setPremium(bool value);
 };

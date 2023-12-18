@@ -1,5 +1,5 @@
 {
-    "isPremium": false,
+    "isPremium": true,
     "login": "userLogin",
     "password": "123",
     "userGames": [

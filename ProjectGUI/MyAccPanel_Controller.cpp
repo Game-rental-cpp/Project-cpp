@@ -5,7 +5,7 @@
 #include "UserNormal.h"
 #include "UserPremium.h"
 #include "MyAccPanel_Logic.h"
-//#include "MainPanel_Logic.h"
+#include "MainPanel_Logic.h"
 #include "Game.h"
 #include <wx/datetime.h>
 //#include <wx/timespan.h>
@@ -42,6 +42,15 @@ void MyAccPanel_Controller::OnEnterPressed(wxKeyEvent& event) {
         premiumInput->SetValue("");
 
         if (enteredText == "PREMIUM") {
+            User* user = MyAccPanel_Logic::GetUser();
+            std::string login = user->getLogin();
+            delete user;
+            user = nullptr;
+
+            user = new UserPremium(login);
+            MainPanel_Logic::SetUser(user);
+            MyAccPanel_Logic::SetUser(user);
+
             premiumInput->Hide();
             wxLogMessage("Jesteœ cz³onkiem premium");
         }
@@ -50,6 +59,7 @@ void MyAccPanel_Controller::OnEnterPressed(wxKeyEvent& event) {
     }
     event.Skip();
 }
+
 
 void MyAccPanel_Controller::LogOut(wxCommandEvent& event) {
     userPanel->Hide();
@@ -79,8 +89,10 @@ void MyAccPanel_Controller::OnPanelShow(wxShowEvent& event) {
         // Check if user is premium
         if(user->getPremium())
                 premiumInput->Hide();
+        else 
+                premiumInput->Show();
 
-        wxLogMessage(wxString::Format("Wartoœæ bool: %s", user->getPremium() ? "true" : "false"));
+        //wxLogMessage(wxString::Format("Wartoœæ bool: %s", user->getPremium() ? "true" : "false"));
 
 
         Layout();
