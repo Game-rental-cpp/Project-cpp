@@ -9,12 +9,12 @@
 
 //panels
 //#define COLOR_BACKGROUND_PANEL wxColour(250, 250, 250)
-#define COLOR_BACKGROUND_PANEL wxColour(23, 27, 33)
+#define COLOR_BACKGROUND_PANEL wxColour(250, 240, 250)
 #define COLOR_BACKGROUND_FRAME wxColour(230, 220, 230)
 //#define COLOR_BACKGROUND_FRAME wxColour(14, 17, 22)
 
 // buttons
-#define COLOR_BACKGROUND_BTN wxColour(100, 100, 100)
+#define COLOR_BACKGROUND_BTN wxColour(66, 2, 60)
 #define COLOR_TEXT_BTN wxColour(255, 255, 255)
 
 #define COLOR_BACKGROUND_NAVBTN wxColour(23, 27, 33)
@@ -25,7 +25,7 @@
 
 
 //labels
-#define COLOR_LBL wxColour(255, 255, 255)
+#define COLOR_LBL wxColour(23, 27, 33)
 #define FONT_SIZE_LBL 12
 
 

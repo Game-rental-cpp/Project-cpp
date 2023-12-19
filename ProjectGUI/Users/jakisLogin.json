@@ -4,9 +4,14 @@
     "password": "123",
     "userGames": [
         {
-            "date": "18-12-23__21-25-44",
-            "id": "b9fdcd17-ca77-4ea3-ba1c-20a2dec4cb6b",
+            "date": "15-11-23__17-36-44",
+            "id": "8cd7f602-6eb5-4095-aa15-ae20ed917c4d",
             "name": "bierki"
+        },
+        {
+            "date": "20-12-23__17-46-06",
+            "id": "1fbc1600-215d-4c8b-a6ac-ccdca76a7c7c",
+            "name": "domino"
         }
     ]
 }
