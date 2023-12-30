@@ -73,7 +73,7 @@ bool  LoginPanel_Logic::SignupValidated(std::string signupName, std::string sign
     int nameLength = signupName.size();
 
     // Check if username meets length requirements
-    if (nameLength < MIN_CHAR_PASSWORD || nameLength > MAX_CHAR_PASSWORD)
+    if (nameLength < MIN_CHAR_NAME || nameLength > MAX_CHAR_NAME)
         signupNameErrorMessage += "Login musi zawierać od " + std::to_string(MIN_CHAR_PASSWORD) + " do " + std::to_string(MAX_CHAR_PASSWORD) + " znaków.\n";
 
     // Check if username meets character content requirements
