@@ -2,6 +2,7 @@
 #include "LoginPanel.h"
 #include "LoginPanel_Logic.h"
 #include "UserCRUD.h"
+#include "Style.h"
 #include <wx/wx.h>
 
 
@@ -9,33 +10,44 @@
 LoginPanel::LoginPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size)
     : wxPanel(parent, id, pos, size)
 {
-    successLabel = new wxStaticText(this, wxID_ANY, "Zalogowano", wxPoint(10, 50));
-    formsPanel = new wxPanel(this, wxID_ANY, wxPoint(10, 50), wxSize(410, 500));
+    successLabel = new wxStaticText(this, wxID_ANY, "Zalogowano", wxPoint(145, 120));
+    successLabel->SetFont(SetTheFont(15, true));
+
+    formsPanel = new wxPanel(this, wxID_ANY, wxPoint(10, 10), wxSize(410, 500));
 
     // Log-in form
-    loginPrompt = new wxStaticText(formsPanel, wxID_ANY, "Zaloguj się", wxPoint(10, 10));
+    loginPrompt = new wxStaticText(formsPanel, wxID_ANY, "Zaloguj się", wxPoint(150, 0));
+    loginPrompt->SetFont(SetTheFont(12, true));
 
-    loginName = new wxTextCtrl(formsPanel, wxID_ANY, wxEmptyString, wxPoint(10, 40), wxSize(200, 20));
+    loginName = new wxTextCtrl(formsPanel, wxID_ANY, wxEmptyString, wxPoint(80, 30), wxSize(220, 22));
     loginName->SetHint("Login");
+    loginName->SetFont(SetTheFont(11));
 
-    loginPassword = new wxTextCtrl(formsPanel, wxID_ANY, wxEmptyString, wxPoint(10, 70), wxSize(200, 20), wxTE_PASSWORD);
+    loginPassword = new wxTextCtrl(formsPanel, wxID_ANY, wxEmptyString, wxPoint(80, 60), wxSize(220, 22), wxTE_PASSWORD);
     loginPassword->SetHint("Hasło");
+    loginPassword->SetFont(SetTheFont(11));
 
-    loginBtn = new wxButton(formsPanel, wxID_ANY, "Zaloguj", wxPoint(10, 100));
+    loginBtn = new wxButton(formsPanel, wxID_ANY, "Zaloguj", wxPoint(140, 95));
+    loginBtn->SetFont(SetTheFont(11));
 
     // Sign-up form
-    loginPrompt = new wxStaticText(formsPanel, wxID_ANY, "Nie masz konta? Zarejestruj się!", wxPoint(10, 160));
+    signupPrompt = new wxStaticText(formsPanel, wxID_ANY, "Nie masz konta? Zarejestruj się!", wxPoint(80, 140));
+    signupPrompt->SetFont(SetTheFont(12, true));
 
-    signupName = new wxTextCtrl(formsPanel, wxID_ANY, wxEmptyString, wxPoint(10, 190), wxSize(200, 20));
+    signupName = new wxTextCtrl(formsPanel, wxID_ANY, wxEmptyString, wxPoint(80, 170), wxSize(220, 22));
     signupName->SetHint("Login");
+    signupName->SetFont(SetTheFont(11));
 
-    signupPassword1 = new wxTextCtrl(formsPanel, wxID_ANY, wxEmptyString, wxPoint(10, 220), wxSize(200, 20), wxTE_PASSWORD);
+    signupPassword1 = new wxTextCtrl(formsPanel, wxID_ANY, wxEmptyString, wxPoint(80, 200), wxSize(220, 22), wxTE_PASSWORD);
     signupPassword1->SetHint("Hasło");
+    signupPassword1->SetFont(SetTheFont(11));
 
-    signupPassword2 = new wxTextCtrl(formsPanel, wxID_ANY, wxEmptyString, wxPoint(10, 250), wxSize(200, 20), wxTE_PASSWORD);
+    signupPassword2 = new wxTextCtrl(formsPanel, wxID_ANY, wxEmptyString, wxPoint(80, 230), wxSize(220, 22), wxTE_PASSWORD);
     signupPassword2->SetHint("Potwierdz hasło");
+    signupPassword2->SetFont(SetTheFont(11));
 
-    signupBtn = new wxButton(formsPanel, wxID_ANY, "Zarejestruj", wxPoint(10, 280));
+    signupBtn = new wxButton(formsPanel, wxID_ANY, "Zarejestruj", wxPoint(140, 265));
+    signupBtn->SetFont(SetTheFont(11));
 
 
     loginBtn->Bind(wxEVT_BUTTON, &LoginPanel::OnLogin, this);
