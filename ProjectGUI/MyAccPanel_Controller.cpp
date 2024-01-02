@@ -165,27 +165,40 @@ void MyAccPanel_Controller::UpdateGamesPanel() {
         dt.ParseFormat(date, "%d-%m-%y__%H-%M-%S", &end); //define formatted wxdateTime variable
 
         wxDateTime today = wxDateTime::Today();
-        wxTimeSpan diff = dt - today; //time difference between the day of hiring the game and today
+        wxTimeSpan diff = today - dt; //time difference between the day of hiring the game and today
+
+        int days; //How many days the user has to return
+        if (user->getPremium())
+            days = 60;
+        else days = 30;
 
         int daysDifference = diff.GetDays(); //how many days passed from the day of hiring the game to today
-        int daysLeft = (30 - daysDifference) < 0 ? 0 : (30 - daysDifference);
+        int daysLeft = (days - daysDifference) < 0 ? 0 : (days - daysDifference);
+
 
         //Creating gamePanel
         wxPanel* gamePanel = new wxPanel(gamesPanel, wxID_ANY, wxPoint(0, i*100), wxSize(userPanel->GetSize().GetWidth(), 100));
         //gamePanel->SetBackgroundColour(COLOR_BACKGROUND_FRAME); // Set background color (optional)
-        wxGauge* progressBar = new wxGauge(gamePanel, wxID_ANY, 100, wxPoint(0, 50), wxDefaultSize, wxGA_SMOOTH);
-        progressBar->SetValue(15);
-        progressBar->SetRange(30);
+        wxGauge* progressBar = new wxGauge(gamePanel, wxID_ANY, 100, wxPoint(50, 65), wxDefaultSize, wxGA_SMOOTH);
+        progressBar->SetValue(daysLeft);
+        if(user->getPremium())
+            progressBar->SetRange(60);
+        else 
+            progressBar->SetRange(30);
 
+        //gamePanel->SetBackgroundColour(wxColour(240, 240, 240));
 
-        wxString labelNameText = wxString::Format("Nazwa gry: %s", gameName);
-
+        wxString labelNameText = wxString::Format("%s", gameName);
         // (label name is the same as game id + Lbl)
-        wxStaticText* labelName = new wxStaticText(gamePanel, wxID_ANY, labelNameText, wxPoint(10, 10), wxDefaultSize, 0, gameId + "Lbl0");
-
+        wxStaticText* labelName = new wxStaticText(gamePanel, wxID_ANY, labelNameText, wxPoint(50, 10), wxDefaultSize, 0, gameId + "Lbl0");
         labelName->SetForegroundColour(COLOR_LBL);
-        labelName->SetFont(SetTheFont());
+        labelName->SetFont(SetTheFont(15, true));
 
+        wxString labelTimeText = wxString::Format("Do oddania zosta³o ci %d dni", daysLeft);
+        // (label name is the same as game id + Lbl)
+        wxStaticText* labelTime = new wxStaticText(gamePanel, wxID_ANY, labelTimeText, wxPoint(50, 40), wxDefaultSize, 0, gameId + "Lbl1");
+        labelTime->SetForegroundColour(COLOR_LBL);
+        labelTime->SetFont(SetTheFont(12));
 
         // Create lambda expression wihich passes additional argument (gameName)
         auto updateGamesLambda = [this, gameName](wxCommandEvent& event) {
@@ -195,7 +208,7 @@ void MyAccPanel_Controller::UpdateGamesPanel() {
 
         std::string buttonText = "Oddaj";
         // (button name is the same as game id)
-        wxButton* hireBtn = new wxButton(gamePanel, wxID_ANY, buttonText, wxPoint(parentEl->GetSize().GetWidth() - 10 - 85, 10), wxSize(85, 35), 0, wxDefaultValidator, gameId);
+        wxButton* hireBtn = new wxButton(gamePanel, wxID_ANY, buttonText, wxPoint(parentEl->GetSize().GetWidth() - 10 - 120, 10), wxSize(85, 35), 0, wxDefaultValidator, gameId);
 
         hireBtn->SetBackgroundColour(COLOR_BACKGROUND_BTN);
         hireBtn->SetForegroundColour(COLOR_TEXT_BTN);
@@ -216,7 +229,7 @@ void MyAccPanel_Controller::UpdateGamesPanel() {
             };
 
         // (button name is the same as game id)
-        wxButton* rateBtn = new wxButton(gamePanel, wxID_ANY, "Oceñ", wxPoint(parentEl->GetSize().GetWidth() - 10 - 85, 50), wxSize(85, 35), 0, wxDefaultValidator, gameId);
+        wxButton* rateBtn = new wxButton(gamePanel, wxID_ANY, "Oceñ", wxPoint(parentEl->GetSize().GetWidth() - 10 - 120, 50), wxSize(85, 35), 0, wxDefaultValidator, gameId);
 
         rateBtn->SetBackgroundColour(COLOR_BACKGROUND_BTN);
         rateBtn->SetForegroundColour(COLOR_TEXT_BTN);
