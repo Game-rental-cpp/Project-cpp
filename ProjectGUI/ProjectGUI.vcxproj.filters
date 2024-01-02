@@ -195,6 +195,13 @@
     <None Include="Users\userek123.json">
       <Filter>Pliki zasobów\Users</Filter>
     </None>
+    <None Include="ubongo.json" />
+    <None Include="monopoli.json">
+      <Filter>Pliki zasobów\Games</Filter>
+    </None>
+    <None Include="dixit.json">
+      <Filter>Pliki zasobów\Games</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Games\statki.json">
