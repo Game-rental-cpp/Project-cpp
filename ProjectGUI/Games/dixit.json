@@ -1,13 +1,12 @@
 {
-  "name": "dixit",
-  "nrOfLoans": 111,
-  "quantity": 19,
-  "rate": 3.19999,
-  "userRates": {
-    "jakisLogin": 4,
-    "key1": 1,
-    "key2": 4,
-    "key3": 2,
-    "userek123": 5
-  }
+    "name": "dixit",
+    "nrOfLoans": 112,
+    "quantity": 19,
+    "rate": 3.1999900341033936,
+    "userRates": {
+        "jakisLogin": 4,
+        "key1": 4,
+        "key2": 2,
+        "userek123": 5
+    }
 }

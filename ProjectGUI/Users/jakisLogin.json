@@ -4,13 +4,13 @@
     "password": "123",
     "userGames": [
         {
-            "date": "15-11-23__17-36-44",
-            "id": "8cd7f602-6eb5-4095-aa15-ae20ed917c4d",
-            "name": "bierki"
+            "date": "03-01-24__17-33-29",
+            "id": "5706d189-28ee-4847-8317-9e970e649ba7",
+            "name": "cluedo"
         },
         {
-            "date": "20-12-23__17-46-06",
-            "id": "1fbc1600-215d-4c8b-a6ac-ccdca76a7c7c",
+            "date": "03-01-24__17-33-31",
+            "id": "452720e3-2b9b-4be3-932b-a0aed05c4212",
             "name": "domino"
         }
     ]

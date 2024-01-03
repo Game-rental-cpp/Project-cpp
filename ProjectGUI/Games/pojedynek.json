@@ -1,0 +1,11 @@
+{
+  "name": "pojedynek",
+  "nrOfLoans": 26,
+  "quantity": 6,
+  "rate": 2.666672357,
+  "userRates": {
+    "key1": 3,
+    "key2": 3,
+    "key3": 2
+  }
+}

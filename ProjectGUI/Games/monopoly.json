@@ -1,12 +1,12 @@
 {
-  "name": "monopoly",
-  "nrOfLoans": 210,
-  "quantity": 19,
-  "rate": 4.499999,
-  "userRates": {
-    "jakisLogin": 5,
-    "key1": 5,
-    "key2": 4,
-    "userek123": 4
-  }
+    "name": "monopoly",
+    "nrOfLoans": 211,
+    "quantity": 19,
+    "rate": 4.499994277954102,
+    "userRates": {
+        "key1": 5,
+        "key2": 4,
+        "key3": 5,
+        "userek123": 4
+    }
 }

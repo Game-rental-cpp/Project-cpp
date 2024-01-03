@@ -195,13 +195,47 @@
     <None Include="Users\userek123.json">
       <Filter>Pliki zasobów\Users</Filter>
     </None>
-    <None Include="ubongo.json" />
-    <None Include="monopoli.json">
+    <None Include="Games\ubongo.json">
       <Filter>Pliki zasobów\Games</Filter>
     </None>
-    <None Include="dixit.json">
+    <None Include="Games\dixit.json">
       <Filter>Pliki zasobów\Games</Filter>
     </None>
+    <None Include="Games\monopoly.json">
+      <Filter>Pliki zasobów\Games</Filter>
+    </None>
+    <None Include="Games\tajniacy.json">
+      <Filter>Pliki zasobów\Games</Filter>
+    </None>
+    <None Include="Games\scrabble.json">
+      <Filter>Pliki zasobów\Games</Filter>
+    </None>
+    <None Include="Games\catan.json">
+      <Filter>Pliki zasobów\Games</Filter>
+    </None>
+    <None Include="Games\ego.json">
+      <Filter>Pliki zasobów\Games</Filter>
+    </None>
+    <None Include="Games\dobble.json">
+      <Filter>Pliki zasobów\Games</Filter>
+    </None>
+    <None Include="Games\taboo.json">
+      <Filter>Pliki zasobów\Games</Filter>
+    </None>
+    <None Include="Games\cluedo.json">
+      <Filter>Pliki zasobów\Games</Filter>
+    </None>
+    <None Include="Games\jenga.json">
+      <Filter>Pliki zasobów\Games</Filter>
+    </None>
+    <None Include="Games\pojedynek.json">
+      <Filter>Pliki zasobów\Games</Filter>
+    </None>
+    <None Include="Games\twister.json">
+      <Filter>Pliki zasobów\Games</Filter>
+    </None>
+    <None Include="Games\cortex.json" />
+    <None Include="Games\rummikub.json" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Games\statki.json">

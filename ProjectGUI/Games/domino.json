@@ -1,6 +1,6 @@
 {
     "name": "domino",
-    "nrOfLoans": 133,
+    "nrOfLoans": 134,
     "quantity": 64,
     "rate": 2.5,
     "userRates": {

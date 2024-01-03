@@ -1,0 +1,13 @@
+{
+    "name": "cluedo",
+    "nrOfLoans": 93,
+    "quantity": 20,
+    "rate": 4.196537494659424,
+    "userRates": {
+        "jakisLogin": 4,
+        "key1": 5,
+        "key2": 4,
+        "key3": 5,
+        "key4": 3
+    }
+}
