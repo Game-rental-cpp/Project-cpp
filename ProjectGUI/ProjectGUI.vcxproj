@@ -200,6 +200,7 @@
     <None Include="Users\jakisLogin.json" />
     <None Include="Users\userek123.json" />
     <None Include="Users\userLogin.json" />
+	<None Include="Users\aba.json" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Games\bierki.json" />
