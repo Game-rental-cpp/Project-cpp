@@ -50,13 +50,16 @@ LoginPanel::LoginPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, cons
 
     // TODO Username requirements
     std::string Requirements;
-    Requirements += "Login musi zawierać od " + std::to_string(MIN_CHAR_NAME) + " do " + std::to_string(MAX_CHAR_NAME) + " znaków " 
-        + "i składać się tylko z cyfr,\n podkreśleń, myślników oraz małych i dużych liter alfabetu angielskiego.\n";
-    wxStaticText* nameReqsLabel = new wxStaticText(formsPanel, wxID_ANY, Requirements, wxPoint(10, 300));
-    // TODO Password requirements
-    std::string passReqs = "Hasło musi zawierać: \n \t od";
-    wxStaticText* passReqsLabel = new wxStaticText(formsPanel, wxID_ANY, passReqs, wxPoint(70, 340));
-
+    Requirements += "* Login musi zawierać od " + std::to_string(MIN_CHAR_NAME) + " do " + std::to_string(MAX_CHAR_NAME) + " znaków " 
+        + "i składać się tylko z cyfr,\n podkreśleń, myślników oraz małych i dużych liter alfabetu angielskiego.\n"
+        + "\n* Hasło musi zawierać: \n \t" 
+        + "- od " + std::to_string(MIN_CHAR_PASSWORD) + " do " + std::to_string(MAX_CHAR_PASSWORD) + " znaków \n \t"
+        + "- małe litery\n \t"
+        + "- duże litery\n \t"
+        + "- cyfry\n \t"
+        + "- znaki specjalne";
+    wxStaticText* reqsLabel = new wxStaticText(formsPanel, wxID_ANY, Requirements, wxPoint(10, 310));
+   
     loginBtn->Bind(wxEVT_BUTTON, &LoginPanel::OnLogin, this);
     signupBtn->Bind(wxEVT_BUTTON, &LoginPanel::OnSignup, this);
 
