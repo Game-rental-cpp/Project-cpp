@@ -32,10 +32,10 @@
 #define RED wxColour(220, 50, 50)
 
 // character limits for usernames and passwords
-//#define MIN_CHAR_NAME 3
-//#define MAX_CHAR_NAME 15
-//#define MIN_CHAR_PASSWORD 8
-//#define MAX_CHAR_PASSWORD 40
+#define MIN_CHAR_NAME 3
+#define MAX_CHAR_NAME 15
+#define MIN_CHAR_PASSWORD 8
+#define MAX_CHAR_PASSWORD 40
 
 // Deklaracja funkcji GetLabelFont
 wxFont SetTheFont(int fontSize = FONT_SIZE_LBL, bool bold=false);
