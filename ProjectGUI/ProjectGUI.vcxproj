@@ -157,6 +157,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameAbs.h" />
     <ClInclude Include="GameCRUD.h" />
+    <ClInclude Include="LoginPanel_Length_Reqs.h" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="LoginPanel_Logic.h" />
     <ClInclude Include="MainFrame_Controller.h" />

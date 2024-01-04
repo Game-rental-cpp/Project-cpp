@@ -1,6 +1,8 @@
 ﻿#include "LoginPanel.h"
 #include "LoginPanel_Logic.h"
+//#include "LoginPanel_Length_Reqs.h"
 #include <wx/wx.h>
+#include "Style.h"
 #include "UserCRUD.h"
 #include "MainPanel_Logic.h"
 #include "MyAccPanel_Logic.h"
@@ -10,6 +12,11 @@
 #include "json.hpp"
 
 using json = nlohmann::json;
+
+constexpr int MIN_CHAR_NAME = 3;
+constexpr int MAX_CHAR_NAME = 15;
+constexpr int MIN_CHAR_PASSWORD = 8;
+constexpr int MAX_CHAR_PASSWORD = 40;
 
 // Log in attempt validation
 bool LoginPanel_Logic::LoginValidated(std::string loginName, std::string loginPassword, LoginPanel* loginPanel) {
@@ -34,8 +41,11 @@ bool LoginPanel_Logic::LoginValidated(std::string loginName, std::string loginPa
 
     // Log in user if there aren't any issues
     UserCRUD::Update_logged(loginName);
-    //TODO: do the same for UserPremium
-    User* user = new UserNormal(loginName);
+    User* user = nullptr;
+    if (jsonData.at("isPremium"))
+        user = new UserPremium(loginName);
+    else
+        user = new UserNormal(loginName);
     MainPanel_Logic::SetUser(user);
     MyAccPanel_Logic::SetUser(user);
 
@@ -44,14 +54,6 @@ bool LoginPanel_Logic::LoginValidated(std::string loginName, std::string loginPa
 
 // Sign up attempt validation
 bool  LoginPanel_Logic::SignupValidated(std::string signupName, std::string signupPassword1, std::string signupPassword2, LoginPanel* loginPanel) {
-
-    // Login username min and max length
-    constexpr int MIN_CHAR_NAME{ 3 };
-    constexpr int MAX_CHAR_NAME{ 15 };
-    
-    // Login password min and max length
-    constexpr int MIN_CHAR_PASSWORD{ 8 };
-    constexpr int MAX_CHAR_PASSWORD{ 40 };
 
     ////////////////////////////////////////////////////////////////////////////////
     // Username validation //
@@ -74,7 +76,7 @@ bool  LoginPanel_Logic::SignupValidated(std::string signupName, std::string sign
 
     // Check if username meets length requirements
     if (nameLength < MIN_CHAR_NAME || nameLength > MAX_CHAR_NAME)
-        signupNameErrorMessage += "Login musi zawierać od " + std::to_string(MIN_CHAR_PASSWORD) + " do " + std::to_string(MAX_CHAR_PASSWORD) + " znaków.\n";
+        signupNameErrorMessage += "Login musi zawierać od " + std::to_string(MIN_CHAR_NAME) + " do " + std::to_string(MAX_CHAR_NAME) + " znaków.\n";
 
     // Check if username meets character content requirements
     for (int i = 0; i < nameLength; i++)

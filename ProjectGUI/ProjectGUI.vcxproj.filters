@@ -182,6 +182,9 @@
     <ClInclude Include="MyAccPanel_Logic.h">
       <Filter>Pliki nagłówkowe\MyAccPanel</Filter>
     </ClInclude>
+    <ClInclude Include="LoginPanel_Length_Reqs.h">
+      <Filter>Pliki nagłówkowe\LoginPanel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore" />

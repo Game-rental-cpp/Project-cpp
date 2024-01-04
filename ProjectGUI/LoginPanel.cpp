@@ -1,15 +1,19 @@
 ﻿// LoginPanel.cpp
 #include "LoginPanel.h"
 #include "LoginPanel_Logic.h"
+//#include "LoginPanel_Length_Reqs.h"
 #include "UserCRUD.h"
 #include "Style.h"
 #include <wx/wx.h>
 
-
+constexpr int MIN_CHAR_NAME = 3;
+constexpr int MAX_CHAR_NAME = 15;
+constexpr int MIN_CHAR_PASSWORD = 8;
+constexpr int MAX_CHAR_PASSWORD = 40;
 
 LoginPanel::LoginPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size)
     : wxPanel(parent, id, pos, size)
-{
+{   
     successLabel = new wxStaticText(this, wxID_ANY, "Zalogowano", wxPoint(145, 120));
     successLabel->SetFont(SetTheFont(15, true));
 
@@ -49,6 +53,14 @@ LoginPanel::LoginPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, cons
     signupBtn = new wxButton(formsPanel, wxID_ANY, "Zarejestruj", wxPoint(140, 265));
     signupBtn->SetFont(SetTheFont(11));
 
+    // TODO Username requirements
+    std::string Requirements;
+    Requirements += "Login musi zawierać od " + std::to_string(MIN_CHAR_NAME) + " do " + std::to_string(MAX_CHAR_NAME) + " znaków " 
+        + "i składać się tylko z cyfr,\n podkreśleń, myślników oraz małych i dużych liter alfabetu angielskiego.\n";
+    wxStaticText* nameReqsLabel = new wxStaticText(formsPanel, wxID_ANY, Requirements, wxPoint(10, 300));
+    // TODO Password requirements
+    std::string passReqs = "Hasło musi zawierać: \n \t od";
+    wxStaticText* passReqsLabel = new wxStaticText(formsPanel, wxID_ANY, passReqs, wxPoint(70, 340));
 
     loginBtn->Bind(wxEVT_BUTTON, &LoginPanel::OnLogin, this);
     signupBtn->Bind(wxEVT_BUTTON, &LoginPanel::OnSignup, this);
