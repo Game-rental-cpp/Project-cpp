@@ -5,13 +5,6 @@
 #include "UserCRUD.h"
 #include "Style.h"
 #include <wx/wx.h>
-/*
-constexpr int MIN_CHAR_NAME = 3;
-constexpr int MAX_CHAR_NAME = 15;
-constexpr int MIN_CHAR_PASSWORD = 8;
-constexpr int MAX_CHAR_PASSWORD = 40;
-*/
-
 
 LoginPanel::LoginPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size)
     : wxPanel(parent, id, pos, size)

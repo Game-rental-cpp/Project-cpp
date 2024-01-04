@@ -12,13 +12,6 @@
 #include "json.hpp"
 
 using json = nlohmann::json;
-/*
-constexpr int MIN_CHAR_NAME = 3;
-constexpr int MAX_CHAR_NAME = 15;
-constexpr int MIN_CHAR_PASSWORD = 8;
-constexpr int MAX_CHAR_PASSWORD = 40;
-*/
-
 
 // Log in attempt validation
 bool LoginPanel_Logic::LoginValidated(std::string loginName, std::string loginPassword, LoginPanel* loginPanel) {
