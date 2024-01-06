@@ -46,7 +46,6 @@ public:
     void removeUserGame(const std::string& id);
 
     void setUserGames(std::vector<UserGame>& newUserGamesVector);
-    //void SetIsPremium(bool status) { isPremium = status; }
 
     virtual std::string stringifyUser() { return ""; };
     std::string stringifyGames();

@@ -44,7 +44,6 @@ Game MainPanel_Logic::CreateGameFromJSON(int i)
             std::string truncatedFileName = fileName.ToStdString().substr(0, fileName.length() - 5);
 
             wxString fileContents = GameCRUD::readGame(truncatedFileName);
-            //wxLogMessage(fileContents);
             json jsonData = json::parse(fileContents);
 
             name = jsonData["name"];
@@ -62,7 +61,6 @@ Game MainPanel_Logic::CreateGameFromJSON(int i)
     return game;
 }
 
-//std::vector<Game> MainPanel_Logic::vec;
 
 /*
 Creates vector of games
@@ -77,7 +75,6 @@ std::vector<Game> MainPanel_Logic::fulfillGamesVector(int gameCount) {
     {
         Game game = MainPanel_Logic::CreateGameFromJSON(i);
 
-        //wxLogMessage("ededewd");
         vector.push_back(game); // Add game to vector
 
     }
@@ -145,14 +142,11 @@ std::vector<Game> MainPanel_Logic::sortVector(std::vector<Game> gamesVector, int
 
 
 User* MainPanel_Logic::createUser() {
-   
     return MainPanel_Logic::user;
-    //return user;
 }
 
 User* MainPanel_Logic::user = nullptr;
 
 void MainPanel_Logic::SetUser(User* u) {
     MainPanel_Logic::user = u;
-    //wxLogMessage(wxString::Format("%s",user->getLogin()));
 }

@@ -18,7 +18,7 @@ MyAccPanel::MyAccPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, cons
     logoutLabel->SetFont(SetTheFont(12, true));
 
     userPanel = new wxPanel(this, wxID_ANY, wxPoint(0, 10), wxSize(410, 500));
-    // Tworzenie przycisku
+    // Creating a button
     logoutBtn = new wxButton(userPanel, wxID_ANY, "Wyloguj", wxPoint(GetClientSize().GetWidth() - 100, 0), wxSize(75, 30));
     logoutBtn->SetFont(SetTheFont(10).MakeBold());
     logoutBtn->SetBackgroundColour(COLOR_BACKGROUND_NAVBTN);
@@ -26,24 +26,10 @@ MyAccPanel::MyAccPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, cons
 
     premiumInput = new wxTextCtrl(userPanel, wxID_ANY, wxEmptyString, wxPoint(100, GetClientSize().GetHeight() - 50), wxSize(220, 30), wxBORDER_RAISED);
     premiumInput->SetHint("Wpisz kod, by zyskaæ konto premium");
-    // Tworzenie etykiety
 
-
-
-    //this->SetBackgroundColour(RED); // Set background color (optional)
-
-
-    //debugowanie
-   /* if(isLogged())
-        wxLogMessage("ktos jest zalogowany");
-    else
-        wxLogMessage("nikt nie jest zalogowany");*/
     MyAccPanel_Controller* controller = new MyAccPanel_Controller(this, logoutLabel, userPanel, loginLabel, logoutBtn, premiumInput, gamesPanel);
     controller->BindEvents();
 
-
-
-    //Bind(wxEVT_SHOW, &MyAccPanel::OnPanelShow, this);
 }
 
 

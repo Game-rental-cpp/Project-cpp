@@ -8,7 +8,6 @@ class MyAccPanel : public wxPanel
 {
 public:
     MyAccPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size);
-    //User* GetUser()  { return user; }
     void SetUser(User* u){user = u;}
 
 private:
@@ -21,7 +20,4 @@ private:
 
     User* user;
 
-    //void OnPanelShow(wxShowEvent& event);
-    //void LogOut(wxCommandEvent& event);
-    //void OnEnterPressed(wxKeyEvent& event);
 };

@@ -25,14 +25,3 @@ std::string UserNormal::stringifyUser() {
     return user.dump(4);
 }
 
-//This function is actually not needed anymore
-
-//bool UserNormal::addUserGame(const std::string& name) {
-//    // Normal user can hire maximally 10 games
-//    if (userGames.size() == 5)
-//        return false; //could'nt add new game
-//    UserCRUD::UpdateUser(login, UserNormal::stringifyUser());
-//
-//    userGames.push_back(UserGame(name));
-//    return true; //game has been added
-//}

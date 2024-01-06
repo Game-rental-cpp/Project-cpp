@@ -68,7 +68,4 @@ void Game::SetRate(int r, std::string login) {
         this->rate = 0.0f;
     }
 
-    // Przyk³adowa logika obs³ugi aktualizacji pliku JSON lub innej formy przechowywania danych
-    // w zale¿noœci od Twoich potrzeb
-    //GameCRUD::updateGame(name, quantity, nrOfLoans, rate, userRates);
 }

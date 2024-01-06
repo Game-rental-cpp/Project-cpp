@@ -8,7 +8,7 @@
 #include "MainPanel_Logic.h"
 #include "Game.h"
 #include <wx/datetime.h>
-//#include <wx/timespan.h>
+
 
 
 MyAccPanel_Controller::MyAccPanel_Controller(MyAccPanel* parentEl, wxStaticText* logoutLabel,
@@ -68,7 +68,6 @@ void MyAccPanel_Controller::LogOut(wxCommandEvent& event) {
     userPanel->Hide();
 
     logoutLabel->Show();
-    //TODO: usuñ usera i pusty string do _logged.txt
     UserCRUD::Update_logged("");
     User* user = MyAccPanel_Logic::GetUser();
     delete user;
@@ -98,8 +97,6 @@ void MyAccPanel_Controller::OnPanelShow(wxShowEvent& event) {
         else 
                 premiumInput->Show();
 
-        //wxLogMessage(wxString::Format("Wartoœæ bool: %s", user->getPremium() ? "true" : "false"));
-
 
         Layout();
     }
@@ -119,8 +116,6 @@ void MyAccPanel_Controller::UpdateUserGames(wxCommandEvent& event, std::string g
 
     Game* game = MyAccPanel_Logic::CreateGameFromJSON(gameName);
     game->SetQuantity(game->GetQuantity()+1);
-    //wxLogMessage(wxString::Format("%.3f", game->GetRate()));
-
 }
 
 
@@ -178,7 +173,6 @@ void MyAccPanel_Controller::UpdateGamesPanel() {
 
         //Creating gamePanel
         wxPanel* gamePanel = new wxPanel(gamesPanel, wxID_ANY, wxPoint(0, i*100), wxSize(userPanel->GetSize().GetWidth(), 100));
-        //gamePanel->SetBackgroundColour(COLOR_BACKGROUND_FRAME); // Set background color (optional)
         wxGauge* progressBar = new wxGauge(gamePanel, wxID_ANY, 100, wxPoint(50, 65), wxDefaultSize, wxGA_SMOOTH);
         progressBar->SetValue(daysLeft);
         if(user->getPremium())
@@ -186,8 +180,7 @@ void MyAccPanel_Controller::UpdateGamesPanel() {
         else 
             progressBar->SetRange(30);
 
-        //gamePanel->SetBackgroundColour(wxColour(240, 240, 240));
-
+       
         wxString labelNameText = wxString::Format("%s", gameName);
         // (label name is the same as game id + Lbl)
         wxStaticText* labelName = new wxStaticText(gamePanel, wxID_ANY, labelNameText, wxPoint(50, 10), wxDefaultSize, 0, gameId + "Lbl0");
@@ -242,11 +235,10 @@ void MyAccPanel_Controller::UpdateGamesPanel() {
 
         auto it = game.GetUserRates().find(user->getLogin());
 
-        // SprawdŸ, czy login zosta³ znaleziony
+        //Check if the login has been found
         if (it != game.GetUserRates().end()) {
-            // Znaleziono ocenê dla danego u¿ytkownika
+            // Found the rate of the user
             int userRating = it->second;
-            //slider->SetValue(userRating);
         }
 
     }
@@ -257,7 +249,7 @@ void MyAccPanel_Controller::UpdateGamesPanel() {
 
 
 void MyAccPanel_Controller::RateGame(wxCommandEvent& event, std::string gameName, std::string login) {
-    // Tutaj mo¿esz uzyskaæ wartoœæ suwaka za pomoc¹: event.GetPosition()
+    
 
     Game* game = MyAccPanel_Logic::CreateGameFromJSON(gameName);
 
@@ -303,11 +295,7 @@ void MyAccPanel_Controller::RateGame(wxCommandEvent& event, std::string gameName
         break;
     }
 
-    //if (currentRate == 0) {
-    //    wxLogMessage("%d", currentRate);
-    //    radio1->SetValue(false);
-    //}
-    // Dodaj radio buttony do sizer'a (jeœli u¿ywasz sizer'a)
+   
     wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
     sizer->Add(radio1, 0, wxALL, 5);
     sizer->Add(radio2, 0, wxALL, 5);
@@ -330,13 +318,12 @@ void MyAccPanel_Controller::RateGame(wxCommandEvent& event, std::string gameName
     resetBtn->Bind(wxEVT_BUTTON, [this, &radioButtons](wxCommandEvent& event) {
         newRate = 0;
 
-        // Odznacz wszystkie przyciski radio
+        // Uncheck all radio buttons
         for (auto& radioButton : radioButtons) {
             radioButton->SetValue(false);
         }
         });
 
-    // Wyœwietlamy dialog
     int result = rateGameDialog->ShowModal();
 }
 
@@ -344,10 +331,7 @@ void MyAccPanel_Controller::OnRadioSelect(wxCommandEvent& event) {
     wxRadioButton* radioButton = dynamic_cast<wxRadioButton*>(event.GetEventObject());
     if (radioButton) {
         wxString label = radioButton->GetLabel();
-        //wxLogMessage("Wybrano ocenê: %s", label);
-
-
-        // Przyk³adowy kod, który zwraca wartoœæ int w zale¿noœci od wybranego przycisku radio
+       
         if (label == "Ocena: 1") {
             newRate= 1;
         }
@@ -369,7 +353,6 @@ void MyAccPanel_Controller::OnRadioSelect(wxCommandEvent& event) {
 
 void MyAccPanel_Controller::OnOKButtonClick(wxCommandEvent& event, Game* game, std::string login) {
 
-    //wxLogMessage(wxString::Format("%d %s", newRate, login));
     game->SetRate(newRate, login);
     GameCRUD::updateGame(game->GetName(), game->GetQuantity(), game->GetNrOfLoans(), game->GetRate(), game->GetUserRates());
     newRate = -1;
@@ -377,7 +360,7 @@ void MyAccPanel_Controller::OnOKButtonClick(wxCommandEvent& event, Game* game, s
     if (okButton) {
         wxDialog* dialog = dynamic_cast<wxDialog*>(okButton->GetParent());
         if (dialog) {
-            dialog->EndModal(wxID_OK);  // Zamknij dialog po naciœniêciu OK
+            dialog->EndModal(wxID_OK);  // Close the dialog after clicking OK
         }
     }
 }

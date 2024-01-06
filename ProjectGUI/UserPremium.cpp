@@ -16,7 +16,7 @@ std::string UserPremium::stringifyUser() {
     json user = {
         {"login", login},
         {"password", password},
-        {"isPremium", true}, //
+        {"isPremium", true}, 
         {"userGames", userGames}
     };
 

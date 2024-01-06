@@ -15,7 +15,6 @@ public:
     static Game* CreateGameFromJSON(std::string gameName);
 
 private:
-    //static std::vector<Game> vec;
     static User* user;
 
 };

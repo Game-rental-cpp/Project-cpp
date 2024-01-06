@@ -182,9 +182,6 @@
     <ClInclude Include="MyAccPanel_Logic.h">
       <Filter>Pliki nagłówkowe\MyAccPanel</Filter>
     </ClInclude>
-    <ClInclude Include="LoginPanel_Length_Reqs.h">
-      <Filter>Pliki nagłówkowe\LoginPanel</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore" />
@@ -237,8 +234,15 @@
     <None Include="Games\twister.json">
       <Filter>Pliki zasobów\Games</Filter>
     </None>
-    <None Include="Games\cortex.json" />
-    <None Include="Games\rummikub.json" />
+    <None Include="Users\aba.json">
+      <Filter>Pliki zasobów\Users</Filter>
+    </None>
+    <None Include="Games\cortex.json">
+      <Filter>Pliki zasobów\Games</Filter>
+    </None>
+    <None Include="Games\rummikub.json">
+      <Filter>Pliki zasobów\Games</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Games\statki.json">

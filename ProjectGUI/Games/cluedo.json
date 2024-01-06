@@ -2,9 +2,9 @@
     "name": "cluedo",
     "nrOfLoans": 93,
     "quantity": 20,
-    "rate": 4.196537494659424,
+    "rate": 4.0,
     "userRates": {
-        "jakisLogin": 4,
+        "jakisLogin": 3,
         "key1": 5,
         "key2": 4,
         "key3": 5,

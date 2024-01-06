@@ -14,10 +14,9 @@ User::User(const std::string& login)
 
     json jsonData = json::parse(userStr); //parsing JSON string
     std::string passwordStr = jsonData.at("password"); //get value of key "password"
-    //isPremium password = jsonData.at("password"); //get value of key "password"
     password = passwordStr;
     json gamesArray = jsonData.at("userGames");
-    //if(gamesArray.size()>0)
+
     // Iterowanie po elementach tablicy
     for (const auto& game : gamesArray) {
         // Wyci¹ganie wartoœci z obiektu w tablicy

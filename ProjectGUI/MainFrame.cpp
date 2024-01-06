@@ -6,14 +6,6 @@
 MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
     : wxFrame(NULL, wxID_ANY, title, pos, size) {
 
-    //std::map<std::string, int> myMap = {
-    //    {"key1", 1},
-    //    {"key2", 2},
-    //    {"key3", 3}
-    //};
-
-    //GameCRUD::updateGame("bierki", 12, 120, 3.2, myMap);
-    //wxLogMessage(wxString::Format("%s",GameCRUD::readGame("bierki")));
 
 
     // Creating buttons
@@ -30,12 +22,10 @@ MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& si
     loginPanel = new LoginPanel(this, wxID_ANY, wxPoint(20, 200), wxSize(410, 500));
     myAccPanel = new MyAccPanel(this, wxID_ANY, wxPoint(10, 100), wxSize(410, 500));
 
-    
-        //wxLogMessage(wxString::Format("%s", UserCRUD::ReadUser("jakisLogin")));
 
     MainFrame_Logic::CreateUser();
 
-    // Default hidden
+    // Hidden by default
     mainPanel->Hide(); //temporarily hide to trigger the OnPanelShow 
     loginPanel->Hide();
     myAccPanel->Hide();

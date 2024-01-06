@@ -1,14 +1,10 @@
 #include "MyAccPanel_Logic.h"
 
-//#include "UserCRUD.h"
-//#include "GameCRUD.h"
-
 #include "User.h"
 #include "UserNormal.h"
 #include "UserPremium.h"
 #include "json.hpp"
 #include "Game.h"
-
 
 #include "UserCRUD.h"
 #include "GameCRUD.h"
@@ -16,9 +12,7 @@
 User* MyAccPanel_Logic::user = nullptr;
 
 User* MyAccPanel_Logic::GetUser() {
-
     return MyAccPanel_Logic::user;
-    //return user;
 }
 
 

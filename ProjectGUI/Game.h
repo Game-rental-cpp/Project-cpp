@@ -6,7 +6,6 @@
 
 class Game : public GameAbs {
 private:
-    //std::string name;
     int quantity;
     int nrOfLoans;
 public:
