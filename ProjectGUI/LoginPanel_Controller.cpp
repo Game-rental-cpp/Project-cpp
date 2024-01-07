@@ -7,11 +7,9 @@
 
 LoginPanel_Controller::LoginPanel_Controller(LoginPanel* parentEl, wxStaticText* successLabel,
     wxPanel* formsPanel,
-    wxStaticText* loginPrompt,
     wxTextCtrl* loginName,
     wxTextCtrl* loginPassword,
     wxButton* loginBtn,
-    wxStaticText* signupPrompt,
     wxTextCtrl* signupName,
     wxTextCtrl* signupPassword1,
     wxTextCtrl* signupPassword2,
@@ -19,11 +17,9 @@ LoginPanel_Controller::LoginPanel_Controller(LoginPanel* parentEl, wxStaticText*
     parentEl(parentEl),
     successLabel(successLabel),
     formsPanel(formsPanel),
-    loginPrompt(loginPrompt),
     loginName(loginName),
     loginPassword(loginPassword),
     loginBtn(loginBtn),
-    signupPrompt(signupPrompt),
     signupName(signupName),
     signupPassword1(signupPassword1),
     signupPassword2(signupPassword2),
@@ -37,6 +33,7 @@ void LoginPanel_Controller::BindEvents() {
     signupBtn->Bind(wxEVT_ENTER_WINDOW, &LoginPanel_Controller::OnMouseHover, this);
 }
 
+// Function called when LoginPanel is shown on screen
 void LoginPanel_Controller::OnPanelShow(wxShowEvent& event) {
     if (event.IsShown()) {
         loginName->Clear();
@@ -57,6 +54,7 @@ void LoginPanel_Controller::OnMouseHover(wxMouseEvent& event) {
     OnCursorHover(event);
 }
 
+// Function called when "Zaloguj" button is pressed
 void LoginPanel_Controller::OnLogin(wxCommandEvent& event) {
     std::string userLoginName = loginName->GetValue().ToStdString();
     std::string userLoginPassword = loginPassword->GetValue().ToStdString();
@@ -68,6 +66,7 @@ void LoginPanel_Controller::OnLogin(wxCommandEvent& event) {
     successLabel->Show();
 }
 
+// Function called when "Zarejestruj" button is pressed
 void LoginPanel_Controller::OnSignup(wxCommandEvent& event) {
     std::string userSignupName = signupName->GetValue().ToStdString();
     std::string userSignupPassword1 = signupPassword1->GetValue().ToStdString();

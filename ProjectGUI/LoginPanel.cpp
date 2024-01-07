@@ -1,7 +1,6 @@
 ﻿// LoginPanel.cpp
 #include "LoginPanel.h"
 #include "LoginPanel_Controller.h"
-#include "LoginPanel_Logic.h"
 #include "UserCRUD.h"
 #include "Style.h"
 #include <wx/wx.h>
@@ -64,7 +63,7 @@ LoginPanel::LoginPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, cons
         + "- znaki specjalne";
     wxStaticText* reqsLabel = new wxStaticText(formsPanel, wxID_ANY, Requirements, wxPoint(10, 310));
    
-    LoginPanel_Controller* controller = new LoginPanel_Controller(this, successLabel, formsPanel, loginPrompt,
-        loginName, loginPassword, loginBtn, signupPrompt, signupName, signupPassword1, signupPassword2, signupBtn);
+    LoginPanel_Controller* controller = new LoginPanel_Controller(this, successLabel, formsPanel,
+        loginName, loginPassword, loginBtn, signupName, signupPassword1, signupPassword2, signupBtn);
     controller->BindEvents();
 }

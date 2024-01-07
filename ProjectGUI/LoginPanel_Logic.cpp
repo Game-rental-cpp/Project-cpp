@@ -79,7 +79,7 @@ bool  LoginPanel_Logic::SignupValidated(std::string signupName, std::string sign
         char c = signupName[i];
         if (!isalpha(c) && !isdigit(c) && c != '-' && c != '_')
         {
-            signupNameErrorMessage += "Login może składać się tylko z cyfr, podkreśleń, myślników oraz małych i dużych liter alfabetu angielskiego.\n";
+            signupNameErrorMessage += "Login może składać się tylko z cyfr, podkreśleń, myślników lub małych i dużych liter alfabetu angielskiego.\n";
             break;
         }
     }
