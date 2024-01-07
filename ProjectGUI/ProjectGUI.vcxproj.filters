@@ -234,9 +234,6 @@
     <None Include="Games\twister.json">
       <Filter>Pliki zasobów\Games</Filter>
     </None>
-    <None Include="Users\aba.json">
-      <Filter>Pliki zasobów\Users</Filter>
-    </None>
     <None Include="Games\cortex.json">
       <Filter>Pliki zasobów\Games</Filter>
     </None>

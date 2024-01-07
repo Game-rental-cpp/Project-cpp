@@ -68,6 +68,7 @@ void MyAccPanel_Controller::LogOut(wxCommandEvent& event) {
     userPanel->Hide();
 
     logoutLabel->Show();
+    //loginLabel->Destroy();
     UserCRUD::Update_logged("");
     User* user = MyAccPanel_Logic::GetUser();
     delete user;
@@ -99,6 +100,10 @@ void MyAccPanel_Controller::OnPanelShow(wxShowEvent& event) {
 
 
         Layout();
+    }
+    else {
+        if(loginLabel)
+        loginLabel->Hide();
     }
     event.Skip();
 }
@@ -187,7 +192,12 @@ void MyAccPanel_Controller::UpdateGamesPanel() {
         labelName->SetForegroundColour(COLOR_LBL);
         labelName->SetFont(SetTheFont(15, true));
 
-        wxString labelTimeText = wxString::Format("Do oddania zosta這 ci %d dni", daysLeft);
+        wxString labelTimeText;
+        if(daysLeft==0)
+            labelTimeText = wxString::Format("Czas na oddanie up造n像");
+        else
+            labelTimeText = wxString::Format("Do oddania zosta這 ci %d dni", daysLeft);
+
         // (label name is the same as game id + Lbl)
         wxStaticText* labelTime = new wxStaticText(gamePanel, wxID_ANY, labelTimeText, wxPoint(50, 40), wxDefaultSize, 0, gameId + "Lbl1");
         labelTime->SetForegroundColour(COLOR_LBL);
