@@ -1,0 +1,17 @@
+{
+    "isPremium": true,
+    "login": "usertest_Xx",
+    "password": "abcABC123!",
+    "userGames": [
+        {
+            "date": "06-01-24__18-23-27",
+            "id": "f2590d1e-4615-4ea1-9700-46e9fccf1993",
+            "name": "twister"
+        },
+        {
+            "date": "06-01-24__18-23-55",
+            "id": "12ee10d5-3551-407b-a5fd-93cf576467e1",
+            "name": "catan"
+        }
+    ]
+}

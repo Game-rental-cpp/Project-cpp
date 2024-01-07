@@ -1,7 +1,6 @@
 ﻿// LoginPanel.cpp
 #include "LoginPanel.h"
 #include "LoginPanel_Logic.h"
-//#include "LoginPanel_Length_Reqs.h"
 #include "UserCRUD.h"
 #include "Style.h"
 #include <wx/wx.h>
@@ -26,8 +25,10 @@ LoginPanel::LoginPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, cons
     loginPassword->SetHint("Hasło");
     loginPassword->SetFont(SetTheFont(11));
 
-    loginBtn = new wxButton(formsPanel, wxID_ANY, "Zaloguj", wxPoint(140, 95));
-    loginBtn->SetFont(SetTheFont(11));
+    loginBtn = new wxButton(formsPanel, wxID_ANY, "Zaloguj", wxPoint(140, 95), wxSize(100, 30));
+    loginBtn->SetFont(SetTheFont(10, true));
+    loginBtn->SetBackgroundColour(COLOR_BACKGROUND_LOGINBTN);
+    loginBtn->SetForegroundColour(COLOR_TEXT_LOGINBTN);
 
     // Sign-up form
     signupPrompt = new wxStaticText(formsPanel, wxID_ANY, "Nie masz konta? Zarejestruj się!", wxPoint(80, 140));
@@ -45,13 +46,15 @@ LoginPanel::LoginPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, cons
     signupPassword2->SetHint("Potwierdz hasło");
     signupPassword2->SetFont(SetTheFont(11));
 
-    signupBtn = new wxButton(formsPanel, wxID_ANY, "Zarejestruj", wxPoint(140, 265));
-    signupBtn->SetFont(SetTheFont(11));
+    signupBtn = new wxButton(formsPanel, wxID_ANY, "Zarejestruj", wxPoint(140, 265), wxSize(100, 30));
+    signupBtn->SetFont(SetTheFont(10, true));
+    signupBtn->SetBackgroundColour(COLOR_BACKGROUND_LOGINBTN);
+    signupBtn->SetForegroundColour(COLOR_TEXT_LOGINBTN);
 
-    // TODO Username requirements
+
     std::string Requirements;
     Requirements += "* Login musi zawierać od " + std::to_string(MIN_CHAR_NAME) + " do " + std::to_string(MAX_CHAR_NAME) + " znaków " 
-        + "i składać się tylko z cyfr,\n podkreśleń, myślników oraz małych i dużych liter alfabetu angielskiego.\n"
+        + "i może składać się tylko z cyfr,\n podkreśleń, myślników lub małych i dużych liter alfabetu angielskiego.\n"
         + "\n* Hasło musi zawierać: \n \t" 
         + "- od " + std::to_string(MIN_CHAR_PASSWORD) + " do " + std::to_string(MAX_CHAR_PASSWORD) + " znaków \n \t"
         + "- małe litery\n \t"
@@ -61,7 +64,9 @@ LoginPanel::LoginPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, cons
     wxStaticText* reqsLabel = new wxStaticText(formsPanel, wxID_ANY, Requirements, wxPoint(10, 310));
    
     loginBtn->Bind(wxEVT_BUTTON, &LoginPanel::OnLogin, this);
+    loginBtn->Bind(wxEVT_ENTER_WINDOW, &LoginPanel::OnMouseHover, this);
     signupBtn->Bind(wxEVT_BUTTON, &LoginPanel::OnSignup, this);
+    signupBtn->Bind(wxEVT_ENTER_WINDOW, &LoginPanel::OnMouseHover, this);
 
     Bind(wxEVT_SHOW, &LoginPanel::OnPanelShow, this);
 }
@@ -111,3 +116,6 @@ void LoginPanel::OnSignup(wxCommandEvent& event)
     successLabel->Show();
 }
 
+void LoginPanel::OnMouseHover(wxMouseEvent& event) {
+    OnCursorHover(event);
+}

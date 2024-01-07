@@ -1,15 +1,15 @@
 {
-  "name": "twister",
-  "nrOfLoans": 312,
-  "quantity": 25,
-  "rate": 4.16273893655,
-  "userRates": {
-    "key1": 5,
-    "key2": 4,
-    "key3": 4,
-    "key4": 3,
-    "key5": 5,
-    "key6": 4,
-    "userek123": 4
-  }
+    "name": "twister",
+    "nrOfLoans": 313,
+    "quantity": 24,
+    "rate": 4.162738800048828,
+    "userRates": {
+        "key1": 5,
+        "key2": 4,
+        "key3": 4,
+        "key4": 3,
+        "key5": 5,
+        "key6": 4,
+        "userek123": 4
+    }
 }

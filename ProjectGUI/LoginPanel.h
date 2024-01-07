@@ -10,6 +10,7 @@ public:
     
     void OnLogin(wxCommandEvent& event);
     void OnSignup(wxCommandEvent& event);
+    void OnMouseHover(wxMouseEvent& event);
 
 private:
     wxStaticText* successLabel;
