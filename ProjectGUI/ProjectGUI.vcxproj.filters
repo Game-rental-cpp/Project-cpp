@@ -117,6 +117,9 @@
     <ClCompile Include="MyAccPanel_Logic.cpp">
       <Filter>Pliki źródłowe\MyAccPanel</Filter>
     </ClCompile>
+    <ClCompile Include="LoginPanel_Controller.cpp">
+      <Filter>Pliki źródłowe\LoginPanel</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainFrame.h">
@@ -181,6 +184,9 @@
     </ClInclude>
     <ClInclude Include="MyAccPanel_Logic.h">
       <Filter>Pliki nagłówkowe\MyAccPanel</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginPanel_Controller.h">
+      <Filter>Pliki nagłówkowe\LoginPanel</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
