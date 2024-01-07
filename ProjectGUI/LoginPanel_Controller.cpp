@@ -1,3 +1,4 @@
+// LoginPanel_Controller.cpp
 #include "LoginPanel_Controller.h"
 #include "LoginPanel.h"
 #include "LoginPanel_Logic.h"
@@ -23,6 +24,7 @@ LoginPanel_Controller::LoginPanel_Controller(LoginPanel* parentEl, wxStaticText*
     loginPassword(loginPassword),
     loginBtn(loginBtn),
     signupPrompt(signupPrompt),
+    signupName(signupName),
     signupPassword1(signupPassword1),
     signupPassword2(signupPassword2),
     signupBtn(signupBtn) {}
@@ -45,6 +47,8 @@ void LoginPanel_Controller::OnPanelShow(wxShowEvent& event) {
 
         successLabel->Hide();
         formsPanel->Show();
+
+        Layout();
     }
     event.Skip();
 }

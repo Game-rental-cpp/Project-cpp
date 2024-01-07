@@ -1,5 +1,6 @@
 ﻿// LoginPanel.cpp
 #include "LoginPanel.h"
+#include "LoginPanel_Controller.h"
 #include "LoginPanel_Logic.h"
 #include "UserCRUD.h"
 #include "Style.h"
@@ -63,59 +64,7 @@ LoginPanel::LoginPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, cons
         + "- znaki specjalne";
     wxStaticText* reqsLabel = new wxStaticText(formsPanel, wxID_ANY, Requirements, wxPoint(10, 310));
    
-    loginBtn->Bind(wxEVT_BUTTON, &LoginPanel::OnLogin, this);
-    loginBtn->Bind(wxEVT_ENTER_WINDOW, &LoginPanel::OnMouseHover, this);
-    signupBtn->Bind(wxEVT_BUTTON, &LoginPanel::OnSignup, this);
-    signupBtn->Bind(wxEVT_ENTER_WINDOW, &LoginPanel::OnMouseHover, this);
-
-    Bind(wxEVT_SHOW, &LoginPanel::OnPanelShow, this);
-}
-
-
-// Function called when LoginPanel is shown
-void LoginPanel::OnPanelShow(wxShowEvent& event)
-{   
-    if (event.IsShown()) {
-        loginName->Clear();
-        loginPassword->Clear();
-        signupName->Clear();
-        signupPassword1->Clear();
-        signupPassword2->Clear();
-
-        successLabel->Hide();
-        formsPanel->Show();
-    }
-
-    event.Skip();
-}
-
-//  Function called when loginBtn is pressed
-void LoginPanel::OnLogin(wxCommandEvent& event)
-{
-    std::string userLoginName = loginName->GetValue().ToStdString();
-    std::string userLoginPassword = loginPassword->GetValue().ToStdString();
-
-    if (!LoginPanel_Logic::LoginValidated(userLoginName, userLoginPassword, this))
-        return;
-
-    formsPanel->Hide();
-    successLabel->Show();
-}
-
-// Function called when signupBtn is pressed
-void LoginPanel::OnSignup(wxCommandEvent& event)
-{
-    std::string userSignupName = signupName->GetValue().ToStdString();
-    std::string userSignupPassword1 = signupPassword1->GetValue().ToStdString();
-    std::string userSignupPassword2 = signupPassword2->GetValue().ToStdString();
-    
-    if (!LoginPanel_Logic::SignupValidated(userSignupName, userSignupPassword1, userSignupPassword2, this))
-        return;
-
-    formsPanel->Hide();
-    successLabel->Show();
-}
-
-void LoginPanel::OnMouseHover(wxMouseEvent& event) {
-    OnCursorHover(event);
+    LoginPanel_Controller* controller = new LoginPanel_Controller(this, successLabel, formsPanel, loginPrompt,
+        loginName, loginPassword, loginBtn, signupPrompt, signupName, signupPassword1, signupPassword2, signupBtn);
+    controller->BindEvents();
 }
