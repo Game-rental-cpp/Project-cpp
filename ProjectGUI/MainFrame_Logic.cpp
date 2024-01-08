@@ -6,7 +6,11 @@
 #include "User.h"
 #include "MainPanel_Logic.h"
 #include "MyAccPanel_Logic.h"
+#include <wx/wx.h>
+#include "json.hpp"
+//#include <wx/wx.h>
 
+using json = nlohmann::json;
 
 void MainFrame_Logic::HideButton(wxButton* loginBtn, wxButton* myAccBtn) {
 	if (UserCRUD::isLogged())
@@ -20,9 +24,17 @@ User* MainFrame_Logic::CreateUser() {
     if (login == "")
         return nullptr;
 
-    // use json to extract information and determine user type
-    // For now, let's assume it's UserNormal
-    User* user = new UserNormal(login);
+    std::string userStr = UserCRUD::ReadUser(login);
+
+    json jsonData = json::parse(userStr); //parsing JSON string
+    bool isPremium = jsonData.at("isPremium"); //extract isPremium value
+
+    User* user;
+    
+    if(isPremium)
+        user = new UserPremium(login);
+    else
+        user = new UserNormal(login);
 
     MainPanel_Logic::SetUser(user);
     MyAccPanel_Logic::SetUser(user);

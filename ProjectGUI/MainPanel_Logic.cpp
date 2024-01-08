@@ -25,6 +25,8 @@ Game MainPanel_Logic::CreateGameFromJSON(int i)
     std::string name;
     int quantity;
     int nrOfLoans;
+    float rate;
+    std::map<std::string, int> userRates;
 
     wxString parentDir = wxGetCwd();
     wxString gamesDir = parentDir + "/Games";
@@ -42,23 +44,23 @@ Game MainPanel_Logic::CreateGameFromJSON(int i)
             std::string truncatedFileName = fileName.ToStdString().substr(0, fileName.length() - 5);
 
             wxString fileContents = GameCRUD::readGame(truncatedFileName);
-            //wxLogMessage(fileContents);
             json jsonData = json::parse(fileContents);
 
             name = jsonData["name"];
             quantity = jsonData["quantity"];
             nrOfLoans = jsonData["nrOfLoans"];
+            rate = jsonData["rate"];
+            userRates = jsonData["userRates"];
 
             file.Close();
         }
     }
 
-    Game game(name, quantity, nrOfLoans);
+    Game game(name, quantity, nrOfLoans, rate, userRates);
 
     return game;
 }
 
-std::vector<Game> MainPanel_Logic::vec;
 
 /*
 Creates vector of games
@@ -66,15 +68,17 @@ Creates vector of games
 @returns std::vector<Game>
 */
 std::vector<Game> MainPanel_Logic::fulfillGamesVector(int gameCount) {
+
+    std::vector<Game> vector;
+
     for (int i = 0; i < gameCount; i++)
     {
         Game game = MainPanel_Logic::CreateGameFromJSON(i);
 
-        //wxLogMessage("ededewd");
-        vec.push_back(game); // Add game to vector
+        vector.push_back(game); // Add game to vector
 
     }
-    return vec;
+    return vector;
 }
 
 /*
@@ -120,6 +124,17 @@ std::vector<Game> MainPanel_Logic::sortVector(std::vector<Game> gamesVector, int
                 }
             }
            break;
+        case 3:
+            //Rate
+            for (int i = 0; i < gameCount - 1; i++) {
+                for (int j = 0; j < gameCount - i - 1; j++) {
+                    if (gamesVector[j].GetRate() < gamesVector[j + 1].GetRate()) {
+
+                        std::swap(gamesVector[j], gamesVector[j + 1]);
+                    }
+                }
+            }
+            break;
     }
     return gamesVector;
 }
@@ -127,14 +142,11 @@ std::vector<Game> MainPanel_Logic::sortVector(std::vector<Game> gamesVector, int
 
 
 User* MainPanel_Logic::createUser() {
-   
     return MainPanel_Logic::user;
-    //return user;
 }
 
 User* MainPanel_Logic::user = nullptr;
 
 void MainPanel_Logic::SetUser(User* u) {
     MainPanel_Logic::user = u;
-    //wxLogMessage(wxString::Format("%s",user->getLogin()));
 }

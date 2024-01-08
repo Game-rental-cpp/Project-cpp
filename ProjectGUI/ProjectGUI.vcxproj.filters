@@ -108,14 +108,17 @@
     <ClCompile Include="UserPremium.cpp">
       <Filter>Pliki źródłowe\Models</Filter>
     </ClCompile>
-    <ClCompile Include="FormsPanel.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
     <ClCompile Include="MyAccPanel_Controller.cpp">
       <Filter>Pliki źródłowe\MyAccPanel</Filter>
     </ClCompile>
     <ClCompile Include="MyAccPanel_Controller.h">
       <Filter>Pliki nagłówkowe\MyAccPanel</Filter>
+    </ClCompile>
+    <ClCompile Include="MyAccPanel_Logic.cpp">
+      <Filter>Pliki źródłowe\MyAccPanel</Filter>
+    </ClCompile>
+    <ClCompile Include="LoginPanel_Controller.cpp">
+      <Filter>Pliki źródłowe\LoginPanel</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -179,10 +182,70 @@
     <ClInclude Include="LoginPanel_Logic.h">
       <Filter>Pliki nagłówkowe\LoginPanel</Filter>
     </ClInclude>
+    <ClInclude Include="MyAccPanel_Logic.h">
+      <Filter>Pliki nagłówkowe\MyAccPanel</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginPanel_Controller.h">
+      <Filter>Pliki nagłówkowe\LoginPanel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore" />
     <None Include="..\README.md" />
+    <None Include="Users\userLogin.json">
+      <Filter>Pliki zasobów\Users</Filter>
+    </None>
+    <None Include="Users\jakisLogin.json">
+      <Filter>Pliki zasobów\Users</Filter>
+    </None>
+    <None Include="Users\userek123.json">
+      <Filter>Pliki zasobów\Users</Filter>
+    </None>
+    <None Include="Games\ubongo.json">
+      <Filter>Pliki zasobów\Games</Filter>
+    </None>
+    <None Include="Games\dixit.json">
+      <Filter>Pliki zasobów\Games</Filter>
+    </None>
+    <None Include="Games\monopoly.json">
+      <Filter>Pliki zasobów\Games</Filter>
+    </None>
+    <None Include="Games\tajniacy.json">
+      <Filter>Pliki zasobów\Games</Filter>
+    </None>
+    <None Include="Games\scrabble.json">
+      <Filter>Pliki zasobów\Games</Filter>
+    </None>
+    <None Include="Games\catan.json">
+      <Filter>Pliki zasobów\Games</Filter>
+    </None>
+    <None Include="Games\ego.json">
+      <Filter>Pliki zasobów\Games</Filter>
+    </None>
+    <None Include="Games\dobble.json">
+      <Filter>Pliki zasobów\Games</Filter>
+    </None>
+    <None Include="Games\taboo.json">
+      <Filter>Pliki zasobów\Games</Filter>
+    </None>
+    <None Include="Games\cluedo.json">
+      <Filter>Pliki zasobów\Games</Filter>
+    </None>
+    <None Include="Games\jenga.json">
+      <Filter>Pliki zasobów\Games</Filter>
+    </None>
+    <None Include="Games\pojedynek.json">
+      <Filter>Pliki zasobów\Games</Filter>
+    </None>
+    <None Include="Games\twister.json">
+      <Filter>Pliki zasobów\Games</Filter>
+    </None>
+    <None Include="Games\cortex.json">
+      <Filter>Pliki zasobów\Games</Filter>
+    </None>
+    <None Include="Games\rummikub.json">
+      <Filter>Pliki zasobów\Games</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Games\statki.json">

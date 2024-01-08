@@ -1,6 +1,7 @@
 #pragma once
 #include <wx/wx.h>
 #include "User.h"
+#include "Game.h"
 
 class MyAccPanel;
 
@@ -14,11 +15,8 @@ public:
     wxTextCtrl* premiumInput,
     wxScrolledWindow* gamesPanel);
 
- 
     void BindEvents();
-    void OnPanelShow(wxShowEvent& event);
-    void LogOut(wxCommandEvent& event);
-    void OnEnterPressed(wxKeyEvent& event);
+ 
 
 private:
     MyAccPanel* parentEl;
@@ -29,8 +27,18 @@ private:
     wxTextCtrl* premiumInput;
     wxScrolledWindow* gamesPanel;
     
+    void OnPanelShow(wxShowEvent& event);
+    void LogOut(wxCommandEvent& event);
+    void OnEnterPressed(wxKeyEvent& event);
     void UpdateGamesPanel();
-    void UpdateUserGames(wxCommandEvent& event);
+    void UpdateUserGames(wxCommandEvent& event, std::string gameName);
+    void OnMouseHover(wxMouseEvent& event);
+    void RateGame(wxCommandEvent& event, std::string gameName, std::string login);
+    void OnOKButtonClick(wxCommandEvent& event, Game* game, std::string login);
+    void OnRadioSelect(wxCommandEvent& event);
+
+    int newRate = -1;
+
 };
 
 

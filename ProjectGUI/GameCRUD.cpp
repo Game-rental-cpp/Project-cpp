@@ -6,7 +6,7 @@
 #include <iostream>
 #include <fstream>
 #include "json.hpp"
-
+//#include <wx/wx.h>
 
 //in included json.hpp so now we can write the line below
 using json = nlohmann::json;
@@ -75,13 +75,17 @@ This funnction updates a game file
 @param int quantity
 @param int nrOfLoans
 */
-void GameCRUD::updateGame(std::string name, int quantity, int nrOfLoans) {
+void GameCRUD::updateGame(std::string name, int quantity, int nrOfLoans, float rate, std::map<std::string, int> userRates) {
  std::ofstream file("./Games/" + name + ".json");
+ //wxLogMessage("sw");
+
     if (file.is_open()) {
         json jsonData = {
             {"name", name},
             {"quantity", quantity},
-            {"nrOfLoans", nrOfLoans}
+            {"nrOfLoans", nrOfLoans},
+            {"rate", rate},
+            {"userRates", userRates}
         };
         file << jsonData.dump(4) << std::endl;
         file.close();

@@ -134,6 +134,7 @@
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameCRUD.cpp" />
+    <ClCompile Include="LoginPanel_Controller.cpp" />
     <ClCompile Include="LoginPanel_Logic.cpp" />
     <ClCompile Include="MainFrame_Controller.cpp" />
     <ClCompile Include="MainFrame_Logic.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="GameAbs.h" />
     <ClInclude Include="GameCRUD.h" />
     <ClInclude Include="json.hpp" />
+    <ClInclude Include="LoginPanel_Controller.h" />
     <ClInclude Include="LoginPanel_Logic.h" />
     <ClInclude Include="MainFrame_Controller.h" />
     <ClInclude Include="MainFrame_Logic.h" />
@@ -178,7 +180,29 @@
   <ItemGroup>
     <None Include="..\.gitignore" />
     <None Include="..\README.md" />
-    <None Include="userLogin.json" />
+    <None Include="Games\catan.json" />
+    <None Include="Games\cluedo.json" />
+    <None Include="Games\cortex.json" />
+    <None Include="Games\dixit.json">
+      <DeploymentContent>false</DeploymentContent>
+    </None>
+    <None Include="Games\dobble.json" />
+    <None Include="Games\ego.json" />
+    <None Include="Games\jenga.json" />
+    <None Include="Games\monopoly.json" />
+    <None Include="Games\pojedynek.json" />
+    <None Include="Games\rummikub.json" />
+    <None Include="Games\scrabble.json" />
+    <None Include="Games\taboo.json" />
+    <None Include="Games\tajniacy.json" />
+    <None Include="Games\twister.json" />
+    <None Include="Games\ubongo.json">
+      <DeploymentContent>false</DeploymentContent>
+    </None>
+    <None Include="Users\jakisLogin.json" />
+    <None Include="Users\userek123.json" />
+    <None Include="Users\userLogin.json" />
+    <None Include="Users\aba.json" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Games\bierki.json" />

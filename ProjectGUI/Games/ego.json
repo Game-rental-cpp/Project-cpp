@@ -1,0 +1,11 @@
+{
+    "name": "ego",
+    "nrOfLoans": 93,
+    "quantity": 20,
+    "rate": 4.649994373321533,
+    "userRates": {
+        "key1": 5,
+        "key2": 4,
+        "key3": 5
+    }
+}

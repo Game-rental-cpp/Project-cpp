@@ -1,0 +1,27 @@
+{
+    "isPremium": true,
+    "login": "userLogin",
+    "password": "123",
+    "userGames": [
+        {
+            "date": "16-12-23__10-50-11",
+            "id": "1da89090-49a4-4123-b100-28972d35c37b",
+            "name": "bierki"
+        },
+        {
+            "date": "16-12-23__10-50-16",
+            "id": "19a51157-e46c-4fce-89e4-68c851187f63",
+            "name": "uno"
+        },
+        {
+            "date": "16-12-23__13-53-16",
+            "id": "c3dd5735-675a-45f8-a894-13d2d65267e4",
+            "name": "statki"
+        },
+        {
+            "date": "06-01-24__15-26-57",
+            "id": "bc6b2ce9-7d08-4048-9ea0-b1d254eaba84",
+            "name": "bierki"
+        }
+    ]
+}

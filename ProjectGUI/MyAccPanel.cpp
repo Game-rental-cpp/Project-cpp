@@ -13,33 +13,23 @@ MyAccPanel::MyAccPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, cons
     : wxPanel(parent, id, pos, size)
 {
 
-    logoutLabel = new wxStaticText(this, wxID_ANY, "wylogowano pomyœlnie", wxPoint(10, 10));
-    //logoutLabel->Hide();
+    logoutLabel = new wxStaticText(this, wxID_ANY, "wylogowano pomyœlnie", wxPoint(100, 250));
+    logoutLabel->SetForegroundColour(COLOR_LBL);
+    logoutLabel->SetFont(SetTheFont(12, true));
+
     userPanel = new wxPanel(this, wxID_ANY, wxPoint(0, 10), wxSize(410, 500));
-    // Tworzenie przycisku
-    logoutBtn = new wxButton(userPanel, wxID_ANY, "Wyloguj", wxPoint(10, GetClientSize().GetHeight()-100));
-    //button->Bind(wxEVT_BUTTON, &MyAccPanel::LoadUser, this);
+    // Creating a button
+    logoutBtn = new wxButton(userPanel, wxID_ANY, "Wyloguj", wxPoint(GetClientSize().GetWidth() - 100, 0), wxSize(75, 30));
+    logoutBtn->SetFont(SetTheFont(10).MakeBold());
+    logoutBtn->SetBackgroundColour(COLOR_BACKGROUND_NAVBTN);
+    logoutBtn->SetForegroundColour(COLOR_TEXT_BTN);
 
-    premiumInput = new wxTextCtrl(userPanel, wxID_ANY, wxEmptyString, wxPoint(GetClientSize().GetWidth() - 10 - 30 - 190, GetClientSize().GetHeight() - 100), wxSize(190, 30), wxBORDER_RAISED);
+    premiumInput = new wxTextCtrl(userPanel, wxID_ANY, wxEmptyString, wxPoint(100, GetClientSize().GetHeight() - 50), wxSize(220, 30), wxBORDER_RAISED);
     premiumInput->SetHint("Wpisz kod, by zyskaæ konto premium");
-    // Tworzenie etykiety
 
-
-
-    this->SetBackgroundColour(RED); // Set background color (optional)
-
-
-    //debugowanie
-   /* if(isLogged())
-        wxLogMessage("ktos jest zalogowany");
-    else
-        wxLogMessage("nikt nie jest zalogowany");*/
     MyAccPanel_Controller* controller = new MyAccPanel_Controller(this, logoutLabel, userPanel, loginLabel, logoutBtn, premiumInput, gamesPanel);
     controller->BindEvents();
 
-
-
-    //Bind(wxEVT_SHOW, &MyAccPanel::OnPanelShow, this);
 }
 
 

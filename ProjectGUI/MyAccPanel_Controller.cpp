@@ -5,24 +5,34 @@
 #include "UserNormal.h"
 #include "UserPremium.h"
 #include "MyAccPanel_Logic.h"
+#include "MainPanel_Logic.h"
+#include "Game.h"
+#include <wx/datetime.h>
+
+
 
 MyAccPanel_Controller::MyAccPanel_Controller(MyAccPanel* parentEl, wxStaticText* logoutLabel,
     wxPanel* userPanel,
     wxStaticText* loginLabel,
     wxButton* logoutBtn,
     wxTextCtrl* premiumInput,
-    wxScrolledWindow* gamesPanel) : parentEl(parentEl), logoutLabel(logoutLabel), userPanel(userPanel), loginLabel(loginLabel), logoutBtn(logoutBtn), premiumInput(premiumInput), gamesPanel(gamesPanel) {
-    // Reszta kodu konstruktora, jeúli jest taka potrzebna
-}
-
+    wxScrolledWindow* gamesPanel) : 
+    parentEl(parentEl), 
+    logoutLabel(logoutLabel), 
+    userPanel(userPanel), 
+    loginLabel(loginLabel), 
+    logoutBtn(logoutBtn), 
+    premiumInput(premiumInput), 
+    gamesPanel(gamesPanel) {}
 
 void MyAccPanel_Controller::BindEvents() {
-
     parentEl->Bind(wxEVT_SHOW, &MyAccPanel_Controller::OnPanelShow, this);
     logoutBtn->Bind(wxEVT_BUTTON, &MyAccPanel_Controller::LogOut, this);
     premiumInput->Bind(wxEVT_CHAR_HOOK, &MyAccPanel_Controller::OnEnterPressed, this, wxID_ANY);
+}
 
-
+void MyAccPanel_Controller::OnMouseHover(wxMouseEvent& event) {
+    OnCursorHover(event);
 }
 
 void MyAccPanel_Controller::OnEnterPressed(wxKeyEvent& event) {
@@ -32,87 +42,86 @@ void MyAccPanel_Controller::OnEnterPressed(wxKeyEvent& event) {
         premiumInput->SetValue("");
 
         if (enteredText == "PREMIUM") {
+            User* user = MyAccPanel_Logic::GetUser();
+            std::string login = user->getLogin();
+            delete user;
+            user = nullptr;
+
+            user = new UserPremium(login);
+            MainPanel_Logic::SetUser(user);
+            MyAccPanel_Logic::SetUser(user);
+
             premiumInput->Hide();
-
-            wxLogMessage("Jesteú cz≥onkiem premium");
-
-            //std::vector<User::UserGame> userGames = user->getUserGames();
-            //delete user;
-            //pobierz login przez cruda albo od starego usera.
-            // UtwÛrz nowego uøytkownika typu UserPremium, ale nadal uøywajπc istniejπcego obiektu
-         /*   user = new (user) UserPremium("login_premium");
-            user->setUserGames(userGames);*/
-
+            wxMessageDialog* signupNameErrorDlg = new wxMessageDialog(parentEl, "Gratulacje! Zdobywasz konto premium", "Informacja");
+            signupNameErrorDlg->ShowModal();
         }
-        else
-            wxLogMessage("Nieprawid≥owy kod");
+        else{
+            wxMessageDialog* signupNameErrorDlg = new wxMessageDialog(parentEl, "Nieprawid≥owy kod", "B≥πd");
+            signupNameErrorDlg->ShowModal();
+        }
     }
-
-
     event.Skip();
 }
+
 
 void MyAccPanel_Controller::LogOut(wxCommandEvent& event) {
     userPanel->Hide();
 
     logoutLabel->Show();
-    //usuÒ usera i pusty string do _logged.txt
-    //user.reset();
+    //loginLabel->Destroy();
+    UserCRUD::Update_logged("");
+    User* user = MyAccPanel_Logic::GetUser();
+    delete user;
+    user = nullptr;
     event.Skip();
-
 }
 
-//OnPanelShow wykonuje siÍ za kaødym wyswietleniem i ukryciem myAccPanel na ekranie;
-void MyAccPanel_Controller::OnPanelShow(wxShowEvent& event)
-{
-    //Wykonaj jesli MyAccPanel zostal wyswietlony na ekranie
+void MyAccPanel_Controller::OnPanelShow(wxShowEvent& event) {
     if (event.IsShown()) {
 
         std::string login = UserCRUD::ReadLogged();
         std::string userStr = UserCRUD::ReadUser(login);
 
         UpdateGamesPanel();
-        //use json to extract information and pass it to the constructor
-       /* if(isPremium)
-            user = new UserPremium("login_normal");*/
-            //else
-        //user = new UserNormal("piotrek123");
 
-        //wxLogMessage("Type of log: %s", user->stringifyUser());
+        User* user = MyAccPanel_Logic::GetUser();
+        loginLabel = new wxStaticText(userPanel, wxID_ANY, wxString::Format("Zalogowany/a jako: %s", user->getLogin()), wxPoint(10, 0));
+        loginLabel->SetForegroundColour(COLOR_LBL);
+        loginLabel->SetFont(SetTheFont(12, true));
 
-
-        //wxLogMessage(wxString::Format("%s",user->stringifyUser()));
-        //loginLabel = new wxStaticText(userPanel, wxID_ANY, wxString::Format("Zalogowany/a jako: %s", user->getLogin()), wxPoint(10, 10));
         logoutLabel->Hide();
-
-        if (true) {
-            // Sprawdü, czy user jest instancjπ UserNormal
-            //UserNormal* userN = dynamic_cast<UserNormal*>(user);
-            //if (!userN) {
-                // User jest obiektem klasy UserNormal
-                //premiumInput->Hide();
-            //}
-        }
-
-
         userPanel->Show();
 
+        // Check if user is premium
+        if(user->getPremium())
+                premiumInput->Hide();
+        else 
+                premiumInput->Show();
 
-        Layout(); // Zaktualizuj uklad
+
+        Layout();
     }
-
-
+    else {
+        if(loginLabel)
+        loginLabel->Hide();
+    }
     event.Skip();
 }
 
 
+// This metohod executes after clicking on "oddaj" button
+void MyAccPanel_Controller::UpdateUserGames(wxCommandEvent& event, std::string gameName)
+{
+    User* user = MyAccPanel_Logic::GetUser();
+    wxButton* button = dynamic_cast<wxButton*>(event.GetEventObject());
+    //button name is the same as game id
+    wxString buttonName = button->GetName();
+    user->removeUserGame(buttonName.ToStdString());
+    UpdateGamesPanel();
 
-
-
-
-
-
-
+    Game* game = MyAccPanel_Logic::CreateGameFromJSON(gameName);
+    game->SetQuantity(game->GetQuantity()+1);
+}
 
 
 void MyAccPanel_Controller::UpdateGamesPanel() {
@@ -124,69 +133,123 @@ void MyAccPanel_Controller::UpdateGamesPanel() {
 
     User* user = MyAccPanel_Logic::GetUser();
 
-    //this vector will contain all games that should appear on screen (except those that shouldn't)
-    //std::vector<User::UserGame> gamesVec; //= user.getUserGames();
     std::vector<User::UserGame> gamesVec = user->getUserGames();
-
-    //wxLogMessage("Formatted message: %s", filteredVector[0].GetName());
-
-
+    int y = user->getPremium() ? 460 : 400;
     gamesPanel = nullptr;
-    int height = gamesVec.size() <= 3 ? 330 : gamesVec.size() * 80;
-    gamesPanel = new wxScrolledWindow(userPanel, wxID_ANY, wxPoint(0, 15), wxSize(userPanel->GetSize().GetWidth(), 330));
-    gamesPanel->SetScrollRate(0, 10);  // Ustawienia przewijania - drugi argument to liczba pikseli na jedno przewiniÍcie
-    //gamesPanel->Hide();
+    int height = gamesVec.size() <= 3 ? 330 : gamesVec.size() * 100+20;
+    gamesPanel = new wxScrolledWindow(userPanel, wxID_ANY, wxPoint(0, 40), wxSize(userPanel->GetSize().GetWidth(), y));
+    gamesPanel->SetScrollRate(0, 10);  
     gamesPanel->SetBackgroundColour(COLOR_BACKGROUND_PANEL); // Set background color (optional)
     gamesPanel->SetVirtualSize(wxSize(410, height));
 
 
-
-
     if (gamesVec.size() == 0) {
-        wxStaticText* noGameLabel = new wxStaticText(gamesPanel, wxID_ANY, "nie wypozyczono jeszcze zadnej gry", wxPoint(33, 150), wxDefaultSize);
+        wxStaticText* noGameLabel = new wxStaticText(gamesPanel, wxID_ANY, "Nie wypoøyczono jeszcze øadnej gry", wxPoint(55, 150), wxDefaultSize);
         noGameLabel->SetForegroundColour(COLOR_LBL);
-        //noGameLabel->SetBackgroundColour(COLOR_BACKGROUND_LOGINBTN);
-        noGameLabel->SetFont(SetTheFont());
+        noGameLabel->SetFont(SetTheFont(12, true));
+
     }
 
 
-
-
     for (int i = 0; i < gamesVec.size(); i++) {
-        //wxLogMessage("s");
 
         User::UserGame game = gamesVec[i];
 
         std::string gameName = game.GetName();
         std::string gameId = game.getId();
         std::string date = game.getDate();
-        //int x = rand() % (100); // Losowa pozycja x na panelu
-        //int y = rand() % (200); // Losowa pozycja y na panelu
 
-        //Creating elements inside gamesPanel
-        wxString labelText0 = wxString::Format("Nazwa gry: %s", gameName);
+        wxDateTime dt; //declare wxDateTime variable
+        wxString::const_iterator end; // iterator
 
-        // (label name is the same as game name + Lbl)
-        wxStaticText* gameLabel0 = new wxStaticText(gamesPanel, wxID_ANY, labelText0, wxPoint(10, 10 + i * 80), wxDefaultSize, 0, gameName + "Lbl0");
+        dt.ParseFormat(date, "%d-%m-%y__%H-%M-%S", &end); //define formatted wxdateTime variable
 
-        gameLabel0->SetForegroundColour(COLOR_LBL);
-        gameLabel0->SetFont(SetTheFont());
+        wxDateTime today = wxDateTime::Today();
+        wxTimeSpan diff = today - dt; //time difference between the day of hiring the game and today
+
+        int days; //How many days the user has to return
+        if (user->getPremium())
+            days = 60;
+        else days = 30;
+
+        int daysDifference = diff.GetDays(); //how many days passed from the day of hiring the game to today
+        int daysLeft = (days - daysDifference) < 0 ? 0 : (days - daysDifference);
 
 
-        //wxStaticText* gameLabel = new wxStaticText(gamesPanel, wxID_ANY, labelText, wxPoint(x, y));
+        //Creating gamePanel
+        wxPanel* gamePanel = new wxPanel(gamesPanel, wxID_ANY, wxPoint(0, i*100), wxSize(userPanel->GetSize().GetWidth(), 100));
+        wxGauge* progressBar = new wxGauge(gamePanel, wxID_ANY, 100, wxPoint(50, 65), wxDefaultSize, wxGA_SMOOTH);
+        progressBar->SetValue(daysLeft);
+        if(user->getPremium())
+            progressBar->SetRange(60);
+        else 
+            progressBar->SetRange(30);
+
+       
+        wxString labelNameText = wxString::Format("%s", gameName);
+        // (label name is the same as game id + Lbl)
+        wxStaticText* labelName = new wxStaticText(gamePanel, wxID_ANY, labelNameText, wxPoint(50, 10), wxDefaultSize, 0, gameId + "Lbl0");
+        labelName->SetForegroundColour(COLOR_LBL);
+        labelName->SetFont(SetTheFont(15, true));
+
+        wxString labelTimeText;
+        if(daysLeft==0)
+            labelTimeText = wxString::Format("Czas na oddanie up≥ynπ≥");
+        else
+            labelTimeText = wxString::Format("Do oddania zosta≥o ci %d dni", daysLeft);
+
+        // (label name is the same as game id + Lbl)
+        wxStaticText* labelTime = new wxStaticText(gamePanel, wxID_ANY, labelTimeText, wxPoint(50, 40), wxDefaultSize, 0, gameId + "Lbl1");
+        labelTime->SetForegroundColour(COLOR_LBL);
+        labelTime->SetFont(SetTheFont(12));
+
+        // Create lambda expression wihich passes additional argument (gameName)
+        auto updateGamesLambda = [this, gameName](wxCommandEvent& event) {
+            // Call function with an additional argument
+            UpdateUserGames(event, gameName);
+            };
 
         std::string buttonText = "Oddaj";
-
-        // (button name is the same as game name)
-        wxButton* hireBtn = new wxButton(gamesPanel, wxID_ANY, buttonText, wxPoint(parentEl->GetSize().GetWidth() - 10 - 85, 10 + i * 85), wxSize(85, 35), 0, wxDefaultValidator, gameId);
+        // (button name is the same as game id)
+        wxButton* hireBtn = new wxButton(gamePanel, wxID_ANY, buttonText, wxPoint(parentEl->GetSize().GetWidth() - 10 - 120, 10), wxSize(85, 35), 0, wxDefaultValidator, gameId);
 
         hireBtn->SetBackgroundColour(COLOR_BACKGROUND_BTN);
         hireBtn->SetForegroundColour(COLOR_TEXT_BTN);
 
-        hireBtn->Bind(wxEVT_BUTTON, &MyAccPanel_Controller::UpdateUserGames, this, wxID_ANY, wxID_ANY);
-        //hireBtn->Bind(wxEVT_ENTER_WINDOW, &MyAccPanbel_Controller::OnMouseHover, this);
+        //instead of direct binding with UpdateUserGames use lambda expression
+        hireBtn->Bind(wxEVT_BUTTON, updateGamesLambda);
+        hireBtn->Bind(wxEVT_ENTER_WINDOW, &MyAccPanel_Controller::OnMouseHover, this);
         hireBtn->SetFont(SetTheFont());
+        ////////////////////
+        /////////////////////
 
+        std::string login = user->getLogin();
+        User* user = MyAccPanel_Logic::GetUser();
+
+        auto rateGameLambda = [this, gameName, login](wxCommandEvent& event) {
+            // Call function with an additional argument
+            RateGame(event, gameName, login);
+            };
+
+        // (button name is the same as game id)
+        wxButton* rateBtn = new wxButton(gamePanel, wxID_ANY, "OceÒ", wxPoint(parentEl->GetSize().GetWidth() - 10 - 120, 50), wxSize(85, 35), 0, wxDefaultValidator, gameId);
+
+        rateBtn->SetBackgroundColour(COLOR_BACKGROUND_BTN);
+        rateBtn->SetForegroundColour(COLOR_TEXT_BTN);
+
+        //instead of direct binding with UpdateUserGames use lambda expression
+        rateBtn->Bind(wxEVT_BUTTON, rateGameLambda);
+        rateBtn->Bind(wxEVT_ENTER_WINDOW, &MyAccPanel_Controller::OnMouseHover, this);
+        rateBtn->SetFont(SetTheFont());
+
+
+        auto it = game.GetUserRates().find(user->getLogin());
+
+        //Check if the login has been found
+        if (it != game.GetUserRates().end()) {
+            // Found the rate of the user
+            int userRating = it->second;
+        }
 
     }
     gamesPanel->Show();
@@ -195,14 +258,119 @@ void MyAccPanel_Controller::UpdateGamesPanel() {
 
 
 
-// This metohod executes after clicking on "oddaj" button
-void MyAccPanel_Controller::UpdateUserGames(wxCommandEvent & event)
-{
-    User* user = MyAccPanel_Logic::GetUser();
-    //wxLogMessage(wxString::Format("%s", user->stringifyUser()));
-    //get the clicked button name
-    wxButton* button = dynamic_cast<wxButton*>(event.GetEventObject());
-    wxString buttonName = button->GetName();
-    user->removeUserGame(buttonName.ToStdString());
-    //wxLogMessage(buttonName);
+void MyAccPanel_Controller::RateGame(wxCommandEvent& event, std::string gameName, std::string login) {
+    
+
+    Game* game = MyAccPanel_Logic::CreateGameFromJSON(gameName);
+
+    //get current user rate
+    std::map <std::string, int> userRates = game->GetUserRates();
+    auto it = userRates.find(login);
+    int currentRate;
+    if (it != userRates.end())
+        currentRate = it->second;
+    else currentRate = 0;
+      
+    GameCRUD::updateGame(game->GetName(), game->GetQuantity(), game->GetNrOfLoans(), game->GetRate(), game->GetUserRates());
+
+    wxDialog* rateGameDialog= new wxDialog(parentEl, wxID_ANY, wxString::Format("OceÒ grÍ %s", gameName), wxDefaultPosition, wxSize(250, 70));
+    rateGameDialog->SetMinSize(wxSize(250, 120));
+
+    wxRadioButton* radio1 = new wxRadioButton(rateGameDialog, wxID_ANY, "Ocena: 1", wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, "radio1");
+    wxRadioButton* radio2 = new wxRadioButton(rateGameDialog, wxID_ANY, "Ocena: 2", wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, "radio2");
+    wxRadioButton* radio3 = new wxRadioButton(rateGameDialog, wxID_ANY, "Ocena: 3", wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, "radio3");
+    wxRadioButton* radio4 = new wxRadioButton(rateGameDialog, wxID_ANY, "Ocena: 4", wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, "radio4");
+    wxRadioButton* radio5 = new wxRadioButton(rateGameDialog, wxID_ANY, "Ocena: 5", wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, "radio5");
+
+
+
+    radio1->Bind(wxEVT_RADIOBUTTON, &MyAccPanel_Controller::OnRadioSelect, this);
+    radio2->Bind(wxEVT_RADIOBUTTON, &MyAccPanel_Controller::OnRadioSelect, this);
+    radio3->Bind(wxEVT_RADIOBUTTON, &MyAccPanel_Controller::OnRadioSelect, this);
+    radio4->Bind(wxEVT_RADIOBUTTON, &MyAccPanel_Controller::OnRadioSelect, this);
+    radio5->Bind(wxEVT_RADIOBUTTON, &MyAccPanel_Controller::OnRadioSelect, this);
+
+    switch (currentRate) {
+    case 1: radio1->SetValue(true);
+        break;
+    case 2: radio2->SetValue(true);
+        break;
+    case 3: radio3->SetValue(true);
+        break;
+    case 4: radio4->SetValue(true);
+        break;
+    case 5: radio5->SetValue(true);
+        break;
+    default: radio5->SetValue(true);
+        break;
+    }
+
+   
+    wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
+    sizer->Add(radio1, 0, wxALL, 5);
+    sizer->Add(radio2, 0, wxALL, 5);
+    sizer->Add(radio3, 0, wxALL, 5);
+    sizer->Add(radio4, 0, wxALL, 5);
+    sizer->Add(radio5, 0, wxALL, 5);
+
+    rateGameDialog->SetSizer(sizer);
+    rateGameDialog->Layout();
+    rateGameDialog->Fit();
+
+    wxButton* okButton = new wxButton(rateGameDialog, wxID_OK, "OceÒ", wxPoint(100, 35), wxSize(85, 35), 0, wxDefaultValidator, "OK");
+    okButton->Bind(wxEVT_BUTTON, [this, game, login](wxCommandEvent& event) {
+        OnOKButtonClick(event, game, login);
+        });
+
+
+    std::vector<wxRadioButton*> radioButtons = { radio1, radio2, radio3, radio4, radio5 };
+    wxButton* resetBtn = new wxButton(rateGameDialog, wxID_OK, "Cofnij ocenÍ", wxPoint(200, 35), wxSize(85, 35), 0, wxDefaultValidator, "OK");
+    resetBtn->Bind(wxEVT_BUTTON, [this, &radioButtons](wxCommandEvent& event) {
+        newRate = 0;
+
+        // Uncheck all radio buttons
+        for (auto& radioButton : radioButtons) {
+            radioButton->SetValue(false);
+        }
+        });
+
+    int result = rateGameDialog->ShowModal();
+}
+
+void MyAccPanel_Controller::OnRadioSelect(wxCommandEvent& event) {
+    wxRadioButton* radioButton = dynamic_cast<wxRadioButton*>(event.GetEventObject());
+    if (radioButton) {
+        wxString label = radioButton->GetLabel();
+       
+        if (label == "Ocena: 1") {
+            newRate= 1;
+        }
+        else if (label == "Ocena: 2") {
+            newRate = 2;
+        }
+        else if (label == "Ocena: 3") {
+            newRate = 3;
+        }
+        else if (label == "Ocena: 4") {
+            newRate = 4;
+        }
+        else if (label == "Ocena: 5") {
+            newRate = 5;
+        }
+    }
+
+}
+
+void MyAccPanel_Controller::OnOKButtonClick(wxCommandEvent& event, Game* game, std::string login) {
+
+    game->SetRate(newRate, login);
+    GameCRUD::updateGame(game->GetName(), game->GetQuantity(), game->GetNrOfLoans(), game->GetRate(), game->GetUserRates());
+    newRate = -1;
+    wxButton* okButton = dynamic_cast<wxButton*>(event.GetEventObject());
+    if (okButton) {
+        wxDialog* dialog = dynamic_cast<wxDialog*>(okButton->GetParent());
+        if (dialog) {
+            dialog->EndModal(wxID_OK);  // Close the dialog after clicking OK
+        }
+    }
 }

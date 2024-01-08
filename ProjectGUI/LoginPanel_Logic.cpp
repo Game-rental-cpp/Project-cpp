@@ -1,8 +1,17 @@
 ﻿#include "LoginPanel.h"
 #include "LoginPanel_Logic.h"
+//#include "LoginPanel_Length_Reqs.h"
 #include <wx/wx.h>
+#include "Style.h"
 #include "UserCRUD.h"
+#include "MainPanel_Logic.h"
+#include "MyAccPanel_Logic.h"
+#include "User.h"
+#include "UserNormal.h"
+#include "UserPremium.h"
+#include "json.hpp"
 
+using json = nlohmann::json;
 
 // Log in attempt validation
 bool LoginPanel_Logic::LoginValidated(std::string loginName, std::string loginPassword, LoginPanel* loginPanel) {
@@ -14,10 +23,12 @@ bool LoginPanel_Logic::LoginValidated(std::string loginName, std::string loginPa
         return false;
     }
 
+    std::string userStr = UserCRUD::ReadUser(loginName); //string representation of user model
+    json jsonData = json::parse(userStr); //parsing JSON string
+    std::string password = jsonData.at("password"); //get value of key "password"
+
     // Handle incorrect password
-    // if (UserCRUD::ReadPassword(loginName) != loginPassword)
-    if (false)
-    {
+     if (password != loginPassword){
         wxMessageDialog* incorrectPasswordDlg = new wxMessageDialog(loginPanel, "Nieprawidłowe hasło.", "Błąd");
         incorrectPasswordDlg->ShowModal();
         return false;
@@ -25,19 +36,19 @@ bool LoginPanel_Logic::LoginValidated(std::string loginName, std::string loginPa
 
     // Log in user if there aren't any issues
     UserCRUD::Update_logged(loginName);
+    User* user = nullptr;
+    if (jsonData.at("isPremium"))
+        user = new UserPremium(loginName);
+    else
+        user = new UserNormal(loginName);
+    MainPanel_Logic::SetUser(user);
+    MyAccPanel_Logic::SetUser(user);
+
     return true;
 }
 
 // Sign up attempt validation
 bool  LoginPanel_Logic::SignupValidated(std::string signupName, std::string signupPassword1, std::string signupPassword2, LoginPanel* loginPanel) {
-
-    // Login username min and max length
-    constexpr int MIN_CHAR_NAME{ 3 };
-    constexpr int MAX_CHAR_NAME{ 15 };
-    
-    // Login password min and max length
-    constexpr int MIN_CHAR_PASSWORD{ 8 };
-    constexpr int MAX_CHAR_PASSWORD{ 40 };
 
     ////////////////////////////////////////////////////////////////////////////////
     // Username validation //
@@ -59,8 +70,8 @@ bool  LoginPanel_Logic::SignupValidated(std::string signupName, std::string sign
     int nameLength = signupName.size();
 
     // Check if username meets length requirements
-    if (nameLength < MIN_CHAR_PASSWORD || nameLength > MAX_CHAR_PASSWORD)
-        signupNameErrorMessage += "Login musi zawierać od " + std::to_string(MIN_CHAR_PASSWORD) + " do " + std::to_string(MAX_CHAR_PASSWORD) + " znaków.\n";
+    if (nameLength < MIN_CHAR_NAME || nameLength > MAX_CHAR_NAME)
+        signupNameErrorMessage += "Login musi zawierać od " + std::to_string(MIN_CHAR_NAME) + " do " + std::to_string(MAX_CHAR_NAME) + " znaków.\n";
 
     // Check if username meets character content requirements
     for (int i = 0; i < nameLength; i++)
@@ -68,7 +79,7 @@ bool  LoginPanel_Logic::SignupValidated(std::string signupName, std::string sign
         char c = signupName[i];
         if (!isalpha(c) && !isdigit(c) && c != '-' && c != '_')
         {
-            signupNameErrorMessage += "Login może składać się tylko z cyfr, podkreśleń, myślników oraz małych i dużych liter alfabetu angielskiego.\n";
+            signupNameErrorMessage += "Login może składać się tylko z cyfr, podkreśleń, myślników lub małych i dużych liter alfabetu angielskiego.\n";
             break;
         }
     }
@@ -138,6 +149,10 @@ bool  LoginPanel_Logic::SignupValidated(std::string signupName, std::string sign
     // Create and log in new user
     UserCRUD::CreateUser(signupName, signupPassword1);
     UserCRUD::Update_logged(signupName);
+
+    User* user = new UserNormal(signupName);
+    MainPanel_Logic::SetUser(user);
+    MyAccPanel_Logic::SetUser(user);
 
     return true;
 }

@@ -2,7 +2,14 @@
 
 ## App description
 
-Will be soon.
+This app is a simulation of a board game rental shop written ic C++. To run this app you need to install a C++ compiler and wxWidgets library version 3.2.3 (it's used to build the graphical user interface). If you struggle to install it, follow [this](https://www.youtube.com/watch?v=ONYW3hBbk-8&list=PLFk1_lkqT8MbVOcwEppCPfjGOGhLvcf9G&index=2) guide. If you want to collaborate, preferred IDE is Visual Studio. 
+
+#### Main features:
+
+- sign in/sign up
+- enhance account to premium version
+- sort and filter games
+- rate games
 
 ## Do zespołu:
 

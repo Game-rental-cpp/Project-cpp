@@ -1,0 +1,10 @@
+{
+  "name": "rummikub",
+  "nrOfLoans": 125,
+  "quantity": 16,
+  "rate": 3.4927635482,
+  "userRates": {
+    "key1": 4,
+    "key2": 3
+  }
+}

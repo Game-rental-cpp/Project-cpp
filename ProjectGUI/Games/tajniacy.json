@@ -1,0 +1,13 @@
+{
+    "name": "tajniacy",
+    "nrOfLoans": 181,
+    "quantity": 43,
+    "rate": 3.5992491245269775,
+    "userRates": {
+        "jakisLogin": 4,
+        "key1": 5,
+        "key2": 2,
+        "key3": 3,
+        "userek123": 4
+    }
+}

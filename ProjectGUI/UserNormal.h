@@ -10,9 +10,6 @@ public:
     UserNormal(const std::string& login);
     virtual ~UserNormal() = default;
 
-    bool addUserGame(const std::string& name)  override;
-
     std::string stringifyUser() override;
-    // Getter
-    bool isPremium() const; 
+
 };

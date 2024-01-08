@@ -6,6 +6,8 @@
 MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
     : wxFrame(NULL, wxID_ANY, title, pos, size) {
 
+
+
     // Creating buttons
     goBackBtn = new wxButton(this, wxID_ANY, "Wróæ", wxDefaultPosition, wxSize(80, 40));
     loginBtn = new wxButton(this, wxID_ANY, "Zaloguj / Zarejestruj", wxDefaultPosition, wxSize(170, 40), wxBORDER_RAISED);
@@ -14,14 +16,16 @@ MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& si
     goBackBtn->Hide();
     MainFrame_Logic::HideButton(loginBtn, myAccBtn); //hide one of the buttons
 
+
     // Creating and adding panels
     mainPanel = new MainPanel(this, wxID_ANY, wxPoint(10, 100), wxSize(410, 500));
     loginPanel = new LoginPanel(this, wxID_ANY, wxPoint(20, 200), wxSize(410, 500));
     myAccPanel = new MyAccPanel(this, wxID_ANY, wxPoint(10, 100), wxSize(410, 500));
 
+
     MainFrame_Logic::CreateUser();
 
-    // Default hidden
+    // Hidden by default
     mainPanel->Hide(); //temporarily hide to trigger the OnPanelShow 
     loginPanel->Hide();
     myAccPanel->Hide();
@@ -37,11 +41,11 @@ MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& si
     loginBtn->SetForegroundColour(COLOR_TEXT_LOGINBTN);
 
     myAccBtn->SetFont(SetTheFont(10).MakeBold());
-    myAccBtn->SetBackgroundColour(COLOR_BACKGROUND_PANEL);
+    myAccBtn->SetBackgroundColour(COLOR_BACKGROUND_NAVBTN);
     myAccBtn->SetForegroundColour(COLOR_TEXT_BTN);
 
     goBackBtn->SetFont(SetTheFont(10).MakeBold());
-    goBackBtn->SetBackgroundColour(COLOR_BACKGROUND_PANEL);
+    goBackBtn->SetBackgroundColour(COLOR_BACKGROUND_NAVBTN);
     goBackBtn->SetForegroundColour(COLOR_TEXT_BTN);
 
     wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
