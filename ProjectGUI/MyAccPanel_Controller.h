@@ -34,10 +34,10 @@ private:
     void UpdateUserGames(wxCommandEvent& event, std::string gameName);
     void OnMouseHover(wxMouseEvent& event);
     void RateGame(wxCommandEvent& event, std::string gameName, std::string login);
-    void OnOKButtonClick(wxCommandEvent& event, Game* game, std::string login);
+    void OnOcenButtonClick(wxCommandEvent& event, Game* game, std::string login);
     void OnRadioSelect(wxCommandEvent& event);
 
-    int newRate = -1;
+    int newRate;
 
 };
 

@@ -256,7 +256,9 @@ void MyAccPanel_Controller::UpdateGamesPanel() {
 
 
 
+/// ////////////// Rating feature
 
+// executes after clicking rateBtn
 void MyAccPanel_Controller::RateGame(wxCommandEvent& event, std::string gameName, std::string login) {
     
 
@@ -291,16 +293,22 @@ void MyAccPanel_Controller::RateGame(wxCommandEvent& event, std::string gameName
 
     switch (currentRate) {
     case 1: radio1->SetValue(true);
+        newRate = 1;
         break;
     case 2: radio2->SetValue(true);
+        newRate = 2;
         break;
     case 3: radio3->SetValue(true);
+        newRate = 3;
         break;
     case 4: radio4->SetValue(true);
+        newRate = 4;
         break;
     case 5: radio5->SetValue(true);
+        newRate = 5;
         break;
     default: radio5->SetValue(true);
+        newRate = 5;
         break;
     }
 
@@ -316,14 +324,14 @@ void MyAccPanel_Controller::RateGame(wxCommandEvent& event, std::string gameName
     rateGameDialog->Layout();
     rateGameDialog->Fit();
 
-    wxButton* okButton = new wxButton(rateGameDialog, wxID_OK, "Oceñ", wxPoint(100, 35), wxSize(85, 35), 0, wxDefaultValidator, "OK");
+    wxButton* okButton = new wxButton(rateGameDialog, wxID_ANY, "Oceñ", wxPoint(100, 35), wxSize(85, 35), 0, wxDefaultValidator);
     okButton->Bind(wxEVT_BUTTON, [this, game, login](wxCommandEvent& event) {
-        OnOKButtonClick(event, game, login);
+        OnOcenButtonClick(event, game, login);
         });
 
 
     std::vector<wxRadioButton*> radioButtons = { radio1, radio2, radio3, radio4, radio5 };
-    wxButton* resetBtn = new wxButton(rateGameDialog, wxID_OK, "Cofnij ocenê", wxPoint(200, 35), wxSize(85, 35), 0, wxDefaultValidator, "OK");
+    wxButton* resetBtn = new wxButton(rateGameDialog, wxID_ANY, "Cofnij ocenê", wxPoint(200, 35), wxSize(85, 35), 0, wxDefaultValidator);
     resetBtn->Bind(wxEVT_BUTTON, [this, &radioButtons](wxCommandEvent& event) {
         newRate = 0;
 
@@ -360,16 +368,15 @@ void MyAccPanel_Controller::OnRadioSelect(wxCommandEvent& event) {
 
 }
 
-void MyAccPanel_Controller::OnOKButtonClick(wxCommandEvent& event, Game* game, std::string login) {
-
+void MyAccPanel_Controller::OnOcenButtonClick(wxCommandEvent& event, Game* game, std::string login) {
     game->SetRate(newRate, login);
     GameCRUD::updateGame(game->GetName(), game->GetQuantity(), game->GetNrOfLoans(), game->GetRate(), game->GetUserRates());
-    newRate = -1;
+    //newRate = -1;
     wxButton* okButton = dynamic_cast<wxButton*>(event.GetEventObject());
     if (okButton) {
         wxDialog* dialog = dynamic_cast<wxDialog*>(okButton->GetParent());
         if (dialog) {
-            dialog->EndModal(wxID_OK);  // Close the dialog after clicking OK
+            dialog->EndModal(wxID_OK);  // Close the dialog after clicking Oceñ
         }
     }
 }

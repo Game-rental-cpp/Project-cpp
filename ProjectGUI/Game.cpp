@@ -33,7 +33,7 @@ void Game::SetNrOfLoans(int nrOfLoans) {
 
 
 void Game::SetRate(int r, std::string login) {
-    if (r == -1) return;
+    //if (r == -1) return;
     // SprawdŸ, czy u¿ytkownik ju¿ oceni³ tê grê
     if (r == 0) {
         // Jeœli r wynosi 0, usuñ ocenê u¿ytkownika z mapy
