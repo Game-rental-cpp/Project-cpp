@@ -68,7 +68,7 @@ void MyAccPanel_Controller::LogOut(wxCommandEvent& event) {
     userPanel->Hide();
 
     logoutLabel->Show();
-    //loginLabel->Destroy();
+    loginLabel->SetLabel("");
     UserCRUD::Update_logged("");
     User* user = MyAccPanel_Logic::GetUser();
     delete user;
@@ -85,9 +85,8 @@ void MyAccPanel_Controller::OnPanelShow(wxShowEvent& event) {
         UpdateGamesPanel();
 
         User* user = MyAccPanel_Logic::GetUser();
-        loginLabel = new wxStaticText(userPanel, wxID_ANY, wxString::Format("Zalogowany/a jako: %s", user->getLogin()), wxPoint(10, 0));
-        loginLabel->SetForegroundColour(COLOR_LBL);
-        loginLabel->SetFont(SetTheFont(12, true));
+        loginLabel->SetLabel(wxString::Format("Zalogowany/a jako: %s", user->getLogin()));
+
 
         logoutLabel->Hide();
         userPanel->Show();
@@ -101,10 +100,10 @@ void MyAccPanel_Controller::OnPanelShow(wxShowEvent& event) {
 
         Layout();
     }
-    else {
-        if(loginLabel)
-        loginLabel->Hide();
-    }
+    //else {
+    //   /* if(loginLabel)
+    //    loginLabel->Hide();*/
+    //}
     event.Skip();
 }
 

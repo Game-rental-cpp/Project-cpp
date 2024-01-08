@@ -18,6 +18,11 @@ MyAccPanel::MyAccPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, cons
     logoutLabel->SetFont(SetTheFont(12, true));
 
     userPanel = new wxPanel(this, wxID_ANY, wxPoint(0, 10), wxSize(410, 500));
+
+    loginLabel = new wxStaticText(userPanel, wxID_ANY, "", wxPoint(10, 0));
+    loginLabel->SetForegroundColour(COLOR_LBL);
+    loginLabel->SetFont(SetTheFont(12, true));
+
     // Creating a button
     logoutBtn = new wxButton(userPanel, wxID_ANY, "Wyloguj", wxPoint(GetClientSize().GetWidth() - 100, 0), wxSize(75, 30));
     logoutBtn->SetFont(SetTheFont(10).MakeBold());
