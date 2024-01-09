@@ -11,3 +11,40 @@ Program zosta? uruchomiony
 jakisLogin wypo?yczy?(a) gr? bierki.  Liczba dost?pnych do wypo?yczania kopii gry wynosi: 5
 jakisLogin wypo?yczy?(a) gr? bierki.  Liczba dost?pnych do wypo?yczania kopii gry wynosi: 4
 jakisLogin wypo?yczy?(a) gr? ego.  Liczba dost?pnych do wypo?yczania kopii gry wynosi: 19
+
+09-01-24__15-50-27
+Program zosta? uruchomiony
+jakisLogin odda?/a gr? domino. Liczba dost?pnych do wypo?yczania kopii gry wynosi: 65
+jakisLogin odda?/a gr? bierki. Liczba dost?pnych do wypo?yczania kopii gry wynosi: 5
+jakisLogin wypo?yczy?(a) gr? bierki.  Liczba dost?pnych do wypo?yczania kopii gry wynosi: 4
+Wylogowano u?ytkownika jakisLogin
+Zalogowano u?ytkownika: jakisLogin
+
+09-01-24__15-55-32
+Program zosta? uruchomiony
+U?ytkownik jakisLogin da? grze domino ocen? 5. ?rednia ocena gry wynosi: 3.500000
+U?ytkownik jakisLogin da? grze domino ocen? 5. ?rednia ocena gry wynosi: 3.500000
+U?ytkownik jakisLogin da? grze domino ocen? 5. ?rednia ocena gry wynosi: 3.500000
+U?ytkownik jakisLogin da? grze domino ocen? 5. ?rednia ocena gry wynosi: 3.500000
+U?ytkownik jakisLogin da? grze domino ocen? 1. ?rednia ocena gry wynosi: 1.500000
+U?ytkownik jakisLogin da? grze domino ocen? 5. ?rednia ocena gry wynosi: 3.500000
+U?ytkownik jakisLogin da? grze domino ocen? 3. ?rednia ocena gry wynosi: 2.500000
+
+09-01-24__20-08-56
+Program zosta? uruchomiony
+
+09-01-24__20-55-56
+Program zosta? uruchomiony
+U?ytkownik jakisLogin da? grze domino ocen? 0. ?rednia ocena gry wynosi: 2.000000
+jakisLogin wypo?yczy?/a gr? dobble.  Liczba dost?pnych do wypo?yczania kopii gry wynosi: 46
+jakisLogin wypo?yczy?/a gr? dobble.  Liczba dost?pnych do wypo?yczania kopii gry wynosi: 45
+U?ytkownik jakisLogin da? grze dobble ocen? 5. ?rednia ocena gry wynosi: 3.666667
+Wylogowano u?ytkownika jakisLogin
+Zalogowano u?ytkownika: miik
+miik zdoby?/a konto premium
+U?ytkownik miik da? grze dixit ocen? 5. ?rednia ocena gry wynosi: 4.000000
+U?ytkownik miik da? grze dixit ocen? 4. ?rednia ocena gry wynosi: 3.800000
+U?ytkownik miik da? grze dixit ocen? 0. ?rednia ocena gry wynosi: 3.750000
+miik odda?/a gr? domino. Liczba dost?pnych do wypo?yczania kopii gry wynosi: 66
+miik wypo?yczy?/a gr? dobble.  Liczba dost?pnych do wypo?yczania kopii gry wynosi: 44
+Wylogowano u?ytkownika miik

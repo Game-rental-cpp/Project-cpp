@@ -120,6 +120,9 @@
     <ClCompile Include="LoginPanel_Controller.cpp">
       <Filter>Pliki źródłowe\LoginPanel</Filter>
     </ClCompile>
+    <ClCompile Include="Log.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainFrame.h">
@@ -188,6 +191,10 @@
     <ClInclude Include="LoginPanel_Controller.h">
       <Filter>Pliki nagłówkowe\LoginPanel</Filter>
     </ClInclude>
+    <ClInclude Include="Log.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="log.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore" />
@@ -245,6 +252,15 @@
     </None>
     <None Include="Games\rummikub.json">
       <Filter>Pliki zasobów\Games</Filter>
+    </None>
+    <None Include="Users\usertest_xX.json">
+      <Filter>Pliki zasobów\Users</Filter>
+    </None>
+    <None Include="Users\miik.json">
+      <Filter>Pliki zasobów\Users</Filter>
+    </None>
+    <None Include="Users\aba.json">
+      <Filter>Pliki zasobów\Users</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
