@@ -1,14 +1,17 @@
-// App.cpp
+﻿// App.cpp
 #include <wx/wx.h>
 #include "MainFrame.h"
+#include "Log.h"
 
 class MyApp : public wxApp
 {
 public:
     virtual bool OnInit()
     {
-
-        MainFrame* frame = new MainFrame("Wypo�yczalnia gier planszowych", wxPoint(50, 50), wxSize(435, 610));
+        wxDateTime now = wxDateTime::Now(); // Today's date and time 
+        std::string date = now.Format(wxT("%d-%m-%y__%H-%M-%S"), wxDateTime::CET).ToStdString(); // convert wxDateTime to string
+        Log::write("\n" + date + "\nProgram został uruchomiony");
+        MainFrame* frame = new MainFrame("Wypo¿yczalnia gier planszowych", wxPoint(50, 50), wxSize(435, 610));
         frame->Show(true);
         return true;
     }

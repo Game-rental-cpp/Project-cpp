@@ -1,0 +1,13 @@
+
+09-01-24__15-24-48
+Program zosta? uruchomiony
+
+09-01-24__15-37-23
+Program zosta? uruchomiony
+Zalogowano u?ytkownika: jakisLogin
+
+09-01-24__15-41-09
+Program zosta? uruchomiony
+jakisLogin wypo?yczy?(a) gr? bierki.  Liczba dost?pnych do wypo?yczania kopii gry wynosi: 5
+jakisLogin wypo?yczy?(a) gr? bierki.  Liczba dost?pnych do wypo?yczania kopii gry wynosi: 4
+jakisLogin wypo?yczy?(a) gr? ego.  Liczba dost?pnych do wypo?yczania kopii gry wynosi: 19

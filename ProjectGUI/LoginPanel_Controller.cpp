@@ -1,8 +1,9 @@
-// LoginPanel_Controller.cpp
+﻿// LoginPanel_Controller.cpp
 #include "LoginPanel_Controller.h"
 #include "LoginPanel.h"
 #include "LoginPanel_Logic.h"
 #include "Style.h"
+#include "Log.h"
 #include <wx/wx.h>
 
 LoginPanel_Controller::LoginPanel_Controller(LoginPanel* parentEl, wxStaticText* successLabel,
@@ -13,7 +14,7 @@ LoginPanel_Controller::LoginPanel_Controller(LoginPanel* parentEl, wxStaticText*
     wxTextCtrl* signupName,
     wxTextCtrl* signupPassword1,
     wxTextCtrl* signupPassword2,
-    wxButton* signupBtn) : 
+    wxButton* signupBtn) :
     parentEl(parentEl),
     successLabel(successLabel),
     formsPanel(formsPanel),
@@ -64,6 +65,9 @@ void LoginPanel_Controller::OnLogin(wxCommandEvent& event) {
 
     formsPanel->Hide();
     successLabel->Show();
+
+    // Update performance log
+    Log::write("Zalogowano użytkownika: " + userLoginName);
 }
 
 // Function called when "Zarejestruj" button is pressed
@@ -77,4 +81,8 @@ void LoginPanel_Controller::OnSignup(wxCommandEvent& event) {
 
     formsPanel->Hide();
     successLabel->Show();
+
+    // Update performance log
+    Log::write("Utworzono nowe konto" + userSignupName);
+    Log::write("Zalogowano użytkownika: " + userSignupName);
 }

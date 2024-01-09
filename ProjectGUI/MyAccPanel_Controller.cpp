@@ -5,6 +5,7 @@
 #include "UserNormal.h"
 #include "UserPremium.h"
 #include "MyAccPanel_Logic.h"
+#include "Log.h"
 #include "MainPanel_Logic.h"
 #include "Game.h"
 #include <wx/datetime.h>
