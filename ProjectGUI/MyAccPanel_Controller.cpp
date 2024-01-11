@@ -11,16 +11,6 @@
 #include <wx/datetime.h>
 
 
-/*
-* // Update performance log
-            Log::write(user->getLogin() + " zdobył(a) konto premium");
-
-   Log::write("Wylogowano użytkownika " + user->getLogin());
-   Log::write("Użytkownik oddał grę " + game->GetName() + ". Liczba dostępnych do wypożyczania kopii gry wynosi: " + std::to_string(game->GetQuantity()));
-
-       Log::write("Użytkownik " + login + " dał grze " + game->GetName() + " ocenę " + std::to_string(newRate));
-*/
-
 MyAccPanel_Controller::MyAccPanel_Controller(MyAccPanel* parentEl, wxStaticText* logoutLabel,
     wxPanel* userPanel,
     wxStaticText* loginLabel,
@@ -244,7 +234,7 @@ void MyAccPanel_Controller::UpdateGamesPanel() {
             };
 
         // (button name is the same as game id)
-        wxButton* rateBtn = new wxButton(gamePanel, wxID_ANY, "Oceñ", wxPoint(parentEl->GetSize().GetWidth() - 10 - 120, 50), wxSize(85, 35), 0, wxDefaultValidator, gameId);
+        wxButton* rateBtn = new wxButton(gamePanel, wxID_ANY, "Oceń", wxPoint(parentEl->GetSize().GetWidth() - 10 - 120, 50), wxSize(85, 35), 0, wxDefaultValidator, gameId);
 
         rateBtn->SetBackgroundColour(COLOR_BACKGROUND_BTN);
         rateBtn->SetForegroundColour(COLOR_TEXT_BTN);
@@ -337,7 +327,7 @@ void MyAccPanel_Controller::RateGame(wxCommandEvent& event, std::string gameName
     rateGameDialog->Layout();
     rateGameDialog->Fit();
 
-    wxButton* okButton = new wxButton(rateGameDialog, wxID_ANY, "Oceñ", wxPoint(100, 35), wxSize(85, 35), 0, wxDefaultValidator);
+    wxButton* okButton = new wxButton(rateGameDialog, wxID_ANY, "Zatwierdź", wxPoint(100, 35), wxSize(85, 35), 0, wxDefaultValidator);
     okButton->Bind(wxEVT_BUTTON, [this, game, login](wxCommandEvent& event) {
         OnOcenButtonClick(event, game, login);
         });

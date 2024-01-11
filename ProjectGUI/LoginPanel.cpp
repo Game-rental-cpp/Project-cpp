@@ -43,7 +43,7 @@ LoginPanel::LoginPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, cons
     signupPassword1->SetFont(SetTheFont(11));
 
     signupPassword2 = new wxTextCtrl(formsPanel, wxID_ANY, wxEmptyString, wxPoint(80, 230), wxSize(220, 22), wxTE_PASSWORD);
-    signupPassword2->SetHint("Potwierdz hasło");
+    signupPassword2->SetHint("Potwierdź hasło");
     signupPassword2->SetFont(SetTheFont(11));
 
     signupBtn = new wxButton(formsPanel, wxID_ANY, "Zarejestruj", wxPoint(140, 265), wxSize(100, 30));

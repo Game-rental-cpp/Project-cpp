@@ -48,3 +48,12 @@ U?ytkownik miik da? grze dixit ocen? 0. ?rednia ocena gry wynosi: 3.750000
 miik odda?/a gr? domino. Liczba dost?pnych do wypo?yczania kopii gry wynosi: 66
 miik wypo?yczy?/a gr? dobble.  Liczba dost?pnych do wypo?yczania kopii gry wynosi: 44
 Wylogowano u?ytkownika miik
+
+11-01-24__12-41-36
+Program zosta? uruchomiony
+Zalogowano u?ytkownika: miik
+
+11-01-24__12-43-03
+Program zosta? uruchomiony
+U?ytkownik miik da? grze ego ocen? 0 (0 = cofn??/??a ocen?). ?rednia ocena gry wynosi: 4.666667
+U?ytkownik miik da? grze ego ocen? 5 (0 = cofn??/??a ocen?). ?rednia ocena gry wynosi: 4.750000
