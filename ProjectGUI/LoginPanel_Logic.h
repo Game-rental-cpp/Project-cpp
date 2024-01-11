@@ -1,7 +1,7 @@
 #pragma once
 
 #include <wx/wx.h>
-class LoginPanel_Logic : public wxPanel
+class LoginPanel_Logic
 {
 public:
 	static bool LoginValidated(std::string loginName, std::string loginPassword, LoginPanel* loginPanel);
