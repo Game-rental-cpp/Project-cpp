@@ -101,7 +101,7 @@ void MainPanel_Controller::UpdateGame(wxCommandEvent& event)
                 disableButton(buttonName);
             }
             // Update performance log
-            Log::write(user->getLogin() + " wypożyczył/a grę " + gamesVector[i].GetName() + ".  Liczba dostępnych do wypożyczania kopii gry wynosi: "
+            writeToLog(user->getLogin() + " wypożyczył/a grę " + gamesVector[i].GetName() + ".  Liczba dostępnych do wypożyczania kopii gry wynosi: "
                 + std::to_string(gamesVector[i].GetQuantity()));
 
             break; // The game has been found, break the loop

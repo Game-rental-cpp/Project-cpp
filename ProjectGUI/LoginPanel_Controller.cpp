@@ -67,7 +67,7 @@ void LoginPanel_Controller::OnLogin(wxCommandEvent& event) {
     successLabel->Show();
 
     // Update performance log
-    Log::write("Zalogowano użytkownika: " + userLoginName);
+    writeToLog("Zalogowano użytkownika: " + userLoginName);
 }
 
 // Function called when "Zarejestruj" button is pressed
@@ -83,6 +83,6 @@ void LoginPanel_Controller::OnSignup(wxCommandEvent& event) {
     successLabel->Show();
 
     // Update performance log
-    Log::write("Utworzono nowe konto" + userSignupName);
-    Log::write("Zalogowano użytkownika: " + userSignupName);
+    writeToLog("Utworzono nowe konto: " + userSignupName);
+    writeToLog("Zalogowano użytkownika: " + userSignupName);
 }

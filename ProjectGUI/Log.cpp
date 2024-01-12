@@ -1,9 +1,9 @@
 // Log.cpp
+
 #include "Log.h"
 #include <fstream>
 
-// This function is used to add data to the program performance log
-void Log::write(std::string update) {
+void writeToLog(std::string update) {
     // Open the file for writing
     std::ofstream log("log.txt", std::ios_base::app);
     if (log.is_open()) {
@@ -16,3 +16,4 @@ void Log::write(std::string update) {
         return;
     }
 }
+

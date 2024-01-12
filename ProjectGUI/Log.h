@@ -1,9 +1,7 @@
 // Log.h
 #pragma once
 #include <iostream>
-class Log
-{
-public:
-	static void write(std::string update);
-};
+#include <fstream>
+// This function is used to add data to the program performance log
+void writeToLog(std::string update);
 

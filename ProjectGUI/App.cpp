@@ -10,7 +10,7 @@ public:
     {
         wxDateTime now = wxDateTime::Now(); // Today's date and time 
         std::string date = now.Format(wxT("%d-%m-%y__%H-%M-%S"), wxDateTime::CET).ToStdString(); // convert wxDateTime to string
-        Log::write("\n" + date + "\nProgram został uruchomiony");
+        writeToLog("\n" + date + "\nProgram został uruchomiony");
         MainFrame* frame = new MainFrame("Wypo¿yczalnia gier planszowych", wxPoint(50, 50), wxSize(435, 610));
         frame->Show(true);
         return true;
