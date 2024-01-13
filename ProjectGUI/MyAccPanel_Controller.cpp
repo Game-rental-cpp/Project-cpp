@@ -57,7 +57,7 @@ void MyAccPanel_Controller::OnEnterPressed(wxKeyEvent& event) {
             signupNameErrorDlg->ShowModal();
         }
         else{
-            wxMessageDialog* signupNameErrorDlg = new wxMessageDialog(parentEl, "Nieprawid³owy kod", "B³¹d");
+            wxMessageDialog* signupNameErrorDlg = new wxMessageDialog(parentEl, L"Nieprawidłowy kod", L"Błąd");
             signupNameErrorDlg->ShowModal();
         }
     }
@@ -102,10 +102,7 @@ void MyAccPanel_Controller::OnPanelShow(wxShowEvent& event) {
 
         Layout();
     }
-    //else {
-    //   /* if(loginLabel)
-    //    loginLabel->Hide();*/
-    //}
+
     event.Skip();
 }
 
@@ -146,7 +143,7 @@ void MyAccPanel_Controller::UpdateGamesPanel() {
 
 
     if (gamesVec.size() == 0) {
-        wxStaticText* noGameLabel = new wxStaticText(gamesPanel, wxID_ANY, "Nie wypo¿yczono jeszcze ¿adnej gry", wxPoint(55, 150), wxDefaultSize);
+        wxStaticText* noGameLabel = new wxStaticText(gamesPanel, wxID_ANY, L"Nie wypożyczono jeszcze żadnej gry", wxPoint(55, 150), wxDefaultSize);
         noGameLabel->SetForegroundColour(COLOR_LBL);
         noGameLabel->SetFont(SetTheFont(12, true));
 
@@ -196,9 +193,9 @@ void MyAccPanel_Controller::UpdateGamesPanel() {
 
         wxString labelTimeText;
         if(daysLeft==0)
-            labelTimeText = wxString::Format("Czas na oddanie up³yn¹³");
+            labelTimeText = wxString::Format(L"Czas na oddanie upłynął");
         else
-            labelTimeText = wxString::Format("Do oddania zosta³o ci %d dni", daysLeft);
+            labelTimeText = wxString::Format(L"Do oddania zostało ci %d dni", daysLeft);
 
         // (label name is the same as game id + Lbl)
         wxStaticText* labelTime = new wxStaticText(gamePanel, wxID_ANY, labelTimeText, wxPoint(50, 40), wxDefaultSize, 0, gameId + "Lbl1");
@@ -234,7 +231,7 @@ void MyAccPanel_Controller::UpdateGamesPanel() {
             };
 
         // (button name is the same as game id)
-        wxButton* rateBtn = new wxButton(gamePanel, wxID_ANY, "Oceń", wxPoint(parentEl->GetSize().GetWidth() - 10 - 120, 50), wxSize(85, 35), 0, wxDefaultValidator, gameId);
+        wxButton* rateBtn = new wxButton(gamePanel, wxID_ANY, L"Oceń", wxPoint(parentEl->GetSize().GetWidth() - 10 - 120, 50), wxSize(85, 35), 0, wxDefaultValidator, gameId);
 
         rateBtn->SetBackgroundColour(COLOR_BACKGROUND_BTN);
         rateBtn->SetForegroundColour(COLOR_TEXT_BTN);
@@ -277,7 +274,7 @@ void MyAccPanel_Controller::RateGame(wxCommandEvent& event, std::string gameName
       
     GameCRUD::updateGame(game->GetName(), game->GetQuantity(), game->GetNrOfLoans(), game->GetRate(), game->GetUserRates());
 
-    wxDialog* rateGameDialog= new wxDialog(parentEl, wxID_ANY, wxString::Format("Oceñ grê %s", gameName), wxDefaultPosition, wxSize(250, 70));
+    wxDialog* rateGameDialog= new wxDialog(parentEl, wxID_ANY, wxString::Format(L"Oceń grę %s", gameName), wxDefaultPosition, wxSize(250, 70));
     rateGameDialog->SetMinSize(wxSize(250, 120));
 
     wxRadioButton* radio1 = new wxRadioButton(rateGameDialog, wxID_ANY, "Ocena: 1", wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, "radio1");
@@ -327,14 +324,14 @@ void MyAccPanel_Controller::RateGame(wxCommandEvent& event, std::string gameName
     rateGameDialog->Layout();
     rateGameDialog->Fit();
 
-    wxButton* okButton = new wxButton(rateGameDialog, wxID_ANY, "Zatwierdź", wxPoint(100, 35), wxSize(85, 35), 0, wxDefaultValidator);
+    wxButton* okButton = new wxButton(rateGameDialog, wxID_ANY, L"Zatwierdź", wxPoint(100, 35), wxSize(85, 35), 0, wxDefaultValidator);
     okButton->Bind(wxEVT_BUTTON, [this, game, login](wxCommandEvent& event) {
         OnOcenButtonClick(event, game, login);
         });
 
 
     std::vector<wxRadioButton*> radioButtons = { radio1, radio2, radio3, radio4, radio5 };
-    wxButton* resetBtn = new wxButton(rateGameDialog, wxID_ANY, "Cofnij ocenê", wxPoint(200, 35), wxSize(85, 35), 0, wxDefaultValidator);
+    wxButton* resetBtn = new wxButton(rateGameDialog, wxID_ANY, L"Cofnij ocenę", wxPoint(200, 35), wxSize(85, 35), 0, wxDefaultValidator);
     resetBtn->Bind(wxEVT_BUTTON, [this, &radioButtons](wxCommandEvent& event) {
         newRate = 0;
 
