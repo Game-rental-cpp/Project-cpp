@@ -1,14 +1,14 @@
-#include "MyAccPanel_Controller.h"
+﻿#include "MyAccPanel_Controller.h"
 #include "MyAccPanel.h"
 #include "Style.h"
 #include "UserCRUD.h"
 #include "UserNormal.h"
 #include "UserPremium.h"
 #include "MyAccPanel_Logic.h"
+#include "Log.h"
 #include "MainPanel_Logic.h"
 #include "Game.h"
 #include <wx/datetime.h>
-
 
 
 MyAccPanel_Controller::MyAccPanel_Controller(MyAccPanel* parentEl, wxStaticText* logoutLabel,
@@ -53,10 +53,11 @@ void MyAccPanel_Controller::OnEnterPressed(wxKeyEvent& event) {
 
             premiumInput->Hide();
             wxMessageDialog* signupNameErrorDlg = new wxMessageDialog(parentEl, "Gratulacje! Zdobywasz konto premium", "Informacja");
+            writeToLog(user->getLogin() + " zdobył/a konto premium");
             signupNameErrorDlg->ShowModal();
         }
         else{
-            wxMessageDialog* signupNameErrorDlg = new wxMessageDialog(parentEl, "Nieprawid�owy kod", "B��d");
+            wxMessageDialog* signupNameErrorDlg = new wxMessageDialog(parentEl, L"Nieprawidłowy kod", L"Błąd");
             signupNameErrorDlg->ShowModal();
         }
     }
@@ -68,9 +69,10 @@ void MyAccPanel_Controller::LogOut(wxCommandEvent& event) {
     userPanel->Hide();
 
     logoutLabel->Show();
-    //loginLabel->Destroy();
+    loginLabel->SetLabel("");
     UserCRUD::Update_logged("");
     User* user = MyAccPanel_Logic::GetUser();
+    writeToLog("Wylogowano użytkownika " + user->getLogin());
     delete user;
     user = nullptr;
     event.Skip();
@@ -85,9 +87,8 @@ void MyAccPanel_Controller::OnPanelShow(wxShowEvent& event) {
         UpdateGamesPanel();
 
         User* user = MyAccPanel_Logic::GetUser();
-        loginLabel = new wxStaticText(userPanel, wxID_ANY, wxString::Format("Zalogowany/a jako: %s", user->getLogin()), wxPoint(10, 0));
-        loginLabel->SetForegroundColour(COLOR_LBL);
-        loginLabel->SetFont(SetTheFont(12, true));
+        loginLabel->SetLabel(wxString::Format("Zalogowany/a jako: %s", user->getLogin()));
+
 
         logoutLabel->Hide();
         userPanel->Show();
@@ -101,10 +102,7 @@ void MyAccPanel_Controller::OnPanelShow(wxShowEvent& event) {
 
         Layout();
     }
-    else {
-        if(loginLabel)
-        loginLabel->Hide();
-    }
+
     event.Skip();
 }
 
@@ -121,6 +119,7 @@ void MyAccPanel_Controller::UpdateUserGames(wxCommandEvent& event, std::string g
 
     Game* game = MyAccPanel_Logic::CreateGameFromJSON(gameName);
     game->SetQuantity(game->GetQuantity()+1);
+    writeToLog(user->getLogin() + " oddał/a grę " + game->GetName() + ". Liczba dostępnych do wypożyczania kopii gry wynosi: " + std::to_string(game->GetQuantity()));
 }
 
 
@@ -144,7 +143,7 @@ void MyAccPanel_Controller::UpdateGamesPanel() {
 
 
     if (gamesVec.size() == 0) {
-        wxStaticText* noGameLabel = new wxStaticText(gamesPanel, wxID_ANY, "Nie wypo�yczono jeszcze �adnej gry", wxPoint(55, 150), wxDefaultSize);
+        wxStaticText* noGameLabel = new wxStaticText(gamesPanel, wxID_ANY, L"Nie wypożyczono jeszcze żadnej gry", wxPoint(55, 150), wxDefaultSize);
         noGameLabel->SetForegroundColour(COLOR_LBL);
         noGameLabel->SetFont(SetTheFont(12, true));
 
@@ -194,9 +193,9 @@ void MyAccPanel_Controller::UpdateGamesPanel() {
 
         wxString labelTimeText;
         if(daysLeft==0)
-            labelTimeText = wxString::Format("Czas na oddanie up�yn��");
+            labelTimeText = wxString::Format(L"Czas na oddanie upłynął");
         else
-            labelTimeText = wxString::Format("Do oddania zosta�o ci %d dni", daysLeft);
+            labelTimeText = wxString::Format(L"Do oddania zostało ci %d dni", daysLeft);
 
         // (label name is the same as game id + Lbl)
         wxStaticText* labelTime = new wxStaticText(gamePanel, wxID_ANY, labelTimeText, wxPoint(50, 40), wxDefaultSize, 0, gameId + "Lbl1");
@@ -232,7 +231,7 @@ void MyAccPanel_Controller::UpdateGamesPanel() {
             };
 
         // (button name is the same as game id)
-        wxButton* rateBtn = new wxButton(gamePanel, wxID_ANY, "Oce�", wxPoint(parentEl->GetSize().GetWidth() - 10 - 120, 50), wxSize(85, 35), 0, wxDefaultValidator, gameId);
+        wxButton* rateBtn = new wxButton(gamePanel, wxID_ANY, L"Oceń", wxPoint(parentEl->GetSize().GetWidth() - 10 - 120, 50), wxSize(85, 35), 0, wxDefaultValidator, gameId);
 
         rateBtn->SetBackgroundColour(COLOR_BACKGROUND_BTN);
         rateBtn->SetForegroundColour(COLOR_TEXT_BTN);
@@ -257,7 +256,9 @@ void MyAccPanel_Controller::UpdateGamesPanel() {
 
 
 
+/// ////////////// Rating feature
 
+// executes after clicking rateBtn
 void MyAccPanel_Controller::RateGame(wxCommandEvent& event, std::string gameName, std::string login) {
     
 
@@ -273,7 +274,7 @@ void MyAccPanel_Controller::RateGame(wxCommandEvent& event, std::string gameName
       
     GameCRUD::updateGame(game->GetName(), game->GetQuantity(), game->GetNrOfLoans(), game->GetRate(), game->GetUserRates());
 
-    wxDialog* rateGameDialog= new wxDialog(parentEl, wxID_ANY, wxString::Format("Oce� gr� %s", gameName), wxDefaultPosition, wxSize(250, 70));
+    wxDialog* rateGameDialog= new wxDialog(parentEl, wxID_ANY, wxString::Format(L"Oceń grę %s", gameName), wxDefaultPosition, wxSize(250, 70));
     rateGameDialog->SetMinSize(wxSize(250, 120));
 
     wxRadioButton* radio1 = new wxRadioButton(rateGameDialog, wxID_ANY, "Ocena: 1", wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, "radio1");
@@ -292,16 +293,22 @@ void MyAccPanel_Controller::RateGame(wxCommandEvent& event, std::string gameName
 
     switch (currentRate) {
     case 1: radio1->SetValue(true);
+        newRate = 1;
         break;
     case 2: radio2->SetValue(true);
+        newRate = 2;
         break;
     case 3: radio3->SetValue(true);
+        newRate = 3;
         break;
     case 4: radio4->SetValue(true);
+        newRate = 4;
         break;
     case 5: radio5->SetValue(true);
+        newRate = 5;
         break;
     default: radio5->SetValue(true);
+        newRate = 5;
         break;
     }
 
@@ -317,14 +324,14 @@ void MyAccPanel_Controller::RateGame(wxCommandEvent& event, std::string gameName
     rateGameDialog->Layout();
     rateGameDialog->Fit();
 
-    wxButton* okButton = new wxButton(rateGameDialog, wxID_OK, "Oce�", wxPoint(100, 35), wxSize(85, 35), 0, wxDefaultValidator, "OK");
+    wxButton* okButton = new wxButton(rateGameDialog, wxID_ANY, L"Zatwierdź", wxPoint(100, 35), wxSize(85, 35), 0, wxDefaultValidator);
     okButton->Bind(wxEVT_BUTTON, [this, game, login](wxCommandEvent& event) {
-        OnOKButtonClick(event, game, login);
+        OnOcenButtonClick(event, game, login);
         });
 
 
     std::vector<wxRadioButton*> radioButtons = { radio1, radio2, radio3, radio4, radio5 };
-    wxButton* resetBtn = new wxButton(rateGameDialog, wxID_OK, "Cofnij ocen�", wxPoint(200, 35), wxSize(85, 35), 0, wxDefaultValidator, "OK");
+    wxButton* resetBtn = new wxButton(rateGameDialog, wxID_ANY, L"Cofnij ocenę", wxPoint(200, 35), wxSize(85, 35), 0, wxDefaultValidator);
     resetBtn->Bind(wxEVT_BUTTON, [this, &radioButtons](wxCommandEvent& event) {
         newRate = 0;
 
@@ -361,16 +368,17 @@ void MyAccPanel_Controller::OnRadioSelect(wxCommandEvent& event) {
 
 }
 
-void MyAccPanel_Controller::OnOKButtonClick(wxCommandEvent& event, Game* game, std::string login) {
-
+void MyAccPanel_Controller::OnOcenButtonClick(wxCommandEvent& event, Game* game, std::string login) {
     game->SetRate(newRate, login);
     GameCRUD::updateGame(game->GetName(), game->GetQuantity(), game->GetNrOfLoans(), game->GetRate(), game->GetUserRates());
-    newRate = -1;
+    //newRate = -1;
     wxButton* okButton = dynamic_cast<wxButton*>(event.GetEventObject());
     if (okButton) {
         wxDialog* dialog = dynamic_cast<wxDialog*>(okButton->GetParent());
         if (dialog) {
-            dialog->EndModal(wxID_OK);  // Close the dialog after clicking OK
+            dialog->EndModal(wxID_OK);  // Close the dialog after clicking Oceñ
         }
     }
+    writeToLog("Użytkownik " + login + " dał grze " + game->GetName() + " ocenę " + std::to_string(newRate)
+    + " (0 = cofnął/ęła ocenę). Średnia ocena gry wynosi: " + std::to_string(game->GetRate()));
 }

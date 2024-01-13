@@ -5,7 +5,7 @@
 #include "Game.h"
 #include "User.h"
 
-class MainPanel_Logic : public wxPanel
+class MainPanel_Logic
 {
 public:
     static Game CreateGameFromJSON(int i);

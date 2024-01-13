@@ -1,14 +1,14 @@
 {
-  "name": "dobble",
-  "nrOfLoans": 295,
-  "quantity": 47,
-  "rate": 3.4935284637,
-  "userRates": {
-    "jakisLogin": 4,
-    "key1": 2,
-    "key2": 3,
-    "key3": 4,
-    "key4": 5,
-    "key5": 3
-  }
+    "name": "dobble",
+    "nrOfLoans": 298,
+    "quantity": 44,
+    "rate": 3.6666667461395264,
+    "userRates": {
+        "jakisLogin": 5,
+        "key1": 2,
+        "key2": 3,
+        "key3": 4,
+        "key4": 5,
+        "key5": 3
+    }
 }

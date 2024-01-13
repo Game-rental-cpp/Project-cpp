@@ -1,13 +1,8 @@
 {
-    "isPremium": false,
+    "isPremium": true,
     "login": "miik",
     "password": "abcABC123!",
     "userGames": [
-        {
-            "date": "07-01-24__17-35-31",
-            "id": "56ccfbf3-40b8-404c-a0c6-76b0272b93ee",
-            "name": "domino"
-        },
         {
             "date": "07-01-24__17-35-33",
             "id": "7b2e11bd-07fd-4710-ae46-87746b8fb089",
@@ -17,6 +12,11 @@
             "date": "07-01-24__17-35-36",
             "id": "3e0465bc-b84d-4981-a72f-fbe137e396ef",
             "name": "dixit"
+        },
+        {
+            "date": "09-01-24__20-57-13",
+            "id": "755bf305-1f8d-4256-aa85-d956311d0608",
+            "name": "dobble"
         }
     ]
 }

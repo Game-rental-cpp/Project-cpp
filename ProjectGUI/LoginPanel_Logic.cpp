@@ -1,6 +1,5 @@
 ﻿#include "LoginPanel.h"
 #include "LoginPanel_Logic.h"
-//#include "LoginPanel_Length_Reqs.h"
 #include <wx/wx.h>
 #include "Style.h"
 #include "UserCRUD.h"
