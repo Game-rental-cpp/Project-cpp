@@ -9,8 +9,6 @@ using json = nlohmann::json;
 UserNormal::UserNormal(const std::string& login)
     : User(login) {
     setPremium(false);
-   
-
 }
 
 std::string UserNormal::stringifyUser() {
@@ -18,7 +16,7 @@ std::string UserNormal::stringifyUser() {
     json user = {
         {"login", login},
         {"password", password},
-        {"isPremium", false}, //
+        {"isPremium", false}, // false
         {"userGames", userGames}
     };
 

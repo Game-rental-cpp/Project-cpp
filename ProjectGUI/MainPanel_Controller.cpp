@@ -46,7 +46,7 @@ void MainPanel_Controller::UpdateGame(wxCommandEvent& event)
 {
     bool logged = UserCRUD::isLogged();
     if (!logged) {
-        wxMessageDialog* signupNameErrorDlg = new wxMessageDialog(parentEl, L"Aby wypożyczyć grę najpierw musisz się zalogować", "Informacja");
+        wxMessageDialog* signupNameErrorDlg = new wxMessageDialog(parentEl, L"Aby wypożyczyż grż najpierw musisz się zalogować", "Informacja");
         signupNameErrorDlg->ShowModal();
         return;
     }

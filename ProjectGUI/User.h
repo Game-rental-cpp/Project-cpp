@@ -34,8 +34,8 @@ public:
     // Getters
     std::string getLogin() const;
     std::string getPassword() const;
-    bool getPremium() const { return isPremium; }; //you can also have return isPremium;
-    const std::vector<UserGame>& getUserGames() const; // Getter for the vector of UserGame
+    bool getPremium() const { return isPremium; }; 
+    const std::vector<UserGame>& getUserGames() const; 
 
 
     // @param std::string& name
