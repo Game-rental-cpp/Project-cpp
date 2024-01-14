@@ -28,6 +28,7 @@ MyAccPanel_Controller::MyAccPanel_Controller(MyAccPanel* parentEl, wxStaticText*
 void MyAccPanel_Controller::BindEvents() {
     parentEl->Bind(wxEVT_SHOW, &MyAccPanel_Controller::OnPanelShow, this);
     logoutBtn->Bind(wxEVT_BUTTON, &MyAccPanel_Controller::LogOut, this);
+    logoutBtn->Bind(wxEVT_ENTER_WINDOW, &MyAccPanel_Controller::OnMouseHover, this);
     premiumInput->Bind(wxEVT_CHAR_HOOK, &MyAccPanel_Controller::OnEnterPressed, this, wxID_ANY);
 }
 
@@ -119,7 +120,7 @@ void MyAccPanel_Controller::UpdateUserGames(wxCommandEvent& event, std::string g
 
     Game* game = MyAccPanel_Logic::CreateGameFromJSON(gameName);
     game->SetQuantity(game->GetQuantity()+1);
-    writeToLog(user->getLogin() + " oddal/a grę " + game->GetName() + ". Liczba dostepnych do wypozyczania kopii gry wynosi: " + std::to_string(game->GetQuantity()));
+    writeToLog(user->getLogin() + " oddal/a gre " + game->GetName() + ". Liczba dostepnych do wypozyczania kopii gry wynosi: " + std::to_string(game->GetQuantity()));
 }
 
 
@@ -380,5 +381,5 @@ void MyAccPanel_Controller::OnOcenButtonClick(wxCommandEvent& event, Game* game,
         }
     }
     writeToLog("Uzytkownik " + login + " dal grze " + game->GetName() + " ocene " + std::to_string(newRate)
-    + " (0 = cofnal/ela ocenę). Srednia ocena gry wynosi: " + std::to_string(game->GetRate()));
+    + " (0 = cofnal/ela ocene). Srednia ocena gry wynosi: " + std::to_string(game->GetRate()));
 }

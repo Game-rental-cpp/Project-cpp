@@ -1,7 +1,7 @@
 {
     "name": "ubongo",
-    "nrOfLoans": 265,
-    "quantity": 32,
+    "nrOfLoans": 266,
+    "quantity": 31,
     "rate": 3.142857074737549,
     "userRates": {
         "jakisLogin": 4,

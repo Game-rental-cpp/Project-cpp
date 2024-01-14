@@ -75,3 +75,13 @@ miik wypozyczyl/a gre cluedo.  Liczba dostepnych do wypozyczania kopii gry wynos
 Wylogowano uzytkownika miik
 Zalogowano uzytkownika: aba
 Wylogowano uzytkownika aba
+
+14-01-24__16-22-09
+Program zostal uruchomiony
+Zalogowano uzytkownika: userek123
+
+14-01-24__16-29-41
+Program zostal uruchomiony
+userek123 wypozyczyl/a gre catan.  Liczba dostepnych do wypozyczania kopii gry wynosi: 86
+userek123 wypozyczyl/a gre ubongo.  Liczba dostepnych do wypozyczania kopii gry wynosi: 31
+Uzytkownik userek123 dal grze catan ocene 4 (0 = cofnal/ela ocene). Srednia ocena gry wynosi: 4.000000
