@@ -21,92 +21,57 @@ Wylogowano u?ytkownika jakisLogin
 Zalogowano u?ytkownika: jakisLogin
 
 09-01-24__15-55-32
-Program zosta? uruchomiony
-U?ytkownik jakisLogin da? grze domino ocen? 5. ?rednia ocena gry wynosi: 3.500000
-U?ytkownik jakisLogin da? grze domino ocen? 5. ?rednia ocena gry wynosi: 3.500000
-U?ytkownik jakisLogin da? grze domino ocen? 5. ?rednia ocena gry wynosi: 3.500000
-U?ytkownik jakisLogin da? grze domino ocen? 5. ?rednia ocena gry wynosi: 3.500000
-U?ytkownik jakisLogin da? grze domino ocen? 1. ?rednia ocena gry wynosi: 1.500000
-U?ytkownik jakisLogin da? grze domino ocen? 5. ?rednia ocena gry wynosi: 3.500000
-U?ytkownik jakisLogin da? grze domino ocen? 3. ?rednia ocena gry wynosi: 2.500000
+Program zostal uruchomiony
+Uzytkownik jakisLogin dal grze domino ocene 5. Srednia ocena gry wynosi: 3.500000
+Uzytkownik jakisLogin dal grze domino ocene 5. Srednia ocena gry wynosi: 3.500000
+Uzytkownik jakisLogin dal grze domino ocene 5. Srednia ocena gry wynosi: 3.500000
+Uzytkownik jakisLogin dal grze domino ocene 5. Srednia ocena gry wynosi: 3.500000
+Uzytkownik jakisLogin dal grze domino ocene 1. Srednia ocena gry wynosi: 1.500000
+Uzytkownik jakisLogin dal grze domino ocene 5. Srednia ocena gry wynosi: 3.500000
+Uzytkownik jakisLogin dal grze domino ocene 3. Srednia ocena gry wynosi: 2.500000
 
 09-01-24__20-08-56
-Program zosta? uruchomiony
+Program zostal uruchomiony
 
 09-01-24__20-55-56
-Program zosta? uruchomiony
-U?ytkownik jakisLogin da? grze domino ocen? 0. ?rednia ocena gry wynosi: 2.000000
-jakisLogin wypo?yczy?/a gr? dobble.  Liczba dost?pnych do wypo?yczania kopii gry wynosi: 46
-jakisLogin wypo?yczy?/a gr? dobble.  Liczba dost?pnych do wypo?yczania kopii gry wynosi: 45
-U?ytkownik jakisLogin da? grze dobble ocen? 5. ?rednia ocena gry wynosi: 3.666667
+Program zostal uruchomiony
+Uzytkownik jakisLogin dal grze domino ocene 0. Srednia ocena gry wynosi: 2.000000
+jakisLogin wypozyczyl/a gre dobble.  Liczba dostepnych do wypozyczania kopii gry wynosi: 46
+jakisLogin wypozyczyl/a gre dobble.  Liczba dostepnych do wypozyczania kopii gry wynosi: 45
+U?ytkownik jakisLogin dal grze dobble ocene 5. Srednia ocena gry wynosi: 3.666667
 Wylogowano u?ytkownika jakisLogin
 Zalogowano u?ytkownika: miik
 miik zdoby?/a konto premium
-U?ytkownik miik da? grze dixit ocen? 5. ?rednia ocena gry wynosi: 4.000000
-U?ytkownik miik da? grze dixit ocen? 4. ?rednia ocena gry wynosi: 3.800000
-U?ytkownik miik da? grze dixit ocen? 0. ?rednia ocena gry wynosi: 3.750000
-miik odda?/a gr? domino. Liczba dost?pnych do wypo?yczania kopii gry wynosi: 66
-miik wypo?yczy?/a gr? dobble.  Liczba dost?pnych do wypo?yczania kopii gry wynosi: 44
-Wylogowano u?ytkownika miik
+Uzytkownik miik dal grze dixit ocene 5. Srednia ocena gry wynosi: 4.000000
+Uzytkownik miik dal grze dixit ocene 4. Srednia ocena gry wynosi: 3.800000
+Uzytkownik miik dal grze dixit ocene 0. Srednia ocena gry wynosi: 3.750000
+miik oddal/a gre domino. Liczba dostepnych do wypozyczania kopii gry wynosi: 66
+miik wypozyczyl/a gre dobble.  Liczba dostepnych do wypozyczania kopii gry wynosi: 44
+Wylogowano uzytkownika miik
 
 11-01-24__12-41-36
-Program zosta? uruchomiony
-Zalogowano u?ytkownika: miik
+Program zostal uruchomiony
+Zalogowano uzytkownika: miik
 
 11-01-24__12-43-03
-Program zosta? uruchomiony
-U?ytkownik miik da? grze ego ocen? 0 (0 = cofn??/??a ocen?). ?rednia ocena gry wynosi: 4.666667
-U?ytkownik miik da? grze ego ocen? 5 (0 = cofn??/??a ocen?). ?rednia ocena gry wynosi: 4.750000
+Program zostal uruchomiony
+U?ytkownik miik dal grze ego ocene 0 (0 = cofnal/ela ocene). Srednia ocena gry wynosi: 4.666667
+U?ytkownik miik dal grze ego ocene 5 (0 = cofnal/ela ocene). Srednia ocena gry wynosi: 4.750000
 
 11-01-24__12-49-55
-Program zosta? uruchomiony
+Program zostal uruchomiony
 
 11-01-24__12-53-51
-Program zosta? uruchomiony
+Program zostal uruchomiony
 
-11-01-24__12-56-31
-Program zosta? uruchomiony
+14-01-24__00-09-21
+Program zostal uruchomiony
+Wylogowano uzytkownika userek123
 
-13-01-24__15-42-03
-Program zosta³ uruchomiony
-
-13-01-24__15-47-24
-Program zosta³ uruchomiony
-
-13-01-24__15-48-30
-Program zosta³ uruchomiony
-
-13-01-24__15-49-09
-Program zosta³ uruchomiony
-
-13-01-24__15-49-18
-Program zosta³ uruchomiony
-
-13-01-24__15-50-18
-Program zosta³ uruchomiony
-
-13-01-24__15-52-44
-Program zosta³ uruchomiony
-Wylogowano u¿ytkownika miik
-
-13-01-24__15-53-59
-Program zosta³ uruchomiony
-
-13-01-24__15-54-35
-Program zosta³ uruchomiony
-
-13-01-24__16-32-17
-Program zosta? uruchomiony
-
-13-01-24__16-41-57
-Program zosta? uruchomiony
-
-13-01-24__16-58-34
-Program zosta? uruchomiony
-
-13-01-24__17-00-56
-Program zosta? uruchomiony
-
-13-01-24__17-03-53
-Program zosta? uruchomiony
-Zalogowano u?ytkownika: userek123
+14-01-24__13-47-28
+Program zostal uruchomiony
+Zalogowano uzytkownika: miik
+miik wypozyczyl/a gre cluedo.  Liczba dostepnych do wypozyczania kopii gry wynosi: 20
+Wylogowano uzytkownika miik
+Zalogowano uzytkownika: aba
+Wylogowano uzytkownika aba

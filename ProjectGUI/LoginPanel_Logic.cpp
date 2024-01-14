@@ -17,7 +17,7 @@ bool LoginPanel_Logic::LoginValidated(std::string loginName, std::string loginPa
     // Handle user not existing
     if (!UserCRUD::DoesExist(loginName))
     {
-        wxMessageDialog* noKnownUserDlg = new wxMessageDialog(loginPanel, "Brak użytkownika o takim loginie.", "Błąd");
+        wxMessageDialog* noKnownUserDlg = new wxMessageDialog(loginPanel, L"Brak użytkownika o takim loginie.", L"Błąd");
         noKnownUserDlg->ShowModal();
         return false;
     }
@@ -28,7 +28,7 @@ bool LoginPanel_Logic::LoginValidated(std::string loginName, std::string loginPa
 
     // Handle incorrect password
      if (password != loginPassword){
-        wxMessageDialog* incorrectPasswordDlg = new wxMessageDialog(loginPanel, "Nieprawidłowe hasło.", "Błąd");
+        wxMessageDialog* incorrectPasswordDlg = new wxMessageDialog(loginPanel, L"Nieprawidłowe hasło.", L"Błąd");
         incorrectPasswordDlg->ShowModal();
         return false;
     }
@@ -56,7 +56,7 @@ bool  LoginPanel_Logic::SignupValidated(std::string signupName, std::string sign
     // Handle user already existing
     if (UserCRUD::DoesExist(signupName))
     {
-        wxMessageDialog* userAlreadyExistsDlg = new wxMessageDialog(loginPanel, "Użytkownik o takim loginie już istnieje", "Błąd");
+        wxMessageDialog* userAlreadyExistsDlg = new wxMessageDialog(loginPanel, L"Użytkownik o takim loginie już istnieje", L"Błąd");
         userAlreadyExistsDlg->ShowModal();
         return false;
     }
@@ -64,13 +64,13 @@ bool  LoginPanel_Logic::SignupValidated(std::string signupName, std::string sign
     // Check if the username meets the requirements //
 
     // Variable for storing an error message 
-    std::string signupNameErrorMessage = "";
+    std::wstring signupNameErrorMessage = L"";
 
     int nameLength = signupName.size();
 
     // Check if username meets length requirements
     if (nameLength < MIN_CHAR_NAME || nameLength > MAX_CHAR_NAME)
-        signupNameErrorMessage += "Login musi zawierać od " + std::to_string(MIN_CHAR_NAME) + " do " + std::to_string(MAX_CHAR_NAME) + " znaków.\n";
+        signupNameErrorMessage += L"Login musi zawierać od " + std::to_string(MIN_CHAR_NAME) + " do " + std::to_string(MAX_CHAR_NAME) + L" znaków.\n";
 
     // Check if username meets character content requirements
     for (int i = 0; i < nameLength; i++)
@@ -78,14 +78,14 @@ bool  LoginPanel_Logic::SignupValidated(std::string signupName, std::string sign
         char c = signupName[i];
         if (!isalpha(c) && !isdigit(c) && c != '-' && c != '_')
         {
-            signupNameErrorMessage += "Login może składać się tylko z cyfr, podkreśleń, myślników lub małych i dużych liter alfabetu angielskiego.\n";
+            signupNameErrorMessage += L"Login może składać się tylko z cyfr, podkreśleń, myślników lub małych i dużych liter alfabetu angielskiego.\n";
             break;
         }
     }
 
     // Handle errors
     if (!signupNameErrorMessage.empty()) {
-        wxMessageDialog* signupNameErrorDlg = new wxMessageDialog(loginPanel, signupNameErrorMessage, "Błąd");
+        wxMessageDialog* signupNameErrorDlg = new wxMessageDialog(loginPanel, signupNameErrorMessage, L"Błąd");
         signupNameErrorDlg->ShowModal();
         return false;
     }
@@ -97,18 +97,18 @@ bool  LoginPanel_Logic::SignupValidated(std::string signupName, std::string sign
     // Handle passwords given by the user being different
     if (signupPassword1 != signupPassword2)
     {
-        wxMessageDialog* differentPasswordsDlg = new wxMessageDialog(loginPanel, "Hasła muszą być takie same", "Błąd");
+        wxMessageDialog* differentPasswordsDlg = new wxMessageDialog(loginPanel, L"Hasła muszą być takie same", L"Błąd");
         differentPasswordsDlg->ShowModal();
         return false;
     }
 
     // Variable for storing invalid password error message
-    std::string signupPasswordErrorMessage = "";
+    std::wstring signupPasswordErrorMessage = L"";
 
     // Check if password meets length requirements
     int passwordLength = signupPassword1.size();
     if (passwordLength < MIN_CHAR_PASSWORD || passwordLength > MAX_CHAR_PASSWORD)
-        signupPasswordErrorMessage += "Hasło musi zawierać od " + std::to_string(MIN_CHAR_PASSWORD) + " do " + std::to_string(MAX_CHAR_PASSWORD) + " znaków.\n";
+        signupPasswordErrorMessage += L"Hasło musi zawierać od " + std::to_string(MIN_CHAR_PASSWORD) + " do " + std::to_string(MAX_CHAR_PASSWORD) + L" znaków.\n";
 
     // Check if password meets character content requirements
     bool hasLower{ false }; bool hasUpper{ false }; bool hasDigit{ false }; bool hasSpecial{ false };
@@ -129,17 +129,17 @@ bool  LoginPanel_Logic::SignupValidated(std::string signupName, std::string sign
 
     // Add respective error messages
     if (!hasLower)
-        signupPasswordErrorMessage += "Hasło musi zawierać małe litery.\n";
+        signupPasswordErrorMessage += L"Hasło musi zawierać małe litery.\n";
     if (!hasUpper)
-        signupPasswordErrorMessage += "Hasło musi zawierać duże litery.\n";
+        signupPasswordErrorMessage += L"Hasło musi zawierać duże litery.\n";
     if (!hasDigit)
-        signupPasswordErrorMessage += "Hasło musi zawierać cyfry.\n";
+        signupPasswordErrorMessage += L"Hasło musi zawierać cyfry.\n";
     if (!hasSpecial)
-        signupPasswordErrorMessage += "Hasło musi zawierać znaki specjalne.\n";
+        signupPasswordErrorMessage += L"Hasło musi zawierać znaki specjalne.\n";
 
     // Handle errors
     if (!signupPasswordErrorMessage.empty()) {
-        wxMessageDialog* signupPasswordErrorDlg = new wxMessageDialog(loginPanel, signupPasswordErrorMessage, "Błąd");
+        wxMessageDialog* signupPasswordErrorDlg = new wxMessageDialog(loginPanel, signupPasswordErrorMessage, L"Błąd");
         signupPasswordErrorDlg->ShowModal();
         return false;
     }

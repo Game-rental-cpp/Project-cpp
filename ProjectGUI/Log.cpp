@@ -5,9 +5,10 @@
 
 void writeToLog(std::string update) {
     // Open the file for writing
-    std::ofstream log("log.txt", std::ios_base::app);
+    std::wofstream log("log.txt", std::ios_base::app);
+    std::wstring wUpdate(update.begin(), update.end());
     if (log.is_open()) {
-        log << update << std::endl;
+        log << wUpdate << std::endl;
         log.close();
     }
     else {

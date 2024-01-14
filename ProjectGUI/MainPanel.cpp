@@ -1,4 +1,4 @@
-// MainPanel.cpp
+ï»¿// MainPanel.cpp
 #include "MainPanel.h"
 #include "MainPanel_Logic.h"
 #include "MainPanel_Controller.h"
@@ -22,11 +22,11 @@ MainPanel::MainPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const 
     //Convert gameCount into string
     wxString gameCountStr = wxString::Format("%d", gameCount1);
 
-    label = new wxStaticText(this, wxID_ANY, L"Witaj w wypo¿yczalni gier planszowych!", wxPoint(10, 10));
+    label = new wxStaticText(this, wxID_ANY, L"Witaj w wypoÅ¼yczalni gier planszowych!", wxPoint(10, 10));
     label->SetForegroundColour(COLOR_LBL);
     label->SetFont(SetTheFont(15, true));
 
-    label2 = new wxStaticText(this, wxID_ANY, L"Wybierz coœ z listy i kliknij \"wypo¿ycz\".", wxPoint(10, 40));
+    label2 = new wxStaticText(this, wxID_ANY, L"Wybierz coÅ› z listy i kliknij \"wypoÅ¼ycz\".", wxPoint(10, 40));
     label2->SetForegroundColour(COLOR_LBL);
     label2->SetFont(SetTheFont(13, true));
 
@@ -35,7 +35,7 @@ MainPanel::MainPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const 
     wxArrayString sortOptions;
     sortOptions.Add("Alfabetycznie (A-Z)");
     sortOptions.Add("Alfabetycznie (Z-A)");
-    sortOptions.Add(L"Liczba wypo¿yczeñ");
+    sortOptions.Add(L"Liczba wypoÅ¼yczeÅ„");
     sortOptions.Add("Ocena");
 
     int y = 70; //height
@@ -45,7 +45,7 @@ MainPanel::MainPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const 
     ////////////
 
     searchInput = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxPoint(GetClientSize().GetWidth() - 10 - 30 - 190, y), wxSize(190, 30), wxBORDER_RAISED);
-    searchInput->SetHint(L"Wyszukaj grê...");
+    searchInput->SetHint(L"Wyszukaj grÄ™...");
     searchInput->SetFont(SetTheFont());
 
     resetBtn = new wxButton(this, wxID_ANY, "X", wxPoint(GetClientSize().GetWidth() - 10 - 30, y-1), wxSize(30, 31), wxBORDER_NONE);

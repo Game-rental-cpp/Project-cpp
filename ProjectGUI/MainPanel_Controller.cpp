@@ -46,7 +46,7 @@ void MainPanel_Controller::UpdateGame(wxCommandEvent& event)
 {
     bool logged = UserCRUD::isLogged();
     if (!logged) {
-        wxMessageDialog* signupNameErrorDlg = new wxMessageDialog(parentEl, "Aby wypo¿yczyæ grê najpierw musisz siê zalogowaæ", "Informacja");
+        wxMessageDialog* signupNameErrorDlg = new wxMessageDialog(parentEl, L"Aby wypożyczyć grę najpierw musisz się zalogować", "Informacja");
         signupNameErrorDlg->ShowModal();
         return;
     }
@@ -59,7 +59,7 @@ void MainPanel_Controller::UpdateGame(wxCommandEvent& event)
     User* user = MainPanel_Logic::createUser();
 
     if (!user->addUserGame(buttonName.ToStdString())) {
-        wxMessageDialog* signupNameErrorDlg = new wxMessageDialog(parentEl, "Przekroczono maksymaln¹ iloœæ gier wypo¿yczonych na raz. Aby wypo¿yczyæ now¹ grê zostañ cz³onkiem premium lub oddaj któr¹œ z ju¿ wypo¿yczonych gier.", "Informacja");
+        wxMessageDialog* signupNameErrorDlg = new wxMessageDialog(parentEl, L"Przekroczono maksymalną ilość gier wypożyczonych na raz. Aby wypożyczyć nową grę zostań członkiem premium lub oddaj którąś z już wypożyczonych gier.", "Informacja");
         signupNameErrorDlg->ShowModal();
 
         return;
@@ -101,7 +101,7 @@ void MainPanel_Controller::UpdateGame(wxCommandEvent& event)
                 disableButton(buttonName);
             }
             // Update performance log
-            writeToLog(user->getLogin() + " wypożyczył/a grę " + gamesVector[i].GetName() + ".  Liczba dostępnych do wypożyczania kopii gry wynosi: "
+            writeToLog(user->getLogin() + " wypozyczyl/a gre " + gamesVector[i].GetName() + ".  Liczba dostepnych do wypozyczania kopii gry wynosi: "
                 + std::to_string(gamesVector[i].GetQuantity()));
 
             break; // The game has been found, break the loop
@@ -174,7 +174,7 @@ void MainPanel_Controller::UpdateGamesPanel(std::vector<Game> gamesVector)
 
 
     if (filteredVector.size() == 0) {
-        wxStaticText* noGameLabel = new wxStaticText(gamesPanel, wxID_ANY, "¯adna z gier nie spe³nia warunków wyszukiwania", wxPoint(21, 150), wxDefaultSize);
+        wxStaticText* noGameLabel = new wxStaticText(gamesPanel, wxID_ANY, L"Żadna z gier nie spełnia warunków wyszukiwania", wxPoint(21, 150), wxDefaultSize);
         noGameLabel->SetForegroundColour(COLOR_LBL);
         noGameLabel->SetFont(SetTheFont(12, true));
     }

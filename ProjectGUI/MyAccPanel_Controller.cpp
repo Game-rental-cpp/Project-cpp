@@ -53,7 +53,7 @@ void MyAccPanel_Controller::OnEnterPressed(wxKeyEvent& event) {
 
             premiumInput->Hide();
             wxMessageDialog* signupNameErrorDlg = new wxMessageDialog(parentEl, "Gratulacje! Zdobywasz konto premium", "Informacja");
-            writeToLog(user->getLogin() + " zdobył/a konto premium");
+            writeToLog(user->getLogin() + " zdobyl/a konto premium");
             signupNameErrorDlg->ShowModal();
         }
         else{
@@ -72,7 +72,7 @@ void MyAccPanel_Controller::LogOut(wxCommandEvent& event) {
     loginLabel->SetLabel("");
     UserCRUD::Update_logged("");
     User* user = MyAccPanel_Logic::GetUser();
-    writeToLog("Wylogowano użytkownika " + user->getLogin());
+    writeToLog("Wylogowano uzytkownika " + user->getLogin());
     delete user;
     user = nullptr;
     event.Skip();
@@ -119,7 +119,7 @@ void MyAccPanel_Controller::UpdateUserGames(wxCommandEvent& event, std::string g
 
     Game* game = MyAccPanel_Logic::CreateGameFromJSON(gameName);
     game->SetQuantity(game->GetQuantity()+1);
-    writeToLog(user->getLogin() + " oddał/a grę " + game->GetName() + ". Liczba dostępnych do wypożyczania kopii gry wynosi: " + std::to_string(game->GetQuantity()));
+    writeToLog(user->getLogin() + " oddal/a grę " + game->GetName() + ". Liczba dostepnych do wypozyczania kopii gry wynosi: " + std::to_string(game->GetQuantity()));
 }
 
 
@@ -379,6 +379,6 @@ void MyAccPanel_Controller::OnOcenButtonClick(wxCommandEvent& event, Game* game,
             dialog->EndModal(wxID_OK);  // Close the dialog after clicking Oceñ
         }
     }
-    writeToLog("Użytkownik " + login + " dał grze " + game->GetName() + " ocenę " + std::to_string(newRate)
-    + " (0 = cofnął/ęła ocenę). Średnia ocena gry wynosi: " + std::to_string(game->GetRate()));
+    writeToLog("Uzytkownik " + login + " dal grze " + game->GetName() + " ocene " + std::to_string(newRate)
+    + " (0 = cofnal/ela ocenę). Srednia ocena gry wynosi: " + std::to_string(game->GetRate()));
 }

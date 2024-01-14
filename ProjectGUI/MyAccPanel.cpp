@@ -1,4 +1,4 @@
-// MyAccPanel.cpp
+﻿// MyAccPanel.cpp
 #include "MyAccPanel.h"
 #include "MyAccPanel_Controller.h"
 #include <string>
@@ -13,7 +13,7 @@ MyAccPanel::MyAccPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, cons
     : wxPanel(parent, id, pos, size)
 {
 
-    logoutLabel = new wxStaticText(this, wxID_ANY, L"wylogowano pomy�lnie", wxPoint(100, 250));
+    logoutLabel = new wxStaticText(this, wxID_ANY, L"wylogowano pomyślnie", wxPoint(100, 250));
     logoutLabel->SetForegroundColour(COLOR_LBL);
     logoutLabel->SetFont(SetTheFont(12, true));
 
