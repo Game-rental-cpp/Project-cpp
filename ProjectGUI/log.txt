@@ -85,3 +85,10 @@ Program zostal uruchomiony
 userek123 wypozyczyl/a gre catan.  Liczba dostepnych do wypozyczania kopii gry wynosi: 86
 userek123 wypozyczyl/a gre ubongo.  Liczba dostepnych do wypozyczania kopii gry wynosi: 31
 Uzytkownik userek123 dal grze catan ocene 4 (0 = cofnal/ela ocene). Srednia ocena gry wynosi: 4.000000
+
+14-01-24__16-56-08
+Program zostal uruchomiony
+
+14-01-24__21-42-43
+Program zostal uruchomiony
+userek123 oddal/a gre catan. Liczba dostepnych do wypozyczania kopii gry wynosi: 87

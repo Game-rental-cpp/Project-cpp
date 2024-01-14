@@ -53,13 +53,13 @@ void MyAccPanel_Controller::OnEnterPressed(wxKeyEvent& event) {
             MyAccPanel_Logic::SetUser(user);
 
             premiumInput->Hide();
-            wxMessageDialog* signupNameErrorDlg = new wxMessageDialog(parentEl, "Gratulacje! Zdobywasz konto premium", "Informacja");
+            wxMessageDialog* dialog = new wxMessageDialog(parentEl, "Gratulacje! Zdobywasz konto premium", "Informacja");
             writeToLog(user->getLogin() + " zdobyl/a konto premium");
-            signupNameErrorDlg->ShowModal();
+            dialog->ShowModal();
         }
         else{
-            wxMessageDialog* signupNameErrorDlg = new wxMessageDialog(parentEl, L"Nieprawidłowy kod", L"Błąd");
-            signupNameErrorDlg->ShowModal();
+            wxMessageDialog* dialog = new wxMessageDialog(parentEl, L"Nieprawidłowy kod", L"Błąd");
+            dialog->ShowModal();
         }
     }
     event.Skip();
@@ -82,8 +82,8 @@ void MyAccPanel_Controller::LogOut(wxCommandEvent& event) {
 void MyAccPanel_Controller::OnPanelShow(wxShowEvent& event) {
     if (event.IsShown()) {
 
-        std::string login = UserCRUD::ReadLogged();
-        std::string userStr = UserCRUD::ReadUser(login);
+        //std::string login = UserCRUD::ReadLogged();
+        //std::string userStr = UserCRUD::ReadUser(login);
 
         UpdateGamesPanel();
 
