@@ -4,7 +4,6 @@
 #include "GameCRUD.h"
 #include "uuid_v4.h"
 #include "json.hpp"
-//#include <wx/wx.h>
 
 using json = nlohmann::json;
 
@@ -17,9 +16,9 @@ User::User(const std::string& login)
     password = passwordStr;
     json gamesArray = jsonData.at("userGames");
 
-    // Iterowanie po elementach tablicy
+    //Iterate through array elements
     for (const auto& game : gamesArray) {
-        // Wyci¹ganie wartoœci z obiektu w tablicy
+        // Get values from the object in the array
         User::UserGame userGame(game.at("name"));
         userGame.SetId(game.at("id"));
         userGame.SetDate(game.at("date"));
@@ -68,10 +67,9 @@ bool User::addUserGame(const std::string& name) {
     if (!isPremium && userGames.size() == 5)
         return false;
 
-    // Create new userGame and puch it to userGames vector
+    // Create new userGame and push it to userGames vector
     userGames.push_back(UserGame(name));
 
-    //TODO: update user json file
     UserCRUD::UpdateUser(login, stringifyUser());
     return true;
 }
@@ -83,8 +81,7 @@ void User::removeUserGame(const std::string& id) {
         if (it->getId() == id) {
             // remove an element
             userGames.erase(it);
-            //TODO: update user json file
-            //UserCRUD::UpdateUser(std::string login, std::string stringifiedUser);
+           
             break; 
         }
     }
