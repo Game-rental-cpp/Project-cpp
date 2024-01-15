@@ -8,7 +8,6 @@ using json = nlohmann::json;
 
 UserNormal::UserNormal(const std::string& login)
     : User(login) {
-    setPremium(false);
 }
 
 std::string UserNormal::stringifyUser() {
@@ -24,7 +23,7 @@ std::string UserNormal::stringifyUser() {
 }
 
 bool UserNormal::addUserGame(const std::string& name) {
-    if (userGames.size() == 5)
+    if (userGames.size() == 5) // add this condition
         return false;
 
     // Create new userGame and push it to userGames vector
