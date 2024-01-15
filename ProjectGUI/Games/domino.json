@@ -1,7 +1,7 @@
 {
     "name": "domino",
-    "nrOfRentals": 136,
-    "quantity": 67,
+    "nrOfRentals": 138,
+    "quantity": 65,
     "rate": 2.0,
     "userRates": {
         "userek123": 2

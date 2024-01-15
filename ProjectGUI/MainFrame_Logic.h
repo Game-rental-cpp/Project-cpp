@@ -14,7 +14,7 @@ public:
 
     // Creates user object if someone is logged in right after opening the app
     static User* CreateUser();
-private:
-    User user;
+//private:
+//    User* user;
 };
 
