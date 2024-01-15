@@ -1,0 +1,32 @@
+{
+    "isPremium": true,
+    "login": "normalUser",
+    "password": "zaq1@WSX",
+    "userGames": [
+        {
+            "date": "15-01-24__17-52-37",
+            "id": "fe5d38ba-06f8-4d8f-bc05-c4aa38f3bbc8",
+            "name": "bierki"
+        },
+        {
+            "date": "15-01-24__17-52-38",
+            "id": "9c1e0a10-7c31-44f5-9226-1165d2def5ac",
+            "name": "cluedo"
+        },
+        {
+            "date": "15-01-24__17-52-39",
+            "id": "9bcf5328-45ab-40e2-b145-f611aea611d6",
+            "name": "cortex"
+        },
+        {
+            "date": "15-01-24__17-52-40",
+            "id": "0aae18eb-2e40-4723-835d-355981230854",
+            "name": "dixit"
+        },
+        {
+            "date": "15-01-24__17-53-11",
+            "id": "103d1062-e493-430c-a31d-a0a2a567773f",
+            "name": "catan"
+        }
+    ]
+}

@@ -1,7 +1,7 @@
 {
     "name": "dixit",
-    "nrOfRentals": 113,
-    "quantity": 18,
+    "nrOfRentals": 114,
+    "quantity": 17,
     "rate": 3.75,
     "userRates": {
         "jakisLogin": 4,

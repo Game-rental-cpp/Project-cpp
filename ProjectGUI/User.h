@@ -40,7 +40,7 @@ public:
 
     // @param std::string& name
     // returns true if added successfully
-    virtual bool addUserGame(const std::string& name);
+    virtual bool addUserGame(const std::string& name) { return false; };
 
     // @param std::string& id
     void removeUserGame(const std::string& id);

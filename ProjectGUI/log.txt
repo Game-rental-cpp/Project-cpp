@@ -126,3 +126,24 @@ jakisLogin wypozyczyl/a gre catan.  Liczba dostepnych do wypozyczania kopii gry 
 Uzytkownik jakisLogin dal grze catan ocene 3 (0 = cofnal/ela ocene). Srednia ocena gry wynosi: 3.888889
 jakisLogin wypozyczyl/a gre uno.  Liczba dostepnych do wypozyczania kopii gry wynosi: 15
 Uzytkownik jakisLogin dal grze uno ocene 4 (0 = cofnal/ela ocene). Srednia ocena gry wynosi: 4.000000
+
+15-01-24__17-45-03
+Program zostal uruchomiony
+
+15-01-24__17-51-44
+Program zostal uruchomiony
+Wylogowano uzytkownika jakisLogin
+Utworzono nowe konto: normalUser
+Zalogowano uzytkownika: normalUser
+normalUser wypozyczyl/a gre bierki.  Liczba dostepnych do wypozyczania kopii gry wynosi: 2
+normalUser wypozyczyl/a gre catan.  Liczba dostepnych do wypozyczania kopii gry wynosi: 82
+normalUser wypozyczyl/a gre cluedo.  Liczba dostepnych do wypozyczania kopii gry wynosi: 19
+normalUser wypozyczyl/a gre cortex.  Liczba dostepnych do wypozyczania kopii gry wynosi: 4
+normalUser wypozyczyl/a gre dixit.  Liczba dostepnych do wypozyczania kopii gry wynosi: 17
+normalUser zdobyl/a konto premium
+normalUser wypozyczyl/a gre catan.  Liczba dostepnych do wypozyczania kopii gry wynosi: 81
+normalUser wypozyczyl/a gre catan.  Liczba dostepnych do wypozyczania kopii gry wynosi: 80
+normalUser wypozyczyl/a gre catan.  Liczba dostepnych do wypozyczania kopii gry wynosi: 79
+normalUser oddal/a gre catan. Liczba dostepnych do wypozyczania kopii gry wynosi: 80
+normalUser oddal/a gre catan. Liczba dostepnych do wypozyczania kopii gry wynosi: 81
+normalUser oddal/a gre catan. Liczba dostepnych do wypozyczania kopii gry wynosi: 82
