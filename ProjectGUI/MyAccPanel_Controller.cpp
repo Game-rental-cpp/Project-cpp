@@ -28,6 +28,7 @@ MyAccPanel_Controller::MyAccPanel_Controller(MyAccPanel* parentEl, wxStaticText*
 void MyAccPanel_Controller::BindEvents() {
     parentEl->Bind(wxEVT_SHOW, &MyAccPanel_Controller::OnPanelShow, this);
     logoutBtn->Bind(wxEVT_BUTTON, &MyAccPanel_Controller::LogOut, this);
+    logoutBtn->Bind(wxEVT_ENTER_WINDOW, &MyAccPanel_Controller::OnMouseHover, this);
     premiumInput->Bind(wxEVT_CHAR_HOOK, &MyAccPanel_Controller::OnEnterPressed, this, wxID_ANY);
 }
 
@@ -52,13 +53,13 @@ void MyAccPanel_Controller::OnEnterPressed(wxKeyEvent& event) {
             MyAccPanel_Logic::SetUser(user);
 
             premiumInput->Hide();
-            wxMessageDialog* signupNameErrorDlg = new wxMessageDialog(parentEl, "Gratulacje! Zdobywasz konto premium", "Informacja");
-            writeToLog(user->getLogin() + " zdobył/a konto premium");
-            signupNameErrorDlg->ShowModal();
+            wxMessageDialog* dialog = new wxMessageDialog(parentEl, "Gratulacje! Zdobywasz konto premium", "Informacja");
+            writeToLog(user->getLogin() + " zdobyl/a konto premium");
+            dialog->ShowModal();
         }
         else{
-            wxMessageDialog* signupNameErrorDlg = new wxMessageDialog(parentEl, L"Nieprawidłowy kod", L"Błąd");
-            signupNameErrorDlg->ShowModal();
+            wxMessageDialog* dialog = new wxMessageDialog(parentEl, L"Nieprawidłowy kod", L"Błąd");
+            dialog->ShowModal();
         }
     }
     event.Skip();
@@ -72,7 +73,7 @@ void MyAccPanel_Controller::LogOut(wxCommandEvent& event) {
     loginLabel->SetLabel("");
     UserCRUD::Update_logged("");
     User* user = MyAccPanel_Logic::GetUser();
-    writeToLog("Wylogowano użytkownika " + user->getLogin());
+    writeToLog("Wylogowano uzytkownika " + user->getLogin());
     delete user;
     user = nullptr;
     event.Skip();
@@ -81,8 +82,8 @@ void MyAccPanel_Controller::LogOut(wxCommandEvent& event) {
 void MyAccPanel_Controller::OnPanelShow(wxShowEvent& event) {
     if (event.IsShown()) {
 
-        std::string login = UserCRUD::ReadLogged();
-        std::string userStr = UserCRUD::ReadUser(login);
+        //std::string login = UserCRUD::ReadLogged();
+        //std::string userStr = UserCRUD::ReadUser(login);
 
         UpdateGamesPanel();
 
@@ -119,7 +120,7 @@ void MyAccPanel_Controller::UpdateUserGames(wxCommandEvent& event, std::string g
 
     Game* game = MyAccPanel_Logic::CreateGameFromJSON(gameName);
     game->SetQuantity(game->GetQuantity()+1);
-    writeToLog(user->getLogin() + " oddał/a grę " + game->GetName() + ". Liczba dostępnych do wypożyczania kopii gry wynosi: " + std::to_string(game->GetQuantity()));
+    writeToLog(user->getLogin() + " oddal/a gre " + game->GetName() + ". Liczba dostepnych do wypozyczania kopii gry wynosi: " + std::to_string(game->GetQuantity()));
 }
 
 
@@ -272,7 +273,7 @@ void MyAccPanel_Controller::RateGame(wxCommandEvent& event, std::string gameName
         currentRate = it->second;
     else currentRate = 0;
       
-    GameCRUD::updateGame(game->GetName(), game->GetQuantity(), game->GetNrOfLoans(), game->GetRate(), game->GetUserRates());
+    GameCRUD::updateGame(game->GetName(), game->GetQuantity(), game->GetNrOfRentals(), game->GetRate(), game->GetUserRates());
 
     wxDialog* rateGameDialog= new wxDialog(parentEl, wxID_ANY, wxString::Format(L"Oceń grę %s", gameName), wxDefaultPosition, wxSize(250, 70));
     rateGameDialog->SetMinSize(wxSize(250, 120));
@@ -370,7 +371,7 @@ void MyAccPanel_Controller::OnRadioSelect(wxCommandEvent& event) {
 
 void MyAccPanel_Controller::OnOcenButtonClick(wxCommandEvent& event, Game* game, std::string login) {
     game->SetRate(newRate, login);
-    GameCRUD::updateGame(game->GetName(), game->GetQuantity(), game->GetNrOfLoans(), game->GetRate(), game->GetUserRates());
+    GameCRUD::updateGame(game->GetName(), game->GetQuantity(), game->GetNrOfRentals(), game->GetRate(), game->GetUserRates());
     //newRate = -1;
     wxButton* okButton = dynamic_cast<wxButton*>(event.GetEventObject());
     if (okButton) {
@@ -379,6 +380,6 @@ void MyAccPanel_Controller::OnOcenButtonClick(wxCommandEvent& event, Game* game,
             dialog->EndModal(wxID_OK);  // Close the dialog after clicking Oceñ
         }
     }
-    writeToLog("Użytkownik " + login + " dał grze " + game->GetName() + " ocenę " + std::to_string(newRate)
-    + " (0 = cofnął/ęła ocenę). Średnia ocena gry wynosi: " + std::to_string(game->GetRate()));
+    writeToLog("Uzytkownik " + login + " dal grze " + game->GetName() + " ocene " + std::to_string(newRate)
+    + " (0 = cofnal/ela ocene). Srednia ocena gry wynosi: " + std::to_string(game->GetRate()));
 }

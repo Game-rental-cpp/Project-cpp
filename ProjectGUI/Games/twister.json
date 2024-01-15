@@ -1,6 +1,6 @@
 {
     "name": "twister",
-    "nrOfLoans": 313,
+    "nrOfRentals": 313,
     "quantity": 24,
     "rate": 4.162738800048828,
     "userRates": {

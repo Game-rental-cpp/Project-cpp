@@ -1,11 +1,11 @@
 {
-  "name": "taboo",
-  "nrOfLoans": 52,
-  "quantity": 9,
-  "rate": 4.000325742,
-  "userRates": {
-    "key1": 5,
-    "key2": 4,
-    "key3": 3
-  }
+    "name": "taboo",
+    "nrOfRentals": 52,
+    "quantity": 9,
+    "rate": 4.000325742,
+    "userRates": {
+        "key1": 5,
+        "key2": 4,
+        "key3": 3
+    }
 }

@@ -1,6 +1,6 @@
 {
     "name": "scrabble",
-    "nrOfLoans": 89,
+    "nrOfRentals": 89,
     "quantity": 52,
     "rate": 4.006352424621582,
     "userRates": {

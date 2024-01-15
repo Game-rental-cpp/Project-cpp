@@ -2,10 +2,9 @@
 #include "Game.h"
 #include "GameCRUD.h"
 
-// Implementacja konstruktora
-Game::Game(const std::string& name, int quantity, int nrOfLoans, float rate, std::map<std::string, int> userRates) : quantity(quantity), nrOfLoans(nrOfLoans) { this->name = name; this->rate = rate; this->userRates = userRates; }
 
-// Implementacje funkcji z GameAbs
+Game::Game(const std::string& name, int quantity, int nrOfRentals, float rate, std::map<std::string, int> userRates) : quantity(quantity), nrOfRentals(nrOfRentals) { this->name = name; this->rate = rate; this->userRates = userRates; }
+
 const std::string& Game::GetName() const {
     return name;
 }
@@ -14,29 +13,31 @@ int Game::GetQuantity() const {
     return quantity;
 }
 
-int Game::GetNrOfLoans() const {
-    return nrOfLoans;
+int Game::GetNrOfRentals() const {
+    return nrOfRentals;
 }
 
 void Game::SetQuantity(int quantity) {
     // Quantity cannot be negative
     if (quantity >= 0) {
         this->quantity = quantity;
-        GameCRUD::updateGame(name, quantity, nrOfLoans, rate, userRates);
+        GameCRUD::updateGame(name, quantity, nrOfRentals, rate, userRates);
     }
 }
 
-void Game::SetNrOfLoans(int nrOfLoans) {
-    this->nrOfLoans++;
-    GameCRUD::updateGame(name, quantity, nrOfLoans, rate, userRates);
+void Game::SetNrOfRentals(int nrOfRentals) {
+    this->nrOfRentals++;
+    GameCRUD::updateGame(name, quantity, nrOfRentals, rate, userRates);
 }
 
-
+/*
+@param int r - user's rate;
+@param string login - user's login
+*/
 void Game::SetRate(int r, std::string login) {
-    //if (r == -1) return;
-    // SprawdŸ, czy u¿ytkownik ju¿ oceni³ tê grê
-    if (r == 0) {
-        // Jeœli r wynosi 0, usuñ ocenê u¿ytkownika z mapy
+    
+    if (r == 0) { // If r equals 0, this means the user canceled their previous rate    
+        // delete user's rate in the map
         auto it = userRates.find(login);
         if (it != userRates.end()) {
             userRates.erase(it);
@@ -44,17 +45,16 @@ void Game::SetRate(int r, std::string login) {
     }
     else {
         auto it = userRates.find(login);
-        if (it != userRates.end()) {
-            // U¿ytkownik ju¿ wczeœniej oceni³ tê grê, wiêc edytuj ocenê
-            it->second = r;
+        if (it != userRates.end()) { // The user already did rated this game
+            it->second = r; //update an existing rate
         }
         else {
-            // Dodaj now¹ ocenê u¿ytkownika do mapy
+            // Add new user's rate to the map
             userRates[login] = r;
         }
     }
 
-    // Zaktualizuj œredni¹ ocenê
+    // Update an average rate
     int totalRates = 0;
     for (const auto& pair : userRates) {
         totalRates += pair.second;
@@ -64,7 +64,7 @@ void Game::SetRate(int r, std::string login) {
         this->rate = static_cast<float>(totalRates) / userRates.size();
     }
     else {
-        // Jeœli userRates jest puste, ustaw rate na 0 lub inny domyœlny wartoœæ
+        // If userRates is empty, set rate on 0 
         this->rate = 0.0f;
     }
 

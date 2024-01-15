@@ -1,4 +1,4 @@
-// MainFrame.cpp
+ï»¿// MainFrame.cpp
 #include "MainFrame.h"
 #include "Style.h"
 
@@ -9,7 +9,7 @@ MainFrame::MainFrame(const wxString& title, const wxPoint& pos, const wxSize& si
 
 
     // Creating buttons
-    goBackBtn = new wxButton(this, wxID_ANY, L"Wróæ", wxDefaultPosition, wxSize(80, 40));
+    goBackBtn = new wxButton(this, wxID_ANY, L"WrÃ³Ä‡", wxDefaultPosition, wxSize(80, 40));
     loginBtn = new wxButton(this, wxID_ANY, "Zaloguj / Zarejestruj", wxDefaultPosition, wxSize(170, 40), wxBORDER_RAISED);
     myAccBtn = new wxButton(this, wxID_ANY, "Moje konto", wxDefaultPosition, wxSize(100, 40));
 

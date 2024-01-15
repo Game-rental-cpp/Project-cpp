@@ -11,5 +11,6 @@ public:
     virtual ~UserNormal() = default;
 
     std::string stringifyUser() override;
+    bool addUserGame(const std::string& name) override;
 
 };

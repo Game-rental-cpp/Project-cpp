@@ -1,5 +1,5 @@
 {
-    "isPremium": false,
+    "isPremium": true,
     "login": "userek123",
     "password": "123",
     "userGames": [
@@ -9,9 +9,29 @@
             "name": "domino"
         },
         {
-            "date": "17-12-23__14-59-48",
-            "id": "d0a9dec3-bac8-492d-af9d-cfeae21970b5",
-            "name": "domino"
+            "date": "14-01-24__16-29-50",
+            "id": "473798b3-4a32-4acc-9a5d-8b86584e510a",
+            "name": "catan"
+        },
+        {
+            "date": "14-01-24__16-30-01",
+            "id": "75557e50-c144-45b6-af49-d747a4123f2b",
+            "name": "ubongo"
+        },
+        {
+            "date": "15-01-24__12-02-39",
+            "id": "a8d20325-1af2-43ab-8429-7238b5956613",
+            "name": "catan"
+        },
+        {
+            "date": "15-01-24__12-02-39",
+            "id": "60ae655b-9f53-4a1d-b63d-573bab932339",
+            "name": "catan"
+        },
+        {
+            "date": "15-01-24__12-03-15",
+            "id": "a0dcd9a6-2853-442f-87e4-b6b66a040cc1",
+            "name": "bierki"
         }
     ]
 }

@@ -24,7 +24,7 @@ public:
         void SetDate(std::string dateToSet) { date = dateToSet; }
     private:
         std::string id; // game unique id
-        std::string date; // date of loan
+        std::string date; // date of rental
     };
 
     /* @param std::string& login */
@@ -34,8 +34,8 @@ public:
     // Getters
     std::string getLogin() const;
     std::string getPassword() const;
-    bool getPremium() const { return isPremium; }; //you can also have return isPremium;
-    const std::vector<UserGame>& getUserGames() const; // Getter for the vector of UserGame
+    bool getPremium() const { return isPremium; }; 
+    const std::vector<UserGame>& getUserGames() const; 
 
 
     // @param std::string& name
@@ -47,7 +47,7 @@ public:
 
     void setUserGames(std::vector<UserGame>& newUserGamesVector);
 
-    virtual std::string stringifyUser() { return ""; };
+    virtual std::string stringifyUser() = 0;
     std::string stringifyGames();
 
 protected:

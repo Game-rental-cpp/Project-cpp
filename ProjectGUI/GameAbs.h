@@ -17,3 +17,7 @@ public:
     virtual const std::map<std::string, int>& GetUserRates() const = 0;
     virtual void SetRate(int r, std::string login) = 0;
 };
+
+
+
+
