@@ -24,7 +24,7 @@ public:
         void SetDate(std::string dateToSet) { date = dateToSet; }
     private:
         std::string id; // game unique id
-        std::string date; // date of loan
+        std::string date; // date of rental
     };
 
     /* @param std::string& login */

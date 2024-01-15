@@ -47,7 +47,8 @@ User::UserGame::UserGame(const std::string& name) {
     id = uuid.str(); // convert id to string
 
     wxDateTime now = wxDateTime::Now(); // Today's date and time 
-    date = now.Format(wxT("%d-%m-%y__%H-%M-%S"), wxDateTime::CET).ToStdString(); // convert wxDateTime to string
+    // convert wxDateTime to string
+    date = now.Format(wxT("%d-%m-%y__%H-%M-%S"), wxDateTime::CET).ToStdString(); 
 }
 
 std::string User::UserGame::getId() const {

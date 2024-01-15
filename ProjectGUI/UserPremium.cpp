@@ -8,7 +8,7 @@ using json = nlohmann::json;
 
 UserPremium::UserPremium(const std::string& login)
     : User(login) {
-    setPremium(true); //set isPremium in User
+    setPremium(true); //set isPremium 
 }
 
 std::string UserPremium::stringifyUser() {
