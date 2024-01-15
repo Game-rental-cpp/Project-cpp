@@ -1,31 +1,31 @@
 {
-    "isPremium": true,
+    "isPremium": false,
     "login": "normalUser",
     "password": "zaq1@WSX",
     "userGames": [
         {
-            "date": "15-01-24__17-52-37",
-            "id": "fe5d38ba-06f8-4d8f-bc05-c4aa38f3bbc8",
-            "name": "bierki"
+            "date": "15-01-24__18-13-11",
+            "id": "9f54800d-8e9e-4eb3-aad0-f91666f2d8a5",
+            "name": "catan"
         },
         {
-            "date": "15-01-24__17-52-38",
-            "id": "9c1e0a10-7c31-44f5-9226-1165d2def5ac",
-            "name": "cluedo"
+            "date": "15-01-24__18-13-11",
+            "id": "b42862ae-36dc-4fa1-ad73-73f1b4aa1c9e",
+            "name": "catan"
         },
         {
-            "date": "15-01-24__17-52-39",
-            "id": "9bcf5328-45ab-40e2-b145-f611aea611d6",
-            "name": "cortex"
+            "date": "15-01-24__18-13-12",
+            "id": "f626986e-e684-49d1-8b01-2cd8d2652a77",
+            "name": "catan"
         },
         {
-            "date": "15-01-24__17-52-40",
-            "id": "0aae18eb-2e40-4723-835d-355981230854",
-            "name": "dixit"
+            "date": "15-01-24__18-13-12",
+            "id": "6a7a2e2d-bd26-4df5-b296-d9e4e62d61a0",
+            "name": "catan"
         },
         {
-            "date": "15-01-24__17-53-11",
-            "id": "103d1062-e493-430c-a31d-a0a2a567773f",
+            "date": "15-01-24__18-13-12",
+            "id": "a73d81aa-3d94-418c-b525-16a41f2278cc",
             "name": "catan"
         }
     ]

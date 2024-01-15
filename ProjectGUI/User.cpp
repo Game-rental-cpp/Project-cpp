@@ -64,7 +64,14 @@ std::string User::UserGame::getDate() const {
     return date;
 }
 
+bool User::addUserGame(const std::string& name) {
 
+    // Create new userGame and push it to userGames vector
+    userGames.push_back(UserGame(name));
+
+    UserCRUD::UpdateUser(login, stringifyUser());
+    return true;
+}
 
 void User::removeUserGame(const std::string& id) {
     

@@ -1,7 +1,7 @@
 {
     "name": "cluedo",
-    "nrOfRentals": 95,
-    "quantity": 19,
+    "nrOfRentals": 96,
+    "quantity": 20,
     "rate": 4.0,
     "userRates": {
         "jakisLogin": 3,

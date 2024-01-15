@@ -1,7 +1,7 @@
 {
     "name": "cortex",
-    "nrOfRentals": 94,
-    "quantity": 4,
+    "nrOfRentals": 95,
+    "quantity": 5,
     "rate": 2.9992356300354004,
     "userRates": {
         "key1": 4,
