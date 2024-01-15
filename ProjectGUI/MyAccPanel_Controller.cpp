@@ -273,7 +273,7 @@ void MyAccPanel_Controller::RateGame(wxCommandEvent& event, std::string gameName
         currentRate = it->second;
     else currentRate = 0;
       
-    GameCRUD::updateGame(game->GetName(), game->GetQuantity(), game->GetNrOfLoans(), game->GetRate(), game->GetUserRates());
+    GameCRUD::updateGame(game->GetName(), game->GetQuantity(), game->GetNrOfRentals(), game->GetRate(), game->GetUserRates());
 
     wxDialog* rateGameDialog= new wxDialog(parentEl, wxID_ANY, wxString::Format(L"Oceń grę %s", gameName), wxDefaultPosition, wxSize(250, 70));
     rateGameDialog->SetMinSize(wxSize(250, 120));
@@ -371,7 +371,7 @@ void MyAccPanel_Controller::OnRadioSelect(wxCommandEvent& event) {
 
 void MyAccPanel_Controller::OnOcenButtonClick(wxCommandEvent& event, Game* game, std::string login) {
     game->SetRate(newRate, login);
-    GameCRUD::updateGame(game->GetName(), game->GetQuantity(), game->GetNrOfLoans(), game->GetRate(), game->GetUserRates());
+    GameCRUD::updateGame(game->GetName(), game->GetQuantity(), game->GetNrOfRentals(), game->GetRate(), game->GetUserRates());
     //newRate = -1;
     wxButton* okButton = dynamic_cast<wxButton*>(event.GetEventObject());
     if (okButton) {

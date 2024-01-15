@@ -73,9 +73,9 @@ std::string GameCRUD::readGame(std::string fileName) {
 This funnction updates a game file
 @param string gameName
 @param int quantity
-@param int nrOfLoans
+@param int nrOfRentals
 */
-void GameCRUD::updateGame(std::string name, int quantity, int nrOfLoans, float rate, std::map<std::string, int> userRates) {
+void GameCRUD::updateGame(std::string name, int quantity, int nrOfRentals, float rate, std::map<std::string, int> userRates) {
  std::ofstream file("./Games/" + name + ".json");
  //wxLogMessage("sw");
 
@@ -83,7 +83,7 @@ void GameCRUD::updateGame(std::string name, int quantity, int nrOfLoans, float r
         json jsonData = {
             {"name", name},
             {"quantity", quantity},
-            {"nrOfLoans", nrOfLoans},
+            {"nrOfRentals", nrOfRentals},
             {"rate", rate},
             {"userRates", userRates}
         };

@@ -31,7 +31,7 @@ Game* MyAccPanel_Logic::CreateGameFromJSON(std::string gameName)
 {
     std::string name;
     int quantity;
-    int nrOfLoans;
+    int nrOfRentals;
     float rate;
     std::map<std::string, int> userRates;
 
@@ -41,11 +41,11 @@ Game* MyAccPanel_Logic::CreateGameFromJSON(std::string gameName)
 
     name = jsonData["name"];
     quantity = jsonData["quantity"];
-    nrOfLoans = jsonData["nrOfLoans"];
+    nrOfRentals = jsonData["nrOfRentals"];
     rate = jsonData["rate"];
     userRates = jsonData["userRates"];
         
-    Game* game = new Game(name, quantity, nrOfLoans, rate, userRates); 
+    Game* game = new Game(name, quantity, nrOfRentals, rate, userRates); 
 
     return game;
 }

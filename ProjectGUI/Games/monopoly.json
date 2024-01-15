@@ -1,6 +1,6 @@
 {
     "name": "monopoly",
-    "nrOfLoans": 211,
+    "nrOfRentals": 211,
     "quantity": 19,
     "rate": 4.499994277954102,
     "userRates": {

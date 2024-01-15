@@ -75,10 +75,10 @@ void MainPanel_Controller::UpdateGame(wxCommandEvent& event)
 
     // Take number (quantity) from label
     int quantity;
-    int nrOfLoans;
+    int nrOfRentals;
 
     labelText1.AfterLast(' ').ToInt(&quantity);
-    labelText2.AfterLast(' ').ToInt(&nrOfLoans);
+    labelText2.AfterLast(' ').ToInt(&nrOfRentals);
 
     //In loop the Game object from the vector is updated and then the label is updated
     for (int i = 0; i < gamesVector.size(); i++) {
@@ -89,11 +89,11 @@ void MainPanel_Controller::UpdateGame(wxCommandEvent& event)
 
             //update json file - set the current value of available games (quantity) decreased by one
             gamesVector[i].SetQuantity(gamesVector[i].GetQuantity() - 1);
-            gamesVector[i].SetNrOfLoans(gamesVector[i].GetNrOfLoans() + 1);
+            gamesVector[i].SetNrOfRentals(gamesVector[i].GetNrOfRentals() + 1);
 
             wxString newLabelText1 = labelText1.BeforeLast(' ') + wxString::Format(" %ld", gamesVector[i].GetQuantity());
             correspondingLabel1->SetLabel(newLabelText1);
-            wxString newLabelText2 = labelText2.BeforeLast(' ') + wxString::Format(" %ld", gamesVector[i].GetNrOfLoans());
+            wxString newLabelText2 = labelText2.BeforeLast(' ') + wxString::Format(" %ld", gamesVector[i].GetNrOfRentals());
             correspondingLabel2->SetLabel(newLabelText2);
 
             //If there are no games available, disable hire button
@@ -186,33 +186,33 @@ void MainPanel_Controller::UpdateGamesPanel(std::vector<Game> gamesVector)
 
         std::string gameName = std::string(game.GetName());
         int gameQuantity = game.GetQuantity();
-        int nrOfLoans = game.GetNrOfLoans();
+        int nrOfRentals = game.GetNrOfRentals();
         float rate = game.GetRate();
 
         //Creating elements inside gamesPanel
         wxString gameNameLabelText = wxString::Format("%s", gameName);
         wxString quantityLabelText = wxString::Format(L"Ilość dostępnych sztuk: %d", gameQuantity);
-        wxString nrOfLoansLabelText = wxString::Format(L"Całkowita ilość wypożyczeń: %d", nrOfLoans);
+        wxString nrOfRentalsLabelText = wxString::Format(L"Całkowita ilość wypożyczeń: %d", nrOfRentals);
         wxString rateLabelText = wxString::Format("ocena: %.2f/5", rate);
         // (label name is the same as game name + Lbl)
         wxStaticText* gameNameLabel = new wxStaticText(gamesPanel, wxID_ANY, gameNameLabelText, wxPoint(50, 12 + i * 80), wxDefaultSize, 0, gameName + "Lbl0");
         wxStaticText* quantityLabel = new wxStaticText(gamesPanel, wxID_ANY, quantityLabelText, wxPoint(50, 40 + i * 80), wxDefaultSize, 0, gameName + "Lbl1");
-        wxStaticText* nrOfLoansLabel = new wxStaticText(gamesPanel, wxID_ANY, nrOfLoansLabelText, wxPoint(50, 60 + i * 80), wxDefaultSize, 0, gameName + "Lbl2");
-        wxStaticText* rateLabel = new wxStaticText(gamesPanel, wxID_ANY, rateLabelText, wxPoint(145, 15 + i * 80), wxDefaultSize, 0, gameName + "Lbl3");
+        wxStaticText* nrOfRentalsLabel = new wxStaticText(gamesPanel, wxID_ANY, nrOfRentalsLabelText, wxPoint(50, 60 + i * 80), wxDefaultSize, 0, gameName + "Lbl2");
+        wxStaticText* rateLabel = new wxStaticText(gamesPanel, wxID_ANY, rateLabelText, wxPoint(185, 15 + i * 80), wxDefaultSize, 0, gameName + "Lbl3");
 
         gameNameLabel->SetForegroundColour(COLOR_LBL);
         gameNameLabel->SetFont(SetTheFont(14, true));
         quantityLabel->SetForegroundColour(COLOR_LBL);
         quantityLabel->SetFont(SetTheFont());
-        nrOfLoansLabel->SetForegroundColour(COLOR_LBL);
-        nrOfLoansLabel->SetFont(SetTheFont());
+        nrOfRentalsLabel->SetForegroundColour(COLOR_LBL);
+        nrOfRentalsLabel->SetFont(SetTheFont());
         rateLabel->SetForegroundColour(COLOR_LBL);
         rateLabel->SetFont(SetTheFont(13));
 
 
 
         // (button name is the same as game name)
-        wxButton* hireBtn = new wxButton(gamesPanel, wxID_ANY, L"Wypożycz", wxPoint(parentEl->GetSize().GetWidth() - 10 - 150, 10 + i * 80), wxSize(85, 35), 0, wxDefaultValidator, gameName);
+        wxButton* hireBtn = new wxButton(gamesPanel, wxID_ANY, L"Wypożycz", wxPoint(parentEl->GetSize().GetWidth() - 10 - 110, 10 + i * 80), wxSize(85, 35), 0, wxDefaultValidator, gameName);
 
         hireBtn->SetBackgroundColour(COLOR_BACKGROUND_BTN);
         hireBtn->SetForegroundColour(COLOR_TEXT_BTN);

@@ -1,6 +1,6 @@
 {
     "name": "ubongo",
-    "nrOfLoans": 266,
+    "nrOfRentals": 266,
     "quantity": 31,
     "rate": 3.142857074737549,
     "userRates": {

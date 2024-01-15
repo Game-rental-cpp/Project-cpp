@@ -1,12 +1,14 @@
 {
-  "name": "cortex",
-  "nrOfLoans": 93,
-  "quantity": 5,
-  "rate": 2.9992357234,
-  "userRates": {
-    "key1": 4,
-    "key2": 2,
-    "key3": 3,
-    "userek123": 3
-  }
+    "name": "cortex",
+    "nrOfRentals": 93,
+    "quantity": 5,
+    "rate": 2.9992357234,
+    "userRates": {
+        "key1": 4,
+        "key2": 2,
+        "key3": 3,
+        "userek123": 3,
+        "key4": 1,
+        "key5": 5
+    }
 }

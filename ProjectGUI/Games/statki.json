@@ -1,6 +1,6 @@
 {
     "name": "statki",
-    "nrOfLoans": 161,
+    "nrOfRentals": 161,
     "quantity": 24,
     "rate": 2.5,
     "userRates": {

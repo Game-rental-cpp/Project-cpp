@@ -1,6 +1,6 @@
 {
     "name": "cluedo",
-    "nrOfLoans": 94,
+    "nrOfRentals": 94,
     "quantity": 20,
     "rate": 4.0,
     "userRates": {

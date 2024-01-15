@@ -24,7 +24,7 @@ Game MainPanel_Logic::CreateGameFromJSON(int i)
 {
     std::string name;
     int quantity;
-    int nrOfLoans;
+    int nrOfRentals;
     float rate;
     std::map<std::string, int> userRates;
 
@@ -48,7 +48,7 @@ Game MainPanel_Logic::CreateGameFromJSON(int i)
 
             name = jsonData["name"];
             quantity = jsonData["quantity"];
-            nrOfLoans = jsonData["nrOfLoans"];
+            nrOfRentals = jsonData["nrOfRentals"];
             rate = jsonData["rate"];
             userRates = jsonData["userRates"];
 
@@ -56,7 +56,7 @@ Game MainPanel_Logic::CreateGameFromJSON(int i)
         }
     }
 
-    Game game(name, quantity, nrOfLoans, rate, userRates);
+    Game game(name, quantity, nrOfRentals, rate, userRates);
 
     return game;
 }
@@ -114,10 +114,10 @@ std::vector<Game> MainPanel_Logic::sortVector(std::vector<Game> gamesVector, int
             }
             break;
         case 2:
-            //Nr of loans
+            //Nr of rentals
             for (int i = 0; i < gameCount - 1; i++) {
                 for (int j = 0; j < gameCount - i - 1; j++) {
-                    if (gamesVector[j].GetNrOfLoans() < gamesVector[j + 1].GetNrOfLoans()) {
+                    if (gamesVector[j].GetNrOfRentals() < gamesVector[j + 1].GetNrOfRentals()) {
                         
                         std::swap(gamesVector[j], gamesVector[j + 1]);
                     }

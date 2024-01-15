@@ -1,10 +1,10 @@
 {
     "name": "catan",
-    "nrOfLoans": 166,
-    "quantity": 87,
-    "rate": 4.0,
+    "nrOfRentals": 169,
+    "quantity": 83,
+    "rate": 3.8888888359069824,
     "userRates": {
-        "jakisLogin": 4,
+        "jakisLogin": 3,
         "key1": 5,
         "key2": 3,
         "key3": 4,

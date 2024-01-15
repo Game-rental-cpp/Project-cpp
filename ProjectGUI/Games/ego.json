@@ -1,6 +1,6 @@
 {
     "name": "ego",
-    "nrOfLoans": 94,
+    "nrOfRentals": 94,
     "quantity": 19,
     "rate": 4.75,
     "userRates": {
